@@ -1,17 +1,21 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true) // Agrega esta línea para elegir si incluir o no los campos de la superclase.
 @PrimaryKeyJoinColumn(name="ci")
 @Table(name = "docente")
+@AllArgsConstructor
+@NoArgsConstructor
 public class DocenteEntity extends PersonaEntity{
 
     @Id
@@ -22,9 +26,6 @@ public class DocenteEntity extends PersonaEntity{
     private String codRfid;
     /*@JsonManagedReference  se utiliza en la entidad padre para indicar que la relacion es administrada
      o manejada por esa entidad si no se hace esto habra un ciclo infinito y un desborde de memoria*/
-
-    public DocenteEntity() {
-    }
 
     public DocenteEntity(long ci){
         this.ci = ci;

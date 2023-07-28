@@ -1,14 +1,18 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+
 import java.sql.Time;
 
 @Entity
 @Data
 @Table(name = "horario")
+@AllArgsConstructor
+@NoArgsConstructor
 public class HorarioEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_horario")
@@ -24,9 +28,4 @@ public class HorarioEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_turno", nullable = false)
     private TurnoEntity turno;
-
-
-    public HorarioEntity(){
-    }
-
 }

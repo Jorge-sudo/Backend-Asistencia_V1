@@ -1,16 +1,19 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import java.sql.Date;
 import java.sql.Time;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "asistencia")
+@AllArgsConstructor
+@NoArgsConstructor
 public class AsistenciaEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_asistencia")
@@ -38,10 +41,6 @@ public class AsistenciaEntity {
     //@NotEmpty(message ="no puede estar vacio")
     @Column(nullable = true)
     private String horario;
-
-    public AsistenciaEntity(){
-
-    }
 
     public AsistenciaEntity(Time horaEntrada, Date fecha) {
         this.horaEntrada = horaEntrada;

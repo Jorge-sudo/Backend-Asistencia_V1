@@ -1,17 +1,25 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.Optional;
 
 @Entity
 @Data
 @Table(name = "materia_carrera_semestre")
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class MateriaCarreraSemestreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_materia_carrera_semestre")
-    private int idMateriaCarrera;
+    private int idMateriaCarreraSemestre;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_carrera", nullable = false)
@@ -28,7 +36,16 @@ public class MateriaCarreraSemestreEntity {
     @NotNull(message ="no puede estar vacio")
     private boolean activo;
 
-    public MateriaCarreraSemestreEntity(){
+    public MateriaCarreraSemestreEntity(
+              Optional<CarreraEntity> carreraEntity
+            , Optional<MateriaEntity> materiaEntity
+            , Optional<SemestreEntity> semestreEntity
+            , boolean activo) {
 
+        this.carrera = carreraEntity.orElse(null);
+        this.materia = materiaEntity.orElse(null);
+        this.semestre = semestreEntity.orElse(null);
+        this.activo = activo;
+        System.out.println(this.toString());
     }
 }

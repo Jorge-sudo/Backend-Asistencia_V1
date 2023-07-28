@@ -1,5 +1,5 @@
 package com.control.asistencia.application.service.materiaCarreraSemestre;
 
-public class UpdateMateriaCarreraSemestreService {
+public class UpdateServiceImplMateriaCarreraSemestre {
     
 }

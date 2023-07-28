@@ -1,13 +1,17 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "aula")
+@AllArgsConstructor
+@NoArgsConstructor
 public class AulaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,16 +33,4 @@ public class AulaEntity {
     @NotEmpty(message ="no puede estar vacio")
     @Column(nullable = false)
     private String bloque;
-
-    public AulaEntity(){
-
-    }
-
-    public AulaEntity(int idAula, String aula, String paralelo, String piso, String bloque) {
-        this.idAula = idAula;
-        this.aula = aula;
-        this.paralelo = paralelo;
-        this.piso = piso;
-        this.bloque = bloque;
-    }
 }

@@ -1,11 +1,15 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "docente_asistencia")
+@AllArgsConstructor
+@NoArgsConstructor
 public class DocenteAsistenciaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +26,6 @@ public class DocenteAsistenciaEntity {
     @JoinColumn(name = "ci", nullable = false)
     private DocenteEntity docente;
 
-    public DocenteAsistenciaEntity(){
-
-    }
 
     public DocenteAsistenciaEntity(int idDocenteAsistencia){
         this.idDocenteAsistencia = idDocenteAsistencia;

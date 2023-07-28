@@ -1,7 +1,9 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import jakarta.persistence.*;
@@ -12,6 +14,8 @@ import java.util.List;
 @Inheritance(strategy=InheritanceType.JOINED)
 @Data
 @Table(name = "persona")
+@AllArgsConstructor
+@NoArgsConstructor
 public class PersonaEntity {
     @Id
     @Digits(integer=11, fraction=0, message="No se permite decimales y maximo de digitos es 10.")
@@ -54,10 +58,4 @@ public class PersonaEntity {
     @JsonManagedReference
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<PersonaRolEntity> personaRoles;
-    public PersonaEntity(){
-
-    }
-
-
-
 }

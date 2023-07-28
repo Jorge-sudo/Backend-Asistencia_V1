@@ -1,13 +1,17 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "dia_semana")
+@AllArgsConstructor
+@NoArgsConstructor
 public class DiaSemanaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

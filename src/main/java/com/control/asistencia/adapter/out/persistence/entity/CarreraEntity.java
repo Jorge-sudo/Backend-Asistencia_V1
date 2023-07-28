@@ -1,13 +1,18 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "carrera")
+@AllArgsConstructor
+@NoArgsConstructor
 public class CarreraEntity implements Serializable {
 
     @Id
@@ -18,10 +23,4 @@ public class CarreraEntity implements Serializable {
     @NotEmpty(message ="no puede estar vacio")
     @Column(nullable = false, unique = true)
     private String nombre;
-
-    public CarreraEntity(){
-
-    }
-
-
 }

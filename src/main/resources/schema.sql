@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS docente_asistencia(
 
 CREATE TABLE IF NOT EXISTS semestre(
     id_semestre INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    semestre VARCHAR(10) NOT NULL
+    nombre VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS materia(
@@ -164,7 +164,7 @@ SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         t.nombre AS 'turno',
         hmd.laboratorio AS 'laboratorio',
         hmd.nro_laboratorio AS 'nro_laboratorio',
-        s.semestre AS 'semestre',
+        s.nombre AS 'semestre',
         p.nombre AS 'nombre_docente',
         p.apellido AS 'apellido_docente'
 FROM materia m

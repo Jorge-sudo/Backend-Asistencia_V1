@@ -1,5 +1,6 @@
 package com.control.asistencia.adapter.out.persistence.mapper.materiaCarreraSemestre;
 
+import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -8,8 +9,8 @@ import org.mapstruct.ReportingPolicy;
 import org.springframework.data.domain.Page;
 
 import com.control.asistencia.adapter.out.persistence.entity.MateriaCarreraSemestreEntity;
-import com.control.asistencia.domain.MateriaCarreraSemestreDTO;
 
+import java.util.Set;
 
 
 @Mapper(
@@ -22,20 +23,28 @@ import com.control.asistencia.domain.MateriaCarreraSemestreDTO;
     //si algunos campos no se asignan directamente.
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
-public interface ViewAllMapperMateriaCarreraSemestre {
+public interface IViewMapperMateriaCarreraSemestre {
    
     //@Mapping(source = "campoOrigen", target = "campoDestino")
     @Mappings({
-        @Mapping(source = "materia.sigla", target = "sigla"),
-        @Mapping(source = "materia.nombre", target = "materia"),
-        @Mapping(source = "carrera.nombre", target = "carrera"),
-        @Mapping(source = "semestre.semestre", target = "semestre"),
-        @Mapping(source = "activo", target = "activo")
+            @Mapping(source = "idMateriaCarreraSemestre", target = "idMateriaCarreraSemestre"),
+            @Mapping(source = "materia.sigla", target = "sigla"),
+            @Mapping(source = "materia.nombre", target = "materia"),
+            @Mapping(source = "carrera.nombre", target = "carrera"),
+            @Mapping(source = "semestre.nombre", target = "semestre"),
+            @Mapping(source = "activo", target = "activo")
     })
-    MateriaCarreraSemestreDTO entityToDto(MateriaCarreraSemestreEntity materiaCarreraSemestreEntity);
+    ViewMateriaCarreraSemestreDTO entityToDto(MateriaCarreraSemestreEntity materiaCarreraSemestreEntity);
 
     // Método para mapear una Page de entidades a una Page de DTOs
-    default Page<MateriaCarreraSemestreDTO> pageEntityToDto(Page<MateriaCarreraSemestreEntity> page) {
+    default Page<ViewMateriaCarreraSemestreDTO> pageEntityToDto(Page<MateriaCarreraSemestreEntity> page) {
         return page.map(this::entityToDto);
+    }
+
+    default Set<ViewMateriaCarreraSemestreDTO> entitysToDtos(Set<MateriaCarreraSemestreEntity> materiaCarreraSemestreEntity) {
+        return materiaCarreraSemestreEntity
+                .stream()
+                .map(this::entityToDto)
+                .collect(java.util.stream.Collectors.toSet());
     }
 }

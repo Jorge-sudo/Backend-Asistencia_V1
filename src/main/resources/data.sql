@@ -69,16 +69,16 @@ INSERT IGNORE INTO docente_asistencia(id_docente_asistencia, id_asistencia, ci) 
 INSERT IGNORE INTO docente_asistencia(id_docente_asistencia,id_asistencia, ci) VALUES(2, 2, 22215 );
 
 --DOCENTES
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(1, 'Primero');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(2, 'Segundo');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(3, 'Tercero');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(4, 'Cuarto');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(5, 'Quinto');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(6, 'Sexto');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(7, 'Septimo');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(8, 'Octavo');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(9, 'Noveno');
-INSERT IGNORE INTO semestre(id_semestre, semestre) VALUES(10, 'Decimo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(1, 'Primero');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(2, 'Segundo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(3, 'Tercero');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(4, 'Cuarto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(5, 'Quinto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(6, 'Sexto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(7, 'Septimo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(8, 'Octavo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(9, 'Noveno');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(10, 'Decimo');
 
 --MATERIAS
 INSERT IGNORE INTO materia(sigla, nombre) VALUES('ING-111', 'Introduccion a la Informatica');
@@ -175,12 +175,14 @@ INSERT IGNORE INTO carrera(id_carrera, nombre) VALUES(7, 'Ciencias de la Educaci
 INSERT IGNORE INTO carrera(id_carrera, nombre) VALUES(8, 'Psicomotricidad');
 
 --DOCENTES
-INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera,sigla, id_semestre, activo) VALUES(1, 1, 'ING-111', 1, TRUE);
-INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera,sigla, id_semestre, activo) VALUES(2, 1, 'LIN-114', 1, TRUE);
-INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera,sigla, id_semestre, activo) VALUES(3, 1, 'MAT-113', 1, TRUE);
-INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera,sigla, id_semestre, activo) VALUES(4, 1, 'MAT-112', 1, TRUE);
-INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera,sigla, id_semestre, activo) VALUES(5, 1, 'FHC-116', 1, FALSE);
-INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera,sigla, id_semestre, activo) VALUES(6, 1, 'INV-115', 1, FALSE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(1, 1, 'ING-111', 1, TRUE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(2, 1, 'LIN-114', 1, TRUE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(3, 1, 'MAT-113', 1, TRUE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(4, 1, 'MAT-112', 1, TRUE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(5, 1, 'FHC-116', 1, FALSE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(6, 1, 'INV-115', 1, FALSE);
+    --eliminar mas adelante
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(7, 2, 'INV-115', 6, TRUE);
 
 INSERT IGNORE INTO turno(id_turno, nombre) VALUES(1, 'Mañana');
 INSERT IGNORE INTO turno(id_turno, nombre) VALUES(2, 'Tarde');

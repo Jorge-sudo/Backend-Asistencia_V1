@@ -1,14 +1,17 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "rol")
+@AllArgsConstructor
+@NoArgsConstructor
 public class RolEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_rol")
@@ -17,8 +20,4 @@ public class RolEntity {
     @NotEmpty(message ="no puede estar vacio")
     @Column(nullable = false)
     private String nombre;
-
-    public RolEntity() {
-    }
-
 }

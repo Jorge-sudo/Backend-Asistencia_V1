@@ -1,0 +1,8 @@
+package com.control.asistencia.application.port.out.materiaCarreraSemestre;
+
+import com.control.asistencia.application.port.in.materiaCarreraSemestre.command.SaveCommandMateriaCarreraSemestre;
+import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
+
+public interface ISaveOutPortMateriaCarreraSemestre {
+    ViewMateriaCarreraSemestreDTO saveSaveMateriaCarreraSemestre(SaveCommandMateriaCarreraSemestre saveCommandMateriaCarreraSemestre);
+}
