@@ -5,6 +5,8 @@ import com.control.asistencia.adapter.out.persistence.repository.IRepositorySeme
 import com.control.asistencia.application.port.out.semestre.IViewOutPortSemestre;
 import com.control.asistencia.common.PersistenceAdapter;
 
+import java.util.Optional;
+
 @PersistenceAdapter
 public class PersistenceAdapterSemestre implements IViewOutPortSemestre {
     private final IRepositorySemestre iRepositorySemestre;
@@ -13,10 +15,8 @@ public class PersistenceAdapterSemestre implements IViewOutPortSemestre {
         this.iRepositorySemestre = iRepositorySemestre;
     }
 
-
     @Override
-    public SemestreEntity viewByIdSemestreEntity(int id) {
-        return this.iRepositorySemestre.findById(id)
-                .orElseThrow(()-> new RuntimeException("Semestre not found"));
+    public Optional<SemestreEntity> viewByIdSemestreEntity(int id) {
+        return this.iRepositorySemestre.findById(id);
     }
 }

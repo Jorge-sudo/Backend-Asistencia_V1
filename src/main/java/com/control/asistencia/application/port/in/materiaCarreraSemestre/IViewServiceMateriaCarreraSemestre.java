@@ -4,10 +4,12 @@ import com.control.asistencia.application.port.in.materiaCarreraSemestre.command
 import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
 import org.springframework.data.domain.Page;
 
+import java.util.Optional;
 import java.util.Set;
 
 public interface IViewServiceMateriaCarreraSemestre {
-    Page<ViewMateriaCarreraSemestreDTO> viewPageMateriaCarreraSemestreDTO(
+    Optional<Page<ViewMateriaCarreraSemestreDTO>> viewPageMateriaCarreraSemestreDTO(
             ViewPageCommandMateriaCarreraSemestre command);
-    Set<ViewMateriaCarreraSemestreDTO> viewAllMateriaCarreraSemestreDTO();
+    Optional<Set<ViewMateriaCarreraSemestreDTO>> viewAllMateriaCarreraSemestreDTO();
+    Optional<ViewMateriaCarreraSemestreDTO> viewByIdMateriaCarreraSemestreDTO(int id) ;
 }

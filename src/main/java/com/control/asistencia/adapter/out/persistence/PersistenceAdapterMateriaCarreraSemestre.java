@@ -7,6 +7,7 @@ import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMate
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateriaCarreraSemestre;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositorySemestre;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.command.SaveCommandMateriaCarreraSemestre;
+import com.control.asistencia.application.port.out.materiaCarreraSemestre.IDeleteOutPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.ISaveOutPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IViewOutPortMateriaCarreraSemestre;
 import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
@@ -16,53 +17,78 @@ import com.control.asistencia.common.PersistenceAdapter;
 import org.springframework.data.domain.Pageable;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
 @PersistenceAdapter
 public class PersistenceAdapterMateriaCarreraSemestre implements IViewOutPortMateriaCarreraSemestre,
-        ISaveOutPortMateriaCarreraSemestre {
-    private final IRepositoryMateriaCarreraSemestre repositoryMateriaCarreraSemestre;
+        ISaveOutPortMateriaCarreraSemestre, IDeleteOutPortMateriaCarreraSemestre  {
+    private final IRepositoryMateriaCarreraSemestre iRepositoryMateriaCarreraSemestre;
     private final IViewMapperMateriaCarreraSemestre iViewMapperMateriaCarreraSemestre;
     private final IRepositoryMateria iRepositoryMateria;
     private final IRepositoryCarrera iRepositoryCarrera;
     private final IRepositorySemestre iRepositorySemestre;
-    public PersistenceAdapterMateriaCarreraSemestre(IRepositoryMateriaCarreraSemestre repositoryMateriaCarreraSemestre
+    public PersistenceAdapterMateriaCarreraSemestre(IRepositoryMateriaCarreraSemestre iRepositoryMateriaCarreraSemestre
                         , IViewMapperMateriaCarreraSemestre iViewMapperMateriaCarreraSemestre
                         , IRepositoryMateria iRepositoryMateria
                         , IRepositoryCarrera iRepositoryCarrera
                         , IRepositorySemestre iRepositorySemestre){
 
-        this.repositoryMateriaCarreraSemestre = repositoryMateriaCarreraSemestre;
+        this.iRepositoryMateriaCarreraSemestre = iRepositoryMateriaCarreraSemestre;
         this.iViewMapperMateriaCarreraSemestre = iViewMapperMateriaCarreraSemestre;
         this.iRepositoryMateria = iRepositoryMateria;
         this.iRepositoryCarrera = iRepositoryCarrera;
         this.iRepositorySemestre = iRepositorySemestre;
     }
     @Override
-    public Page<ViewMateriaCarreraSemestreDTO> viewPagePageMateriaCarreraSemestreDTO(Pageable pageable) {
-        return this.iViewMapperMateriaCarreraSemestre.pageEntityToDto(
-                this.repositoryMateriaCarreraSemestre.findAll(pageable)
-        );
+    public Optional<Page<ViewMateriaCarreraSemestreDTO>> viewPagePageMateriaCarreraSemestreDTO(Pageable pageable) {
+        return Optional.of(this.iViewMapperMateriaCarreraSemestre.pageEntitysToDtos(
+                this.iRepositoryMateriaCarreraSemestre.findAll(pageable)
+        ));
     }
     @Override
-    public Set<ViewMateriaCarreraSemestreDTO> viewAllMateriaCarreraSemestreDTO() {
-        return this.iViewMapperMateriaCarreraSemestre.entitysToDtos(
-                new HashSet<>(this.repositoryMateriaCarreraSemestre.findAll())
-        );
+    public Optional<Set<ViewMateriaCarreraSemestreDTO>> viewAllMateriaCarreraSemestreDTO() {
+        return Optional.of(this.iViewMapperMateriaCarreraSemestre.entitysToDtos(
+                new HashSet<>(this.iRepositoryMateriaCarreraSemestre.findAll())
+        ));
     }
+
     @Override
-    public ViewMateriaCarreraSemestreDTO saveSaveMateriaCarreraSemestre(
+    public Optional<ViewMateriaCarreraSemestreDTO> viewByIdMateriaCarreraSemestreDTO(int id) {
+        return Optional.of(this.iViewMapperMateriaCarreraSemestre.entityToDto(
+                this.iRepositoryMateriaCarreraSemestre.findById(id).orElse(null)
+        ));
+    }
+
+    @Override
+    public Optional<ViewMateriaCarreraSemestreDTO> saveSaveMateriaCarreraSemestre(
             SaveCommandMateriaCarreraSemestre command) {
-        return this.iViewMapperMateriaCarreraSemestre.entityToDto(
-                this.repositoryMateriaCarreraSemestre.save(
+        return Optional.ofNullable(this.iViewMapperMateriaCarreraSemestre.entityToDto(
+                this.iRepositoryMateriaCarreraSemestre.save(
                         new MateriaCarreraSemestreEntity(
-                                  this.iRepositoryCarrera.findById(command.getIdCarrera())
+                                //se utiliza para obtener el valor máximo entre el
+                                // valor actual de idMateriaCarreraSemestre y cero (0)
+                                Math.max(command.getIdMateriaCarreraSemestre(), 0)
+                                , this.iRepositoryCarrera.findById(command.getIdCarrera())
                                 , this.iRepositoryMateria.findById(command.getSigla())
                                 , this.iRepositorySemestre.findById(command.getIdSemestre())
                                 , command.isActivo()
                         )
                 )
-        );
+        ));
+
     }
+
+    @Override
+    public boolean deleteMateriaCarreraSemestre(int id) {
+        return this.iRepositoryMateriaCarreraSemestre.findById(id).map(
+                materiaCarreraSemestreEntity -> {
+                    this.iRepositoryMateriaCarreraSemestre.delete(materiaCarreraSemestreEntity);
+                    return true;
+                }
+        ).orElse(false);
+    }
+
+
 }

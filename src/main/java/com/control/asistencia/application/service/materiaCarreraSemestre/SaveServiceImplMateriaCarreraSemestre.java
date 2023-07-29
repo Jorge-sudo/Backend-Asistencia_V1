@@ -7,16 +7,17 @@ import com.control.asistencia.common.UseCase;
 import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @UseCase
 public class SaveServiceImplMateriaCarreraSemestre implements ISaveServiceMateriaCarreraSemestre {
     private final ISaveOutPortMateriaCarreraSemestre iSaveOutPortMateriaCarreraSemestre;
     public SaveServiceImplMateriaCarreraSemestre(ISaveOutPortMateriaCarreraSemestre iSaveOutPortMateriaCarreraSemestre){
         this.iSaveOutPortMateriaCarreraSemestre = iSaveOutPortMateriaCarreraSemestre;
     }
-
     @Override
     @Transactional
-    public ViewMateriaCarreraSemestreDTO saveMateriaCarreraSemestre(
+    public Optional<ViewMateriaCarreraSemestreDTO> saveMateriaCarreraSemestre(
             SaveCommandMateriaCarreraSemestre saveCommandMateriaCarreraSemestre) {
         return this.iSaveOutPortMateriaCarreraSemestre
                 .saveSaveMateriaCarreraSemestre(saveCommandMateriaCarreraSemestre);

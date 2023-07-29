@@ -6,6 +6,8 @@ import com.control.asistencia.application.port.out.materia.IViewOutPortMateria;
 import com.control.asistencia.common.PersistenceAdapter;
 import jakarta.persistence.EntityNotFoundException;
 
+import java.util.Optional;
+
 @PersistenceAdapter
 public class PersistenceAdapterMateria implements IViewOutPortMateria {
     private final IRepositoryMateria iRepositoryMateria;
@@ -14,8 +16,7 @@ public class PersistenceAdapterMateria implements IViewOutPortMateria {
     }
 
     @Override
-    public MateriaEntity viewByIdMateriaEntity(String sigla) {
-        return this.iRepositoryMateria.findById(sigla)
-                .orElseThrow(() -> new EntityNotFoundException("Materia not found"));
+    public Optional<MateriaEntity> viewByIdMateriaEntity(String sigla) {
+        return this.iRepositoryMateria.findById(sigla);
     }
 }

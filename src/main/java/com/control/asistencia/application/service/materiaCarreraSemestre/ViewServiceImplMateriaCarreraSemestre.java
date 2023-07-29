@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Set;
 
 @UseCase
@@ -21,7 +22,7 @@ public class ViewServiceImplMateriaCarreraSemestre implements IViewServiceMateri
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ViewMateriaCarreraSemestreDTO> viewPageMateriaCarreraSemestreDTO(ViewPageCommandMateriaCarreraSemestre command) {
+    public Optional<Page<ViewMateriaCarreraSemestreDTO>>  viewPageMateriaCarreraSemestreDTO(ViewPageCommandMateriaCarreraSemestre command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
 
         return this.iViewOutPortMateriaCarreraSemestre.viewPagePageMateriaCarreraSemestreDTO(
@@ -31,7 +32,13 @@ public class ViewServiceImplMateriaCarreraSemestre implements IViewServiceMateri
 
     @Override
     @Transactional(readOnly = true)
-    public Set<ViewMateriaCarreraSemestreDTO> viewAllMateriaCarreraSemestreDTO() {
+    public Optional<Set<ViewMateriaCarreraSemestreDTO>> viewAllMateriaCarreraSemestreDTO() {
         return this.iViewOutPortMateriaCarreraSemestre.viewAllMateriaCarreraSemestreDTO();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<ViewMateriaCarreraSemestreDTO> viewByIdMateriaCarreraSemestreDTO(int id) {
+        return this.iViewOutPortMateriaCarreraSemestre.viewByIdMateriaCarreraSemestreDTO(id);
     }
 }

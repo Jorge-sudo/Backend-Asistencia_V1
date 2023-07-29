@@ -24,7 +24,7 @@ import java.util.Set;
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public interface IViewMapperMateriaCarreraSemestre {
-   
+
     //@Mapping(source = "campoOrigen", target = "campoDestino")
     @Mappings({
             @Mapping(source = "idMateriaCarreraSemestre", target = "idMateriaCarreraSemestre"),
@@ -37,7 +37,7 @@ public interface IViewMapperMateriaCarreraSemestre {
     ViewMateriaCarreraSemestreDTO entityToDto(MateriaCarreraSemestreEntity materiaCarreraSemestreEntity);
 
     // Método para mapear una Page de entidades a una Page de DTOs
-    default Page<ViewMateriaCarreraSemestreDTO> pageEntityToDto(Page<MateriaCarreraSemestreEntity> page) {
+    default Page<ViewMateriaCarreraSemestreDTO> pageEntitysToDtos(Page<MateriaCarreraSemestreEntity> page) {
         return page.map(this::entityToDto);
     }
 

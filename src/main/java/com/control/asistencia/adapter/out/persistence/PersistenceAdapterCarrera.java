@@ -6,6 +6,8 @@ import com.control.asistencia.application.port.out.carrera.IViewOutPortCarrera;
 import com.control.asistencia.common.PersistenceAdapter;
 import jakarta.persistence.EntityNotFoundException;
 
+import java.util.Optional;
+
 @PersistenceAdapter
 public class PersistenceAdapterCarrera implements
         IViewOutPortCarrera {
@@ -13,10 +15,8 @@ public class PersistenceAdapterCarrera implements
     public PersistenceAdapterCarrera(IRepositoryCarrera repositoryCarrera){
         this.repositoryCarrera = repositoryCarrera;
     }
-
     @Override
-    public CarreraEntity viewByIdCarreraEntity(int id) {
-        return this.repositoryCarrera.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Carrera not found"));
+    public Optional<CarreraEntity> viewByIdCarreraEntity(int id) {
+        return this.repositoryCarrera.findById(id);
     }
 }

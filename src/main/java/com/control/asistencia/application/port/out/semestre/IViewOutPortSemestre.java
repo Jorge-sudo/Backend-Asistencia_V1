@@ -2,6 +2,8 @@ package com.control.asistencia.application.port.out.semestre;
 
 import com.control.asistencia.adapter.out.persistence.entity.SemestreEntity;
 
+import java.util.Optional;
+
 public interface IViewOutPortSemestre {
-    SemestreEntity viewByIdSemestreEntity(int id);
+    Optional<SemestreEntity> viewByIdSemestreEntity(int id);
 }
