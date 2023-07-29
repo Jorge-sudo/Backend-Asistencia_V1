@@ -65,7 +65,7 @@ public class ResponseBuilderApiRest {
 
     public static ResponseEntity<?> error(HttpStatus status) {
         return buildResponse(
-                "An error occurred, check your data.",
+                "An internal error occurred.",
                 status,
                 false,
                 false,

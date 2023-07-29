@@ -1,7 +1,7 @@
 package com.control.asistencia.application.service.materiaCarreraSemestre;
 
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.IViewServiceMateriaCarreraSemestre;
-import com.control.asistencia.application.port.in.materiaCarreraSemestre.command.ViewPageCommandMateriaCarreraSemestre;
+import com.control.asistencia.application.port.in.command.ViewPageCommand;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IViewOutPortMateriaCarreraSemestre;
 import com.control.asistencia.common.UseCase;
 import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
@@ -22,7 +22,7 @@ public class ViewServiceImplMateriaCarreraSemestre implements IViewServiceMateri
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Page<ViewMateriaCarreraSemestreDTO>>  viewPageMateriaCarreraSemestreDTO(ViewPageCommandMateriaCarreraSemestre command) {
+    public Optional<Page<ViewMateriaCarreraSemestreDTO>>  viewPageMateriaCarreraSemestreDTO(ViewPageCommand command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
 
         return this.iViewOutPortMateriaCarreraSemestre.viewPagePageMateriaCarreraSemestreDTO(

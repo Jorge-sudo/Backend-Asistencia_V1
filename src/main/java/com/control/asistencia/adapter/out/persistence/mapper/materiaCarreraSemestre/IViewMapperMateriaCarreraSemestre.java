@@ -14,13 +14,10 @@ import java.util.Set;
 
 
 @Mapper(
-    //indicamos que la implementacion sea generado como un componente de spring para poder inyectarl
+        //indicamos que la implementacion sea generado como un componente de spring para poder inyectarl
         componentModel = MappingConstants.ComponentModel.SPRING,
-    //Este atributo determina cómo se manejarán los campos de destino que no tienen una 
-    //asignación directa definida en el mapper. En tu ejemplo, se está utilizando ReportingPolicy.IGNORE, 
-    //lo que significa que se ignorarán los campos de destino no mapeados y no se mostrarán informes de advertencia 
-    //o error. Esto es útil cuando solo deseas mapear algunos campos específicos y no te importa 
-    //si algunos campos no se asignan directamente.
+        //Este atributo determina cómo se manejarán los campos de destino que no tienen una asignación
+        // directa definida en el mapper.
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public interface IViewMapperMateriaCarreraSemestre {

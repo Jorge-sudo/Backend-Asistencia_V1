@@ -5,7 +5,7 @@ import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSe
 
 import java.util.Optional;
 
-public interface ISaveServiceMateriaCarreraSemestre {
-    Optional<ViewMateriaCarreraSemestreDTO> saveMateriaCarreraSemestre(
+public interface ISaveOrUpdateServiceMateriaCarreraSemestre {
+    Optional<ViewMateriaCarreraSemestreDTO> saveOrUpdateMateriaCarreraSemestre(
             SaveCommandMateriaCarreraSemestre saveCommandMateriaCarreraSemestre);
 }
