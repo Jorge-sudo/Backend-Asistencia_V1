@@ -1,9 +1,9 @@
 package com.control.asistencia.application.port.out.carrera;
 
-import com.control.asistencia.domain.generic.GenericDTO;
+import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
 
 import java.util.Optional;
 
 public interface ISaveOrUpdateOutPortCarrera {
-    Optional<GenericDTO> saveOrUpdateCarrera(GenericDTO genericDTO);
+    Optional<SaveCommandGeneric> saveOrUpdateCarrera(SaveCommandGeneric saveCommandGeneric);
 }

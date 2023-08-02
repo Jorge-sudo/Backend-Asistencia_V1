@@ -1,6 +1,7 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -10,11 +11,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "aula_materia_docente")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AulaMateriaDocenteEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_aula_materia_docente")
+    @Column(name = "id_aula_materia_docente", nullable = false)
     private int idAulaMateriaDocente;
+
     //@JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_materia_docente", nullable = false)

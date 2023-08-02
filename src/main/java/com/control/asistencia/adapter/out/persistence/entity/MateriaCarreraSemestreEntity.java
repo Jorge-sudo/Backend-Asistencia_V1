@@ -1,13 +1,8 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import java.util.Optional;
 
 @Entity
 @Data
@@ -15,6 +10,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class MateriaCarreraSemestreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,37 +26,11 @@ public class MateriaCarreraSemestreEntity {
     @ManyToOne
     @JoinColumn(name = "sigla", nullable = false)
     private MateriaEntity materia;
+
     @ManyToOne
     @JoinColumn(name = "id_semestre", nullable = false)
     private SemestreEntity semestre;
-    @NotNull(message ="no puede estar vacio")
+
     private boolean activo;
 
-    public MateriaCarreraSemestreEntity(
-              Optional<CarreraEntity> carreraEntity
-            , Optional<MateriaEntity> materiaEntity
-            , Optional<SemestreEntity> semestreEntity
-            , boolean activo) {
-
-        this.carrera = carreraEntity.orElse(null);
-        this.materia = materiaEntity.orElse(null);
-        this.semestre = semestreEntity.orElse(null);
-        this.activo = activo;
-
-    }
-
-    public MateriaCarreraSemestreEntity(
-                int idMateriaCarreraSemestre,
-            Optional<CarreraEntity> carreraEntity
-            , Optional<MateriaEntity> materiaEntity
-            , Optional<SemestreEntity> semestreEntity
-            , boolean activo) {
-
-        this.idMateriaCarreraSemestre = idMateriaCarreraSemestre;
-        this.carrera = carreraEntity.orElse(null);
-        this.materia = materiaEntity.orElse(null);
-        this.semestre = semestreEntity.orElse(null);
-        this.activo = activo;
-
-    }
 }

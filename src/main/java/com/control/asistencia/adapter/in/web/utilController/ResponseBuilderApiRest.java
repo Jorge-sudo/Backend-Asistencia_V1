@@ -22,7 +22,7 @@ public class ResponseBuilderApiRest {
 
     public static ResponseEntity<?> view(Optional<?> data) {
         return buildResponse(
-                "Your data was show successfully.",
+                "Tus datos fueron mostrados exitosamente.",
                 HttpStatus.OK,
                 true,
                 false,
@@ -33,7 +33,7 @@ public class ResponseBuilderApiRest {
 
     public static ResponseEntity<?> save(Optional<?> data) {
         return buildResponse(
-                "Your data was saved successfully.",
+                "Tus datos se guardaron con éxito.",
                 HttpStatus.CREATED,
                 false,
                 true,
@@ -44,7 +44,7 @@ public class ResponseBuilderApiRest {
 
     public static ResponseEntity<?> update(Optional<?> data) {
         return buildResponse(
-                "Your data was updated successfully.",
+                "Tus datos se actualizaron con éxito.",
                 HttpStatus.OK,
                 false,
                 false,
@@ -54,34 +54,12 @@ public class ResponseBuilderApiRest {
     }
     public static ResponseEntity<?> delete(boolean result) {
         return buildResponse(
-                result ? "Your data was deleted successfully.": "Your data was not deleted, check the id sent.",
+                result ? "Tus datos fueron eliminados con éxito.": "Tus datos no fueron eliminados, revisa el id enviado.",
                 HttpStatus.OK,
                 false,
                 false,
                 false,
                 result,
-                Optional.empty());
-    }
-
-    public static ResponseEntity<?> error(HttpStatus status) {
-        return buildResponse(
-                "An internal error occurred.",
-                status,
-                false,
-                false,
-                false,
-                false,
-                Optional.empty());
-    }
-
-    public static ResponseEntity<?> errorWithData(Optional<?> data, HttpStatus status) {
-        return buildResponse(
-                "Data not found by id to save the data or some attribute is missing check your data.",
-                status,
-                false,
-                false,
-                false,
-                false,
                 Optional.empty());
     }
 

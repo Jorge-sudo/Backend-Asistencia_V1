@@ -1,7 +1,7 @@
 package com.control.asistencia.adapter.out.persistence.mapper.materia;
 
 import com.control.asistencia.adapter.out.persistence.entity.MateriaEntity;
-import com.control.asistencia.domain.materia.MateriaDTO;
+import com.control.asistencia.application.port.in.materia.command.SaveCommandMateria;
 import org.mapstruct.*;
 import org.springframework.data.domain.Page;
 
@@ -20,16 +20,16 @@ public interface IMapperMateria {
             @Mapping(source = "sigla", target = "sigla"),
             @Mapping(source = "nombre", target = "nombre")
     })
-    MateriaDTO entityToDto(MateriaEntity materiaEntity);
+    SaveCommandMateria entityToDto(MateriaEntity materiaEntity);
     @Mappings({
             @Mapping(source = "sigla", target = "sigla"),
             @Mapping(source = "nombre", target = "nombre")
     })
-    MateriaEntity dtoToEntity(MateriaDTO materiaDTO);
-    default Page<MateriaDTO> pageEntitysToDtos(Page<MateriaEntity> page) {
+    MateriaEntity dtoToEntity(SaveCommandMateria saveCommandMateria);
+    default Page<SaveCommandMateria> pageEntitysToDtos(Page<MateriaEntity> page) {
         return page.map(this::entityToDto);
     }
-    default Set<MateriaDTO> entitysToDtos(Set<MateriaEntity> materiaEntity) {
+    default Set<SaveCommandMateria> entitysToDtos(Set<MateriaEntity> materiaEntity) {
         return materiaEntity
                 .stream()
                 .map(this::entityToDto)

@@ -1,8 +1,7 @@
 package com.control.asistencia.adapter.in.web.semestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ExceptionHandlerUtil;
 import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
-import com.control.asistencia.application.port.in.semestre.IViewServiceSemestre;
+import com.control.asistencia.application.port.in.semestre.IViewInPortSemestre;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,21 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ViewControllerSemestre {
-    private final IViewServiceSemestre iViewServiceSemestre;
-    public ViewControllerSemestre(IViewServiceSemestre iViewServiceSemestre){
-        this.iViewServiceSemestre = iViewServiceSemestre;
+    private final IViewInPortSemestre iViewInPortSemestre;
+    public ViewControllerSemestre(IViewInPortSemestre iViewInPortSemestre){
+        this.iViewInPortSemestre = iViewInPortSemestre;
     }
     @GetMapping(path = "/semestres")
     ResponseEntity<?> viewAllSemestres(){
-        ResponseEntity<?> response;
-        try{
-            response = ResponseBuilderApiRest.view(
-                  this.iViewServiceSemestre.viewAllSemestreDTO()
-            );
-        } catch (Exception e) {
-            // Captura de cualquier otra excepción no esperada
-            response =  ExceptionHandlerUtil.handleException(e);
-        }
-        return response;
+        return ResponseBuilderApiRest.view(
+                this.iViewInPortSemestre.viewAllSemestreDTO()
+        );
     }
 }

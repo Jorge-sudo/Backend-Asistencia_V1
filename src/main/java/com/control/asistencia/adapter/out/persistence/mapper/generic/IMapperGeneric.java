@@ -1,8 +1,9 @@
 package com.control.asistencia.adapter.out.persistence.mapper.generic;
 
 import com.control.asistencia.adapter.out.persistence.entity.CarreraEntity;
+import com.control.asistencia.adapter.out.persistence.entity.RolEntity;
 import com.control.asistencia.adapter.out.persistence.entity.SemestreEntity;
-import com.control.asistencia.domain.generic.GenericDTO;
+import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
 import org.mapstruct.*;
 import java.util.Set;
 
@@ -21,13 +22,13 @@ public interface IMapperGeneric {
             @Mapping(source = "idCarrera", target = "id"),
             @Mapping(source = "nombre", target = "nombre")
     })
-    GenericDTO entityToDtoCarrera(CarreraEntity carreraEntity);
+    SaveCommandGeneric entityToDtoCarrera(CarreraEntity carreraEntity);
     @Mappings({
             @Mapping(source = "id", target = "idCarrera"),
             @Mapping(source = "nombre", target = "nombre")
     })
-    CarreraEntity dtoToEntityCarrera(GenericDTO carreraDTO);
-    default Set<GenericDTO> entitysToDtosCarrera(Set<CarreraEntity> carreraEntity) {
+    CarreraEntity dtoToEntityCarrera(SaveCommandGeneric carreraDTO);
+    default Set<SaveCommandGeneric> entitysToDtosCarrera(Set<CarreraEntity> carreraEntity) {
         return carreraEntity
                 .stream()
                 .map(this::entityToDtoCarrera)
@@ -39,17 +40,29 @@ public interface IMapperGeneric {
             @Mapping(source = "idSemestre", target = "id"),
             @Mapping(source = "nombre", target = "nombre")
     })
-    GenericDTO entityToDtoSemestre(SemestreEntity semestreEntity);
+    SaveCommandGeneric entityToDtoSemestre(SemestreEntity semestreEntity);
     @Mappings({
             @Mapping(source = "id", target = "idSemestre"),
             @Mapping(source = "nombre", target = "nombre")
     })
-    SemestreEntity dtoToEntitySemestre(GenericDTO semestreDTO);
-    default Set<GenericDTO> entitysToDtosSemestre(Set<SemestreEntity> semestreEntities) {
+    SemestreEntity dtoToEntitySemestre(SaveCommandGeneric semestreDTO);
+    default Set<SaveCommandGeneric> entitysToDtosSemestre(Set<SemestreEntity> semestreEntities) {
         return semestreEntities
                 .stream()
                 .map(this::entityToDtoSemestre)
                 .collect(java.util.stream.Collectors.toSet());
     }
 
+    // --------- ROL --------------
+    @Mappings({
+            @Mapping(source = "idRol", target = "id"),
+            @Mapping(source = "nombre", target = "nombre")
+    })
+    SaveCommandGeneric entityToDtoRol(RolEntity rolEntity);
+    default Set<SaveCommandGeneric> entitysToDtosRol(Set<RolEntity> rolEntities) {
+        return rolEntities
+                .stream()
+                .map(this::entityToDtoRol)
+                .collect(java.util.stream.Collectors.toSet());
+    }
 }

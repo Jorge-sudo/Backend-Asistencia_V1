@@ -1,9 +1,8 @@
 package com.control.asistencia.adapter.in.web.materiaCarreraSemestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ExceptionHandlerUtil;
 import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
-import com.control.asistencia.application.port.in.materiaCarreraSemestre.IViewServiceMateriaCarreraSemestre;
-import com.control.asistencia.application.port.in.command.ViewPageCommand;
+import com.control.asistencia.application.port.in.materiaCarreraSemestre.IViewInPortMateriaCarreraSemestre;
+import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ViewControllerMateriaCarreraSemestre {
-    private final IViewServiceMateriaCarreraSemestre iViewServiceMateriaCarreraSemestre;
-    public ViewControllerMateriaCarreraSemestre(IViewServiceMateriaCarreraSemestre iViewServiceMateriaCarreraSemestre){
-        this.iViewServiceMateriaCarreraSemestre = iViewServiceMateriaCarreraSemestre;
+    private final IViewInPortMateriaCarreraSemestre iViewInPortMateriaCarreraSemestre;
+    public ViewControllerMateriaCarreraSemestre(IViewInPortMateriaCarreraSemestre iViewInPortMateriaCarreraSemestre){
+        this.iViewInPortMateriaCarreraSemestre = iViewInPortMateriaCarreraSemestre;
     }
     @GetMapping(path = "/materiaCarreraSemestres/page/{page}/{size}/{sortBy}")
     ResponseEntity<?> viewPageMateriaCarreraSemestre(
@@ -31,42 +30,21 @@ public class ViewControllerMateriaCarreraSemestre {
                 size,
                 sortBy);
 
-        ResponseEntity<?> response;
-        try {
-            response = ResponseBuilderApiRest.view(
-                    this.iViewServiceMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(command)
-            );
-        } catch (Exception e) {
-            // Captura de cualquier otra excepción no esperada
-            response =  ExceptionHandlerUtil.handleException(e);
-        }
-        return response;
+        return ResponseBuilderApiRest.view(
+                this.iViewInPortMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(command)
+        );
     }
     @GetMapping(path = "/materiaCarreraSemestres")
     ResponseEntity<?> viewAllMateriaCarreraSemestre() {
-        ResponseEntity<?> response;
-        try {
-            response = ResponseBuilderApiRest.view(
-                    this.iViewServiceMateriaCarreraSemestre.viewAllMateriaCarreraSemestreDTO()
-            );
-        } catch (Exception e) {
-            // Captura de cualquier otra excepción no esperada
-            response =  ExceptionHandlerUtil.handleException(e);
-        }
-        return response;
+        return ResponseBuilderApiRest.view(
+                this.iViewInPortMateriaCarreraSemestre.viewAllMateriaCarreraSemestreDTO()
+        );
     }
     @GetMapping(path = "/materiaCarreraSemestres/{id}")
     ResponseEntity<?> viewByIdMateriaCarreraSemestre(@PathVariable("id") int id) {
-        ResponseEntity<?> response;
-        try {
-            response = ResponseBuilderApiRest.view(
-                    this.iViewServiceMateriaCarreraSemestre.viewByIdMateriaCarreraSemestreDTO(id)
-            );
-        } catch (Exception e) {
-            // Captura de cualquier otra excepción no esperada
-            response =  ExceptionHandlerUtil.handleException(e);
-        }
-        return response;
+        return ResponseBuilderApiRest.view(
+                this.iViewInPortMateriaCarreraSemestre.viewByIdMateriaCarreraSemestreDTO(id)
+        );
     }
 
 

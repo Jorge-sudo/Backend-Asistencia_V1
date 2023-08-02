@@ -1,45 +1,27 @@
 
 -- CONTROL DE ASISTENCIA MODELO RELACIONAL NORMALIZADO
-
-
---SUPERVISOR
-INSERT IGNORE INTO persona(ci, nombre, apellido, fotografia, email, genero,  correo_institucional, contrasenia)
-VALUES (11077821, 'Jorge Luis', 'Arone Delgado', 'JorgeLuisAroneDelgado11077821.jpg', 'jorgearone567@gmail.com', 'M',
-        'jorge.arone@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi');
---DOCENTES
-INSERT IGNORE INTO persona(ci, nombre, apellido, fotografia, email, genero,  correo_institucional, contrasenia, activo)
-VALUES (222221, 'Rita Roxana', 'Torrico', 'RitaRoxanaTorrico222221.jpg', 'ritatorrico222@gmail.com', 'F', 'rita.torrico@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (2222224, 'Lorena Morayma', 'Huasco Aruquipa', 'LorenaMoraymaHuascoAruquipa2222224.jpg', 'lorenahuasco222@gmail.com', 'F','lorena.huasco@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (22225, 'Maribel', 'Apaza Atahuachi', 'MaribelApazaAtahuachi22225.jpg', 'marielapaza222@gmail.com', 'F','maribel.apaza@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (2222231, 'Erik Alvaro', 'Mamani Callisaya', 'ErikAlvaroMamaniCallisaya2222231.jpg', 'erikmamanicallisaya222@gmail.com', 'M','erik.mamani@usalesiana.edu.bo', 'erik222', TRUE),
-       (222223, 'Ariel Naddir', 'Aguilar Duran', 'ArielNaddirAguilarDuran222223.jpg', 'arielaguilar222@gmail.com', 'M','ariel.aguilar@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (22227, 'Angela Raquel', 'Blanco Velasquez', 'AngelaRaquelBlancoVelasquez22227.jpg', 'angelablanco222@gmail.com', 'F','angela.blanco@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (2222241, 'Maria Elizabeth', 'Quezada Gutierrez', 'MariaElizabethQuezadaGutierrez2222241.jpg', 'mariaquezada222@gmail.com', 'F','maria.quezada@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (2222234, 'Maria Nila', 'Morales Quispe', 'MariaNilaMoralesQuispe2222234.jpg', 'mariamorales222@gmail.com', 'F','maria.morales@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (22219, 'Alfonso Martin', 'Flores Chumacero', 'AlfonsoMartinFloresChumacero22219.jpg', 'alfonsoflores222@gmail.com', 'M','alfonso.flores@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (2222230, 'Erik Elio', 'Mamani Padilla', 'ErikElioMamaniPadilla2222230.jpg', 'erikmamani222@gmail.com', 'M','erik.mamani@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE),
-       (2222251, 'Adalid Irvin', 'Yujra Alí', 'AdalidIrvinYujraAlí2222251.jpg', 'adalidyujra222@gmail.com', 'M','adalid.yujra@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', FALSE),
-       (22215, 'Fernando Ramiro', 'estrada Navia', 'FernandoRamiroestradaNavia22215.jpg', 'fernandoestrada222@gmail.com', 'M','fernando.estrada@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', FALSE);
-
-
 INSERT IGNORE INTO rol(id_rol, nombre) VALUES(1, 'USER');
 INSERT IGNORE INTO rol(id_rol, nombre) VALUES(2, 'ADMIN');
 
-INSERT IGNORE INTO persona_rol(id_persona_rol , id_rol, ci) VALUES(1, 1, 11077821);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(2, 2, 11077821);
+--SUPERVISOR
+INSERT IGNORE INTO persona(ci, nombre, apellido, fotografia, email, genero,  correo_institucional, contrasenia, activo, id_rol)
+VALUES (11077821, 'Jorge Luis', 'Arone Delgado', 'JorgeLuisAroneDelgado11077821.jpg', 'jorgearone567@gmail.com', 'M',
+        'jorge.arone@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 2);
 --DOCENTES
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(3, 1, 222221);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(4, 1, 2222224);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(5, 1, 22225);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(6, 1, 2222231);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(7, 1, 222223);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(8, 1, 22227);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(9, 1, 2222241);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(10, 1, 2222234);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(11, 1, 22219);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(12, 1, 2222230);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(13, 1, 2222251);
-INSERT IGNORE INTO persona_rol(id_persona_rol ,id_rol, ci) VALUES(14, 1, 22215);
+INSERT IGNORE INTO persona(ci, nombre, apellido, fotografia, email, genero,  correo_institucional, contrasenia, activo, id_rol)
+VALUES (222221, 'Rita Roxana', 'Torrico', 'RitaRoxanaTorrico222221.jpg', 'ritatorrico222@gmail.com', 'F', 'rita.torrico@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (2222224, 'Lorena Morayma', 'Huasco Aruquipa', 'LorenaMoraymaHuascoAruquipa2222224.jpg', 'lorenahuasco222@gmail.com', 'F','lorena.huasco@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (22225, 'Maribel', 'Apaza Atahuachi', 'MaribelApazaAtahuachi22225.jpg', 'marielapaza222@gmail.com', 'F','maribel.apaza@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (2222231, 'Erik Alvaro', 'Mamani Callisaya', 'ErikAlvaroMamaniCallisaya2222231.jpg', 'erikmamanicallisaya222@gmail.com', 'M','erik.mamani@usalesiana.edu.bo', 'erik222', TRUE, 1),
+       (222223, 'Ariel Naddir', 'Aguilar Duran', 'ArielNaddirAguilarDuran222223.jpg', 'arielaguilar222@gmail.com', 'M','ariel.aguilar@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (22227, 'Angela Raquel', 'Blanco Velasquez', 'AngelaRaquelBlancoVelasquez22227.jpg', 'angelablanco222@gmail.com', 'F','angela.blanco@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (2222241, 'Maria Elizabeth', 'Quezada Gutierrez', 'MariaElizabethQuezadaGutierrez2222241.jpg', 'mariaquezada222@gmail.com', 'F','maria.quezada@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (2222234, 'Maria Nila', 'Morales Quispe', 'MariaNilaMoralesQuispe2222234.jpg', 'mariamorales222@gmail.com', 'F','maria.morales@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (22219, 'Alfonso Martin', 'Flores Chumacero', 'AlfonsoMartinFloresChumacero22219.jpg', 'alfonsoflores222@gmail.com', 'M','alfonso.flores@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (2222230, 'Erik Elio', 'Mamani Padilla', 'ErikElioMamaniPadilla2222230.jpg', 'erikmamani222@gmail.com', 'M','erik.mamani@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', TRUE, 1),
+       (2222251, 'Adalid Irvin', 'Yujra Alí', 'AdalidIrvinYujraAlí2222251.jpg', 'adalidyujra222@gmail.com', 'M','adalid.yujra@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', FALSE, 1),
+       (22215, 'Fernando Ramiro', 'estrada Navia', 'FernandoRamiroestradaNavia22215.jpg', 'fernandoestrada222@gmail.com', 'M','fernando.estrada@usalesiana.edu.bo', '$2a$10$bhC2WU3LGtlCC8lGNOpzhOtQbDQfGkTS/axflao.Bs2II8kGWwdKi', FALSE, 1);
+
 
 INSERT IGNORE INTO supervisor(ci, reporte_email, reporte_institucional) VALUES(11077821, true, true);
 

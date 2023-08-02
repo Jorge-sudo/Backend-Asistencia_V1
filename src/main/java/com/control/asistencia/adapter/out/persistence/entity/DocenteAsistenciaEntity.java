@@ -1,6 +1,7 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "docente_asistencia")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DocenteAsistenciaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +27,6 @@ public class DocenteAsistenciaEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ci", nullable = false)
     private DocenteEntity docente;
-
-
-    public DocenteAsistenciaEntity(int idDocenteAsistencia){
-        this.idDocenteAsistencia = idDocenteAsistencia;
-    }
-
-    public DocenteAsistenciaEntity(AsistenciaEntity asistencia, DocenteEntity docente) {
-        this.asistencia = asistencia;
-        this.docente = docente;
-    }
 
 
 }

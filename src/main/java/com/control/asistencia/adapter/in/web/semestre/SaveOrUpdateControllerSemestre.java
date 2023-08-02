@@ -1,10 +1,10 @@
 package com.control.asistencia.adapter.in.web.semestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ExceptionHandlerUtil;
 import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
-import com.control.asistencia.application.port.in.semestre.ISaveOrUpdateServiceSemestre;
+import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
+import com.control.asistencia.application.port.in.semestre.ISaveOrUpdateInPortSemestre;
 import com.control.asistencia.common.WebAdapter;
-import com.control.asistencia.domain.generic.GenericDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,26 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class SaveOrUpdateControllerSemestre {
-    private final ISaveOrUpdateServiceSemestre iSaveOrUpdateServiceSemestre;
-    public SaveOrUpdateControllerSemestre(ISaveOrUpdateServiceSemestre iSaveOrUpdateServiceSemestre){
-        this.iSaveOrUpdateServiceSemestre = iSaveOrUpdateServiceSemestre;
+    private final ISaveOrUpdateInPortSemestre iSaveOrUpdateInPortSemestre;
+    public SaveOrUpdateControllerSemestre(ISaveOrUpdateInPortSemestre iSaveOrUpdateInPortSemestre){
+        this.iSaveOrUpdateInPortSemestre = iSaveOrUpdateInPortSemestre;
     }
     @PostMapping("/semestres")
-    ResponseEntity<?> saveOrUpdateSemestre(@RequestBody GenericDTO data){
-        ResponseEntity<?> response;
-        try {
-            response = data.getId() > 0
-                    ? ResponseBuilderApiRest.update(
-                    this.iSaveOrUpdateServiceSemestre.saveOrUpdateSemestre(data)
-            )
-                    : ResponseBuilderApiRest.save(
-                    this.iSaveOrUpdateServiceSemestre.saveOrUpdateSemestre(data)
-            );
-        } catch (Exception e) {
-            // Captura de cualquier otra excepción no esperada
-            response =  ExceptionHandlerUtil.handleException(e);
-        }
-        return response;
+    ResponseEntity<?> saveOrUpdateSemestre(@RequestBody @Valid SaveCommandGeneric data){
+        return data.getId() > 0
+                ? ResponseBuilderApiRest.update(
+                this.iSaveOrUpdateInPortSemestre.saveOrUpdateSemestre(data)
+        )
+                : ResponseBuilderApiRest.save(
+                this.iSaveOrUpdateInPortSemestre.saveOrUpdateSemestre(data)
+        );
     }
 
 

@@ -1,14 +1,13 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.lang.Nullable;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.util.List;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -16,46 +15,56 @@ import java.util.List;
 @Table(name = "persona")
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class PersonaEntity {
+
     @Id
-    @Digits(integer=11, fraction=0, message="No se permite decimales y maximo de digitos es 10.")
-    @Column(name = "ci", nullable = false)
+    @Digits(integer=12, fraction=0, message="CI no valido: No se permite decimales y maximo de digitos es 12.")
+    @NotNull(message = "CI no válido: el CI es NULL")
+    @Column(unique = true)
     private long ci ;
-    @Size(min=2, max=25, message="el tamaño tiene que estar entre 2 y 25")
-    @NotEmpty(message ="no puede estar vacio")
-    @Column(nullable = false)
+
+    @Size(min=3, max=30, message="Nombre no válido: el tamaño tiene que estar entre 3 y 30")
+    @NotBlank(message = "Nombre no válido: nombre vacío")
+    @NotNull(message = "Nombre no válido: el nombre es NULL")
     private String nombre;
-    @Size(min=2, max=25, message="el tamaño tiene que estar entre 2 y 25")
-    @NotEmpty(message ="no puede estar vacio")
-    @Column(nullable = false)
+
+    @Size(min=3, max=30, message="Apellido no valido: el tamaño tiene que estar entre 3 y 30")
+    @NotBlank(message = "Apellido no válido: apellido vacío")
+    @NotNull(message = "Apellido no válido: el apellido es NULL")
     private String apellido;
 
     @Nullable
     private String fotografia;
-    @Email(message = "el correo no es valido")
-    @Size(min=2, max=50, message="el tamaño tiene que estar entre 2 y 50")
-    @NotEmpty(message ="no puede estar vacio")
-    @Column(nullable = false)
+
+    @Email(message = "Email no válido: El formato no es valido")
+    @NotBlank(message = "Email no válido: Email vacío")
+    @NotNull(message = "Email no válido: el Email es NULL")
+    @Column(unique = true)
     private String email;
-    @Size(min=1, max=1, message="el tamaño tiene que estar entre 1 y 1")
-    @NotEmpty(message ="no puede estar vacio")
-    @Column(nullable = false)
+
+    @Size(min=1, max=1, message="Genero no válido: el tamaño tiene que estar entre 1 y 1")
+    @NotBlank(message = "Genero no válido: genero vacío")
+    @NotNull(message = "Genero no válido: el genero es NULL")
     private String genero;
-    @Size(min=2, max=50, message="el tamaño tiene que estar entre 2 y 50")
-    @NotEmpty(message ="no puede estar vacio")
-    @Column(name = "correo_institucional", nullable = false)
+
+    @Email(message = "Correo institucional no valido: El formato no es valido")
+    @NotBlank(message = "Correo Institucional no válido: Correo Institucional vacío")
+    @NotNull(message = "Correo Institucional no válido: el Correo Institucional es NULL")
+    @Column(name = "correo_institucional")
     private String correoInstitucional;
-    @Size(min=2, max=200, message="el tamaño tiene que estar entre 2 y 200")
-    @NotEmpty(message ="no puede estar vacio")
-    @Column(nullable = false)
+
+    @Size(min=2, max=200, message="Contrasenia no valida: el tamaño tiene que estar entre 2 y 200")
+    @NotBlank(message = "Contrasenia no válido: Contrasenia vacío")
+    @NotNull(message = "Contrasenia no válido: la Contrasenia es NULL")
     private String contrasenia;
-    @NotNull(message ="no puede estar vacio")
+
     private boolean activo;
 
     /*@JsonManagedReference  se utiliza en la entidad padre para indicar que la relacion es administrada
      o manejada por esa entidad si no se hace esto habra un ciclo infinito y un desborde de memoria*/
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
-    private List<PersonaRolEntity> personaRoles;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_rol", nullable = false)
+    private RolEntity rol;
 }

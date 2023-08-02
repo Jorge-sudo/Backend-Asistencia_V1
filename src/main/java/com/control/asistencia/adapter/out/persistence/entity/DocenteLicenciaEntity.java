@@ -1,6 +1,7 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "docente_licencia")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DocenteLicenciaEntity {
     @Id
     @Column(name = "id_docente_licencia")
