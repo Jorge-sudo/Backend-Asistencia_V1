@@ -9,9 +9,9 @@ import com.control.asistencia.domain.supervisor.SupervisorViewDTO;
 import java.util.Optional;
 
 @UseCase
-public class SaveOrUpdateServiceImplSupervisor implements ISaveOrUpdateInPortSupervisor {
+public class SaveOrUpdateInPortImplSupervisor implements ISaveOrUpdateInPortSupervisor {
     private final ISaveOrUpdateOutPortSupervisor iSaveOrUpdateOutPortSupervisor;
-    public SaveOrUpdateServiceImplSupervisor(ISaveOrUpdateOutPortSupervisor iSaveOrUpdateOutPortSupervisor){
+    public SaveOrUpdateInPortImplSupervisor(ISaveOrUpdateOutPortSupervisor iSaveOrUpdateOutPortSupervisor){
         this.iSaveOrUpdateOutPortSupervisor = iSaveOrUpdateOutPortSupervisor;
     }
 

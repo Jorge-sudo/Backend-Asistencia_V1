@@ -1,8 +1,8 @@
-package com.control.asistencia.adapter.in.web.docente;
+package com.control.asistencia.adapter.in.web.aula;
 
 import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.application.port.in.aula.IViewInPortAula;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
-import com.control.asistencia.application.port.in.docente.IViewInPortDocente;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @WebAdapter
 @RestController
 @RequestMapping("/api")
-public class ViewControllerDocente {
-    private final IViewInPortDocente iViewInPortDocente;
-    public ViewControllerDocente(IViewInPortDocente iViewInPortDocente){
-        this.iViewInPortDocente = iViewInPortDocente;
+public class ViewControllerAula {
+    private final IViewInPortAula iViewInPortAula;
+    public ViewControllerAula(IViewInPortAula iViewInPortAula){
+        this.iViewInPortAula = iViewInPortAula;
     }
-    @GetMapping("/docentes/page/{page}/{size}/{sortBy}")
-    ResponseEntity<?> viewPageDocente(
+    @GetMapping(path = "/aulas/page/{page}/{size}/{sortBy}")
+    ResponseEntity<?> viewPageAula(
             @PathVariable("page") int page,
             @PathVariable("size") int size,
             @PathVariable("sortBy") String sortBy ){
@@ -30,19 +30,16 @@ public class ViewControllerDocente {
                 sortBy);
 
         return ResponseBuilderApiRest.viewPage(
-                this.iViewInPortDocente.viewPageDocenteDTO(command)
+                this.iViewInPortAula.viewPageAulaDTO(command)
         );
-
     }
 
-    @GetMapping("/docentes/{ci}")
-    ResponseEntity<?> viewByCiDocente(
-            @PathVariable("ci") long ci){
+    @GetMapping(path = "/aulas/{id}")
+    ResponseEntity<?> viewByIdAula(
+            @PathVariable("id") int id){
 
         return ResponseBuilderApiRest.view(
-                this.iViewInPortDocente.viewByCiDocenteDTO(ci)
+                this.iViewInPortAula.viewByIdAulaDTO(id)
         );
-
     }
-
 }

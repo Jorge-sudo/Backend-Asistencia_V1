@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SaveCommandMateria {
+public class CommandMateria {
 
     @Size(min=3, max=10, message="Sigla no válido: el tamaño tiene que estar entre 3 y 10")
     @NotBlank(message = "Sigla no válido: Sigla vacío")

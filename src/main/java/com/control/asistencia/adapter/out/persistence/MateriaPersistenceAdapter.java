@@ -2,11 +2,11 @@ package com.control.asistencia.adapter.out.persistence;
 
 import com.control.asistencia.adapter.out.persistence.mapper.materia.IMapperMateria;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateria;
+import com.control.asistencia.application.port.in.materia.command.CommandMateria;
 import com.control.asistencia.application.port.out.materia.IDeleteOutPortMateria;
 import com.control.asistencia.application.port.out.materia.ISaveOrUpdateOutPortMateria;
 import com.control.asistencia.application.port.out.materia.IViewOutPortMateria;
 import com.control.asistencia.common.PersistenceAdapter;
-import com.control.asistencia.application.port.in.materia.command.SaveCommandMateria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,17 +27,15 @@ public class MateriaPersistenceAdapter implements
     }
 
     @Override
-    public Optional<Page<SaveCommandMateria>> viewPageMateriaEntity(Pageable pageable) {
-        return Optional.of(
-                this.iMapperMateria.pageEntitysToDtos(
-                        this.iRepositoryMateria.findAll(pageable)
-                )
+    public Page<CommandMateria> viewPageMateriaEntity(Pageable pageable) {
+        return this.iMapperMateria.pageEntitysToDtos(
+                this.iRepositoryMateria.findAll(pageable)
         );
     }
 
 
     @Override
-    public Optional<SaveCommandMateria> viewByIdMateriaDTO(String sigla) {
+    public Optional<CommandMateria> viewByIdMateriaDTO(String sigla) {
         return Optional.of(
                 this.iMapperMateria.entityToDto(
                         this.iRepositoryMateria.findById(sigla)
@@ -47,11 +45,11 @@ public class MateriaPersistenceAdapter implements
     }
 
     @Override
-    public Optional<SaveCommandMateria> saveOrUpdateMateria(SaveCommandMateria saveCommandMateria) {
+    public Optional<CommandMateria> saveOrUpdateMateria(CommandMateria commandMateria) {
         return Optional.of(
                 this.iMapperMateria.entityToDto(
                         this.iRepositoryMateria.save(
-                                this.iMapperMateria.dtoToEntity(saveCommandMateria)
+                                this.iMapperMateria.dtoToEntity(commandMateria)
                         )
                 )
         );

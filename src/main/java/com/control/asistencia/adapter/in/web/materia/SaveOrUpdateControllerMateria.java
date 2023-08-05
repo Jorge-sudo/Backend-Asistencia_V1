@@ -3,8 +3,8 @@ package com.control.asistencia.adapter.in.web.materia;
 import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materia.ISaveOrUpdateInPortMateria;
 import com.control.asistencia.application.port.in.materia.IViewInPortMateria;
+import com.control.asistencia.application.port.in.materia.command.CommandMateria;
 import com.control.asistencia.common.WebAdapter;
-import com.control.asistencia.application.port.in.materia.command.SaveCommandMateria;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +29,9 @@ public class SaveOrUpdateControllerMateria {
 
     }
     @PostMapping("/materias")
-    ResponseEntity<?> saveOrUpdateMateria(@RequestBody @Valid SaveCommandMateria data){
+    ResponseEntity<?> saveOrUpdateMateria(@RequestBody @Valid CommandMateria data){
 
-        Optional<SaveCommandMateria> response = this.iViewInPortMateria
+        Optional<CommandMateria> response = this.iViewInPortMateria
                 .viewByIdMateriaDTO(data.getSigla());
 
         return response.isEmpty()

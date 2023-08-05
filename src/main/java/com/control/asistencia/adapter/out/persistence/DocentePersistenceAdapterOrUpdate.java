@@ -33,11 +33,9 @@ public class DocentePersistenceAdapterOrUpdate implements
     }
 
     @Override
-    public Optional<Page<DocenteViewDTO>> viewPageDocenteDTO(Pageable pageable){
-        return Optional.of(
-                this.iMapperDocente.pageEntitysToDtos(
-                        this.iRepositoryDocente.findAll(pageable)
-                )
+    public Page<DocenteViewDTO> viewPageDocenteDTO(Pageable pageable){
+        return this.iMapperDocente.pageEntitysToDtos(
+                this.iRepositoryDocente.findAll(pageable)
         );
     }
 

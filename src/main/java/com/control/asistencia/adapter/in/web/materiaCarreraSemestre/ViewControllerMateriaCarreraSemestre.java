@@ -30,7 +30,7 @@ public class ViewControllerMateriaCarreraSemestre {
                 size,
                 sortBy);
 
-        return ResponseBuilderApiRest.view(
+        return ResponseBuilderApiRest.viewPage(
                 this.iViewInPortMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(command)
         );
     }

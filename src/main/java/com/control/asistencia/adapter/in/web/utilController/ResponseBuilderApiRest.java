@@ -1,5 +1,6 @@
 package com.control.asistencia.adapter.in.web.utilController;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,17 @@ public class ResponseBuilderApiRest {
                 false,
                 false,
                 data);
+    }
+
+    public static ResponseEntity<?> viewPage(Page<?> data) {
+        return buildResponse(
+                "Tus datos fueron mostrados exitosamente.",
+                HttpStatus.OK,
+                true,
+                false,
+                false,
+                false,
+                Optional.of(data));
     }
 
     public static ResponseEntity<?> save(Optional<?> data) {

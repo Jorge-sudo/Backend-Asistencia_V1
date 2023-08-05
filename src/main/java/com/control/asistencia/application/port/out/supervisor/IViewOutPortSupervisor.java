@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface IViewOutPortSupervisor {
-    Optional<Page<SupervisorViewDTO>> viewPageSupervisorDTO(Pageable pageable);
+    Page<SupervisorViewDTO> viewPageSupervisorDTO(Pageable pageable);
     Optional<SupervisorViewDTO> viewByCiSupervisorDTO(Long ci);
 }

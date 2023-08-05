@@ -31,7 +31,7 @@ public class ViewControllerMateria {
                 size,
                 sortBy);
 
-        return ResponseBuilderApiRest.view(
+        return ResponseBuilderApiRest.viewPage(
                 this.iViewInPortMateria.viewPageMateriaDTO(command)
         );
     }

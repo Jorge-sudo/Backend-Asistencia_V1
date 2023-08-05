@@ -12,15 +12,15 @@ import org.springframework.data.domain.Sort;
 import java.util.Optional;
 
 @UseCase
-public class ViewServiceImplDocente implements  IViewInPortDocente {
+public class ViewInPortImplDocente implements  IViewInPortDocente {
     private final IViewOutPortDocente iViewOutPortDocente;
 
-    public ViewServiceImplDocente( IViewOutPortDocente iViewOutPortDocente ) {
+    public ViewInPortImplDocente(IViewOutPortDocente iViewOutPortDocente ) {
         this.iViewOutPortDocente = iViewOutPortDocente;
     }
 
     @Override
-    public Optional<Page<DocenteViewDTO>> viewPageDocenteDTO(ViewPageCommand command) {
+    public Page<DocenteViewDTO> viewPageDocenteDTO(ViewPageCommand command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
 
         return this.iViewOutPortDocente.viewPageDocenteDTO(

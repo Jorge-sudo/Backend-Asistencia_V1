@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @UseCase
-public class SaveOrUpdateServiceImplDocente implements ISaveOrUpdateInPortDocente {
+public class SaveOrUpdateInPortImplDocente implements ISaveOrUpdateInPortDocente {
     private final ISaveOrUpdateOutPortDocente iSaveOrUpdateOutPortDocente;
-    public SaveOrUpdateServiceImplDocente(ISaveOrUpdateOutPortDocente iSaveOrUpdateOutPortDocente){
+    public SaveOrUpdateInPortImplDocente(ISaveOrUpdateOutPortDocente iSaveOrUpdateOutPortDocente){
         this.iSaveOrUpdateOutPortDocente = iSaveOrUpdateOutPortDocente;
     }
     @Override

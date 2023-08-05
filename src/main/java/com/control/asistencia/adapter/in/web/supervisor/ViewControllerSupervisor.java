@@ -29,7 +29,7 @@ public class ViewControllerSupervisor {
                 size,
                 sortBy);
 
-        return ResponseBuilderApiRest.view(
+        return ResponseBuilderApiRest.viewPage(
                 this.iViewInPortSupervisor.viewPageSupervisorDTO(command)
         );
 

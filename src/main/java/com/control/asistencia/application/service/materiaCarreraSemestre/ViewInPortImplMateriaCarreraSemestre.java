@@ -22,7 +22,7 @@ public class ViewInPortImplMateriaCarreraSemestre implements IViewInPortMateriaC
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Page<ViewMateriaCarreraSemestreDTO>>  viewPageMateriaCarreraSemestreDTO(ViewPageCommand command) {
+    public Page<ViewMateriaCarreraSemestreDTO>  viewPageMateriaCarreraSemestreDTO(ViewPageCommand command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
 
         return this.iViewOutPortMateriaCarreraSemestre.viewPagePageMateriaCarreraSemestreDTO(

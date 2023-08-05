@@ -12,14 +12,14 @@ import org.springframework.data.domain.Sort;
 import java.util.Optional;
 
 @UseCase
-public class ViewServiceImplSupervisor implements IViewInPortSupervisor {
+public class ViewInPortImplSupervisor implements IViewInPortSupervisor {
     private final IViewOutPortSupervisor iViewOutPortSupervisor;
-    public ViewServiceImplSupervisor(IViewOutPortSupervisor iViewOutPortSupervisor){
+    public ViewInPortImplSupervisor(IViewOutPortSupervisor iViewOutPortSupervisor){
         this.iViewOutPortSupervisor = iViewOutPortSupervisor;
     }
 
     @Override
-    public Optional<Page<SupervisorViewDTO>> viewPageSupervisorDTO(ViewPageCommand command) {
+    public Page<SupervisorViewDTO> viewPageSupervisorDTO(ViewPageCommand command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
         return this.iViewOutPortSupervisor.viewPageSupervisorDTO(
                 PageRequest.of(command.getPage(), command.getSize(), sort )

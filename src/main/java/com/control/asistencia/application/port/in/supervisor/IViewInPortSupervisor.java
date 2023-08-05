@@ -7,6 +7,6 @@ import org.springframework.data.domain.Page;
 import java.util.Optional;
 
 public interface IViewInPortSupervisor {
-    Optional<Page<SupervisorViewDTO>> viewPageSupervisorDTO(ViewPageCommand command);
+    Page<SupervisorViewDTO> viewPageSupervisorDTO(ViewPageCommand command);
     Optional<SupervisorViewDTO> viewByCiSupervisorDTO(Long ci);
 }

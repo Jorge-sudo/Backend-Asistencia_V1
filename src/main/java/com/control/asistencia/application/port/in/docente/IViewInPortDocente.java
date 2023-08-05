@@ -7,6 +7,6 @@ import org.springframework.data.domain.Page;
 import java.util.Optional;
 
 public interface IViewInPortDocente {
-    Optional<Page<DocenteViewDTO>> viewPageDocenteDTO(ViewPageCommand command);
+    Page<DocenteViewDTO> viewPageDocenteDTO(ViewPageCommand command);
     Optional<DocenteViewDTO> viewByCiDocenteDTO(Long ci);
 }
