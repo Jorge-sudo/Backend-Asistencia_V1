@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.docente;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.in.docente.IViewInPortDocente;
 import com.control.asistencia.common.WebAdapter;
@@ -29,9 +28,7 @@ public class ViewControllerDocente {
                 size,
                 sortBy);
 
-        return ResponseBuilderApiRest.viewPage(
-                this.iViewInPortDocente.viewPageDocenteDTO(command)
-        );
+        return this.iViewInPortDocente.viewPageDocenteDTO(command);
 
     }
 
@@ -39,9 +36,7 @@ public class ViewControllerDocente {
     ResponseEntity<?> viewByCiDocente(
             @PathVariable("ci") long ci){
 
-        return ResponseBuilderApiRest.view(
-                this.iViewInPortDocente.viewByCiDocenteDTO(ci)
-        );
+        return this.iViewInPortDocente.viewByCiDocenteDTO(ci);
 
     }
 

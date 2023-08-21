@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.materia;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materia.IDeleteInPortMateria;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,6 @@ public class DeleteControllerMateria {
     ResponseEntity<?> deleteMateria(
             @PathVariable String sigla){
 
-        return ResponseBuilderApiRest.delete(
-                this.iDeleteInPortMateria.deleteMateria(sigla)
-        );
+        return this.iDeleteInPortMateria.deleteMateria(sigla);
     }
 }

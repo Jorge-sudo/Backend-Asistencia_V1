@@ -1,5 +1,7 @@
 package com.control.asistencia.application.port.in.materia;
 
+import org.springframework.http.ResponseEntity;
+
 public interface IDeleteInPortMateria {
-    boolean deleteMateria(String sigla);
+    ResponseEntity<?> deleteMateria(String sigla);
 }

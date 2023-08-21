@@ -1,12 +1,12 @@
 package com.control.asistencia.application.service.carrera;
 
+import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.carrera.IViewInPortCarrera;
 import com.control.asistencia.application.port.out.carrera.IViewOutPortCarrera;
 import com.control.asistencia.common.UseCase;
-import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-import java.util.Set;
 
 @UseCase
 public class ViewInPortImplCarrera implements IViewInPortCarrera {
@@ -16,7 +16,10 @@ public class ViewInPortImplCarrera implements IViewInPortCarrera {
     }
 
     @Override
-    public Optional<Set<SaveCommandGeneric>> viewAllCarreraDTO() {
-        return this.iViewOutPortCarrera.viewAllCarreraDTO();
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> viewAllCarreraDTO() {
+        return ResponseBuilderApiRest.view(
+                this.iViewOutPortCarrera.viewAllCarreraDTO()
+        );
     }
 }

@@ -1,9 +1,8 @@
 package com.control.asistencia.application.port.in.materia;
 
 import com.control.asistencia.application.port.in.materia.command.CommandMateria;
-
-import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 
 public interface ISaveOrUpdateInPortMateria {
-    Optional<CommandMateria> saveOrUpdateMateria(CommandMateria commandMateria);
+    ResponseEntity<?> saveOrUpdateMateria(CommandMateria commandMateria);
 }

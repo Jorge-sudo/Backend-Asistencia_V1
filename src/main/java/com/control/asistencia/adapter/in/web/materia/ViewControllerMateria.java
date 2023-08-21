@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.materia;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.in.materia.IViewInPortMateria;
 import com.control.asistencia.common.WebAdapter;
@@ -31,15 +30,11 @@ public class ViewControllerMateria {
                 size,
                 sortBy);
 
-        return ResponseBuilderApiRest.viewPage(
-                this.iViewInPortMateria.viewPageMateriaDTO(command)
-        );
+        return this.iViewInPortMateria.viewPageMateriaDTO(command);
     }
 
     @GetMapping(path = "/materias/{sigla}")
     ResponseEntity<?> viewByIdMateria(@PathVariable String sigla){
-        return ResponseBuilderApiRest.view(
-                this.iViewInPortMateria.viewByIdMateriaDTO(sigla)
-        );
+        return this.iViewInPortMateria.viewByIdMateriaDTO(sigla);
     }
 }

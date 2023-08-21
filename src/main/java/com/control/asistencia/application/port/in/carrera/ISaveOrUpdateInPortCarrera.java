@@ -1,9 +1,9 @@
 package com.control.asistencia.application.port.in.carrera;
 
 import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
+import org.springframework.http.ResponseEntity;
 
-import java.util.Optional;
 
 public interface ISaveOrUpdateInPortCarrera {
-    Optional<SaveCommandGeneric> saveOrUpdateCarrera(SaveCommandGeneric saveCommandGeneric);
+    ResponseEntity<?> saveOrUpdateCarrera(SaveCommandGeneric saveCommandGeneric);
 }

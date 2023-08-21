@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.aula;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.aula.IDeleteInPortAula;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,7 @@ public class DeleteControllerAula {
         this.iDeleteInPortAula = iDeleteInPortAula;
     }
     @DeleteMapping ("/aulas/{id}")
-    ResponseEntity<?> deleteAula(
-            @PathVariable  int id){
-
-        return ResponseBuilderApiRest.delete(
-                this.iDeleteInPortAula.deleteAula(id)
-        );
+    ResponseEntity<?> deleteAula(@PathVariable  int id){
+        return this.iDeleteInPortAula.deleteAula(id);
     }
 }

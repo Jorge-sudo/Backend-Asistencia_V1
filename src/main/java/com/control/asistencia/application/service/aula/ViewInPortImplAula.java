@@ -1,15 +1,15 @@
 package com.control.asistencia.application.service.aula;
 
+import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.aula.IViewInPortAula;
-import com.control.asistencia.application.port.in.aula.command.CommandAula;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.out.aula.IViewOutPortAula;
 import com.control.asistencia.common.UseCase;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @UseCase
 public class ViewInPortImplAula implements
@@ -19,15 +19,19 @@ public class ViewInPortImplAula implements
         this.iViewOutPortAula = iViewOutPortAula;
     }
     @Override
-    public Page<CommandAula> viewPageAulaDTO(ViewPageCommand command) {
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> viewPageAulaDTO(ViewPageCommand command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
-        return this.iViewOutPortAula.viewPageAulaDTO(
+        return ResponseBuilderApiRest.viewPage(this.iViewOutPortAula.viewPageAulaDTO(
                 PageRequest.of(command.getPage(), command.getSize(), sort )
-        );
+        ));
     }
 
     @Override
-    public Optional<CommandAula> viewByIdAulaDTO(int idAula) {
-        return this.iViewOutPortAula.viewByIdAulaDTO(idAula);
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> viewByIdAulaDTO(int idAula) {
+        return ResponseBuilderApiRest.view(
+                this.iViewOutPortAula.viewByIdAulaDTO(idAula)
+        );
     }
 }

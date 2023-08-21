@@ -1,8 +1,11 @@
 package com.control.asistencia.application.service.materia;
 
+import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materia.IDeleteInPortMateria;
 import com.control.asistencia.application.port.out.materia.IDeleteOutPortMateria;
 import com.control.asistencia.common.UseCase;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class DeleteInPortImplMateria implements IDeleteInPortMateria {
@@ -12,7 +15,10 @@ public class DeleteInPortImplMateria implements IDeleteInPortMateria {
     }
 
     @Override
-    public boolean deleteMateria(String sigla) {
-        return this.iDeleteOutPortMateria.deleteMateria(sigla);
+    @Transactional
+    public ResponseEntity<?> deleteMateria(String sigla) {
+        return ResponseBuilderApiRest.delete(
+                this.iDeleteOutPortMateria.deleteMateria(sigla)
+        );
     }
 }

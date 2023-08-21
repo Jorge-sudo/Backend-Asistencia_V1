@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.semestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.semestre.IDeleteInPortSemestre;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +20,6 @@ public class DeleteControllerSemestre {
     // se define el endpoint y el método HTTP que acepta (en este caso POST)
     @DeleteMapping("/semestres/{id}")
     ResponseEntity<?> deleteSemestre(@PathVariable int id){
-        return ResponseBuilderApiRest.delete(
-                this.iDeleteInPortSemestre.deleteSemestre(id)
-        );
+        return this.iDeleteInPortSemestre.deleteSemestre(id);
     }
 }

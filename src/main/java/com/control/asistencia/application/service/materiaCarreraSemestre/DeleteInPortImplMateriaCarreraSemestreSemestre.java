@@ -1,8 +1,11 @@
 package com.control.asistencia.application.service.materiaCarreraSemestre;
 
+import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.IDeleteInPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IDeleteOutPortMateriaCarreraSemestre;
 import com.control.asistencia.common.UseCase;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class DeleteInPortImplMateriaCarreraSemestreSemestre implements IDeleteInPortMateriaCarreraSemestre {
@@ -12,7 +15,10 @@ public class DeleteInPortImplMateriaCarreraSemestreSemestre implements IDeleteIn
     }
 
     @Override
-    public boolean deleteMateriaCarrera(int id) {
-        return this.iDeleteOutPortMateriaCarreraSemestre.deleteMateriaCarreraSemestre(id);
+    @Transactional
+    public ResponseEntity<?> deleteMateriaCarrera(int id) {
+        return ResponseBuilderApiRest.delete(
+                this.iDeleteOutPortMateriaCarreraSemestre.deleteMateriaCarreraSemestre(id)
+        );
     }
 }

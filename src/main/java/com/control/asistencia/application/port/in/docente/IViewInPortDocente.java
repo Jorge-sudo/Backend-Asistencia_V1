@@ -1,12 +1,9 @@
 package com.control.asistencia.application.port.in.docente;
 
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
-import com.control.asistencia.domain.docente.DocenteViewDTO;
-import org.springframework.data.domain.Page;
-
-import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 
 public interface IViewInPortDocente {
-    Page<DocenteViewDTO> viewPageDocenteDTO(ViewPageCommand command);
-    Optional<DocenteViewDTO> viewByCiDocenteDTO(Long ci);
+    ResponseEntity<?> viewPageDocenteDTO(ViewPageCommand command);
+    ResponseEntity<?> viewByCiDocenteDTO(Long ci);
 }

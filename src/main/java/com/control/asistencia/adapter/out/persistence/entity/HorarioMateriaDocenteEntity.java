@@ -23,9 +23,7 @@ public class HorarioMateriaDocenteEntity {
     @Column(name = "nro_laboratorio", nullable = true)
     private Integer nroLaboratorio;
 
-    @NotBlank(message = "Laboratorio entrada no válido: Laboratorio vacío")
-    @NotNull(message = "Laboratorio entrada no válido: la Laboratorio es NULL")
-    @Column(name = "laboratorio", nullable = false)
+    @Column(name = "laboratorio")
     private boolean laboratorio;
 
     @ManyToOne(cascade = CascadeType.ALL)

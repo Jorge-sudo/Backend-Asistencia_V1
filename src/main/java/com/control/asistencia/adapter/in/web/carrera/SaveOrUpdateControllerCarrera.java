@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.carrera;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.carrera.ISaveOrUpdateInPortCarrera;
 import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
 import com.control.asistencia.common.WebAdapter;
@@ -19,12 +18,6 @@ public class SaveOrUpdateControllerCarrera {
         this.iSaveOrUpdateInPortCarrera = iSaveOrUpdateInPortCarrera;
     }
     ResponseEntity<?> saveOrUpdateCarrera(@RequestBody @Valid SaveCommandGeneric data){
-        return data.getId() > 0
-                ? ResponseBuilderApiRest.update(
-                this.iSaveOrUpdateInPortCarrera.saveOrUpdateCarrera(data)
-        )
-                : ResponseBuilderApiRest.save(
-                this.iSaveOrUpdateInPortCarrera.saveOrUpdateCarrera(data)
-        );
+        return this.iSaveOrUpdateInPortCarrera.saveOrUpdateCarrera(data);
     }
 }

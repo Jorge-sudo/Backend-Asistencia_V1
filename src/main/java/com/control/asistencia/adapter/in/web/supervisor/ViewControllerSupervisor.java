@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.supervisor;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.in.supervisor.IViewInPortSupervisor;
 import com.control.asistencia.common.WebAdapter;
@@ -29,18 +28,14 @@ public class ViewControllerSupervisor {
                 size,
                 sortBy);
 
-        return ResponseBuilderApiRest.viewPage(
-                this.iViewInPortSupervisor.viewPageSupervisorDTO(command)
-        );
+        return this.iViewInPortSupervisor.viewPageSupervisorDTO(command);
 
     }
     @GetMapping("/supervisores/{ci}")
     ResponseEntity<?> viewByCiSupervisor(
             @PathVariable("ci") long ci){
 
-        return ResponseBuilderApiRest.view(
-                this.iViewInPortSupervisor.viewByCiSupervisorDTO(ci)
-        );
+        return this.iViewInPortSupervisor.viewByCiSupervisorDTO(ci);
 
     }
 }

@@ -1,12 +1,11 @@
 package com.control.asistencia.application.service.semestre;
 
+import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.semestre.IViewInPortSemestre;
 import com.control.asistencia.application.port.out.semestre.IViewOutPortSemestre;
 import com.control.asistencia.common.UseCase;
-import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
-
-import java.util.Optional;
-import java.util.Set;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class ViewInPortImplSemestre implements IViewInPortSemestre {
@@ -16,7 +15,10 @@ public class ViewInPortImplSemestre implements IViewInPortSemestre {
     }
 
     @Override
-    public Optional<Set<SaveCommandGeneric>> viewAllSemestreDTO() {
-        return this.iViewOutPortSemestre.viewAllSemestreDTO();
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> viewAllSemestreDTO() {
+        return ResponseBuilderApiRest.view(
+                this.iViewOutPortSemestre.viewAllSemestreDTO()
+        );
     }
 }

@@ -9,6 +9,7 @@ import com.control.asistencia.application.port.in.docente.command.SaveCommandDoc
 import com.control.asistencia.application.port.out.docente.ISaveOrUpdateOutPortDocente;
 import com.control.asistencia.application.port.out.docente.IViewOutPortDocente;
 import com.control.asistencia.common.PersistenceAdapter;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
 import com.control.asistencia.domain.docente.DocenteViewDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,7 +45,7 @@ public class DocentePersistenceAdapterOrUpdate implements
         return Optional.of(
                 this.iMapperDocente.entityToDto(
                         this.iRepositoryDocente.findById(ci)
-                                .orElseThrow(() -> new RuntimeException("No existe el docente con el ID: " + ci))
+                                .orElseThrow(() -> new DataNotFoundException("No existe el docente con el ID: " + ci))
                 )
         );
     }

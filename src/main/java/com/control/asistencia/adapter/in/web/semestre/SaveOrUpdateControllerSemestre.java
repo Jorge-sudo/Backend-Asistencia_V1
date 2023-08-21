@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.semestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
 import com.control.asistencia.application.port.in.semestre.ISaveOrUpdateInPortSemestre;
 import com.control.asistencia.common.WebAdapter;
@@ -21,14 +20,7 @@ public class SaveOrUpdateControllerSemestre {
     }
     @PostMapping("/semestres")
     ResponseEntity<?> saveOrUpdateSemestre(@RequestBody @Valid SaveCommandGeneric data){
-        return data.getId() > 0
-                ? ResponseBuilderApiRest.update(
-                this.iSaveOrUpdateInPortSemestre.saveOrUpdateSemestre(data)
-        )
-                : ResponseBuilderApiRest.save(
-                this.iSaveOrUpdateInPortSemestre.saveOrUpdateSemestre(data)
-        );
+        return this.iSaveOrUpdateInPortSemestre.saveOrUpdateSemestre(data);
     }
-
 
 }

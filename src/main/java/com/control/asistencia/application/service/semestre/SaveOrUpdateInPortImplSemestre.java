@@ -1,11 +1,12 @@
 package com.control.asistencia.application.service.semestre;
 
+import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
 import com.control.asistencia.application.port.in.semestre.ISaveOrUpdateInPortSemestre;
 import com.control.asistencia.application.port.out.semestre.ISaveOrUpdateOutPortSemestre;
 import com.control.asistencia.common.UseCase;
-
-import java.util.Optional;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class SaveOrUpdateInPortImplSemestre implements ISaveOrUpdateInPortSemestre {
@@ -15,7 +16,14 @@ public class SaveOrUpdateInPortImplSemestre implements ISaveOrUpdateInPortSemest
     }
 
     @Override
-    public Optional<SaveCommandGeneric> saveOrUpdateSemestre(SaveCommandGeneric saveCommandGeneric) {
-        return this.iSaveOrUpdateOutPortSemestre.saveOrUpdateSemestre(saveCommandGeneric);
+    @Transactional
+    public ResponseEntity<?> saveOrUpdateSemestre(SaveCommandGeneric saveCommandGeneric) {
+        return saveCommandGeneric.getId() > 0
+                ? ResponseBuilderApiRest.update(
+                this.iSaveOrUpdateOutPortSemestre.saveOrUpdateSemestre(saveCommandGeneric)
+        )
+                : ResponseBuilderApiRest.save(
+                this.iSaveOrUpdateOutPortSemestre.saveOrUpdateSemestre(saveCommandGeneric)
+        );
     }
 }

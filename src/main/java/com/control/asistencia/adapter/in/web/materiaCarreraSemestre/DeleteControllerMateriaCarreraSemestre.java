@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.materiaCarreraSemestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.IDeleteInPortMateriaCarreraSemestre;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,6 @@ public class DeleteControllerMateriaCarreraSemestre {
     // se define el endpoint y el método HTTP que acepta (en este caso POST)
     @DeleteMapping("/materiaCarreraSemestres/{id}")
     ResponseEntity<?> deleteMateriaCarreraSemestre(@PathVariable int id){
-        return ResponseBuilderApiRest.delete(
-                this.iDeleteInPortMateriaCarreraSemestre.deleteMateriaCarrera(id)
-        );
+        return this.iDeleteInPortMateriaCarreraSemestre.deleteMateriaCarrera(id);
     }
 }

@@ -1,8 +1,11 @@
 package com.control.asistencia.application.service.carrera;
 
+import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.carrera.IDeleteInPortCarrera;
 import com.control.asistencia.application.port.out.carrera.IDeleteOutPortCarrera;
 import com.control.asistencia.common.UseCase;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class DeleteInPortImplCarrera implements IDeleteInPortCarrera {
@@ -12,7 +15,10 @@ public class DeleteInPortImplCarrera implements IDeleteInPortCarrera {
     }
 
     @Override
-    public boolean deleteCarrera(int id) {
-        return this.iDeleteOutPortCarrera.deleteCarrera(id);
+    @Transactional
+    public ResponseEntity<?> deleteCarrera(int id) {
+        return ResponseBuilderApiRest.delete(
+                this.iDeleteOutPortCarrera.deleteCarrera(id)
+        );
     }
 }

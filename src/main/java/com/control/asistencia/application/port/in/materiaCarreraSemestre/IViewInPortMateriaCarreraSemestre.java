@@ -1,15 +1,11 @@
 package com.control.asistencia.application.port.in.materiaCarreraSemestre;
 
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
-import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
-import org.springframework.data.domain.Page;
-
-import java.util.Optional;
-import java.util.Set;
+import org.springframework.http.ResponseEntity;
 
 public interface IViewInPortMateriaCarreraSemestre {
-    Page<ViewMateriaCarreraSemestreDTO> viewPageMateriaCarreraSemestreDTO(
+    ResponseEntity<?> viewPageMateriaCarreraSemestreDTO(
             ViewPageCommand command);
-    Optional<Set<ViewMateriaCarreraSemestreDTO>> viewAllMateriaCarreraSemestreDTO();
-    Optional<ViewMateriaCarreraSemestreDTO> viewByIdMateriaCarreraSemestreDTO(int id) ;
+    ResponseEntity<?>  viewAllMateriaCarreraSemestreDTO();
+    ResponseEntity<?>  viewByIdMateriaCarreraSemestreDTO(int id) ;
 }

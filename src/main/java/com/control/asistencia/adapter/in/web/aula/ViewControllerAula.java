@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.aula;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.aula.IViewInPortAula;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.common.WebAdapter;
@@ -29,17 +28,12 @@ public class ViewControllerAula {
                 size,
                 sortBy);
 
-        return ResponseBuilderApiRest.viewPage(
-                this.iViewInPortAula.viewPageAulaDTO(command)
-        );
+        return this.iViewInPortAula.viewPageAulaDTO(command);
     }
 
     @GetMapping(path = "/aulas/{id}")
     ResponseEntity<?> viewByIdAula(
             @PathVariable("id") int id){
-
-        return ResponseBuilderApiRest.view(
-                this.iViewInPortAula.viewByIdAulaDTO(id)
-        );
+        return this.iViewInPortAula.viewByIdAulaDTO(id);
     }
 }

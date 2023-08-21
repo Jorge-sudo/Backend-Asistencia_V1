@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.carrera;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.carrera.IViewInPortCarrera;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +18,6 @@ public class ViewControllerCarrera {
 
     @GetMapping(path = "/carreras")
     ResponseEntity<?> viewAllCarreras(){
-        return ResponseBuilderApiRest.view(
-                this.iViewInPortCarrera.viewAllCarreraDTO()
-        );
+        return this.iViewInPortCarrera.viewAllCarreraDTO();
     }
 }

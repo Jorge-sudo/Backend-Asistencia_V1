@@ -1,5 +1,7 @@
 package com.control.asistencia.application.port.in.materiaCarreraSemestre;
 
+import org.springframework.http.ResponseEntity;
+
 public interface IDeleteInPortMateriaCarreraSemestre {
-    boolean deleteMateriaCarrera(int id);
+    ResponseEntity<?> deleteMateriaCarrera(int id);
 }

@@ -1,5 +1,7 @@
 package com.control.asistencia.application.port.in.aula;
 
+import org.springframework.http.ResponseEntity;
+
 public interface IDeleteInPortAula {
-    boolean deleteAula(int idAula);
+    ResponseEntity<?> deleteAula(int idAula);
 }

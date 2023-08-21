@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.materiaCarreraSemestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.IViewInPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.common.WebAdapter;
@@ -30,21 +29,15 @@ public class ViewControllerMateriaCarreraSemestre {
                 size,
                 sortBy);
 
-        return ResponseBuilderApiRest.viewPage(
-                this.iViewInPortMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(command)
-        );
+        return  this.iViewInPortMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(command);
     }
     @GetMapping(path = "/materiaCarreraSemestres")
     ResponseEntity<?> viewAllMateriaCarreraSemestre() {
-        return ResponseBuilderApiRest.view(
-                this.iViewInPortMateriaCarreraSemestre.viewAllMateriaCarreraSemestreDTO()
-        );
+        return  this.iViewInPortMateriaCarreraSemestre.viewAllMateriaCarreraSemestreDTO();
     }
     @GetMapping(path = "/materiaCarreraSemestres/{id}")
     ResponseEntity<?> viewByIdMateriaCarreraSemestre(@PathVariable("id") int id) {
-        return ResponseBuilderApiRest.view(
-                this.iViewInPortMateriaCarreraSemestre.viewByIdMateriaCarreraSemestreDTO(id)
-        );
+        return this.iViewInPortMateriaCarreraSemestre.viewByIdMateriaCarreraSemestreDTO(id);
     }
 
 

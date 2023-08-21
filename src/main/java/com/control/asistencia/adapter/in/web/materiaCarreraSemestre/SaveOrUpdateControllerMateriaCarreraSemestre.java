@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.materiaCarreraSemestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.ISaveOrUpdateInPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.command.SaveCommandMateriaCarreraSemestre;
 import com.control.asistencia.common.WebAdapter;
@@ -23,12 +22,6 @@ public class SaveOrUpdateControllerMateriaCarreraSemestre {
     @PostMapping("/materiaCarreraSemestres")
     ResponseEntity<?> saveOrUpdateMateriaCarreraSemestre(
             @RequestBody @Valid SaveCommandMateriaCarreraSemestre command) {
-        return command.getIdMateriaCarreraSemestre() > 0
-                ? ResponseBuilderApiRest.update(
-                this.iSaveOrUpdateInPortMateriaCarreraSemestre.saveOrUpdateMateriaCarreraSemestre(command)
-        )
-                : ResponseBuilderApiRest.save(
-                this.iSaveOrUpdateInPortMateriaCarreraSemestre.saveOrUpdateMateriaCarreraSemestre(command)
-        );
+        return this.iSaveOrUpdateInPortMateriaCarreraSemestre.saveOrUpdateMateriaCarreraSemestre(command);
     }
 }

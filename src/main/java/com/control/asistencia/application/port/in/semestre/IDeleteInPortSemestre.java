@@ -1,5 +1,7 @@
 package com.control.asistencia.application.port.in.semestre;
 
+import org.springframework.http.ResponseEntity;
+
 public interface IDeleteInPortSemestre {
-    boolean deleteSemestre(int id);
+    ResponseEntity<?> deleteSemestre(int id);
 }

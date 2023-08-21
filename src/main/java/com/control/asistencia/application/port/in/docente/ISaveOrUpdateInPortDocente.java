@@ -1,10 +1,8 @@
 package com.control.asistencia.application.port.in.docente;
 
 import com.control.asistencia.application.port.in.docente.command.SaveCommandDocente;
-import com.control.asistencia.domain.docente.DocenteViewDTO;
-
-import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 
 public interface ISaveOrUpdateInPortDocente {
-    Optional<DocenteViewDTO> saveOrUpdateDocente(SaveCommandDocente saveCommandDocente);
+    ResponseEntity<?> saveOrUpdateDocente(SaveCommandDocente saveCommandDocente);
 }

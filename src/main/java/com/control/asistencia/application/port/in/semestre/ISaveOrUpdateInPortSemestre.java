@@ -1,9 +1,8 @@
 package com.control.asistencia.application.port.in.semestre;
 
 import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
-
-import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 
 public interface ISaveOrUpdateInPortSemestre {
-    Optional<SaveCommandGeneric> saveOrUpdateSemestre(SaveCommandGeneric saveCommandGeneric);
+    ResponseEntity<?> saveOrUpdateSemestre(SaveCommandGeneric saveCommandGeneric);
 }
