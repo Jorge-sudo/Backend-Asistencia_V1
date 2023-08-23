@@ -26,14 +26,11 @@ public class SaveOrUpdateInPortImplDocente implements ISaveOrUpdateInPortDocente
     @Override
     @Transactional
     public ResponseEntity<?> saveOrUpdateDocente(SaveCommandDocente saveCommandDocente) {
-        Optional<DocenteViewDTO> response = this.iViewOutPortDocente
-                .viewByCiDocenteDTO(saveCommandDocente.getCi());
-
-        return response.isEmpty()
-                ?  ResponseBuilderApiRest.save(
+        return this.iViewOutPortDocente.viewByCiDocenteDTO(saveCommandDocente.getCi()).isPresent()
+                ?  ResponseBuilderApiRest.update(
                 this.iSaveOrUpdateOutPortDocente.saveOrUpdateDocente(saveCommandDocente)
-        )
-                : ResponseBuilderApiRest.update(
+                )
+                : ResponseBuilderApiRest.save(
                 this.iSaveOrUpdateOutPortDocente.saveOrUpdateDocente(saveCommandDocente)
         );
     }

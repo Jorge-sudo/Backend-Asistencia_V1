@@ -8,6 +8,7 @@ import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMate
 import com.control.asistencia.application.port.in.asignarMateria.command.CommandHorarioMateriaDocente;
 import com.control.asistencia.application.port.out.horarioMateriaDocente.ISaveOrUpdateOutPortHorarioMateriaDocente;
 import com.control.asistencia.common.PersistenceAdapter;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,10 +45,10 @@ public class HorarioMateriaDocentePersistenceAdapter implements
                                     HorarioMateriaDocenteEntity.builder()
                                             .idHorarioMateriaDocente(command.getIdHorarioMateriaDocente())
                                             .materiaDocente(this.iRepositoryMateriaDocente.findById(command.getIdMateriaDocente())
-                                                    .orElseThrow(() -> new RuntimeException("No existe la materiaDocente con el ID: " + command.getIdMateriaDocente()))
+                                                    .orElseThrow(() -> new DataNotFoundException("No existe la materiaDocente con el ID: " + command.getIdMateriaDocente()))
                                             )
                                             .horario(this.iRepositoryHorario.findById(command.getIdHorario())
-                                                    .orElseThrow(() -> new RuntimeException("No existe la horario con el ID: " + command.getIdHorario()))
+                                                    .orElseThrow(() -> new DataNotFoundException("No existe la horario con el ID: " + command.getIdHorario()))
                                             )
                                             .build()
                             )

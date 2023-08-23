@@ -8,6 +8,7 @@ import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMate
 import com.control.asistencia.application.port.in.asignarMateria.command.CommandMateriaDocente;
 import com.control.asistencia.application.port.out.materiaDocente.ISaveOrUpdateOutPortMateriaDocente;
 import com.control.asistencia.common.PersistenceAdapter;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
 
 import java.util.Optional;
 
@@ -41,10 +42,10 @@ public class MateriaDocentePersistenceAdapter implements
                                 MateriaDocenteEntity.builder()
                                         .idMateriaDocente(command.getIdMateriaDocente())
                                         .materia(this.iRepositoryMateria.findById(command.getSigla())
-                                                .orElseThrow(() -> new RuntimeException("No existe la materia con el ID: " + command.getSigla()))
+                                                .orElseThrow(() -> new DataNotFoundException("No existe la materia con el ID: " + command.getSigla()))
                                         )
                                         .docente(this.iRepositoryDocente.findById(command.getCi())
-                                                .orElseThrow(() -> new RuntimeException("No existe la docente con el ID: " + command.getCi()))
+                                                .orElseThrow(() -> new DataNotFoundException("No existe la docente con el ID: " + command.getCi()))
                                         )
                                         .build()
                         )

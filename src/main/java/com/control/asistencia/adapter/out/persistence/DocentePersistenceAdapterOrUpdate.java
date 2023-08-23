@@ -42,10 +42,10 @@ public class DocentePersistenceAdapterOrUpdate implements
 
     @Override
     public Optional<DocenteViewDTO> viewByCiDocenteDTO(Long ci) {
-        return Optional.of(
+        return Optional.ofNullable(
                 this.iMapperDocente.entityToDto(
                         this.iRepositoryDocente.findById(ci)
-                                .orElseThrow(() -> new DataNotFoundException("No existe el docente con el ID: " + ci))
+                                .orElse(null)
                 )
         );
     }
@@ -66,7 +66,7 @@ public class DocentePersistenceAdapterOrUpdate implements
                                         .contrasenia(command.getContrasenia())
                                         .activo(command.isActivo())
                                         .rol(this.iRepositoryRol.findById(command.getRol())
-                                                .orElseThrow(() -> new RuntimeException("No existe el rol con el ID: " + command.getRol())))
+                                                .orElseThrow(() -> new DataNotFoundException("No existe el rol con el ID: " + command.getRol())))
                                         .codRfid(command.getCodRfid())
                                         .build()
 

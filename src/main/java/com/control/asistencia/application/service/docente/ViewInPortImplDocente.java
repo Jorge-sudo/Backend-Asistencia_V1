@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @UseCase
 public class ViewInPortImplDocente implements  IViewInPortDocente {
     private final IViewOutPortDocente iViewOutPortDocente;
@@ -32,7 +34,10 @@ public class ViewInPortImplDocente implements  IViewInPortDocente {
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewByCiDocenteDTO(Long ci) {
         return ResponseBuilderApiRest.view(
-                this.iViewOutPortDocente.viewByCiDocenteDTO(ci)
+                Optional.of(
+                        this.iViewOutPortDocente.viewByCiDocenteDTO(ci)
+                        .orElseThrow(() -> new RuntimeException("No existe el docente con el ci: " + ci))
+                )
         );
     }
 

@@ -9,7 +9,6 @@ import com.control.asistencia.common.UseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @UseCase
 public class SaveOrUpdateInPortImplMateria implements ISaveOrUpdateInPortMateria {
@@ -26,14 +25,11 @@ public class SaveOrUpdateInPortImplMateria implements ISaveOrUpdateInPortMateria
     @Override
     @Transactional
     public ResponseEntity<?> saveOrUpdateMateria(CommandMateria commandMateria) {
-        Optional<CommandMateria> response = this.iViewOutPortMateria
-                .viewByIdMateriaDTO(commandMateria.getSigla());
-
-        return response.isEmpty()
-                ? ResponseBuilderApiRest.save(
+        return this.iViewOutPortMateria.viewByIdMateriaDTO(commandMateria.getSigla()).isPresent()
+                ? ResponseBuilderApiRest.update(
                 this.iSaveOrUpdateOutPortMateria.saveOrUpdateMateria(commandMateria)
-        )
-                : ResponseBuilderApiRest.update(
+                )
+                : ResponseBuilderApiRest.save(
                 this.iSaveOrUpdateOutPortMateria.saveOrUpdateMateria(commandMateria)
         );
     }

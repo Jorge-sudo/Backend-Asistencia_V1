@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
 
 @Entity
 @Data

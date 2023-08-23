@@ -27,14 +27,11 @@ public class SaveOrUpdateInPortImplSupervisor implements ISaveOrUpdateInPortSupe
     @Override
     @Transactional
     public ResponseEntity<?> saveOrUpdateSupervisor(SaveCommandSupervisor command) {
-        Optional<SupervisorViewDTO> response = this.iViewOutPortSupervisor
-                .viewByCiSupervisorDTO(command.getCi());
-
-        return response.isEmpty()
-                ? ResponseBuilderApiRest.save(
+        return this.iViewOutPortSupervisor.viewByCiSupervisorDTO(command.getCi()).isPresent()
+                ? ResponseBuilderApiRest.update(
                 this.iSaveOrUpdateOutPortSupervisor.saveOrUpdateSupervisor(command)
-        )
-                : ResponseBuilderApiRest.update(
+                )
+                : ResponseBuilderApiRest.save(
                 this.iSaveOrUpdateOutPortSupervisor.saveOrUpdateSupervisor(command)
         );
     }

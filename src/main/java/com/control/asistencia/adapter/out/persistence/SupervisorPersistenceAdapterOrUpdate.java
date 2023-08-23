@@ -8,6 +8,7 @@ import com.control.asistencia.application.port.in.supervisor.command.SaveCommand
 import com.control.asistencia.application.port.out.supervisor.ISaveOrUpdateOutPortSupervisor;
 import com.control.asistencia.application.port.out.supervisor.IViewOutPortSupervisor;
 import com.control.asistencia.common.PersistenceAdapter;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
 import com.control.asistencia.domain.supervisor.SupervisorViewDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,10 +42,10 @@ public class SupervisorPersistenceAdapterOrUpdate implements
 
     @Override
     public Optional<SupervisorViewDTO> viewByCiSupervisorDTO(Long ci) {
-        return Optional.of(
+        return Optional.ofNullable(
                 this.iMapperSupervisor.entityToDto(
                         this.iRepositorySupervisor.findById(ci)
-                                .orElseThrow(() -> new RuntimeException("No existe el supervisor con el ID: " + ci))
+                                .orElse(null)
                 )
         );
     }
@@ -65,7 +66,7 @@ public class SupervisorPersistenceAdapterOrUpdate implements
                                         .contrasenia(command.getContrasenia())
                                         .activo(command.isActivo())
                                         .rol(this.iRepositoryRol.findById(command.getRol())
-                                                .orElseThrow(() -> new RuntimeException("No existe el rol con el ID: " + command.getRol())))
+                                                .orElseThrow(() -> new DataNotFoundException("No existe el rol con el ID: " + command.getRol())))
                                         .reporteEmail(command.isReporteEmail())
                                         .reporteInstitucional(command.isReporteInstitucional())
                                         .build()

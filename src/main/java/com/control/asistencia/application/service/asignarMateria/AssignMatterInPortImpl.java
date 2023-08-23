@@ -31,9 +31,7 @@ public class AssignMatterInPortImpl implements IAssignMatterInPort {
     @Transactional
     public ResponseEntity<?> assignMatter(CommandAssignMatter command) {
         CommandMateriaDocente materiaDocente = this.iSaveOrUpdateOutPortMateriaDocente
-                                .saveOrUpdateMateriaDocente(
-                                        command.getMateriaDocente()
-                                ).orElse(null);
+                .saveOrUpdateMateriaDocente(command.getMateriaDocente()).orElse(null);
 
         assert materiaDocente != null;
 

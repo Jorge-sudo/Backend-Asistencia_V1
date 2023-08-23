@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @UseCase
 public class ViewInPortImplSupervisor implements IViewInPortSupervisor {
     private final IViewOutPortSupervisor iViewOutPortSupervisor;
@@ -31,7 +33,10 @@ public class ViewInPortImplSupervisor implements IViewInPortSupervisor {
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewByCiSupervisorDTO(Long ci) {
         return ResponseBuilderApiRest.view(
-                this.iViewOutPortSupervisor.viewByCiSupervisorDTO(ci)
+                Optional.of(
+                        this.iViewOutPortSupervisor.viewByCiSupervisorDTO(ci)
+                            .orElseThrow(() -> new RuntimeException("No existe el supervisor con el ci: " + ci))
+                )
         );
     }
 }

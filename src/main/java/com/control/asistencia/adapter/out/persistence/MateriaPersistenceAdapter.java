@@ -7,6 +7,7 @@ import com.control.asistencia.application.port.out.materia.IDeleteOutPortMateria
 import com.control.asistencia.application.port.out.materia.ISaveOrUpdateOutPortMateria;
 import com.control.asistencia.application.port.out.materia.IViewOutPortMateria;
 import com.control.asistencia.common.PersistenceAdapter;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
 @PersistenceAdapter
 public class MateriaPersistenceAdapter implements
                 IViewOutPortMateria ,
-        ISaveOrUpdateOutPortMateria,
+                ISaveOrUpdateOutPortMateria ,
                 IDeleteOutPortMateria {
 
     private final IRepositoryMateria iRepositoryMateria;
@@ -36,10 +37,10 @@ public class MateriaPersistenceAdapter implements
 
     @Override
     public Optional<CommandMateria> viewByIdMateriaDTO(String sigla) {
-        return Optional.of(
+        return Optional.ofNullable(
                 this.iMapperMateria.entityToDto(
                         this.iRepositoryMateria.findById(sigla)
-                                .orElseThrow(() -> new RuntimeException("No existe la materia con la sigla: " + sigla))
+                                .orElse(null)
                 )
         );
     }
@@ -62,6 +63,6 @@ public class MateriaPersistenceAdapter implements
                     this.iRepositoryMateria.delete(materia);
                     return true;
                 }
-        ).orElseThrow(() -> new RuntimeException("No existe la materia con la sigla: " + sigla));
+        ).orElseThrow(() -> new DataNotFoundException("No existe la materia con la sigla: " + sigla));
     }
 }
