@@ -17,5 +17,5 @@ public interface IMapperAulaMateriaDocente {
             @Mapping(source = "materiaDocente.idMateriaDocente", target = "idMateriaDocente"),
             @Mapping(source = "aula.idAula", target = "idAula")
     })
-    CommandAulaMateriaDocente entityToDto(AulaMateriaDocenteEntity aulaMateriaDocenteEntity);
+    CommandAulaMateriaDocente entityToCommand(AulaMateriaDocenteEntity aulaMateriaDocenteEntity);
 }

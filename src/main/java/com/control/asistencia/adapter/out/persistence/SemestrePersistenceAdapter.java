@@ -1,8 +1,8 @@
 package com.control.asistencia.adapter.out.persistence;
 
-import com.control.asistencia.adapter.out.persistence.mapper.generic.IMapperGeneric;
+import com.control.asistencia.adapter.out.persistence.mapper.generic.IMapperGenericSemestre;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositorySemestre;
-import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
+import com.control.asistencia.application.port.in.commandGeneric.SaveOrViewCommandGeneric;
 import com.control.asistencia.application.port.out.semestre.IDeleteOutPortSemestre;
 import com.control.asistencia.application.port.out.semestre.ISaveOrUpdateOutPortSemestre;
 import com.control.asistencia.application.port.out.semestre.IViewOutPortSemestre;
@@ -16,34 +16,34 @@ import java.util.Set;
 @PersistenceAdapter
 public class SemestrePersistenceAdapter implements
                 IViewOutPortSemestre ,
-        ISaveOrUpdateOutPortSemestre,
+                ISaveOrUpdateOutPortSemestre,
                 IDeleteOutPortSemestre {
     private final IRepositorySemestre iRepositorySemestre;
-    private final IMapperGeneric iMapperGeneric;
+    private final IMapperGenericSemestre iMapperGenericSemestre;
 
     public SemestrePersistenceAdapter(IRepositorySemestre iRepositorySemestre
-                , IMapperGeneric iMapperGeneric){
+                , IMapperGenericSemestre iMapperGenericSemestre){
 
         this.iRepositorySemestre = iRepositorySemestre;
-        this.iMapperGeneric = iMapperGeneric;
+        this.iMapperGenericSemestre = iMapperGenericSemestre;
 
     }
 
     @Override
-    public Optional<Set<SaveCommandGeneric>> viewAllSemestreDTO() {
+    public Optional<Set<SaveOrViewCommandGeneric>> viewAllSemestreDTO() {
         return Optional.of(
-                this.iMapperGeneric.entitysToDtosSemestre(
+                this.iMapperGenericSemestre.entitysToCommandsSet(
                         new HashSet<>(this.iRepositorySemestre.findAll())
                 )
         );
     }
 
     @Override
-    public Optional<SaveCommandGeneric> saveOrUpdateSemestre(SaveCommandGeneric saveCommandGeneric) {
+    public Optional<SaveOrViewCommandGeneric> saveOrUpdateSemestre(SaveOrViewCommandGeneric saveOrViewCommandGeneric) {
         return Optional.of(
-                this.iMapperGeneric.entityToDtoSemestre(
+                this.iMapperGenericSemestre.entityToCommand(
                         this.iRepositorySemestre.save(
-                                this.iMapperGeneric.dtoToEntitySemestre(saveCommandGeneric)
+                                this.iMapperGenericSemestre.commandToEntity(saveOrViewCommandGeneric)
                         )
                 )
         );

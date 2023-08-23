@@ -33,7 +33,7 @@ public class AulaMateriaDocentePersistenceAdapter implements
     public Optional<CommandAulaMateriaDocente> saveOrUpdateAulaMateriaDocente(
             CommandAulaMateriaDocente command) {
         return Optional.of(
-                this.iMapperAulaMateriaDocente.entityToDto(
+                this.iMapperAulaMateriaDocente.entityToCommand(
                         this.iRepositoryAulaMateriaDocente.save(
                                 AulaMateriaDocenteEntity.builder()
                                         .idAulaMateriaDocente(command.getIdAulaMateriaDocente())

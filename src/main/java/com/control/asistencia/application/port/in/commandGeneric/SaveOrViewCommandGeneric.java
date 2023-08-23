@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SaveCommandGeneric {
+public class SaveOrViewCommandGeneric {
     private Integer id;
 
     @Size(min=3, max=50, message="Nombre no válido: el tamaño tiene que estar entre 3 y 50")

@@ -37,7 +37,7 @@ public class MateriaDocentePersistenceAdapter implements
             CommandMateriaDocente command) {
 
         return Optional.of(
-                this.iMapperMateriaDocente.entityToDto(
+                this.iMapperMateriaDocente.entityToCommand(
                         this.iRepositoryMateriaDocente.save(
                                 MateriaDocenteEntity.builder()
                                         .idMateriaDocente(command.getIdMateriaDocente())

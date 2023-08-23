@@ -19,5 +19,5 @@ public interface IMapperHorarioMateriaDocente {
             @Mapping(source = "horario.idHorario", target = "idHorario"),
             @Mapping(source = "materiaDocente.idMateriaDocente", target = "idMateriaDocente")
     })
-    CommandHorarioMateriaDocente entityToDto(HorarioMateriaDocenteEntity entity);
+    CommandHorarioMateriaDocente entityToCommand(HorarioMateriaDocenteEntity entity);
 }

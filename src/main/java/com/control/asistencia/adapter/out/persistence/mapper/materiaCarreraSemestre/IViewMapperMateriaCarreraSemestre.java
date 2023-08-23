@@ -34,11 +34,11 @@ public interface IViewMapperMateriaCarreraSemestre {
     ViewMateriaCarreraSemestreDTO entityToDto(MateriaCarreraSemestreEntity materiaCarreraSemestreEntity);
 
     // Método para mapear una Page de entidades a una Page de DTOs
-    default Page<ViewMateriaCarreraSemestreDTO> pageEntitysToDtos(Page<MateriaCarreraSemestreEntity> page) {
+    default Page<ViewMateriaCarreraSemestreDTO> entitysToDtosPage(Page<MateriaCarreraSemestreEntity> page) {
         return page.map(this::entityToDto);
     }
 
-    default Set<ViewMateriaCarreraSemestreDTO> entitysToDtos(Set<MateriaCarreraSemestreEntity> materiaCarreraSemestreEntity) {
+    default Set<ViewMateriaCarreraSemestreDTO> entitysToDtosSet(Set<MateriaCarreraSemestreEntity> materiaCarreraSemestreEntity) {
         return materiaCarreraSemestreEntity
                 .stream()
                 .map(this::entityToDto)

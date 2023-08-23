@@ -28,8 +28,8 @@ public class MateriaPersistenceAdapter implements
     }
 
     @Override
-    public Page<CommandMateria> viewPageMateriaEntity(Pageable pageable) {
-        return this.iMapperMateria.pageEntitysToDtos(
+    public Page<CommandMateria> viewPageMateria(Pageable pageable) {
+        return this.iMapperMateria.entitysToCommandsPage(
                 this.iRepositoryMateria.findAll(pageable)
         );
     }
@@ -38,7 +38,7 @@ public class MateriaPersistenceAdapter implements
     @Override
     public Optional<CommandMateria> viewByIdMateriaDTO(String sigla) {
         return Optional.ofNullable(
-                this.iMapperMateria.entityToDto(
+                this.iMapperMateria.entityToCommand(
                         this.iRepositoryMateria.findById(sigla)
                                 .orElse(null)
                 )
@@ -48,9 +48,9 @@ public class MateriaPersistenceAdapter implements
     @Override
     public Optional<CommandMateria> saveOrUpdateMateria(CommandMateria commandMateria) {
         return Optional.of(
-                this.iMapperMateria.entityToDto(
+                this.iMapperMateria.entityToCommand(
                         this.iRepositoryMateria.save(
-                                this.iMapperMateria.dtoToEntity(commandMateria)
+                                this.iMapperMateria.commandToEntity(commandMateria)
                         )
                 )
         );

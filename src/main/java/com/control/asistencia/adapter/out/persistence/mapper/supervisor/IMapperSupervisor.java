@@ -27,7 +27,7 @@ public interface IMapperSupervisor {
             @Mapping(source = "reporteInstitucional", target = "reporteInstitucional"),
     })
     SupervisorViewDTO entityToDto(SupervisorEntity supervisorEntity);
-    default Page<SupervisorViewDTO> pageEntitysToDtos(Page<SupervisorEntity> page) {
+    default Page<SupervisorViewDTO> entitysToDtosPage(Page<SupervisorEntity> page) {
         return page.map(this::entityToDto);
     }
 }

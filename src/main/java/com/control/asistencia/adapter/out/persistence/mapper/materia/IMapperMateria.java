@@ -5,7 +5,6 @@ import com.control.asistencia.application.port.in.materia.command.CommandMateria
 import org.mapstruct.*;
 import org.springframework.data.domain.Page;
 
-import java.util.Set;
 
 @Mapper(
         //indicamos que la implementacion sea generado como un componente de spring para poder inyectarl
@@ -20,19 +19,13 @@ public interface IMapperMateria {
             @Mapping(source = "sigla", target = "sigla"),
             @Mapping(source = "nombre", target = "nombre")
     })
-    CommandMateria entityToDto(MateriaEntity materiaEntity);
+    CommandMateria entityToCommand(MateriaEntity materiaEntity);
     @Mappings({
             @Mapping(source = "sigla", target = "sigla"),
             @Mapping(source = "nombre", target = "nombre")
     })
-    MateriaEntity dtoToEntity(CommandMateria commandMateria);
-    default Page<CommandMateria> pageEntitysToDtos(Page<MateriaEntity> page) {
-        return page.map(this::entityToDto);
-    }
-    default Set<CommandMateria> entitysToDtos(Set<MateriaEntity> materiaEntity) {
-        return materiaEntity
-                .stream()
-                .map(this::entityToDto)
-                .collect(java.util.stream.Collectors.toSet());
+    MateriaEntity commandToEntity(CommandMateria commandMateria);
+    default Page<CommandMateria> entitysToCommandsPage(Page<MateriaEntity> page) {
+        return page.map(this::entityToCommand);
     }
 }

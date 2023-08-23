@@ -32,7 +32,7 @@ public class AulaPersistenceAdapter implements
 
     @Override
     public Page<CommandAula> viewPageAulaDTO(Pageable pageable) {
-        return this.iMapperAula.pageEntitysToDtos(
+        return this.iMapperAula.entitysToCommandsPage(
                 this.iRepositoryAula.findAll(pageable)
         );
     }
@@ -40,7 +40,7 @@ public class AulaPersistenceAdapter implements
     @Override
     public Optional<CommandAula> viewByIdAulaDTO(int idAula) {
         return Optional.of(
-                this.iMapperAula.entityToDto(
+                this.iMapperAula.entityToCommand(
                         this.iRepositoryAula.findById(idAula)
                                 .orElseThrow(() -> new DataNotFoundException("No existe la aula con el id: " + idAula))
                 )
@@ -50,7 +50,7 @@ public class AulaPersistenceAdapter implements
     @Override
     public Optional<CommandAula> saveOrUpdateAula(CommandAula commandAula) {
         return Optional.of(
-                this.iMapperAula.entityToDto(
+                this.iMapperAula.entityToCommand(
                         this.iRepositoryAula.save(
                                 this.iMapperAula.dtoToEntity(commandAula)
                         )

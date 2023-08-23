@@ -1,8 +1,8 @@
 package com.control.asistencia.adapter.out.persistence;
 
-import com.control.asistencia.adapter.out.persistence.mapper.generic.IMapperGeneric;
+import com.control.asistencia.adapter.out.persistence.mapper.generic.IMapperGenericCarrera;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryCarrera;
-import com.control.asistencia.application.port.in.commandGeneric.SaveCommandGeneric;
+import com.control.asistencia.application.port.in.commandGeneric.SaveOrViewCommandGeneric;
 import com.control.asistencia.application.port.out.carrera.IDeleteOutPortCarrera;
 import com.control.asistencia.application.port.out.carrera.ISaveOrUpdateOutPortCarrera;
 import com.control.asistencia.application.port.out.carrera.IViewOutPortCarrera;
@@ -20,21 +20,21 @@ public class CarreraPersistenceAdapter implements
         IDeleteOutPortCarrera {
 
     private final IRepositoryCarrera iRepositoryCarrera;
-    private final IMapperGeneric iMapperGeneric;
+    private final IMapperGenericCarrera iMapperGenericCarrera;
     public CarreraPersistenceAdapter(
             IRepositoryCarrera iRepositoryCarrera,
-            IMapperGeneric iMapperGeneric ){
+            IMapperGenericCarrera iMapperGenericCarrera ){
 
         this.iRepositoryCarrera = iRepositoryCarrera;
-        this.iMapperGeneric = iMapperGeneric;
+        this.iMapperGenericCarrera = iMapperGenericCarrera;
 
     }
 
 
     @Override
-    public Optional<Set<SaveCommandGeneric>> viewAllCarreraDTO() {
+    public Optional<Set<SaveOrViewCommandGeneric>> viewAllCarreraDTO() {
         return Optional.of(
-                this.iMapperGeneric.entitysToDtosCarrera(
+                this.iMapperGenericCarrera.entitysToCommandsSet(
                         new HashSet<>(this.iRepositoryCarrera.findAll())
                 )
         );
@@ -42,11 +42,11 @@ public class CarreraPersistenceAdapter implements
 
 
     @Override
-    public Optional<SaveCommandGeneric> saveOrUpdateCarrera(SaveCommandGeneric saveCommandGeneric) {
+    public Optional<SaveOrViewCommandGeneric> saveOrUpdateCarrera(SaveOrViewCommandGeneric saveOrViewCommandGeneric) {
         return Optional.of(
-                this.iMapperGeneric.entityToDtoCarrera(
+                this.iMapperGenericCarrera.entityToCommand(
                         this.iRepositoryCarrera.save(
-                                this.iMapperGeneric.dtoToEntityCarrera(saveCommandGeneric)
+                                this.iMapperGenericCarrera.commandToEntity(saveOrViewCommandGeneric)
                         )
                 )
         );

@@ -21,7 +21,7 @@ public interface IMapperAula {
             @Mapping(source = "piso", target = "piso"),
             @Mapping(source = "bloque", target = "bloque"),
     })
-    CommandAula entityToDto(AulaEntity aulaEntity);
+    CommandAula entityToCommand(AulaEntity aulaEntity);
     @Mappings({
             @Mapping(source = "id", target = "idAula"),
             @Mapping(source = "aula", target = "aula"),
@@ -30,7 +30,7 @@ public interface IMapperAula {
             @Mapping(source = "bloque", target = "bloque"),
     })
     AulaEntity dtoToEntity(CommandAula commandAula);
-    default Page<CommandAula> pageEntitysToDtos(Page<AulaEntity> page) {
-        return page.map(this::entityToDto);
+    default Page<CommandAula> entitysToCommandsPage(Page<AulaEntity> page) {
+        return page.map(this::entityToCommand);
     }
 }

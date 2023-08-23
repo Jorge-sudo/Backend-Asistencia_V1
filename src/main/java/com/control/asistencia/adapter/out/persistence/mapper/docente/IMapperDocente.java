@@ -26,7 +26,7 @@ public interface IMapperDocente {
             @Mapping(source = "rol.nombre", target = "rol"),
     })
     DocenteViewDTO entityToDto(DocenteEntity docenteEntity);
-    default Page<DocenteViewDTO> pageEntitysToDtos(Page<DocenteEntity> page) {
+    default Page<DocenteViewDTO> entitysToDtosPage(Page<DocenteEntity> page) {
         return page.map(this::entityToDto);
     }
 }

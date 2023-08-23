@@ -40,7 +40,7 @@ public class HorarioMateriaDocentePersistenceAdapter implements
         Set<CommandHorarioMateriaDocente> result = new HashSet<>();
         for (CommandHorarioMateriaDocente command : commands) {
             result.add(
-                    this.iMapperHorarioMateriaDocente.entityToDto(
+                    this.iMapperHorarioMateriaDocente.entityToCommand(
                             this.iRepositoryHorarioMateriaDocente.save(
                                     HorarioMateriaDocenteEntity.builder()
                                             .idHorarioMateriaDocente(command.getIdHorarioMateriaDocente())

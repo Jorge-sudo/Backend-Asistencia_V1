@@ -35,7 +35,7 @@ public class SupervisorPersistenceAdapterOrUpdate implements
 
     @Override
     public Page<SupervisorViewDTO> viewPageSupervisorDTO(Pageable pageable) {
-        return this.iMapperSupervisor.pageEntitysToDtos(
+        return this.iMapperSupervisor.entitysToDtosPage(
                 this.iRepositorySupervisor.findAll(pageable)
         );
     }

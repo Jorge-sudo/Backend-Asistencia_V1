@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface IViewOutPortMateria {
-    Page<CommandMateria> viewPageMateriaEntity(Pageable pageable);
+    Page<CommandMateria> viewPageMateria(Pageable pageable);
     Optional<CommandMateria> viewByIdMateriaDTO(String sigla);
 }

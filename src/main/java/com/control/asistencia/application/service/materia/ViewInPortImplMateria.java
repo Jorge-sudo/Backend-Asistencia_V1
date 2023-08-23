@@ -25,7 +25,7 @@ public class ViewInPortImplMateria implements IViewInPortMateria {
     public ResponseEntity<?> viewPageMateriaDTO(ViewPageCommand command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
         return ResponseBuilderApiRest.viewPage(
-                this.iViewOutPortMateria.viewPageMateriaEntity(
+                this.iViewOutPortMateria.viewPageMateria(
                 PageRequest.of(command.getPage(), command.getSize(), sort )
         ));
     }
