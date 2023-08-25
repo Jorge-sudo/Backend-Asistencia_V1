@@ -5,6 +5,7 @@ import com.control.asistencia.application.port.in.horario.IDeleteInPortHorario;
 import com.control.asistencia.application.port.out.horario.IDeleteOutPortHorario;
 import com.control.asistencia.common.UseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class DeleteInPortImplHorario implements IDeleteInPortHorario {
@@ -13,6 +14,7 @@ public class DeleteInPortImplHorario implements IDeleteInPortHorario {
         this.iDeleteOutPortHorario = iDeleteOutPortHorario;
     }
     @Override
+    @Transactional
     public ResponseEntity<?> deleteHorario(int idHorario) {
         return ResponseBuilderApiRest.delete(
                 this.iDeleteOutPortHorario.deleteHorario(idHorario)

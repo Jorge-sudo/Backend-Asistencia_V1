@@ -8,6 +8,7 @@ import com.control.asistencia.common.UseCase;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class ViewInPortImplHorario implements IViewInPortHorario {
@@ -16,6 +17,7 @@ public class ViewInPortImplHorario implements IViewInPortHorario {
         this.iViewOutPortHorario = iViewOutPortHorario;
     }
     @Override
+    @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageHorarioDTO(ViewPageCommand command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
         return ResponseBuilderApiRest.viewPage(

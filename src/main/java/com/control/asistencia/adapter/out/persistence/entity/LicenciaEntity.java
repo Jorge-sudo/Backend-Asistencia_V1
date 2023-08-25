@@ -23,14 +23,12 @@ public class LicenciaEntity {
     private int idLicencia;
 
     @Future(message = "La fecha de inicio debe ser futura")
-    @NotBlank(message = "Fecha Inicio  no válido: Fecha Inicio vacío")
     @NotNull(message = "Fecha Inicio  no válido: la Fecha Inicio es NULL")
     @Column(name = "fecha_inicio", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
 
     @Future(message = "La fecha de final debe ser futura")
-    @NotBlank(message = "Fecha Final no válido: Fecha Final vacío")
     @NotNull(message = "Fecha Final no válido: la Fecha Final es NULL")
     @Column(name = "fecha_final", nullable = false)
     @Temporal(TemporalType.DATE)

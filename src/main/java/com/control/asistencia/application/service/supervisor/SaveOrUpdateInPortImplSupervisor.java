@@ -6,11 +6,8 @@ import com.control.asistencia.application.port.in.supervisor.command.SaveCommand
 import com.control.asistencia.application.port.out.supervisor.ISaveOrUpdateOutPortSupervisor;
 import com.control.asistencia.application.port.out.supervisor.IViewOutPortSupervisor;
 import com.control.asistencia.common.UseCase;
-import com.control.asistencia.domain.supervisor.SupervisorViewDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @UseCase
 public class SaveOrUpdateInPortImplSupervisor implements ISaveOrUpdateInPortSupervisor {

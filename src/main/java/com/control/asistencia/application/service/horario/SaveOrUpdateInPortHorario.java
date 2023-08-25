@@ -6,6 +6,7 @@ import com.control.asistencia.application.port.in.horario.command.SaveCommandHor
 import com.control.asistencia.application.port.out.horario.ISaveOrUpdateOutPortHorario;
 import com.control.asistencia.common.UseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class SaveOrUpdateInPortHorario implements ISaveOrUpdateInPortHorario {
@@ -14,6 +15,7 @@ public class SaveOrUpdateInPortHorario implements ISaveOrUpdateInPortHorario {
         this.iSaveOrUpdateOutPortHorario = iSaveOrUpdateOutPortHorario;
     }
     @Override
+    @Transactional
     public ResponseEntity<?> saveOrUpdateHorario(SaveCommandHorario commandHorario) {
         return commandHorario.getIdHorario() > 0
                 ? ResponseBuilderApiRest.update(

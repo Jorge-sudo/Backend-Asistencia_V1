@@ -1,7 +1,5 @@
 package com.control.asistencia.adapter.out.persistence.entity;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import jakarta.persistence.*;

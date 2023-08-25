@@ -18,12 +18,10 @@ public class CommandSaveOrViewLicencia {
     private int id;
 
     @Future(message = "La fecha de inicio debe ser futura")
-    @NotBlank(message = "Fecha Inicio  no válido: Fecha Inicio vacío")
     @NotNull(message = "Fecha Inicio  no válido: la Fecha Inicio es NULL")
     private Date fechaInicio;
 
-    @Future(message = "La fecha de inicio debe ser futura")
-    @NotBlank(message = "Fecha Inicio  no válido: Fecha Inicio vacío")
+    @Future(message = "La fecha de finalización debe ser futura")
     @NotNull(message = "Fecha Inicio  no válido: la Fecha Inicio es NULL")
     private Date fechaFinal;
 

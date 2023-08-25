@@ -5,6 +5,7 @@ import com.control.asistencia.application.port.in.diaSemana.IViewInPortDiaSemana
 import com.control.asistencia.application.port.out.diaSemana.IViewOutPortDiaSemana;
 import com.control.asistencia.common.UseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class ViewInPortImplDiaSemana implements IViewInPortDiaSemana {
@@ -13,6 +14,7 @@ public class ViewInPortImplDiaSemana implements IViewInPortDiaSemana {
         this.iViewOutPortDiaSemana = iViewOutPortDiaSemana;
     }
     @Override
+    @Transactional(readOnly = true)
     public ResponseEntity<?> viewAllDiaSemanaDTO() {
         return ResponseBuilderApiRest.view(
                 this.iViewOutPortDiaSemana.viewAllDiaSemanaDTO()

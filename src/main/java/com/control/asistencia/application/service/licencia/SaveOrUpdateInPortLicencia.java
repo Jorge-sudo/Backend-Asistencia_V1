@@ -6,6 +6,7 @@ import com.control.asistencia.application.port.in.licencia.command.CommandSaveOr
 import com.control.asistencia.application.port.out.licencia.ISaveOrUpdateOutPortLicencia;
 import com.control.asistencia.common.UseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class SaveOrUpdateInPortLicencia implements ISaveOrUpdateInPortLicencia {
@@ -14,6 +15,7 @@ public class SaveOrUpdateInPortLicencia implements ISaveOrUpdateInPortLicencia {
         this.iSaveOrUpdateOutPortLicencia = iSaveOrUpdateOutPortLicencia;
     }
     @Override
+    @Transactional
     public ResponseEntity<?> saveOrUpdateLicencia(CommandSaveOrViewLicencia command) {
         return command.getId() > 0
                 ? ResponseBuilderApiRest.update(

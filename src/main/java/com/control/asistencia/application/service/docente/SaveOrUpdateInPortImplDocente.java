@@ -6,11 +6,8 @@ import com.control.asistencia.application.port.in.docente.command.SaveCommandDoc
 import com.control.asistencia.application.port.out.docente.ISaveOrUpdateOutPortDocente;
 import com.control.asistencia.application.port.out.docente.IViewOutPortDocente;
 import com.control.asistencia.common.UseCase;
-import com.control.asistencia.domain.docente.DocenteViewDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @UseCase
 public class SaveOrUpdateInPortImplDocente implements ISaveOrUpdateInPortDocente {
