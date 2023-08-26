@@ -9,6 +9,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -23,10 +25,15 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final CustomUsersDetailsService customUsersDetailsService;
 
     @Autowired
-    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
+    public SecurityConfig(
+            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint ,
+            CustomUsersDetailsService customUsersDetailsService) {
+
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.customUsersDetailsService = customUsersDetailsService;
     }
 
 
@@ -53,13 +60,23 @@ public class SecurityConfig {
     // Y es aquí donde determinaremos los permisos segun los roles de usuarios para acceder a nuestra aplicación
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http    .cors(withDefaults())
-                .authorizeRequests((authorizeRequests) ->
-                        authorizeRequests
-                                .requestMatchers("/api/auth/login").permitAll()
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/publico/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults());
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .cors(withDefaults())
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling((exception) -> exception
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+
+                )
+                .userDetailsService(customUsersDetailsService)
+                .sessionManagement((session) -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
         return http.build();
     }
 }

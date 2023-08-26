@@ -5,6 +5,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private CustomUsersDetailsService customUsersDetailsService;
     private JwtGenerador jwtGenerador;
+    @Autowired
     public JwtAuthenticationFilter(
             CustomUsersDetailsService customUsersDetailsService,
             JwtGenerador jwtGenerador) {
@@ -47,6 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     //Mecanismo para invocar el siguiente filtro en la siguiente cadena de filtros
                                     FilterChain filterChain) throws ServletException, IOException {
+
         //Obtenemos los datos del token mediante el método desarrollado arriba
         String token = obtenerTokenDeSolicitud(request);
         // Validamos la información del token
