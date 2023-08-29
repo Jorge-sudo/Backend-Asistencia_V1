@@ -1,6 +1,7 @@
 package com.control.asistencia.config.exception;
 
 import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.TokenExpiredException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, List<String>>> handleUsernameNotFoundException(UsernameNotFoundException ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(TokenExpiredException.class)
+    public ResponseEntity<Map<String, List<String>>> handleTokenExpiredException(TokenExpiredException ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.UNAUTHORIZED);
     }
 
     private Map<String, List<String>> getErrorsMap(List<String> errors) {

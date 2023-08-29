@@ -25,10 +25,10 @@ public class CustomUsersDetailsService implements UserDetailsService {
     // Método para cargar los detalles del usuario a partir del correo institucional
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if(this.iViewOutPortPersona.viewByEmail(email).isPresent()){
-            List<PersonaEntity> persona = this.iViewOutPortPersona.viewByEmail(email).get();
+        if(this.iViewOutPortPersona.viewByEmail(username).isPresent()){
+            List<PersonaEntity> persona = this.iViewOutPortPersona.viewByEmail(username).get();
             authorities.add(new SimpleGrantedAuthority(persona.get(0).getRol().getNombre()));
             // Crea y devuelve un objeto User de Spring Security con el correo institucional, la contraseña y las autoridades del usuario
             return new UserDetailsImpl(

@@ -11,7 +11,12 @@ import java.util.Collection;
 public class UserDetailsImpl extends User {
     private long id;
 
-    public UserDetailsImpl(long id, String correoInstitucional, String contrasenia, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(
+            long id,
+            String correoInstitucional,
+            String contrasenia,
+            Collection<? extends GrantedAuthority> authorities) {
+
         super(correoInstitucional, contrasenia, authorities);
         this.id = id;
     }

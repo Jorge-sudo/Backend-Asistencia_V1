@@ -5,6 +5,7 @@ import com.control.asistencia.config.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,20 +27,24 @@ public class SecurityConfig {
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final CustomUsersDetailsService customUsersDetailsService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
     public SecurityConfig(
             JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint ,
-            CustomUsersDetailsService customUsersDetailsService) {
+            CustomUsersDetailsService customUsersDetailsService ,
+            JwtAuthenticationFilter jwtAuthenticationFilter) {
 
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.customUsersDetailsService = customUsersDetailsService;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
 
     //Este bean va a encargarse de verificar la información de los usuarios que se loguearán en nuestra api
     @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -50,10 +55,6 @@ public class SecurityConfig {
     }
 
     //Este bean incorporará el filtro de seguridad de json web token que creamos en nuestra clase anterior
-    @Bean
-    JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
-    }
 
 
     //Vamos a crear un bean el cual va a establecer una cadena de filtros de seguridad en nuestra aplicación.
@@ -63,17 +64,21 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/publico/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/swagger-ui.html#/").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/docente").hasAnyAuthority("ADMIN" , "USER")
+                        .requestMatchers(HttpMethod.GET,"/api/docente/**").hasAnyAuthority("ADMIN" , "USER")
+                        .requestMatchers(HttpMethod.DELETE,"/api/docente/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/docente/actualizar").hasAnyAuthority("ADMIN", "USER")
                         .anyRequest().authenticated()
                 )
                 .cors(withDefaults())
-                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exception) -> exception
-                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                        .authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
 
                 )
-                .userDetailsService(customUsersDetailsService)
+                .userDetailsService(this.customUsersDetailsService)
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
