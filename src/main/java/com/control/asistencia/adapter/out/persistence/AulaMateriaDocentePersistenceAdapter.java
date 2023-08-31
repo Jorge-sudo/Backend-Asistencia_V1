@@ -6,7 +6,7 @@ import com.control.asistencia.adapter.out.persistence.repository.*;
 import com.control.asistencia.application.port.in.asignarMateria.command.CommandAulaMateriaDocente;
 import com.control.asistencia.application.port.out.aulaMateriaDocente.ISaveOrUpdateOutPortAulaMateriaDocente;
 import com.control.asistencia.common.PersistenceAdapter;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 
 import java.util.Optional;
 
@@ -38,10 +38,10 @@ public class AulaMateriaDocentePersistenceAdapter implements
                                 AulaMateriaDocenteEntity.builder()
                                         .idAulaMateriaDocente(command.getIdAulaMateriaDocente())
                                         .materiaDocente(this.iRepositoryMateriaDocente.findById(command.getIdMateriaDocente())
-                                                        .orElseThrow(() -> new DataNotFoundException("No existe la materiaDocente con el ID: " + command.getIdMateriaDocente()))
+                                                        .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaDocente con el ID: " + command.getIdMateriaDocente()))
                                         )
                                         .aula(this.iRepositoryAula.findById(command.getIdAula())
-                                                        .orElseThrow(() -> new DataNotFoundException("No existe la aula con el ID: " + command.getIdAula()))
+                                                        .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la aula con el ID: " + command.getIdAula()))
                                         )
                                         .build()
                         )

@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface IViewOutPortPersona {
     Optional<List<PersonaEntity>> viewByEmail(String email);
+    Optional<PersonaEntity> viewById(Long ci);
 }

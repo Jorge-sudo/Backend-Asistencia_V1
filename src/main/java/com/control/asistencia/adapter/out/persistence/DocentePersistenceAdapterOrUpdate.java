@@ -9,7 +9,7 @@ import com.control.asistencia.application.port.in.docente.command.SaveCommandDoc
 import com.control.asistencia.application.port.out.docente.ISaveOrUpdateOutPortDocente;
 import com.control.asistencia.application.port.out.docente.IViewOutPortDocente;
 import com.control.asistencia.common.PersistenceAdapter;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.domain.docente.DocenteViewDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -66,7 +66,7 @@ public class DocentePersistenceAdapterOrUpdate implements
                                         .contrasenia(command.getContrasenia())
                                         .activo(command.isActivo())
                                         .rol(this.iRepositoryRol.findById(command.getRol())
-                                                .orElseThrow(() -> new DataNotFoundException("No existe el rol con el ID: " + command.getRol())))
+                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el rol con el ID: " + command.getRol())))
                                         .codRfid(command.getCodRfid())
                                         .build()
 

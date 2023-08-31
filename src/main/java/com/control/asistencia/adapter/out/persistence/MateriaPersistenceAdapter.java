@@ -7,7 +7,7 @@ import com.control.asistencia.application.port.out.materia.IDeleteOutPortMateria
 import com.control.asistencia.application.port.out.materia.ISaveOrUpdateOutPortMateria;
 import com.control.asistencia.application.port.out.materia.IViewOutPortMateria;
 import com.control.asistencia.common.PersistenceAdapter;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -63,6 +63,6 @@ public class MateriaPersistenceAdapter implements
                     this.iRepositoryMateria.delete(materia);
                     return true;
                 }
-        ).orElseThrow(() -> new DataNotFoundException("No existe la materia con la sigla: " + sigla));
+        ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materia con la sigla: " + sigla));
     }
 }

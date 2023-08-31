@@ -10,7 +10,7 @@ import com.control.asistencia.application.port.in.materiaCarreraSemestre.command
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IDeleteOutPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.ISaveOrUpdateOutPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IViewOutPortMateriaCarreraSemestre;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
 import org.springframework.data.domain.Page;
 
@@ -64,7 +64,7 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
         return Optional.of(
                 this.iViewMapperMateriaCarreraSemestre.entityToDto(
                         this.iRepositoryMateriaCarreraSemestre.findById(id)
-                                .orElseThrow(() -> new DataNotFoundException("No existe materiaCarreraSemestre con el ID: " + id))
+                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe materiaCarreraSemestre con el ID: " + id))
                 )
         );
     }
@@ -79,13 +79,13 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
                                 MateriaCarreraSemestreEntity.builder()
                                         .idMateriaCarreraSemestre(Math.max(command.getIdMateriaCarreraSemestre(), 0))
                                         .materia(this.iRepositoryMateria.findById(command.getSigla())
-                                                .orElseThrow(() -> new DataNotFoundException("No existe la materia con la sigla: " + command.getSigla()))
+                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materia con la sigla: " + command.getSigla()))
                                         )
                                         .carrera(this.iRepositoryCarrera.findById(command.getIdCarrera())
-                                                .orElseThrow(() -> new DataNotFoundException("No existe la carrera con el ID: " + command.getIdCarrera()))
+                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la carrera con el ID: " + command.getIdCarrera()))
                                         )
                                         .semestre(this.iRepositorySemestre.findById(command.getIdSemestre())
-                                                .orElseThrow(() -> new DataNotFoundException("No existe el semestre con el ID: " + command.getIdSemestre()))
+                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el semestre con el ID: " + command.getIdSemestre()))
                                         )
                                         .activo(command.isActivo())
                                         .build()
@@ -102,7 +102,7 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
                     this.iRepositoryMateriaCarreraSemestre.delete(materiaCarreraSemestreEntity);
                     return true;
                 }
-        ).orElseThrow(() -> new DataNotFoundException("No existe la materiaCarreraSemestre con el ID: " + id));
+        ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaCarreraSemestre con el ID: " + id));
     }
 
 }

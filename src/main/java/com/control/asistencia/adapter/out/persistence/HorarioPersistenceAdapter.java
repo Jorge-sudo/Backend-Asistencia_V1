@@ -11,7 +11,7 @@ import com.control.asistencia.application.port.out.horario.IDeleteOutPortHorario
 import com.control.asistencia.application.port.out.horario.ISaveOrUpdateOutPortHorario;
 import com.control.asistencia.application.port.out.horario.IViewOutPortHorario;
 import com.control.asistencia.common.PersistenceAdapter;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.domain.horario.HorarioViewDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,13 +63,13 @@ public class HorarioPersistenceAdapter implements
                                         .diaSemana(
                                                 this.iRepositoryDiaSemana.findById(saveCommandHorario.getIdDia())
                                                         .orElseThrow(() ->
-                                                                new DataNotFoundException(
+                                                                new DataNotFoundExceptionMessage(
                                                                         "No existe el diaSemana con el id: "+saveCommandHorario.getIdDia()))
                                         )
                                         .turno(
                                                 this.iRepositoryTurno.findById(saveCommandHorario.getIdTurno())
                                                         .orElseThrow(() ->
-                                                                new DataNotFoundException(
+                                                                new DataNotFoundExceptionMessage(
                                                                         "No existe el turno con el id: "+saveCommandHorario.getIdTurno()))
                                         )
                                         .build()

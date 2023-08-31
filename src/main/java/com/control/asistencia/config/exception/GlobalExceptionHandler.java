@@ -1,7 +1,8 @@
 package com.control.asistencia.config.exception;
 
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
-import com.control.asistencia.config.exception.exceptions.TokenExpiredException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
+import com.control.asistencia.config.exception.exceptions.TokenExpiredExceptionMessage;
+import com.control.asistencia.config.exception.exceptions.TokenNotFoundEcxeptionMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DataNotFoundException.class)
-    public ResponseEntity<Map<String, List<String>>> handleNotFoundException(DataNotFoundException ex) {
+    @ExceptionHandler(DataNotFoundExceptionMessage.class)
+    public ResponseEntity<Map<String, List<String>>> handleNotFoundException(DataNotFoundExceptionMessage ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
@@ -50,10 +51,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(TokenExpiredException.class)
-    public ResponseEntity<Map<String, List<String>>> handleTokenExpiredException(TokenExpiredException ex) {
+    @ExceptionHandler(TokenExpiredExceptionMessage.class)
+    public ResponseEntity<Map<String, List<String>>> handleTokenExpiredException(TokenExpiredExceptionMessage ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(TokenNotFoundEcxeptionMessage.class)
+    public ResponseEntity<Map<String, List<String>>> handleTokenNotFoundException(TokenNotFoundEcxeptionMessage ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
     private Map<String, List<String>> getErrorsMap(List<String> errors) {

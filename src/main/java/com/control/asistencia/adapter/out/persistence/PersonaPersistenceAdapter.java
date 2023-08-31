@@ -21,4 +21,9 @@ public class PersonaPersistenceAdapter implements IViewOutPortPersona {
                 this.iRepositoryPersona.findByNombre(email)
         );
     }
+
+    @Override
+    public Optional<PersonaEntity> viewById(Long ci) {
+        return this.iRepositoryPersona.findById(ci);
+    }
 }

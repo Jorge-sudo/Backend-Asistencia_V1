@@ -5,7 +5,7 @@ import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.in.materia.IViewInPortMateria;
 import com.control.asistencia.application.port.out.materia.IViewOutPortMateria;
 import com.control.asistencia.common.UseCase;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +36,7 @@ public class ViewInPortImplMateria implements IViewInPortMateria {
         return ResponseBuilderApiRest.view(
                 Optional.of(
                         this.iViewOutPortMateria.viewByIdMateriaDTO(sigla)
-                        .orElseThrow(() -> new DataNotFoundException("No existe la materia con la sigla: " + sigla))
+                        .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materia con la sigla: " + sigla))
                 )
         );
     }

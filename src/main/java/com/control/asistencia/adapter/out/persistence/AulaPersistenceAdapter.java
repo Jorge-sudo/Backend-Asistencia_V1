@@ -7,7 +7,7 @@ import com.control.asistencia.application.port.out.aula.IDeleteOutPortAula;
 import com.control.asistencia.application.port.out.aula.ISaveOrUpdateOutPortAula;
 import com.control.asistencia.application.port.out.aula.IViewOutPortAula;
 import com.control.asistencia.common.PersistenceAdapter;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -42,7 +42,7 @@ public class AulaPersistenceAdapter implements
         return Optional.of(
                 this.iMapperAula.entityToCommand(
                         this.iRepositoryAula.findById(idAula)
-                                .orElseThrow(() -> new DataNotFoundException("No existe la aula con el id: " + idAula))
+                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la aula con el id: " + idAula))
                 )
         );
     }
@@ -65,6 +65,6 @@ public class AulaPersistenceAdapter implements
                     this.iRepositoryAula.delete(aula);
                     return true;
                 }
-        ).orElseThrow(() -> new DataNotFoundException("No existe la aula con el id: " + idAula));
+        ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la aula con el id: " + idAula));
     }
 }

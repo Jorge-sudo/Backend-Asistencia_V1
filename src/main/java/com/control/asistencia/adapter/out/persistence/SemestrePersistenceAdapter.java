@@ -7,7 +7,7 @@ import com.control.asistencia.application.port.out.semestre.IDeleteOutPortSemest
 import com.control.asistencia.application.port.out.semestre.ISaveOrUpdateOutPortSemestre;
 import com.control.asistencia.application.port.out.semestre.IViewOutPortSemestre;
 import com.control.asistencia.common.PersistenceAdapter;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -57,6 +57,6 @@ public class SemestrePersistenceAdapter implements
                     this.iRepositorySemestre.delete(semestre);
                     return true;
                 }
-        ).orElseThrow(() -> new DataNotFoundException("No existe el semestre con el ID: " + id));
+        ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el semestre con el ID: " + id));
     }
 }

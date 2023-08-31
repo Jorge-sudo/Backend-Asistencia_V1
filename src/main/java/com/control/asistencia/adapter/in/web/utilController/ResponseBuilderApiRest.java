@@ -54,6 +54,18 @@ public class ResponseBuilderApiRest {
                 data);
     }
 
+    public static ResponseEntity<?> saveOrUpdateImage(boolean save, boolean update){
+        return buildResponse(
+                "Su operación fue exitosa.",
+                HttpStatus.CREATED,
+                false,
+                save,
+                update,
+                false,
+                Optional.empty());
+    }
+
+
     public static ResponseEntity<?> update(Optional<?> data) {
         return buildResponse(
                 "Tus datos se actualizaron con éxito.",

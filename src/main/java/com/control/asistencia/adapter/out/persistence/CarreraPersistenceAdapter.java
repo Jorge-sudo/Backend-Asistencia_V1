@@ -7,7 +7,7 @@ import com.control.asistencia.application.port.out.carrera.IDeleteOutPortCarrera
 import com.control.asistencia.application.port.out.carrera.ISaveOrUpdateOutPortCarrera;
 import com.control.asistencia.application.port.out.carrera.IViewOutPortCarrera;
 import com.control.asistencia.common.PersistenceAdapter;
-import com.control.asistencia.config.exception.exceptions.DataNotFoundException;
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -59,6 +59,6 @@ public class CarreraPersistenceAdapter implements
                     this.iRepositoryCarrera.delete(carrera);
                     return true;
                 }
-        ).orElseThrow(() -> new DataNotFoundException("No existe la carrera con el ID: " + id));
+        ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la carrera con el ID: " + id));
     }
 }
