@@ -50,13 +50,7 @@ public class SaveOrUpdateInPortImplImagePersona  implements ISaveOrUpdateInPortI
 
         Optional<PersonaEntity> personaEntity = this.iViewOutPortPersona.viewById(ci);
 
-        if(personaEntity.isEmpty()){
-            throw new DataNotFoundExceptionMessage("No se encontró la persona con el ci :" + ci);
-        }
-
-        if(img.isEmpty()){
-            throw new DataNotFoundExceptionMessage("El archivo no puede estar vacío");
-        }
+        validationFileAndPersona(img, personaEntity, ci);
 
         // Se obtiene la extensión del archivo
         String nameImg = getString(img, personaEntity);
@@ -98,5 +92,23 @@ public class SaveOrUpdateInPortImplImagePersona  implements ISaveOrUpdateInPortI
                 + "_" + personaEntity.get().getApellido()
                 + "_" + personaEntity.get().getCi() + "." + extension)
                 .replaceAll("\\s+", "");// elimina todos los espacios en blanco
+    }
+
+    private static void validationFileAndPersona(
+            MultipartFile img,
+            Optional<PersonaEntity> personaEntity,
+            Long ci){
+
+        if(personaEntity.isEmpty()){
+            throw new DataNotFoundExceptionMessage("No se encontró la persona con el ci :" + ci);
+        }
+
+        if(img.isEmpty()){
+            throw new DataNotFoundExceptionMessage("El archivo no puede estar vacío");
+        }
+
+        if(!Objects.equals(img.getContentType(), "image/jpeg")){
+            throw new DataNotFoundExceptionMessage("El archivo debe ser de tipo image/jpeg ");
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.control.asistencia.config.jwt;
 
 
 import com.control.asistencia.config.exception.exceptions.TokenExpiredExceptionMessage;
-import com.control.asistencia.config.exception.exceptions.TokenNotFoundEcxeptionMessage;
+import com.control.asistencia.config.exception.exceptions.TokenNotFoundExceptionMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
@@ -31,7 +31,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             response.sendError(
                     HttpServletResponse.SC_UNAUTHORIZED,
                     "No se proporcionó un token de autenticación");
-            throw new TokenNotFoundEcxeptionMessage("No se proporcionó un token de autenticación");
+            throw new TokenNotFoundExceptionMessage("No se proporcionó un token de autenticación");
         }
 
         boolean tokenValido = jwtGenerador.validarToken(token);
