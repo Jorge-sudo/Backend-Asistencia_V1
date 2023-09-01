@@ -9,17 +9,6 @@ import java.util.Optional;
 
 @Component
 public class ResponseBuilderApiRest {
-    public static ResponseEntity<?> success(Optional<?> data) {
-        return buildResponse(
-                "Operation success.",
-                HttpStatus.OK,
-                false,
-                false,
-                false,
-                false,
-                data
-        );
-    }
 
     public static ResponseEntity<?> view(Optional<?> data) {
         return buildResponse(

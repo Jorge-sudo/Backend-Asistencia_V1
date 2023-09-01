@@ -19,9 +19,10 @@ public class ViewInPortImplImagePersona implements IViewInPortImagePersona {
     private final StoragePaths storagePaths;
     public ViewInPortImplImagePersona(StoragePaths storagePaths) {
         this.storagePaths = storagePaths;
+        this.storagePaths.createDirectoryIsNoTExists();
     }
     @Override
-    public boolean thisImagePersonaExists(String nameImg)  {
+    public boolean thisImagePersonaExists(String nameImg) {
         // Se obtiene la ruta completa del archivo a cargar
         Path rutaArchivo = this.storagePaths.imgDirectory().resolve(nameImg).toAbsolutePath();
 
