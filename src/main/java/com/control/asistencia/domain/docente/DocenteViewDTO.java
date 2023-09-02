@@ -12,6 +12,7 @@ public class DocenteViewDTO {
     private String nombre;
     private String apellido;
     private String fotografia;
+    private String base64Image;
     private String email;
     private String genero;
     private String correoInstitucional;

@@ -23,7 +23,7 @@ public class ViewInPortImplMateriaCarreraSemestre implements IViewInPortMateriaC
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
 
         return ResponseBuilderApiRest.viewPage(
-                this.iViewOutPortMateriaCarreraSemestre.viewPagePageMateriaCarreraSemestreDTO(
+                this.iViewOutPortMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(
                 PageRequest.of(command.getPage(), command.getSize(), sort )
         ));
     }

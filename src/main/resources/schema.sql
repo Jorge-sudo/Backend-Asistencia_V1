@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS horario_materia_docente(
     FOREIGN KEY (id_materia_docente) REFERENCES materia_docente(id_materia_docente)
 );
 
-CREATE VIEW IF NOT EXISTS vista_materia AS
+CREATE VIEW IF NOT EXISTS materia_assign_view AS
 SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         m.nombre AS 'nombre',
         mc.activo AS 'activo',

@@ -24,7 +24,6 @@ public class ViewInPortImplDocente implements  IViewInPortDocente {
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageDocenteDTO(ViewPageCommand command) {
         Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
-
         return ResponseBuilderApiRest.viewPage(this.iViewOutPortDocente.viewPageDocenteDTO(
                 PageRequest.of(command.getPage(), command.getSize(), sort )
         ));

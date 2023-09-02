@@ -16,6 +16,7 @@ public class StoragePaths {
     public Path imgDirectory() {
         return Paths.get(System.getProperty("user.dir") + "/uploads");
     }
+
     @Bean
     public boolean directoryIsExists() {
         return Files.exists(this.imgDirectory());

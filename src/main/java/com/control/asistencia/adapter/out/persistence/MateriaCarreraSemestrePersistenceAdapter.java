@@ -44,7 +44,7 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
     }
 
     @Override
-    public Page<ViewMateriaCarreraSemestreDTO> viewPagePageMateriaCarreraSemestreDTO(Pageable pageable) {
+    public Page<ViewMateriaCarreraSemestreDTO> viewPageMateriaCarreraSemestreDTO(Pageable pageable) {
         return this.iViewMapperMateriaCarreraSemestre.entitysToDtosPage(
                 this.iRepositoryMateriaCarreraSemestre.findAll(pageable)
         );
