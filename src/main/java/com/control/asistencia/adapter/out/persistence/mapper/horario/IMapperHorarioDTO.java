@@ -17,8 +17,8 @@ public interface IMapperHorarioDTO {
             @Mapping(source = "idHorario", target = "idHorario"),
             @Mapping(source = "horaInicio", target = "horaInicio"),
             @Mapping(source = "horaFin", target = "horaFin"),
-            @Mapping(source = "diaSemana.nombre", target = "diaSemana"),
-            @Mapping(source = "turno.nombre", target = "turno"),
+            @Mapping(source = "diaSemanaEntity.nombre", target = "diaSemana"),
+            @Mapping(source = "turnoEntity.nombre", target = "turno"),
     })
     HorarioViewDTO entityToDto(HorarioEntity horarioEntity);
     default Page<HorarioViewDTO> entitysToDtosPage(Page<HorarioEntity> horarioEntityPage){

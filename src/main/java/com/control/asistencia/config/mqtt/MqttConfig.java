@@ -46,82 +46,46 @@ public class MqttConfig {
     @Value("${mqtt.cantidad-estudiante-channel}")
     private String mqttCantidadEstudianteTopic;
 
-    // Configuración del cliente MQTT
+    // Configuración del cliente MQTT agregamos los atributos como usuario y etc.
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
         // Creación de un objeto DefaultMqttPahoClientFactory para configurar la conexión
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         // Creación de un objeto MqttConnectOptions para configurar los detalles de la conexión
         MqttConnectOptions options = new MqttConnectOptions();
-        // Establecimiento de la dirección del servidor MQTT al que se conectará el cliente
         options.setServerURIs(new String[] { mqttHostname });
-        // Configuración de la opción de reconexión automática del cliente
         options.setAutomaticReconnect(mqttAutomaticReconnect);
-        // Configuración de la opción de sesión limpia del cliente
         options.setCleanSession(mqttCleanSession);
-        // Configuración del tiempo de espera de la conexión
         options.setConnectionTimeout(mqttConnectionTimeout);
-        // Configuración del nombre de usuario y contraseña para la autenticación
         options.setUserName(mqttUserName);
         options.setPassword(mqttPassword.toCharArray());
-        // Establecimiento de las opciones de conexión en el objeto DefaultMqttPahoClientFactory
         factory.setConnectionOptions(options);
         return factory;
     }
 
-    // Canal de entrada para mensajes MQTT para Asistencia
-    @Bean
-    public MessageChannel mqttInputChannelTopicAsistencia() {
-        return new DirectChannel();
-    }
-
-    // Nuevos canales de entrada para Materia
-    @Bean
-    public MessageChannel mqttInputChannelCantidadEstudiante() {
-        return new DirectChannel();
-    }
-
-    // Canal de salida para mensajes MQTT
-    @Bean
-    public MessageChannel mqttOutputChannel() { // Agregado
-        return new DirectChannel();
-    }
 
     // Adaptador para recibir mensajes del servidor MQTT de asistencia
     @Bean
-    public MessageProducer mqttInboundAdapterTopicAsistencia() {
+    public MessageProducer mqttInboundAdapterTopic() {
         // Creación de un objeto MqttPahoMessageDrivenChannelAdapter para recibir mensajes del servidor MQTT
         MqttPahoMessageDrivenChannelAdapter adapter =
                 new MqttPahoMessageDrivenChannelAdapter(
-                        "mqttInboundAdapter-" + mqttAsistenciaTopic, mqttClientFactory(), mqttAsistenciaTopic);
+                        "backend-spring", // Identificador del adaptador MQTT
+                        mqttClientFactory(),
+                        mqttAsistenciaTopic,
+                        mqttCantidadEstudianteTopic);
+
         // Establecimiento del tiempo de espera de la operación de recepción
         adapter.setCompletionTimeout(5000);
         // Configuración del convertidor de mensajes a utilizar
         adapter.setConverter(new DefaultPahoMessageConverter());
         // Establecimiento del nivel de calidad de servicio (QoS) para la recepción de mensajes
         adapter.setQos(2);
-        adapter.setOutputChannel(mqttInputChannelTopicAsistencia()); // Conexión del canal de entrada MQTT al adaptador MQTT
+        adapter.setOutputChannel(mqttInputChannelTopic()); // Conexión del canal de entrada MQTT al adaptador MQTT
         return adapter;
     }
 
-    // Adaptador para recibir mensajes del servidor MQTT de materia
-    @Bean
-    public MessageProducer mqttInboundAdapterCantidadEstudiante() {
-        MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter(
-                        "mqttInboundAdapter-" + mqttCantidadEstudianteTopic, mqttClientFactory(), mqttCantidadEstudianteTopic);
-        adapter.setCompletionTimeout(5000);
-        adapter.setConverter(new DefaultPahoMessageConverter());
-        adapter.setQos(2);
-        adapter.setOutputChannel(mqttInputChannelCantidadEstudiante());
-        return adapter;
-    }
 
-    // Canal de salida para enviar mensajes MQTT
-    @Bean
-    public MessageChannel mqttOutboundChannel() {
-        return new DirectChannel();
-    }
 
     // Manejador para enviar mensajes al servidor MQTT
     @Bean
@@ -130,7 +94,9 @@ public class MqttConfig {
         // Creación de un objeto MqttPahoMessageHandler para enviar mensajes al servidor MQTT
         MqttPahoMessageHandler messageHandler =
                 new MqttPahoMessageHandler(
-                        "mqttOutboundHandler", mqttClientFactory());
+                        "backend-spring",
+                        mqttClientFactory());
+
         // Configuración del envío asíncrono de mensajes
         messageHandler.setAsync(true);
         // Establecimiento del tema predeterminado para enviar mensajes
@@ -139,5 +105,18 @@ public class MqttConfig {
         messageHandler.setDefaultQos(2);
         return messageHandler;
     }
+
+    // Canal de entrada para mensajes MQTT para Asistencia
+    @Bean
+    public MessageChannel mqttInputChannelTopic() {
+        return new DirectChannel();
+    }
+
+    // Canal de salida para enviar mensajes MQTT
+    @Bean
+    public MessageChannel mqttOutboundChannel() {
+        return new DirectChannel();
+    }
+
 
 }

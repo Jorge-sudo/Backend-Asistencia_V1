@@ -1,7 +1,7 @@
 package com.control.asistencia.adapter.out.persistence.mapper.materiaDocente;
 
 import com.control.asistencia.adapter.out.persistence.entity.MateriaDocenteEntity;
-import com.control.asistencia.application.port.in.asignarMateria.command.CommandMateriaDocente;
+import com.control.asistencia.application.port.in.assignMateria.command.CommandMateriaDocente;
 import org.mapstruct.*;
 
 @Mapper(
@@ -15,8 +15,8 @@ public interface IMapperMateriaDocente {
 
     @Mappings({
             @Mapping(source = "idMateriaDocente", target = "idMateriaDocente"),
-            @Mapping(source = "materia.sigla", target = "sigla"),
-            @Mapping(source = "docente.ci", target = "ci")
+            @Mapping(source = "materiaEntity.sigla", target = "sigla"),
+            @Mapping(source = "docenteEntity.ci", target = "ci")
     })
     CommandMateriaDocente entityToCommand(MateriaDocenteEntity materiaDocenteEntity);
 }

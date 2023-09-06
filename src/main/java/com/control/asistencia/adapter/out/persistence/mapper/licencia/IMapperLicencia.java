@@ -20,12 +20,7 @@ public interface IMapperLicencia {
             @Mapping(source = "descripcion", target = "descripcion"),
     })
     CommandSaveOrViewLicencia entityToCommand(LicenciaEntity licenciaEntity);
-    @Mappings({
-            @Mapping(source = "id", target = "idLicencia"),
-            @Mapping(source = "fechaInicio", target = "fechaInicio"),
-            @Mapping(source = "fechaFinal", target = "fechaFinal"),
-            @Mapping(source = "descripcion", target = "descripcion"),
-    })
+    @InheritInverseConfiguration
     LicenciaEntity commandToEntity(CommandSaveOrViewLicencia commandSaveOrViewLicencia);
 
     default Page<CommandSaveOrViewLicencia> entityToCommandPage(Page<LicenciaEntity> licenciaEntityPage) {

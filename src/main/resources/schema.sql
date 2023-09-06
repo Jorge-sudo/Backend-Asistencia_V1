@@ -47,23 +47,6 @@ CREATE TABLE IF NOT EXISTS docente_licencia(
     FOREIGN KEY (id_licencia) REFERENCES licencia(id_licencia)
 );
 
-CREATE TABLE IF NOT EXISTS asistencia (
-    id_asistencia INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    hora_entrada TIME NOT NULL,
-    cant_estudiantes INTEGER NULL,
-    fecha DATE NOT NULL,
-    estado VARCHAR(20) NOT NULL,
-    id_modulo VARCHAR(15) NOT NULL,
-    horario VARCHAR(25) NULL
-);
-
-CREATE TABLE IF NOT EXISTS docente_asistencia(
-    id_docente_asistencia INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    id_asistencia INTEGER NOT NULL,
-    ci BIGINT NOT NULL,
-    FOREIGN KEY (ci) REFERENCES persona(ci),
-    FOREIGN KEY (id_asistencia) REFERENCES asistencia(id_asistencia)
-);
 
 CREATE TABLE IF NOT EXISTS semestre(
     id_semestre INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -143,6 +126,19 @@ CREATE TABLE IF NOT EXISTS horario_materia_docente(
     FOREIGN KEY (id_materia_docente) REFERENCES materia_docente(id_materia_docente)
 );
 
+CREATE TABLE IF NOT EXISTS asistencia (
+    id_asistencia INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    hora_entrada TIME NOT NULL,
+    cantidad_estudiantes INTEGER NULL,
+    fecha DATE NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    id_aula INTEGER NOT NULL,
+    id_horario_materia_docente INTEGER NOT NULL,
+    FOREIGN KEY (id_aula) REFERENCES aula(id_aula),
+    FOREIGN KEY (id_horario_materia_docente) REFERENCES horario_materia_docente(id_horario_materia_docente)
+);
+
+
 CREATE VIEW IF NOT EXISTS materia_assign_view AS
 SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         m.nombre AS 'nombre',
@@ -176,29 +172,29 @@ CREATE VIEW IF NOT EXISTS vista_docente_dashboard AS
 SELECT
     1 AS id,
     COUNT(*)  AS total_docentes,
-    CAST(SUM(CASE WHEN p.activo = FALSE THEN 1 ELSE 0 END) AS INTEGER) AS total_inactivos
+    CAST(SUM(IF(p.activo = FALSE, 1, 0)) AS INTEGER) AS total_inactivos
 FROM docente d
          JOIN persona p ON d.ci = p.ci;
 
-CREATE VIEW IF NOT EXISTS vista_docente_asistencia_dashboard AS
-SELECT
-    1 AS id,
-    COUNT(*) AS docente_asistencia_total,
-    CAST(SUM(CASE WHEN a.estado = 'Impuntual' THEN 1 ELSE 0 END) AS INTEGER )AS total_inpuntuales
-FROM persona p JOIN  docente d  ON p.ci = d.ci JOIN docente_asistencia da
-ON da.ci = d.ci JOIN asistencia a ON da.id_asistencia= a.id_asistencia  WHERE a.fecha = CURDATE();
+#CREATE VIEW IF NOT EXISTS vista_docente_asistencia_dashboard AS
+#SELECT
+#    1 AS id,
+#   COUNT(*) AS docente_asistencia_total,
+#   CAST(SUM(IF(a.estado = 'Impuntual', 1, 0)) AS INTEGER ) AS total_inpuntuales
+#FROM persona p JOIN  docente d  ON p.ci = d.ci JOIN docente_asistencia da
+#ON da.ci = d.ci JOIN asistencia a ON da.id_asistencia= a.id_asistencia  WHERE a.fecha = CURDATE();
 
-CREATE VIEW IF NOT EXISTS vista_docente_asistencia_dashboard_mes AS
-SELECT
-    1 AS id,
-    COUNT(*)  AS docente_asistencia_total,
-    CAST(SUM(CASE WHEN a.estado = 'Impuntual' THEN 1 ELSE 0 END) AS INTEGER) AS total_inpuntuales
-FROM persona p JOIN  docente d  ON p.ci = d.ci JOIN docente_asistencia da
-ON da.ci = d.ci JOIN asistencia a ON da.id_asistencia= a.id_asistencia WHERE MONTH(a.fecha) = MONTH(CURDATE());
+#CREATE VIEW IF NOT EXISTS vista_docente_asistencia_dashboard_mes AS
+#SELECT
+#   1 AS id,
+#   COUNT(*)  AS docente_asistencia_total,
+#   CAST(SUM(IF(a.estado = 'Impuntual', 1, 0)) AS INTEGER) AS total_inpuntuales
+#FROM persona p JOIN  docente d  ON p.ci = d.ci JOIN docente_asistencia da
+#ON da.ci = d.ci JOIN asistencia a ON da.id_asistencia= a.id_asistencia WHERE MONTH(a.fecha) = MONTH(CURDATE());
 
 CREATE VIEW IF NOT EXISTS vista_materia_carrera_dashboard AS
 SELECT
     1 AS id,
     COUNT(*) AS total_materia_carreras,
-    CAST(SUM(CASE WHEN mcs.activo = FALSE THEN 1 ELSE 0 END) AS INTEGER) AS total_inactivos
+    CAST(SUM(IF(mcs.activo = FALSE, 1, 0)) AS INTEGER) AS total_inactivos
 FROM carrera c JOIN  materia_carrera_semestre mcs  ON c.id_carrera = mcs.id_carrera JOIN materia m  ON m.sigla = mcs.sigla;

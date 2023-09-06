@@ -1,4 +1,4 @@
-package com.control.asistencia.application.port.out.materiaAssignView;
+package com.control.asistencia.application.port.out.assignMateria;
 
 import com.control.asistencia.adapter.out.persistence.entity.view.MateriaAssignView;
 import org.springframework.data.domain.Page;

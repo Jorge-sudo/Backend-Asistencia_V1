@@ -1,9 +1,9 @@
-package com.control.asistencia.application.service.materiaAssignView;
+package com.control.asistencia.application.service.assignMateria;
 
 import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
-import com.control.asistencia.application.port.in.materiaAssignView.IViewInPortMateriaAssignView;
-import com.control.asistencia.application.port.out.materiaAssignView.IViewOutPortMateriaAssignView;
+import com.control.asistencia.application.port.in.assignMateria.IViewInPortMateriaAssignView;
+import com.control.asistencia.application.port.out.assignMateria.IViewOutPortMateriaAssignView;
 import com.control.asistencia.common.UseCase;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

@@ -20,10 +20,7 @@ public interface IMapperGenericSemestre {
             @Mapping(source = "nombre", target = "nombre")
     })
     SaveOrViewCommandGeneric entityToCommand(SemestreEntity semestreEntity);
-    @Mappings({
-            @Mapping(source = "id", target = "idSemestre"),
-            @Mapping(source = "nombre", target = "nombre")
-    })
+    @InheritInverseConfiguration
     SemestreEntity commandToEntity(SaveOrViewCommandGeneric semestreDTO);
     default Set<SaveOrViewCommandGeneric> entitysToCommandsSet(Set<SemestreEntity> semestreEntities) {
         return semestreEntities

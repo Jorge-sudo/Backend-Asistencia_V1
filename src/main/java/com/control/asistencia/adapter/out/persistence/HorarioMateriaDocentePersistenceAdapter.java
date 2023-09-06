@@ -5,7 +5,7 @@ import com.control.asistencia.adapter.out.persistence.mapper.horarioMateriaDocen
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryHorario;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryHorarioMateriaDocente;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateriaDocente;
-import com.control.asistencia.application.port.in.asignarMateria.command.CommandHorarioMateriaDocente;
+import com.control.asistencia.application.port.in.assignMateria.command.CommandHorarioMateriaDocente;
 import com.control.asistencia.application.port.out.horarioMateriaDocente.ISaveOrUpdateOutPortHorarioMateriaDocente;
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
@@ -44,10 +44,10 @@ public class HorarioMateriaDocentePersistenceAdapter implements
                             this.iRepositoryHorarioMateriaDocente.save(
                                     HorarioMateriaDocenteEntity.builder()
                                             .idHorarioMateriaDocente(command.getIdHorarioMateriaDocente())
-                                            .materiaDocente(this.iRepositoryMateriaDocente.findById(command.getIdMateriaDocente())
+                                            .materiaDocenteEntity(this.iRepositoryMateriaDocente.findById(command.getIdMateriaDocente())
                                                     .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaDocente con el ID: " + command.getIdMateriaDocente()))
                                             )
-                                            .horario(this.iRepositoryHorario.findById(command.getIdHorario())
+                                            .horarioEntity(this.iRepositoryHorario.findById(command.getIdHorario())
                                                     .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la horario con el ID: " + command.getIdHorario()))
                                             )
                                             .build()

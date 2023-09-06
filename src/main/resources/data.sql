@@ -44,12 +44,6 @@ VALUES(1, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
 
 INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(1, 1, 22219);
 
-INSERT IGNORE INTO asistencia(id_asistencia, hora_entrada, cant_estudiantes, fecha, estado) VALUES(1, '7:30', 21, '2023-3-22' , 'Puntual');
-INSERT IGNORE INTO asistencia(id_asistencia, hora_entrada, cant_estudiantes, fecha, estado) VALUES(2, '9:00', 21, '2023-3-26' , 'Puntual');
-
-INSERT IGNORE INTO docente_asistencia(id_docente_asistencia, id_asistencia, ci) VALUES(1, 1, 22219 );
-INSERT IGNORE INTO docente_asistencia(id_docente_asistencia,id_asistencia, ci) VALUES(2, 2, 22215 );
-
 --DOCENTES
 INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(1, 'Primero');
 INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(2, 'Segundo');

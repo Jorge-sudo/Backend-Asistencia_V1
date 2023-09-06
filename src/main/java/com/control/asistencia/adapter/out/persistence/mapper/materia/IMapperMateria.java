@@ -20,10 +20,7 @@ public interface IMapperMateria {
             @Mapping(source = "nombre", target = "nombre")
     })
     CommandMateria entityToCommand(MateriaEntity materiaEntity);
-    @Mappings({
-            @Mapping(source = "sigla", target = "sigla"),
-            @Mapping(source = "nombre", target = "nombre")
-    })
+    @InheritInverseConfiguration
     MateriaEntity commandToEntity(CommandMateria commandMateria);
     default Page<CommandMateria> entitysToCommandsPage(Page<MateriaEntity> page) {
         return page.map(this::entityToCommand);

@@ -1,30 +1,27 @@
-package com.control.asistencia.adapter.out.persistence.entity;
+package com.control.asistencia.application.port.in.asistencia.command;
 
+import com.control.asistencia.application.port.in.assignMateria.command.CommandHorarioMateriaDocente;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import java.sql.Date;
-import java.sql.Time;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.sql.Date;
+import java.sql.Time;
+
 @Data
-@Table(name = "asistencia")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AsistenciaEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_asistencia")
+public class CommandAsistencia {
+
     private int idAsistencia;
 
     @NotBlank(message = "Hora entrada no válido: Hora entrada vacío")
     @NotNull(message = "Hora entrada no válido: la Hora entrada es NULL")
-    @Column(name = "hora_entrada", nullable = false)
     private Time horaEntrada;
+
     //@Digits(integer=3, fraction=0, message="No se permite decimales y maximo de digitos es 3.")
     private Integer cantidadEstudiantes;
 
@@ -37,12 +34,11 @@ public class AsistenciaEntity {
     @NotNull(message = "Estado entrada no válido: la estado es NULL")
     private String estado;
 
-    @ManyToOne
-    @JoinColumn(name = "idAula",nullable = false)
-    private AulaEntity aulaEntity;
+    @NotNull(message = "idAula no válido: el idAula es NULL")
+    @Min(value = 1, message = "idAula no válido: el tamaño minimo es 1")
+    private int idAula;
 
-    @ManyToOne
-    @JoinColumn(name = "id_horario_materia_docente", nullable = false)
-    private HorarioMateriaDocenteEntity horarioMateriaDocenteEntity;
-
+    @NotNull(message = "idHorarioMateriaDocente no válido: el idHorarioMateriaDocente es NULL")
+    @Min(value = 1, message = "idHorarioMateriaDocente no válido: el tamaño minimo es 1")
+    private int idHorarioMateriaDocente;
 }

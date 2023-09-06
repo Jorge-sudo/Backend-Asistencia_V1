@@ -22,13 +22,7 @@ public interface IMapperAula {
             @Mapping(source = "bloque", target = "bloque"),
     })
     CommandAula entityToCommand(AulaEntity aulaEntity);
-    @Mappings({
-            @Mapping(source = "id", target = "idAula"),
-            @Mapping(source = "aula", target = "aula"),
-            @Mapping(source = "paralelo", target = "paralelo"),
-            @Mapping(source = "piso", target = "piso"),
-            @Mapping(source = "bloque", target = "bloque"),
-    })
+    @InheritInverseConfiguration
     AulaEntity dtoToEntity(CommandAula commandAula);
     default Page<CommandAula> entitysToCommandsPage(Page<AulaEntity> page) {
         return page.map(this::entityToCommand);

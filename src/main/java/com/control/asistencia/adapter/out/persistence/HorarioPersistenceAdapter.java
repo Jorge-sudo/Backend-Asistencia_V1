@@ -60,13 +60,13 @@ public class HorarioPersistenceAdapter implements
                                         .idHorario(saveCommandHorario.getIdHorario())
                                         .horaInicio(saveCommandHorario.getHoraInicio())
                                         .horaFin(saveCommandHorario.getHoraFin())
-                                        .diaSemana(
+                                        .diaSemanaEntity(
                                                 this.iRepositoryDiaSemana.findById(saveCommandHorario.getIdDia())
                                                         .orElseThrow(() ->
                                                                 new DataNotFoundExceptionMessage(
                                                                         "No existe el diaSemana con el id: "+saveCommandHorario.getIdDia()))
                                         )
-                                        .turno(
+                                        .turnoEntity(
                                                 this.iRepositoryTurno.findById(saveCommandHorario.getIdTurno())
                                                         .orElseThrow(() ->
                                                                 new DataNotFoundExceptionMessage(

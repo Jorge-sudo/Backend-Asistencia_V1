@@ -1,7 +1,7 @@
-package com.control.asistencia.adapter.in.web.asignarMateria;
+package com.control.asistencia.adapter.in.web.assignMateria;
 
-import com.control.asistencia.application.port.in.asignarMateria.IAssignMatterInPort;
-import com.control.asistencia.application.port.in.asignarMateria.command.CommandAssignMatter;
+import com.control.asistencia.application.port.in.assignMateria.IAssignMatterInPort;
+import com.control.asistencia.application.port.in.assignMateria.command.CommandAssignMatter;
 import com.control.asistencia.common.WebAdapter;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

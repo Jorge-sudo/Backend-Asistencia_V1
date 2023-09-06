@@ -1,7 +1,7 @@
-package com.control.asistencia.adapter.in.web.materiaAssignView;
+package com.control.asistencia.adapter.in.web.asistencia;
 
+import com.control.asistencia.application.port.in.asistencia.IViewInPortAsistencia;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
-import com.control.asistencia.application.port.in.materiaAssignView.IViewInPortMateriaAssignView;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @WebAdapter
 @RestController
 @RequestMapping("/api")
-public class ViewMateriaAssignViewController {
-    private final IViewInPortMateriaAssignView iViewInPortMateriaAssignView;
-    public ViewMateriaAssignViewController(IViewInPortMateriaAssignView iViewInPortMateriaAssignView){
-        this.iViewInPortMateriaAssignView = iViewInPortMateriaAssignView;
+public class ViewControllerAsistencia {
+    private final IViewInPortAsistencia iViewInPortAsistencia;
+    public ViewControllerAsistencia(IViewInPortAsistencia iViewInPortAsistencia){
+        this.iViewInPortAsistencia = iViewInPortAsistencia;
     }
-    @GetMapping(path = "/materiasAssignView/page/{page}/{size}/{sortBy}")
-    ResponseEntity<?> viewPageMateriaAssignView(
+    @GetMapping(path = "/asistencias/page/{page}/{size}/{sortBy}")
+    ResponseEntity<?> viewPageAsistencia(
             @PathVariable("page") int page,
             @PathVariable("size") int size,
             @PathVariable("sortBy") String sortBy ){
@@ -28,6 +28,6 @@ public class ViewMateriaAssignViewController {
                 size,
                 sortBy);
 
-        return this.iViewInPortMateriaAssignView.viewPageMateriaAssignView(command);
+        return this.iViewInPortAsistencia.viewPageAsistencia(command);
     }
 }

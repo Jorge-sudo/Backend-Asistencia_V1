@@ -11,7 +11,7 @@ import com.control.asistencia.application.port.out.materiaCarreraSemestre.IDelet
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.ISaveOrUpdateOutPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IViewOutPortMateriaCarreraSemestre;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
-import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
+import com.control.asistencia.domain.materiaCarreraSemestre.MateriaCarreraSemestreViewDTO;
 import org.springframework.data.domain.Page;
 
 import com.control.asistencia.common.PersistenceAdapter;
@@ -44,14 +44,14 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
     }
 
     @Override
-    public Page<ViewMateriaCarreraSemestreDTO> viewPageMateriaCarreraSemestreDTO(Pageable pageable) {
+    public Page<MateriaCarreraSemestreViewDTO> viewPageMateriaCarreraSemestreDTO(Pageable pageable) {
         return this.iViewMapperMateriaCarreraSemestre.entitysToDtosPage(
                 this.iRepositoryMateriaCarreraSemestre.findAll(pageable)
         );
     }
 
     @Override
-    public Optional<Set<ViewMateriaCarreraSemestreDTO>> viewAllMateriaCarreraSemestreDTO() {
+    public Optional<Set<MateriaCarreraSemestreViewDTO>> viewAllMateriaCarreraSemestreDTO() {
         return Optional.of(
                 this.iViewMapperMateriaCarreraSemestre.entitysToDtosSet(
                         new HashSet<>(this.iRepositoryMateriaCarreraSemestre.findAll())
@@ -60,7 +60,7 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
     }
 
     @Override
-    public Optional<ViewMateriaCarreraSemestreDTO> viewByIdMateriaCarreraSemestreDTO(int id) {
+    public Optional<MateriaCarreraSemestreViewDTO> viewByIdMateriaCarreraSemestreDTO(int id) {
         return Optional.of(
                 this.iViewMapperMateriaCarreraSemestre.entityToDto(
                         this.iRepositoryMateriaCarreraSemestre.findById(id)
@@ -71,7 +71,7 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
 
 
     @Override
-    public Optional<ViewMateriaCarreraSemestreDTO> saveOrUpdateMateriaCarreraSemestre(
+    public Optional<MateriaCarreraSemestreViewDTO> saveOrUpdateMateriaCarreraSemestre(
             SaveCommandMateriaCarreraSemestre command) {
         return Optional.ofNullable(
                 this.iViewMapperMateriaCarreraSemestre.entityToDto(

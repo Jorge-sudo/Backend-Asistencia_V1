@@ -3,7 +3,7 @@ package com.control.asistencia.adapter.out.persistence;
 import com.control.asistencia.adapter.out.persistence.entity.AulaMateriaDocenteEntity;
 import com.control.asistencia.adapter.out.persistence.mapper.aulaMateriaDocente.IMapperAulaMateriaDocente;
 import com.control.asistencia.adapter.out.persistence.repository.*;
-import com.control.asistencia.application.port.in.asignarMateria.command.CommandAulaMateriaDocente;
+import com.control.asistencia.application.port.in.assignMateria.command.CommandAulaMateriaDocente;
 import com.control.asistencia.application.port.out.aulaMateriaDocente.ISaveOrUpdateOutPortAulaMateriaDocente;
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;

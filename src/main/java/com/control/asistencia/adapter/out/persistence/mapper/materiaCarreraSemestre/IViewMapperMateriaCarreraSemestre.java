@@ -1,6 +1,6 @@
 package com.control.asistencia.adapter.out.persistence.mapper.materiaCarreraSemestre;
 
-import com.control.asistencia.domain.materiaCarreraSemestre.ViewMateriaCarreraSemestreDTO;
+import com.control.asistencia.domain.materiaCarreraSemestre.MateriaCarreraSemestreViewDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -31,14 +31,14 @@ public interface IViewMapperMateriaCarreraSemestre {
             @Mapping(source = "semestre.nombre", target = "semestre"),
             @Mapping(source = "activo", target = "activo")
     })
-    ViewMateriaCarreraSemestreDTO entityToDto(MateriaCarreraSemestreEntity materiaCarreraSemestreEntity);
+    MateriaCarreraSemestreViewDTO entityToDto(MateriaCarreraSemestreEntity materiaCarreraSemestreEntity);
 
     // Método para mapear una Page de entidades a una Page de DTOs
-    default Page<ViewMateriaCarreraSemestreDTO> entitysToDtosPage(Page<MateriaCarreraSemestreEntity> page) {
+    default Page<MateriaCarreraSemestreViewDTO> entitysToDtosPage(Page<MateriaCarreraSemestreEntity> page) {
         return page.map(this::entityToDto);
     }
 
-    default Set<ViewMateriaCarreraSemestreDTO> entitysToDtosSet(Set<MateriaCarreraSemestreEntity> materiaCarreraSemestreEntity) {
+    default Set<MateriaCarreraSemestreViewDTO> entitysToDtosSet(Set<MateriaCarreraSemestreEntity> materiaCarreraSemestreEntity) {
         return materiaCarreraSemestreEntity
                 .stream()
                 .map(this::entityToDto)

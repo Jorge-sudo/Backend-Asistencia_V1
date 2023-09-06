@@ -16,8 +16,8 @@ public interface IMapperHorarioCommand {
             @Mapping(source = "idHorario", target = "idHorario"),
             @Mapping(source = "horaInicio", target = "horaInicio"),
             @Mapping(source = "horaFin", target = "horaFin"),
-            @Mapping(source = "diaSemana.idDia", target = "idDia"),
-            @Mapping(source = "turno.idTurno", target = "idTurno"),
+            @Mapping(source = "diaSemanaEntity.idDia", target = "idDia"),
+            @Mapping(source = "turnoEntity.idTurno", target = "idTurno"),
     })
     SaveCommandHorario entityToCommand(HorarioEntity horarioEntity);
 }

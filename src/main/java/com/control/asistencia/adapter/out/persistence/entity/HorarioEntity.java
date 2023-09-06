@@ -31,9 +31,9 @@ public class HorarioEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_dia",nullable = false)
-    private DiaSemanaEntity diaSemana;
+    private DiaSemanaEntity diaSemanaEntity;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_turno", nullable = false)
-    private TurnoEntity turno;
+    private TurnoEntity turnoEntity;
 }

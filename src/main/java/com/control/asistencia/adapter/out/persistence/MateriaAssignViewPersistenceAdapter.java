@@ -2,7 +2,7 @@ package com.control.asistencia.adapter.out.persistence;
 
 import com.control.asistencia.adapter.out.persistence.entity.view.MateriaAssignView;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateriaAssignView;
-import com.control.asistencia.application.port.out.materiaAssignView.IViewOutPortMateriaAssignView;
+import com.control.asistencia.application.port.out.assignMateria.IViewOutPortMateriaAssignView;
 import com.control.asistencia.common.PersistenceAdapter;
 import org.springframework.data.domain.Page;
 

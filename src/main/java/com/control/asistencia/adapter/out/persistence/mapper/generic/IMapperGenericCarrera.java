@@ -20,10 +20,7 @@ public interface IMapperGenericCarrera {
             @Mapping(source = "nombre", target = "nombre")
     })
     SaveOrViewCommandGeneric entityToCommand(CarreraEntity carreraEntity);
-    @Mappings({
-            @Mapping(source = "id", target = "idCarrera"),
-            @Mapping(source = "nombre", target = "nombre")
-    })
+    @InheritInverseConfiguration
     CarreraEntity commandToEntity(SaveOrViewCommandGeneric carreraDTO);
     default Set<SaveOrViewCommandGeneric> entitysToCommandsSet(Set<CarreraEntity> carreraEntity) {
         return carreraEntity

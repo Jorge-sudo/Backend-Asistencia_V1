@@ -20,11 +20,11 @@ public class MateriaDocenteEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sigla", nullable = false)
-    private MateriaEntity materia;
+    private MateriaEntity materiaEntity;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ci", nullable = false)
-    private DocenteEntity docente;
+    private DocenteEntity docenteEntity;
     /*
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiaDocente")

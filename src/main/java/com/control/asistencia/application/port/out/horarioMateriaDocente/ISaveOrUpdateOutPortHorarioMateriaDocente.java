@@ -1,6 +1,6 @@
 package com.control.asistencia.application.port.out.horarioMateriaDocente;
 
-import com.control.asistencia.application.port.in.asignarMateria.command.CommandHorarioMateriaDocente;
+import com.control.asistencia.application.port.in.assignMateria.command.CommandHorarioMateriaDocente;
 
 import java.util.Set;
 

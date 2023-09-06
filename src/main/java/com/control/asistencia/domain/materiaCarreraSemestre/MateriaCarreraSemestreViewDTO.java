@@ -3,7 +3,7 @@ package com.control.asistencia.domain.materiaCarreraSemestre;
 import lombok.Data;
 
 @Data
-public class ViewMateriaCarreraSemestreDTO {
+public class MateriaCarreraSemestreViewDTO {
     private int idMateriaCarreraSemestre;
     private String sigla;
     private String materia;

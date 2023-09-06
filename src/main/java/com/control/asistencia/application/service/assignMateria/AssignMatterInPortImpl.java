@@ -1,9 +1,9 @@
-package com.control.asistencia.application.service.asignarMateria;
+package com.control.asistencia.application.service.assignMateria;
 
 import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
-import com.control.asistencia.application.port.in.asignarMateria.IAssignMatterInPort;
-import com.control.asistencia.application.port.in.asignarMateria.command.CommandAssignMatter;
-import com.control.asistencia.application.port.in.asignarMateria.command.CommandMateriaDocente;
+import com.control.asistencia.application.port.in.assignMateria.IAssignMatterInPort;
+import com.control.asistencia.application.port.in.assignMateria.command.CommandAssignMatter;
+import com.control.asistencia.application.port.in.assignMateria.command.CommandMateriaDocente;
 import com.control.asistencia.application.port.out.aulaMateriaDocente.ISaveOrUpdateOutPortAulaMateriaDocente;
 import com.control.asistencia.application.port.out.horarioMateriaDocente.ISaveOrUpdateOutPortHorarioMateriaDocente;
 import com.control.asistencia.application.port.out.materiaDocente.ISaveOrUpdateOutPortMateriaDocente;
@@ -30,6 +30,7 @@ public class AssignMatterInPortImpl implements IAssignMatterInPort {
     @Override
     @Transactional
     public ResponseEntity<?> assignMatter(CommandAssignMatter command) {
+
         CommandMateriaDocente materiaDocente = this.iSaveOrUpdateOutPortMateriaDocente
                 .saveOrUpdateMateriaDocente(command.getMateriaDocente()).orElse(null);
 

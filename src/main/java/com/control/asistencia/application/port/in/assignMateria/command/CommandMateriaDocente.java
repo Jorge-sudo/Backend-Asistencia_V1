@@ -1,4 +1,4 @@
-package com.control.asistencia.application.port.in.asignarMateria.command;
+package com.control.asistencia.application.port.in.assignMateria.command;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.*;
