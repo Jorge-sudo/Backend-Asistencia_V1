@@ -1,4 +1,4 @@
-package com.control.asistencia.adapter.in.web.utilController;
+package com.control.asistencia.util.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

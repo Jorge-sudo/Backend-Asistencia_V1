@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.docente;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.docente.ISaveOrUpdateInPortDocente;
 import com.control.asistencia.application.port.in.docente.command.SaveCommandDocente;
 import com.control.asistencia.application.port.out.docente.ISaveOrUpdateOutPortDocente;

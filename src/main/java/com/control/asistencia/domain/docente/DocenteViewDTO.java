@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DocenteViewDTO {
-    private long ci;
+    private Long ci;
     private String nombre;
     private String apellido;
     private String fotografia;

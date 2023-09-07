@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.turno;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.turno.IViewInPortTurno;
 import com.control.asistencia.application.port.out.turno.IViewOutPortTurno;
 import com.control.asistencia.common.UseCase;

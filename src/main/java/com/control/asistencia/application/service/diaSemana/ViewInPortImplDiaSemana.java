@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.diaSemana;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.diaSemana.IViewInPortDiaSemana;
 import com.control.asistencia.application.port.out.diaSemana.IViewOutPortDiaSemana;
 import com.control.asistencia.common.UseCase;

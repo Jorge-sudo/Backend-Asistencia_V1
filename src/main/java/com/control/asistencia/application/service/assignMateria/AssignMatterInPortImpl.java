@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.assignMateria;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.assignMateria.IAssignMatterInPort;
 import com.control.asistencia.application.port.in.assignMateria.command.CommandAssignMatter;
 import com.control.asistencia.application.port.in.assignMateria.command.CommandMateriaDocente;

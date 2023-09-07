@@ -9,5 +9,5 @@ import java.util.List;
 public interface IRepositoryPersona
         extends JpaRepository<PersonaEntity, Long> {
     @Query("SELECT p FROM PersonaEntity p WHERE p.email = :email")
-    List<PersonaEntity> findByNombre(String email);
+    PersonaEntity findByNombre(String email);
 }

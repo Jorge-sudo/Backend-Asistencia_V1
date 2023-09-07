@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.imagePersona;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.adapter.out.persistence.entity.PersonaEntity;
 import com.control.asistencia.application.port.in.imagePersona.IDeleteInPortImagePersona;
 import com.control.asistencia.application.port.in.imagePersona.ISaveOrUpdateInPortImagePersona;

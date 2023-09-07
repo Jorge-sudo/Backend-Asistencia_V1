@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.licencia;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.licencia.ISaveOrUpdateInPortLicencia;
 import com.control.asistencia.application.port.in.licencia.command.CommandSaveOrViewLicencia;
 import com.control.asistencia.application.port.out.licencia.ISaveOrUpdateOutPortLicencia;

@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.materia;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materia.IDeleteInPortMateria;
 import com.control.asistencia.application.port.out.materia.IDeleteOutPortMateria;
 import com.control.asistencia.common.UseCase;

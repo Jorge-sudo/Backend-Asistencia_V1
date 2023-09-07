@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.assignMateria;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.in.assignMateria.IViewInPortMateriaAssignView;
 import com.control.asistencia.application.port.out.assignMateria.IViewOutPortMateriaAssignView;

@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.aula;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.aula.ISaveOrUpdateInPortAula;
 import com.control.asistencia.application.port.in.aula.command.CommandAula;
 import com.control.asistencia.application.port.out.aula.ISaveOrUpdateOutPortAula;

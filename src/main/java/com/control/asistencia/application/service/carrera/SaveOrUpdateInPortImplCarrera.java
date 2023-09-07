@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.carrera;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.carrera.ISaveOrUpdateInPortCarrera;
 import com.control.asistencia.application.port.in.commandGeneric.SaveOrViewCommandGeneric;
 import com.control.asistencia.application.port.out.carrera.ISaveOrUpdateOutPortCarrera;

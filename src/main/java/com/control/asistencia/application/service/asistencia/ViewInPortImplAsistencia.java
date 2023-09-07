@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.asistencia;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.asistencia.IViewInPortAsistencia;
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.out.asistencia.IViewOutPortAsistencia;

@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.semestre;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.semestre.IDeleteInPortSemestre;
 import com.control.asistencia.application.port.out.semestre.IDeleteOutPortSemestre;
 import com.control.asistencia.common.UseCase;

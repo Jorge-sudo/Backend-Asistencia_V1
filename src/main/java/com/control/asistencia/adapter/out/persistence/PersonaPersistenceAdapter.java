@@ -19,7 +19,7 @@ public class PersonaPersistenceAdapter implements
     }
 
     @Override
-    public Optional<List<PersonaEntity>> viewByEmail(String email) {
+    public Optional<PersonaEntity> viewByEmail(String email) {
         return Optional.ofNullable(
                 this.iRepositoryPersona.findByNombre(email)
         );

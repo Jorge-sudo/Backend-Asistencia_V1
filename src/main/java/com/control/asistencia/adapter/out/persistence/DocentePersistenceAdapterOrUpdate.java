@@ -51,6 +51,15 @@ public class DocentePersistenceAdapterOrUpdate implements
     }
 
     @Override
+    public Optional<DocenteViewDTO> viewByCodigoRfidDocenteDTO(String codigoRfid) {
+        return Optional.ofNullable(
+                this.iMapperDocente.entityToDto(
+                        this.iRepositoryDocente.findByCodRfid(codigoRfid)
+                )
+        );
+    }
+
+    @Override
     public Optional<DocenteViewDTO> saveOrUpdateDocente(SaveCommandDocente command) {
         return Optional.of(
                 this.iMapperDocente.entityToDto(

@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.horario;
 
-import com.control.asistencia.adapter.in.web.utilController.ResponseBuilderApiRest;
+import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.horario.ISaveOrUpdateInPortHorario;
 import com.control.asistencia.application.port.in.horario.command.SaveCommandHorario;
 import com.control.asistencia.application.port.out.horario.ISaveOrUpdateOutPortHorario;

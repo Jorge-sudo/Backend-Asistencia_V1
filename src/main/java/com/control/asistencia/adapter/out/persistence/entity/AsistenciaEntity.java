@@ -21,14 +21,12 @@ public class AsistenciaEntity {
     @Column(name = "id_asistencia")
     private int idAsistencia;
 
-    @NotBlank(message = "Hora entrada no válido: Hora entrada vacío")
     @NotNull(message = "Hora entrada no válido: la Hora entrada es NULL")
     @Column(name = "hora_entrada", nullable = false)
     private Time horaEntrada;
-    //@Digits(integer=3, fraction=0, message="No se permite decimales y maximo de digitos es 3.")
+
     private Integer cantidadEstudiantes;
 
-    @NotBlank(message = "Fecha entrada no válido: Fecha vacío")
     @NotNull(message = "Fecha entrada no válido: la Fecha es NULL")
     private Date fecha;
 

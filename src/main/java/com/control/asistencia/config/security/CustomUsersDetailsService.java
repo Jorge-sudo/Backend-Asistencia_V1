@@ -28,13 +28,13 @@ public class CustomUsersDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<GrantedAuthority> authorities = new ArrayList<>();
         if(this.iViewOutPortPersona.viewByEmail(username).isPresent()){
-            List<PersonaEntity> persona = this.iViewOutPortPersona.viewByEmail(username).get();
-            authorities.add(new SimpleGrantedAuthority(persona.get(0).getRol().getNombre()));
+            PersonaEntity persona = this.iViewOutPortPersona.viewByEmail(username).get();
+            authorities.add(new SimpleGrantedAuthority(persona.getRol().getNombre()));
             // Crea y devuelve un objeto User de Spring Security con el correo institucional, la contraseña y las autoridades del usuario
             return new UserDetailsImpl(
-                    persona.get(0).getCi(),
-                    persona.get(0).getEmail(),
-                    persona.get(0).getContrasenia(),
+                    persona.getCi(),
+                    persona.getEmail(),
+                    persona.getContrasenia(),
                     authorities);
         }
         throw new UsernameNotFoundException("Usuario no encontrado");

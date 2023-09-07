@@ -11,7 +11,7 @@ import org.mapstruct.*;
         // directa definida en el mapper.
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
-public interface IMapperHorarioMateriaDocente {
+public interface IMapperHorarioMateriaDocenteCommand {
     @Mappings({
             @Mapping(source = "idHorarioMateriaDocente", target = "idHorarioMateriaDocente"),
             @Mapping(source = "laboratorio", target = "laboratorio"),

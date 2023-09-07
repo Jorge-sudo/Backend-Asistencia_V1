@@ -1,0 +1,39 @@
+package com.control.asistencia.adapter.out.persistence.mapper.horarioMateriaDocente;
+
+import com.control.asistencia.adapter.out.persistence.entity.HorarioMateriaDocenteEntity;
+import com.control.asistencia.domain.horarioMateriaDocente.HorarioMateriaDocenteDTO;
+import org.mapstruct.*;
+import org.springframework.data.domain.Page;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Mapper(
+        //indicamos que la implementacion sea generado como un componente de spring para poder inyectarl
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        //Este atributo determina cómo se manejarán los campos de destino que no tienen una asignación
+        // directa definida en el mapper.
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
+)
+public interface IMapperHorarioMateriaDocenteDTO {
+    @Mappings({
+            @Mapping(source = "idHorarioMateriaDocente", target = "idHorarioMateriaDocente"),
+            @Mapping(source = "laboratorio", target = "laboratorio"),
+            @Mapping(source = "nroLaboratorio", target = "nroLaboratorio"),
+            @Mapping(source = "horarioEntity.horaInicio", target = "horaInicio"),
+            @Mapping(source = "horarioEntity.horaFin", target = "horaFin"),
+            @Mapping(source = "horarioEntity.diaSemanaEntity.nombre", target = "dia"),
+            @Mapping(source = "horarioEntity.turnoEntity.nombre", target = "turno"),
+            @Mapping(source = "materiaDocenteEntity.materiaEntity.sigla", target = "sigla"),
+            @Mapping(source = "materiaDocenteEntity.materiaEntity.nombre", target = "materia"),
+            @Mapping(source = "materiaDocenteEntity.docenteEntity.nombre", target = "nombreDocente"),
+            @Mapping(source = "materiaDocenteEntity.docenteEntity.apellido", target = "apellidoDocente"),
+    })
+    HorarioMateriaDocenteDTO entityToDto(HorarioMateriaDocenteEntity entity);
+    default Page<HorarioMateriaDocenteDTO> entitysToDtosPage(Page<HorarioMateriaDocenteEntity> page) {
+        return page.map(this::entityToDto);
+    }
+    default Set<HorarioMateriaDocenteDTO> entitysToDtosSet(Set<HorarioMateriaDocenteEntity> set) {
+        return set.stream().map(this::entityToDto).collect(Collectors.toSet());
+    }
+}
