@@ -8,9 +8,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.Message;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class UpdateInPortImplAsistencia {
+
     @Value("${mqtt.cantidad-estudiante-respuesta-pub}")
     private String numberStudentsUpdateTopic;
     private final IMqttPubTopicGateway iMqttPubTopicGateway;
@@ -23,6 +25,7 @@ public class UpdateInPortImplAsistencia {
         this.iSaveOrUpdateOutPortAsistencia = iSaveOrUpdateOutPortAsistencia;
     }
 
+    @Transactional
     @ServiceActivator(inputChannel = "mqttInputChannelCantidad")
     public void updateAsistenciaAddCantStudent(Message<?> message) {
         MqttMessageResponseNumberEstudiante mqttMessage;

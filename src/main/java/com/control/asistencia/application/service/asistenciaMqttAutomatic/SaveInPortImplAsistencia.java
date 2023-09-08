@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.Message;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -60,6 +61,7 @@ public class SaveInPortImplAsistencia {
         this.iViewOutPortHorarioMateriaDocente = iViewOutPortHorarioMateriaDocente;
     }
 
+    @Transactional
     @ServiceActivator(inputChannel = "mqttInputChannelAsistencia")
     public void saveAsistencia(Message<?> message) {
         MqttMessageAsistencia mqttMessage;

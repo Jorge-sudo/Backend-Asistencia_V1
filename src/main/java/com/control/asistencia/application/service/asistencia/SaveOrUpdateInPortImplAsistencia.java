@@ -6,6 +6,7 @@ import com.control.asistencia.application.port.in.asistencia.command.CommandAsis
 import com.control.asistencia.application.port.out.asistencia.ISaveOrUpdateOutPortAsistencia;
 import com.control.asistencia.common.UseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @UseCase
@@ -16,6 +17,7 @@ public class SaveOrUpdateInPortImplAsistencia implements ISaveOrUpdateInPortAsis
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> saveOrUpdateAsistencia(CommandAsistencia command) {
         return command.getIdAsistencia() > 0
                 ? ResponseBuilderApiRest.update(
