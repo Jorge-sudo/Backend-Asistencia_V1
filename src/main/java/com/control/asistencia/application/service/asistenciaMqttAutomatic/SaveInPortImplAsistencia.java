@@ -14,7 +14,6 @@ import com.control.asistencia.domain.mqttAsistencia.MqttMessageAsistencia;
 import com.control.asistencia.domain.mqttAsistencia.MqttMessageResponseAsistencia;
 import com.control.asistencia.util.asistenciaMqtt.UtilDia;
 import com.control.asistencia.util.asistenciaMqtt.UtilMaxAndMinMinutes;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +34,7 @@ public class SaveInPortImplAsistencia {
 
     @Value("${mqtt.materia-respuesta-pub}")
     private String materiaSendLcdTopic;
+
     @Value("${mqtt.asistencia-respuesta-pub}")
     private String asistenciaResponse;
     private final IMqttPubTopicGateway iMqttPubTopicGateway;
@@ -73,44 +73,51 @@ public class SaveInPortImplAsistencia {
                     message.getPayload().toString(),
                     MqttMessageAsistencia.class);
 
-        } catch (JsonProcessingException e) {
-            // Maneja la excepción de acuerdo a tus necesidades
-            throw new RuntimeException("Error al procesar el JSON: " + e.getMessage(), e);
-        }
+            logger.debug("MqttMessage Object: " + mqttMessage.toString());
 
-        logger.debug("MqttMessage Object: " + mqttMessage.toString());
+            Optional<DocenteViewDTO> docenteViewDTO = this.iViewOutPortDocente.viewByCodigoRfidDocenteDTO(
+                    mqttMessage.getCodigoRfid());
+            Optional<CommandAula> commandAula = this.iViewOutPortAula.viewByIdAulaDTO(mqttMessage.getIdAula());
 
-        Optional<DocenteViewDTO> docenteViewDTO = this.iViewOutPortDocente.viewByCodigoRfidDocenteDTO(
-                mqttMessage.getCodigoRfid());
-        Optional<CommandAula> commandAula = this.iViewOutPortAula.viewByIdAulaDTO(mqttMessage.getIdAula());
+            if(docenteViewDTO.isPresent() && commandAula.isPresent()) {
 
-        if(docenteViewDTO.isPresent() && commandAula.isPresent()) {
+                Optional<CommandAsistencia> asistencia = this.iSaveOrUpdateOutPortAsistencia.saveOrUpdateAsistencia(
+                        CommandAsistencia.builder()
+                                .horaEntrada(time)
+                                .cantidadEstudiantes(0)
+                                .fecha(date)
+                                .estado(
+                                        this.getStatusAssistant(
+                                                docenteViewDTO.get().getCi(),
+                                                UtilDia.getDiaSemana(date),
+                                                time
+                                        )
+                                )
+                                .idAula(commandAula.get().getId())
+                                .idHorarioMateriaDocente(this.idHorarioMateriaDocente)
+                                .build()
+                );
 
-            Optional<CommandAsistencia> asistencia = this.iSaveOrUpdateOutPortAsistencia.saveOrUpdateAsistencia(
-                    CommandAsistencia.builder()
-                            .horaEntrada(time)
-                            .cantidadEstudiantes(0)
-                            .fecha(date)
-                            .estado(
-                                    this.getStatusAssistant(
-                                            docenteViewDTO.get().getCi(),
-                                            UtilDia.getDiaSemana(date),
-                                            time
-                                    )
-                            )
-                            .idAula(commandAula.get().getId())
-                            .idHorarioMateriaDocente(this.idHorarioMateriaDocente)
-                            .build()
-            );
-
-            asistencia.ifPresent(commandAsistencia -> this.iMqttPubTopicGateway.sendMessageMqtt(
+                asistencia.ifPresent(commandAsistencia -> this.iMqttPubTopicGateway.sendMessageMqtt(
+                        this.asistenciaResponse,
+                        MqttMessageResponseAsistencia.builder()
+                                .idAsistencia(commandAsistencia.getIdAsistencia())
+                                .estado("OK")
+                                .ci(docenteViewDTO.get().getCi())
+                                .build().toString()
+                ));
+            }
+        } catch (Exception ex){
+            this.iMqttPubTopicGateway.sendMessageMqtt(
                     this.asistenciaResponse,
                     MqttMessageResponseAsistencia.builder()
-                            .idAsistencia(commandAsistencia.getIdAsistencia())
-                            .estado(commandAsistencia.getEstado())
-                            .ci(docenteViewDTO.get().getCi())
+                            .idAsistencia(0)
+                            .estado("ERROR")
+                            .ci(0)
                             .build().toString()
-            ));
+            );
+            // Maneja la excepción de acuerdo a tus necesidades
+            throw new RuntimeException("Se produjo un error : " + ex.getMessage(), ex);
         }
 
     }

@@ -12,6 +12,7 @@ import com.control.asistencia.application.port.out.asistencia.IViewOutPortAsiste
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.domain.asistencia.AsistenciaViewDTO;
+import com.control.asistencia.domain.mqttAsistencia.MqttMessageResponseNumberEstudiante;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -69,6 +70,14 @@ public class AsistenciaPersistenceAdapter implements
                                         .build()
                         )
                 )
+        );
+    }
+
+    @Override
+    public boolean updateMqttNumberStudentAsistencia(MqttMessageResponseNumberEstudiante message) {
+        return this.iRepositoryAsistencia.updateNumberStudentExistAsistencia(
+                message.getIdAsistencia(),
+                message.getCantEstudiantes()
         );
     }
 
