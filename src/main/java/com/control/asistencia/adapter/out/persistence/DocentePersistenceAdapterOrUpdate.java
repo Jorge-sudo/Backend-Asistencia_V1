@@ -6,11 +6,15 @@ import com.control.asistencia.adapter.out.persistence.mapper.docente.IMapperDoce
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryDocente;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryRol;
 import com.control.asistencia.application.port.in.docente.command.SaveCommandDocente;
+import com.control.asistencia.application.port.in.docente.command.UpdateActivoCommandDocente;
 import com.control.asistencia.application.port.out.docente.ISaveOrUpdateOutPortDocente;
+import com.control.asistencia.application.port.out.docente.IUpdateOutPortDocente;
 import com.control.asistencia.application.port.out.docente.IViewOutPortDocente;
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.domain.docente.DocenteViewDTO;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,7 +23,8 @@ import java.util.Optional;
 @PersistenceAdapter
 public class DocentePersistenceAdapterOrUpdate implements
             IViewOutPortDocente ,
-            ISaveOrUpdateOutPortDocente {
+            ISaveOrUpdateOutPortDocente ,
+            IUpdateOutPortDocente {
     private final IRepositoryDocente iRepositoryDocente;
     private final IRepositoryRol iRepositoryRol;
     private final IMapperDocente iMapperDocente;
@@ -34,9 +39,26 @@ public class DocentePersistenceAdapterOrUpdate implements
     }
 
     @Override
-    public Page<DocenteViewDTO> viewPageDocenteDTO(Pageable pageable){
+    public Page<DocenteViewDTO> viewPageDocenteDTO(String globalFilter, Pageable pageable){
+        Example<DocenteEntity> example = Example.of(
+                DocenteEntity.builder()
+                        .nombre(globalFilter)
+                        .apellido(globalFilter)
+                        .build(),
+                ExampleMatcher.matchingAny() // Cambiar  por matching()
+                        .withMatcher("nombre", match -> match.contains().ignoreCase())
+                        .withMatcher("apellido", match -> match.contains().ignoreCase())
+                        .withIgnorePaths(
+                                "ci", "fotografia",
+                                "email", "genero",
+                                "correoInstitucional", "activo",
+                                "rol", "codRfid")
+        );
+
         return this.iMapperDocente.entitysToDtosPage(
-                this.iRepositoryDocente.findAll(pageable)
+                globalFilter == null
+                        ? this.iRepositoryDocente.findAll(pageable)
+                        : this.iRepositoryDocente.findAll(example, pageable)
         );
     }
 
@@ -82,5 +104,14 @@ public class DocentePersistenceAdapterOrUpdate implements
                         )
                 )
         );
+    }
+
+    @Override
+    public boolean updateDocenteActivo(UpdateActivoCommandDocente command) {
+        DocenteEntity docenteEntity = this.iRepositoryDocente.findById(command.getCi())
+                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el docente con el CI: " + command.getCi()));
+        docenteEntity.setActivo(command.isActivo());
+        docenteEntity = this.iRepositoryDocente.save(docenteEntity);
+        return docenteEntity.isActivo() == command.isActivo();
     }
 }

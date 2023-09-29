@@ -19,7 +19,7 @@ public class ViewInPortImplHorario implements IViewInPortHorario {
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageHorarioDTO(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
         return ResponseBuilderApiRest.viewPage(
                 this.iViewOutPortHorario.viewPageHorario(
                         PageRequest.of(command.getPage(), command.getSize(), sort

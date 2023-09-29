@@ -4,10 +4,7 @@ import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.in.docente.IViewInPortDocente;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @WebAdapter
 @RestController
@@ -17,16 +14,24 @@ public class ViewControllerDocente {
     public ViewControllerDocente(IViewInPortDocente iViewInPortDocente){
         this.iViewInPortDocente = iViewInPortDocente;
     }
-    @GetMapping("/docentes/page/{page}/{size}/{sortBy}")
+    @GetMapping("/docentes/page/{page}/{size}/{shortOrder}/{sortField}")
     ResponseEntity<?> viewPageDocente(
             @PathVariable("page") int page,
             @PathVariable("size") int size,
-            @PathVariable("sortBy") String sortBy ){
+            @PathVariable("shortOrder") int shortOrder,
+            @PathVariable("sortField") String sortField,
+            @RequestParam(value = "globalFilter", required = false) String globalFilter){
+
+        if (globalFilter == null || globalFilter.isEmpty()) {
+            globalFilter = null;
+        }
 
         ViewPageCommand command = new ViewPageCommand(
                 page,
                 size,
-                sortBy);
+                sortField,
+                shortOrder,
+                globalFilter);
 
         return this.iViewInPortDocente.viewPageDocenteDTO(command);
 

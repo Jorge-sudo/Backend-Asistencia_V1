@@ -4,7 +4,6 @@ import com.control.asistencia.adapter.out.persistence.entity.PersonaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 
 public interface IRepositoryPersona
         extends JpaRepository<PersonaEntity, Long> {

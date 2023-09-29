@@ -17,7 +17,7 @@ public class ViewInPortImplAsistencia implements IViewInPortAsistencia {
     }
     @Override
     public ResponseEntity<?> viewPageAsistencia(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
         return ResponseBuilderApiRest.viewPage(
                 this.iViewOutPortAsistencia.viewPageAsistencia(
                         PageRequest.of(command.getPage(), command.getSize(), sort)

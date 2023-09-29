@@ -11,9 +11,6 @@ public class MqttMessageResponseNumberEstudiante {
     private int idAsistencia;
     private int cantEstudiantes;
 
-    public MqttMessageResponseNumberEstudiante() {
-        // Constructor predeterminado
-    }
 
     @JsonCreator
     public MqttMessageResponseNumberEstudiante(

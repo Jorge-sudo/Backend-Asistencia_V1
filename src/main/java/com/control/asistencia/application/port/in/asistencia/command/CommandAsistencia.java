@@ -1,6 +1,5 @@
 package com.control.asistencia.application.port.in.asistencia.command;
 
-import com.control.asistencia.application.port.in.assignMateria.command.CommandHorarioMateriaDocente;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

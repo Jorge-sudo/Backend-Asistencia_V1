@@ -5,7 +5,9 @@ import com.control.asistencia.adapter.out.persistence.mapper.supervisor.IMapperS
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryRol;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositorySupervisor;
 import com.control.asistencia.application.port.in.supervisor.command.SaveCommandSupervisor;
+import com.control.asistencia.application.port.in.supervisor.command.UpdateActivoCommandSupervisor;
 import com.control.asistencia.application.port.out.supervisor.ISaveOrUpdateOutPortSupervisor;
+import com.control.asistencia.application.port.out.supervisor.IUpdateOutPortSupervisor;
 import com.control.asistencia.application.port.out.supervisor.IViewOutPortSupervisor;
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
@@ -18,7 +20,8 @@ import java.util.Optional;
 @PersistenceAdapter
 public class SupervisorPersistenceAdapterOrUpdate implements
         IViewOutPortSupervisor ,
-        ISaveOrUpdateOutPortSupervisor {
+        ISaveOrUpdateOutPortSupervisor ,
+        IUpdateOutPortSupervisor {
 
     private final IRepositorySupervisor iRepositorySupervisor;
     private final IMapperSupervisor iMapperSupervisor;
@@ -73,5 +76,14 @@ public class SupervisorPersistenceAdapterOrUpdate implements
                         )
                 )
         );
+    }
+
+    @Override
+    public boolean updateSupervisorActivo(UpdateActivoCommandSupervisor command) {
+        SupervisorEntity supervisorEntity = this.iRepositorySupervisor.findById(command.getCi())
+                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el supervisor con el CI: " + command.getCi()));
+        supervisorEntity.setActivo(command.isActivo());
+        supervisorEntity = this.iRepositorySupervisor.save(supervisorEntity);
+        return supervisorEntity.isActivo() == command.isActivo();
     }
 }

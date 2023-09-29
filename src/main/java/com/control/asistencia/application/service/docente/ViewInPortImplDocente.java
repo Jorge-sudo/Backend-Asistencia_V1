@@ -23,8 +23,12 @@ public class ViewInPortImplDocente implements  IViewInPortDocente {
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageDocenteDTO(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(
+                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
+                command.getSortField());
+
         return ResponseBuilderApiRest.viewPage(this.iViewOutPortDocente.viewPageDocenteDTO(
+                command.getGlobalFilter(),
                 PageRequest.of(command.getPage(), command.getSize(), sort )
         ));
     }

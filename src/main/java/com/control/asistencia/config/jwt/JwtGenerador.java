@@ -5,7 +5,6 @@ import io.jsonwebtoken.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import java.security.PrivateKey;
 import java.util.Date;
 
 @Component

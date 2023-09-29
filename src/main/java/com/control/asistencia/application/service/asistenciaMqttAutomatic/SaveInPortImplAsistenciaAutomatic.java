@@ -31,7 +31,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @UseCase
-public class SaveInPortImplAsistencia {
+public class SaveInPortImplAsistenciaAutomatic {
 
     @Value("${mqtt.materia-respuesta-pub}")
     private String materiaSendLcdTopic;
@@ -43,11 +43,11 @@ public class SaveInPortImplAsistencia {
     private final IViewOutPortAula iViewOutPortAula;
     private final ISaveOrUpdateOutPortAsistencia iSaveOrUpdateOutPortAsistencia;
     private final IViewOutPortHorarioMateriaDocente iViewOutPortHorarioMateriaDocente;
-    private static final Logger logger = LoggerFactory.getLogger(SaveInPortImplAsistencia.class);
+    private static final Logger logger = LoggerFactory.getLogger(SaveInPortImplAsistenciaAutomatic.class);
     // Obtener la zona horaria definida en la propiedad "spring.jackson.time-zone"
     private final ZoneId zonaHoraria = ZoneId.of("America/La_Paz");
     private int idHorarioMateriaDocente;
-    public SaveInPortImplAsistencia(
+    public SaveInPortImplAsistenciaAutomatic(
             IMqttPubTopicGateway iMqttPubTopicGateway,
             IViewOutPortDocente iViewOutPortDocente,
             IViewOutPortAula iViewOutPortAula,
@@ -79,7 +79,9 @@ public class SaveInPortImplAsistencia {
 
             Optional<DocenteViewDTO> docenteViewDTO = this.iViewOutPortDocente.viewByCodigoRfidDocenteDTO(
                     mqttMessage.getCodigoRfid());
+
             Optional<CommandAula> commandAula = this.iViewOutPortAula.viewByIdAulaDTO(mqttMessage.getIdAula());
+
 
             if(docenteViewDTO.isPresent() && commandAula.isPresent()) {
 
@@ -105,9 +107,16 @@ public class SaveInPortImplAsistencia {
                         MqttMessageResponseAsistencia.builder()
                                 .idAsistencia(commandAsistencia.getIdAsistencia())
                                 .estado("OK")
-                                .ci(docenteViewDTO.get().getCi())
                                 .build().toString()
                 ));
+            }else{
+                this.iMqttPubTopicGateway.sendMessageMqtt(
+                        this.asistenciaResponse,
+                        MqttMessageResponseAsistencia.builder()
+                                .idAsistencia(0)
+                                .estado("ERROR")
+                                .build().toString()
+                );
             }
         } catch (Exception ex){
             this.iMqttPubTopicGateway.sendMessageMqtt(
@@ -115,11 +124,10 @@ public class SaveInPortImplAsistencia {
                     MqttMessageResponseAsistencia.builder()
                             .idAsistencia(0)
                             .estado("ERROR")
-                            .ci(0)
                             .build().toString()
             );
             // Maneja la excepción de acuerdo a tus necesidades
-            throw new RuntimeException("Se produjo un error : " + ex.getMessage(), ex);
+            logger.error("Se produjo un error : " + ex.getMessage());
         }
 
     }

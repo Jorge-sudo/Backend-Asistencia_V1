@@ -65,6 +65,17 @@ public class ResponseBuilderApiRest {
                 false,
                 data);
     }
+
+    public static ResponseEntity<?> updateActivo(boolean result) {
+        return buildResponse(
+                "Tus datos se actualizaron con éxito.",
+                HttpStatus.OK,
+                false,
+                false,
+                result,
+                false,
+                Optional.empty());
+    }
     public static ResponseEntity<?> delete(boolean result) {
         return buildResponse(
                 result ? "Tus datos fueron eliminados con éxito.": "Tus datos no fueron eliminados, revisa el id enviado.",

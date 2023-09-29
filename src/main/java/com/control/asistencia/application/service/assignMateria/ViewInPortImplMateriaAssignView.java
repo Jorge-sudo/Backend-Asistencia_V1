@@ -19,7 +19,7 @@ public class ViewInPortImplMateriaAssignView implements IViewInPortMateriaAssign
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageMateriaAssignView(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
         return ResponseBuilderApiRest.viewPage(
                 this.iViewOutPortMateriaAssignView.viewPageMateriaAssignView(
                         PageRequest.of(command.getPage(), command.getSize(), sort )

@@ -22,7 +22,7 @@ public class ViewInPortImplSupervisor implements IViewInPortSupervisor {
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageSupervisorDTO(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
         return ResponseBuilderApiRest.viewPage(
                 this.iViewOutPortSupervisor.viewPageSupervisorDTO(
                 PageRequest.of(command.getPage(), command.getSize(), sort )

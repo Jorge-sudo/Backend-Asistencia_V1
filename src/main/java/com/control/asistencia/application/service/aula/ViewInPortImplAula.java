@@ -21,7 +21,7 @@ public class ViewInPortImplAula implements
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageAulaDTO(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
         return ResponseBuilderApiRest.viewPage(this.iViewOutPortAula.viewPageAulaDTO(
                 PageRequest.of(command.getPage(), command.getSize(), sort )
         ));

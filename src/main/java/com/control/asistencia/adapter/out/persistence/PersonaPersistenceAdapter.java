@@ -6,7 +6,6 @@ import com.control.asistencia.application.port.out.persona.ISaveOrUpdateOutPortP
 import com.control.asistencia.application.port.out.persona.IViewOutPortPersona;
 import com.control.asistencia.common.PersistenceAdapter;
 
-import java.util.List;
 import java.util.Optional;
 
 @PersistenceAdapter

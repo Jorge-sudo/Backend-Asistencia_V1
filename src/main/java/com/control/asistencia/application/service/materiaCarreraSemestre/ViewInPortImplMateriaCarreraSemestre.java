@@ -20,7 +20,7 @@ public class ViewInPortImplMateriaCarreraSemestre implements IViewInPortMateriaC
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageMateriaCarreraSemestreDTO(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
 
         return ResponseBuilderApiRest.viewPage(
                 this.iViewOutPortMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(

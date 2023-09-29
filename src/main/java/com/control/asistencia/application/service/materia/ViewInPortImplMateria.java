@@ -23,7 +23,7 @@ public class ViewInPortImplMateria implements IViewInPortMateria {
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageMateriaDTO(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
         return ResponseBuilderApiRest.viewPage(
                 this.iViewOutPortMateria.viewPageMateria(
                 PageRequest.of(command.getPage(), command.getSize(), sort )

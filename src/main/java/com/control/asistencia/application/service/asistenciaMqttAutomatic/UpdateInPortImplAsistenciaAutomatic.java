@@ -11,13 +11,13 @@ import org.springframework.messaging.Message;
 import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
-public class UpdateInPortImplAsistencia {
+public class UpdateInPortImplAsistenciaAutomatic {
 
     @Value("${mqtt.cantidad-estudiante-respuesta-pub}")
     private String numberStudentsUpdateTopic;
     private final IMqttPubTopicGateway iMqttPubTopicGateway;
     private final ISaveOrUpdateOutPortAsistencia iSaveOrUpdateOutPortAsistencia;
-    public UpdateInPortImplAsistencia(
+    public UpdateInPortImplAsistenciaAutomatic(
             IMqttPubTopicGateway iMqttPubTopicGateway,
             ISaveOrUpdateOutPortAsistencia iSaveOrUpdateOutPortAsistencia) {
 
@@ -35,10 +35,14 @@ public class UpdateInPortImplAsistencia {
                     message.getPayload().toString(),
                     MqttMessageResponseNumberEstudiante.class);
 
-            // Actualizar la cantidad de estudiantes en la asistencia
-            if(this.iSaveOrUpdateOutPortAsistencia.updateMqttNumberStudentAsistencia(mqttMessage)){
-                // Enviar mensaje de respuesta al LCD
-                this.iMqttPubTopicGateway.sendMessageMqtt(numberStudentsUpdateTopic, "OK");
+            if(mqttMessage.getIdAsistencia() != 0){
+                // Actualizar la cantidad de estudiantes en la asistencia
+                if(this.iSaveOrUpdateOutPortAsistencia.updateMqttNumberStudentAsistencia(mqttMessage)){
+                    // Enviar mensaje de respuesta al LCD
+                    this.iMqttPubTopicGateway.sendMessageMqtt(numberStudentsUpdateTopic, "OK");
+                }
+            }else{
+                this.iMqttPubTopicGateway.sendMessageMqtt(numberStudentsUpdateTopic, "ERROR");
             }
         }catch (Exception e) {
             this.iMqttPubTopicGateway.sendMessageMqtt(numberStudentsUpdateTopic, "ERROR");

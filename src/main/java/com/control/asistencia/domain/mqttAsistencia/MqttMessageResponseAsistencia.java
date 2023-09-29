@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class MqttMessageResponseAsistencia {
     private String estado;
     private int idAsistencia;
-    private long ci;
 }

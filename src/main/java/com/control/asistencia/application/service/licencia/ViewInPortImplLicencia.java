@@ -19,7 +19,7 @@ public class ViewInPortImplLicencia implements IViewInPortLicencia {
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageLicenciaDTO(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortBy());
+        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
         return ResponseBuilderApiRest.viewPage(
                 this.iViewOutPortLicencia.viewPageLicencia(
                         PageRequest.of(command.getPage(), command.getSize(), sort

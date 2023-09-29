@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface IViewOutPortDocente {
-    Page<DocenteViewDTO> viewPageDocenteDTO(Pageable pageable);
+    Page<DocenteViewDTO> viewPageDocenteDTO(String globalFilter, Pageable pageable);
     Optional<DocenteViewDTO> viewByCiDocenteDTO(Long ci);
     Optional<DocenteViewDTO> viewByCodigoRfidDocenteDTO(String codigoRfid);
 }
