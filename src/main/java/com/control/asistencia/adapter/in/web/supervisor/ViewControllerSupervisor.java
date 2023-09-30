@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.supervisor;
 
-import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.in.supervisor.IViewInPortSupervisor;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
@@ -17,20 +16,11 @@ public class ViewControllerSupervisor {
     public ViewControllerSupervisor(IViewInPortSupervisor iViewInPortSupervisor){
         this.iViewInPortSupervisor = iViewInPortSupervisor;
     }
-    @GetMapping("/supervisores/page/{page}/{size}/{sortBy}")
-    ResponseEntity<?> viewPageSupervisor(
-            @PathVariable("page") int page,
-            @PathVariable("size") int size,
-            @PathVariable("sortBy") String sortBy ){
-
-        ViewPageCommand command = new ViewPageCommand(
-                page,
-                size,
-                sortBy);
-
-        return this.iViewInPortSupervisor.viewPageSupervisorDTO(command);
-
+    @GetMapping("/supervisores")
+    ResponseEntity<?> viewSetSupervisor(){
+        return this.iViewInPortSupervisor.viewSetSupervisorDTO();
     }
+
     @GetMapping("/supervisores/{ci}")
     ResponseEntity<?> viewByCiSupervisor(
             @PathVariable("ci") long ci){

@@ -4,10 +4,7 @@ import com.control.asistencia.application.port.in.materiaCarreraSemestre.IViewIn
 import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @WebAdapter
@@ -18,16 +15,24 @@ public class ViewControllerMateriaCarreraSemestre {
     public ViewControllerMateriaCarreraSemestre(IViewInPortMateriaCarreraSemestre iViewInPortMateriaCarreraSemestre){
         this.iViewInPortMateriaCarreraSemestre = iViewInPortMateriaCarreraSemestre;
     }
-    @GetMapping(path = "/materiaCarreraSemestres/page/{page}/{size}/{sortBy}")
+    @GetMapping(path = "/materiaCarreraSemestres/page/{page}/{size}/{shortOrder}/{sortField}")
     ResponseEntity<?> viewPageMateriaCarreraSemestre(
             @PathVariable("page") int page,
             @PathVariable("size") int size,
-            @PathVariable("sortBy") String sortBy) {
+            @PathVariable("shortOrder") int shortOrder,
+            @PathVariable("sortField") String sortField,
+            @RequestParam(value = "globalFilter", required = false) String globalFilter) {
+
+        if (globalFilter == null || globalFilter.isEmpty()) {
+            globalFilter = null;
+        }
 
         ViewPageCommand command = new ViewPageCommand(
                 page,
                 size,
-                sortBy);
+                sortField,
+                shortOrder,
+                globalFilter);
 
         return  this.iViewInPortMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(command);
     }

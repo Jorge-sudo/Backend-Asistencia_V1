@@ -1,17 +1,24 @@
 package com.control.asistencia.adapter.out.persistence;
 
+import com.control.asistencia.adapter.out.persistence.entity.CarreraEntity;
 import com.control.asistencia.adapter.out.persistence.entity.MateriaCarreraSemestreEntity;
+import com.control.asistencia.adapter.out.persistence.entity.MateriaEntity;
+import com.control.asistencia.adapter.out.persistence.entity.SemestreEntity;
 import com.control.asistencia.adapter.out.persistence.mapper.materiaCarreraSemestre.IViewMapperMateriaCarreraSemestre;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryCarrera;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateria;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateriaCarreraSemestre;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositorySemestre;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.command.SaveCommandMateriaCarreraSemestre;
+import com.control.asistencia.application.port.in.materiaCarreraSemestre.command.UpdateActivoCommandMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IDeleteOutPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.ISaveOrUpdateOutPortMateriaCarreraSemestre;
+import com.control.asistencia.application.port.out.materiaCarreraSemestre.IUpdateOutPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IViewOutPortMateriaCarreraSemestre;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.domain.materiaCarreraSemestre.MateriaCarreraSemestreViewDTO;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 
 import com.control.asistencia.common.PersistenceAdapter;
@@ -23,8 +30,11 @@ import java.util.Set;
 
 
 @PersistenceAdapter
-public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMateriaCarreraSemestre,
-        ISaveOrUpdateOutPortMateriaCarreraSemestre, IDeleteOutPortMateriaCarreraSemestre  {
+public class MateriaCarreraSemestrePersistenceAdapter implements
+        IViewOutPortMateriaCarreraSemestre,
+        ISaveOrUpdateOutPortMateriaCarreraSemestre,
+        IDeleteOutPortMateriaCarreraSemestre  ,
+        IUpdateOutPortMateriaCarreraSemestre {
     private final IRepositoryMateriaCarreraSemestre iRepositoryMateriaCarreraSemestre;
     private final IViewMapperMateriaCarreraSemestre iViewMapperMateriaCarreraSemestre;
     private final IRepositoryMateria iRepositoryMateria;
@@ -44,9 +54,41 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
     }
 
     @Override
-    public Page<MateriaCarreraSemestreViewDTO> viewPageMateriaCarreraSemestreDTO(Pageable pageable) {
+    public Page<MateriaCarreraSemestreViewDTO> viewPageMateriaCarreraSemestreDTO(String globalFilter,Pageable pageable) {
+        Example<MateriaCarreraSemestreEntity> example = Example.of(
+                MateriaCarreraSemestreEntity.builder()
+                        .carrera(
+                                CarreraEntity.builder()
+                                        .nombre(globalFilter)
+                                        .build()
+                        )
+                        .materia(
+                                MateriaEntity.builder()
+                                        .sigla(globalFilter)
+                                        .nombre(globalFilter)
+                                        .build()
+                        )
+                        .semestre(
+                                SemestreEntity.builder()
+                                        .nombre(globalFilter)
+                                        .build()
+                        )
+                        .build(),
+                ExampleMatcher.matchingAny() // Cambiar  por matching()
+                        .withMatcher("carrera.nombre", match -> match.contains().ignoreCase())
+                        .withMatcher("materia.sigla", match -> match.contains().ignoreCase())
+                        .withMatcher("materia.nombre", match -> match.contains().ignoreCase())
+                        .withMatcher("semestre.nombre", match -> match.contains().ignoreCase())
+
+                        .withIgnorePaths(
+                                "idMateriaCarreraSemestre", "carrera.idCarrera",
+                                "semestre.idSemestre",  "activo")
+        );
+        
         return this.iViewMapperMateriaCarreraSemestre.entitysToDtosPage(
-                this.iRepositoryMateriaCarreraSemestre.findAll(pageable)
+                globalFilter == null
+                        ? this.iRepositoryMateriaCarreraSemestre.findAll(pageable)
+                        : this.iRepositoryMateriaCarreraSemestre.findAll(example, pageable)
         );
     }
 
@@ -105,4 +147,14 @@ public class MateriaCarreraSemestrePersistenceAdapter implements IViewOutPortMat
         ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaCarreraSemestre con el ID: " + id));
     }
 
+    @Override
+    public boolean updateMateriaCarreraSemestreActivo(UpdateActivoCommandMateriaCarreraSemestre command) {
+        return this.iRepositoryMateriaCarreraSemestre.findById(command.getIdMateriaCarreraSemestre()).map(
+                materiaCarreraSemestreEntity -> {
+                    materiaCarreraSemestreEntity.setActivo(command.isActivo());
+                    this.iRepositoryMateriaCarreraSemestre.save(materiaCarreraSemestreEntity);
+                    return true;
+                }
+        ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaCarreraSemestre con el ID: " + command.getIdMateriaCarreraSemestre()));
+    }
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SaveCommandSupervisor {
     @Digits(integer=12, fraction=0, message="CI no valido: No se permite decimales y maximo de digitos es 12.")
+    @Min(value = 1, message = "CI no válido: el CI es menor a 1")
     @NotNull(message = "CI no válido: el CI es NULL")
     private long ci;
 

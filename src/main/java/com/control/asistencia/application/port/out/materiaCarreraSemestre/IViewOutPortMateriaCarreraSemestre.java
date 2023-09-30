@@ -8,7 +8,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface IViewOutPortMateriaCarreraSemestre {
-    Page<MateriaCarreraSemestreViewDTO> viewPageMateriaCarreraSemestreDTO(Pageable pageable) ;
+    Page<MateriaCarreraSemestreViewDTO> viewPageMateriaCarreraSemestreDTO(
+            String globalFilter, Pageable pageable) ;
     Optional<Set<MateriaCarreraSemestreViewDTO>> viewAllMateriaCarreraSemestreDTO() ;
     Optional<MateriaCarreraSemestreViewDTO> viewByIdMateriaCarreraSemestreDTO(int id) ;
 }

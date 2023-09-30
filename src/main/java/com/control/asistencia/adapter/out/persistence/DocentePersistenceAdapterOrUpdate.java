@@ -108,10 +108,12 @@ public class DocentePersistenceAdapterOrUpdate implements
 
     @Override
     public boolean updateDocenteActivo(UpdateActivoCommandDocente command) {
-        DocenteEntity docenteEntity = this.iRepositoryDocente.findById(command.getCi())
-                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el docente con el CI: " + command.getCi()));
-        docenteEntity.setActivo(command.isActivo());
-        docenteEntity = this.iRepositoryDocente.save(docenteEntity);
-        return docenteEntity.isActivo() == command.isActivo();
+        return  this.iRepositoryDocente.findById(command.getCi())
+                .map(docenteEntity -> {
+                    docenteEntity.setActivo(command.isActivo());
+                    this.iRepositoryDocente.save(docenteEntity);
+                    return true;
+                }
+        ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el docente con el CI: " + command.getCi()));
     }
 }

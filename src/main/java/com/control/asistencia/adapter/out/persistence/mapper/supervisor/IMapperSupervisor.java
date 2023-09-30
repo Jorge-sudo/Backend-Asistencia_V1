@@ -7,6 +7,10 @@ import com.control.asistencia.domain.supervisor.SupervisorViewDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class IMapperSupervisor {
     private final IViewInPortImagePersona iViewInPortImagePersona;
@@ -43,8 +47,10 @@ public class IMapperSupervisor {
         }
         return supervisorViewDTO;
     };
-    public Page<SupervisorViewDTO> entitysToDtosPage(Page<SupervisorEntity> page) {
-        return page.map(this::entityToDto);
+
+
+    public Set<SupervisorViewDTO> entitysToDtosSet(List<SupervisorEntity> set) {
+        return set.stream().map(this::entityToDto).collect(Collectors.toSet());
     }
 
     private String supervisorEntityRolNombre(SupervisorEntity supervisorEntity) {

@@ -1,12 +1,9 @@
 package com.control.asistencia.application.service.supervisor;
 
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
-import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
 import com.control.asistencia.application.port.in.supervisor.IViewInPortSupervisor;
 import com.control.asistencia.application.port.out.supervisor.IViewOutPortSupervisor;
 import com.control.asistencia.common.UseCase;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +18,10 @@ public class ViewInPortImplSupervisor implements IViewInPortSupervisor {
 
     @Override
     @Transactional(readOnly = true)
-    public ResponseEntity<?> viewPageSupervisorDTO(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
-        return ResponseBuilderApiRest.viewPage(
-                this.iViewOutPortSupervisor.viewPageSupervisorDTO(
-                PageRequest.of(command.getPage(), command.getSize(), sort )
-        ));
+    public ResponseEntity<?> viewSetSupervisorDTO() {
+        return ResponseBuilderApiRest.view(
+                Optional.of(this.iViewOutPortSupervisor.viewSetSupervisorDTO())
+        );
     }
 
     @Override

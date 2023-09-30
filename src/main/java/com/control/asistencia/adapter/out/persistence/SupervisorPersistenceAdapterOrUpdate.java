@@ -12,10 +12,9 @@ import com.control.asistencia.application.port.out.supervisor.IViewOutPortSuperv
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.domain.supervisor.SupervisorViewDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
+import java.util.Set;
 
 @PersistenceAdapter
 public class SupervisorPersistenceAdapterOrUpdate implements
@@ -37,9 +36,9 @@ public class SupervisorPersistenceAdapterOrUpdate implements
     }
 
     @Override
-    public Page<SupervisorViewDTO> viewPageSupervisorDTO(Pageable pageable) {
-        return this.iMapperSupervisor.entitysToDtosPage(
-                this.iRepositorySupervisor.findAll(pageable)
+    public Set<SupervisorViewDTO> viewSetSupervisorDTO() {
+        return this.iMapperSupervisor.entitysToDtosSet(
+                this.iRepositorySupervisor.findAll()
         );
     }
 

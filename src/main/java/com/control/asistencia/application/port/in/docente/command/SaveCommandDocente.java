@@ -12,6 +12,7 @@ public class SaveCommandDocente {
 
     @Digits(integer=12, fraction=0, message="CI no valido: No se permite decimales y maximo de digitos es 12.")
     @NotNull(message = "CI no válido: el CI es NULL")
+    @Min(value = 1, message = "CI no válido: el CI es menor a 1")
     private long ci;
 
     @Size(min=3, max=30, message="Nombre no válido: el tamaño tiene que estar entre 3 y 30")
