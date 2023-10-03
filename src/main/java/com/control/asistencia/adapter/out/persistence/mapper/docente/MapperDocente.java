@@ -11,9 +11,9 @@ import java.net.MalformedURLException;
 
 
 @Component
-public class IMapperDocente {
+public class MapperDocente {
     private final IViewInPortImagePersona iViewInPortImagePersona;
-    public IMapperDocente(IViewInPortImagePersona iViewInPortImagePersona) {
+    public MapperDocente(IViewInPortImagePersona iViewInPortImagePersona) {
         this.iViewInPortImagePersona = iViewInPortImagePersona;
     }
 

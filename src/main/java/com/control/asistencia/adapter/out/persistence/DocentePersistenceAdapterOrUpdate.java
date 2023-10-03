@@ -2,7 +2,7 @@ package com.control.asistencia.adapter.out.persistence;
 
 
 import com.control.asistencia.adapter.out.persistence.entity.DocenteEntity;
-import com.control.asistencia.adapter.out.persistence.mapper.docente.IMapperDocente;
+import com.control.asistencia.adapter.out.persistence.mapper.docente.MapperDocente;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryDocente;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryRol;
 import com.control.asistencia.application.port.in.docente.command.SaveCommandDocente;
@@ -27,10 +27,10 @@ public class DocentePersistenceAdapterOrUpdate implements
             IUpdateOutPortDocente {
     private final IRepositoryDocente iRepositoryDocente;
     private final IRepositoryRol iRepositoryRol;
-    private final IMapperDocente iMapperDocente;
+    private final MapperDocente iMapperDocente;
     public DocentePersistenceAdapterOrUpdate(
             IRepositoryDocente iRepositoryDocente ,
-            IMapperDocente iMapperDocente ,
+            MapperDocente iMapperDocente ,
             IRepositoryRol iRepositoryRol) {
 
         this.iRepositoryDocente = iRepositoryDocente;
@@ -40,25 +40,11 @@ public class DocentePersistenceAdapterOrUpdate implements
 
     @Override
     public Page<DocenteViewDTO> viewPageDocenteDTO(String globalFilter, Pageable pageable){
-        Example<DocenteEntity> example = Example.of(
-                DocenteEntity.builder()
-                        .nombre(globalFilter)
-                        .apellido(globalFilter)
-                        .build(),
-                ExampleMatcher.matchingAny() // Cambiar  por matching()
-                        .withMatcher("nombre", match -> match.contains().ignoreCase())
-                        .withMatcher("apellido", match -> match.contains().ignoreCase())
-                        .withIgnorePaths(
-                                "ci", "fotografia",
-                                "email", "genero",
-                                "correoInstitucional", "activo",
-                                "rol", "codRfid")
-        );
 
         return this.iMapperDocente.entitysToDtosPage(
-                globalFilter == null
+                globalFilter == null || globalFilter.isEmpty() || globalFilter.isBlank() || globalFilter.equals("undefined")
                         ? this.iRepositoryDocente.findAll(pageable)
-                        : this.iRepositoryDocente.findAll(example, pageable)
+                        : this.iRepositoryDocente.findAll(this.funFilterGlobal(globalFilter), pageable)
         );
     }
 
@@ -115,5 +101,23 @@ public class DocentePersistenceAdapterOrUpdate implements
                     return true;
                 }
         ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el docente con el CI: " + command.getCi()));
+    }
+
+
+    private Example<DocenteEntity> funFilterGlobal(String globalFilter){
+        return Example.of(
+                DocenteEntity.builder()
+                        .nombre(globalFilter)
+                        .apellido(globalFilter)
+                        .build(),
+                ExampleMatcher.matchingAny() // Cambiar  por matching()
+                        .withMatcher("nombre", match -> match.contains().ignoreCase())
+                        .withMatcher("apellido", match -> match.contains().ignoreCase())
+                        .withIgnorePaths(
+                                "ci", "fotografia",
+                                "email", "genero",
+                                "correoInstitucional", "activo",
+                                "rol", "codRfid")
+        );
     }
 }

@@ -18,7 +18,7 @@ public class SupervisorEntity extends PersonaEntity{
 
     @Id
     @Digits(integer=12, fraction=0, message="CI supervisor no valido: No se permite decimales y maximo de digitos es 12.")
-    private long ci;
+    private Long ci;
 
     @Column(name = "reporte_email", nullable = false)
     private boolean reporteEmail;

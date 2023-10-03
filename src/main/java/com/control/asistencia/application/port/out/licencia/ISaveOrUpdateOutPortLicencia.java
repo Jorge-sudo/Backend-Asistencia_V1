@@ -5,5 +5,6 @@ import com.control.asistencia.application.port.in.licencia.command.CommandSaveOr
 import java.util.Optional;
 
 public interface ISaveOrUpdateOutPortLicencia {
-    Optional<CommandSaveOrViewLicencia> saveOrUpdateLicencia(CommandSaveOrViewLicencia commandSaveOrViewLicencia);
+    Optional<CommandSaveOrViewLicencia> saveOrUpdateLicencia(
+            CommandSaveOrViewLicencia commandSaveOrViewLicencia);
 }

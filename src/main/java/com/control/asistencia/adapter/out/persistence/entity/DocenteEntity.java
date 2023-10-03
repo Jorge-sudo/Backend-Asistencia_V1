@@ -20,7 +20,7 @@ public class DocenteEntity extends PersonaEntity{
 
     @Id
     @Digits(integer=12, fraction=0, message="CI docente no valido: No se permite decimales y maximo de digitos es 12.")
-    private long ci;
+    private Long ci;
 
     @Size(min=2, max=20, message="el tamaño tiene que estar entre 2 y 20")
     @NotBlank(message = "CodRfid no válido: codRfid vacío")

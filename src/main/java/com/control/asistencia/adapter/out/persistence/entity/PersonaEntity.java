@@ -22,7 +22,7 @@ public class PersonaEntity {
     @Digits(integer=12, fraction=0, message="CI no valido: No se permite decimales y maximo de digitos es 12.")
     @NotNull(message = "CI no válido: el CI es NULL")
     @Column(unique = true)
-    private long ci ;
+    private Long ci ;
 
     @Size(min=3, max=30, message="Nombre no válido: el tamaño tiene que estar entre 3 y 30")
     @NotBlank(message = "Nombre no válido: nombre vacío")
@@ -60,9 +60,6 @@ public class PersonaEntity {
     private String contrasenia;
 
     private boolean activo;
-
-    /*@JsonManagedReference  se utiliza en la entidad padre para indicar que la relacion es administrada
-     o manejada por esa entidad si no se hace esto habra un ciclo infinito y un desborde de memoria*/
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_rol", nullable = false)

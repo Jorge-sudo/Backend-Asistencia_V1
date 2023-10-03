@@ -19,6 +19,13 @@ public class ViewPageCommand {
     @Nullable
     private String globalFilter;
 
+    public ViewPageCommand(int page, int size, String sortField, int shortOrder) {
+        this.page = page;
+        this.size = size;
+        this.sortField = sortField;
+        this.shortOrder = shortOrder;
+    }
+
     public ViewPageCommand(int page, int size, String sortField) {
         this.page = page;
         this.size = size;

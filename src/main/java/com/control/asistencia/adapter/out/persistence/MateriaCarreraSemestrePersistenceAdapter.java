@@ -1,9 +1,6 @@
 package com.control.asistencia.adapter.out.persistence;
 
-import com.control.asistencia.adapter.out.persistence.entity.CarreraEntity;
-import com.control.asistencia.adapter.out.persistence.entity.MateriaCarreraSemestreEntity;
-import com.control.asistencia.adapter.out.persistence.entity.MateriaEntity;
-import com.control.asistencia.adapter.out.persistence.entity.SemestreEntity;
+import com.control.asistencia.adapter.out.persistence.entity.*;
 import com.control.asistencia.adapter.out.persistence.mapper.materiaCarreraSemestre.IViewMapperMateriaCarreraSemestre;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryCarrera;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateria;
@@ -55,40 +52,11 @@ public class MateriaCarreraSemestrePersistenceAdapter implements
 
     @Override
     public Page<MateriaCarreraSemestreViewDTO> viewPageMateriaCarreraSemestreDTO(String globalFilter,Pageable pageable) {
-        Example<MateriaCarreraSemestreEntity> example = Example.of(
-                MateriaCarreraSemestreEntity.builder()
-                        .carrera(
-                                CarreraEntity.builder()
-                                        .nombre(globalFilter)
-                                        .build()
-                        )
-                        .materia(
-                                MateriaEntity.builder()
-                                        .sigla(globalFilter)
-                                        .nombre(globalFilter)
-                                        .build()
-                        )
-                        .semestre(
-                                SemestreEntity.builder()
-                                        .nombre(globalFilter)
-                                        .build()
-                        )
-                        .build(),
-                ExampleMatcher.matchingAny() // Cambiar  por matching()
-                        .withMatcher("carrera.nombre", match -> match.contains().ignoreCase())
-                        .withMatcher("materia.sigla", match -> match.contains().ignoreCase())
-                        .withMatcher("materia.nombre", match -> match.contains().ignoreCase())
-                        .withMatcher("semestre.nombre", match -> match.contains().ignoreCase())
-
-                        .withIgnorePaths(
-                                "idMateriaCarreraSemestre", "carrera.idCarrera",
-                                "semestre.idSemestre",  "activo")
-        );
         
         return this.iViewMapperMateriaCarreraSemestre.entitysToDtosPage(
                 globalFilter == null
                         ? this.iRepositoryMateriaCarreraSemestre.findAll(pageable)
-                        : this.iRepositoryMateriaCarreraSemestre.findAll(example, pageable)
+                        : this.iRepositoryMateriaCarreraSemestre.findAll(this.funFilterGlobal(globalFilter), pageable)
         );
     }
 
@@ -156,5 +124,38 @@ public class MateriaCarreraSemestrePersistenceAdapter implements
                     return true;
                 }
         ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaCarreraSemestre con el ID: " + command.getIdMateriaCarreraSemestre()));
+    }
+
+    private Example<MateriaCarreraSemestreEntity> funFilterGlobal(String globalFilter) {
+        return Example.of(
+                MateriaCarreraSemestreEntity.builder()
+                        .carrera(
+                                CarreraEntity.builder()
+                                        .nombre(globalFilter)
+                                        .build()
+                        )
+                        .materia(
+                                MateriaEntity.builder()
+                                        .sigla(globalFilter)
+                                        .nombre(globalFilter)
+                                        .build()
+                        )
+                        .semestre(
+                                SemestreEntity.builder()
+                                        .nombre(globalFilter)
+                                        .build()
+                        )
+                        .build(),
+
+                ExampleMatcher.matchingAny() // Cambiar  por matching()
+                        .withMatcher("carrera.nombre", match -> match.contains().ignoreCase())
+                        .withMatcher("materia.sigla", match -> match.contains().ignoreCase())
+                        .withMatcher("materia.nombre", match -> match.contains().ignoreCase())
+                        .withMatcher("semestre.nombre", match -> match.contains().ignoreCase())
+
+                        .withIgnorePaths(
+                                "idMateriaCarreraSemestre", "carrera.idCarrera",
+                                "semestre.idSemestre",  "activo")
+        );
     }
 }

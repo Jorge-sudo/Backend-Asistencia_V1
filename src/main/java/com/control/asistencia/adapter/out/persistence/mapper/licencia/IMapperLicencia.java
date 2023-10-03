@@ -3,7 +3,6 @@ package com.control.asistencia.adapter.out.persistence.mapper.licencia;
 import com.control.asistencia.adapter.out.persistence.entity.LicenciaEntity;
 import com.control.asistencia.application.port.in.licencia.command.CommandSaveOrViewLicencia;
 import org.mapstruct.*;
-import org.springframework.data.domain.Page;
 
 @Mapper(
         //indicamos que la implementacion sea generado como un componente de spring para poder inyectarl
@@ -22,8 +21,4 @@ public interface IMapperLicencia {
     CommandSaveOrViewLicencia entityToCommand(LicenciaEntity licenciaEntity);
     @InheritInverseConfiguration
     LicenciaEntity commandToEntity(CommandSaveOrViewLicencia commandSaveOrViewLicencia);
-
-    default Page<CommandSaveOrViewLicencia> entityToCommandPage(Page<LicenciaEntity> licenciaEntityPage) {
-        return licenciaEntityPage.map(this::entityToCommand);
-    }
 }

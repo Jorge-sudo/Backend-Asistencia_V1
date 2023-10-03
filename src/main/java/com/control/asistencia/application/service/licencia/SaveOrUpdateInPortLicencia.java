@@ -1,5 +1,6 @@
 package com.control.asistencia.application.service.licencia;
 
+
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.licencia.ISaveOrUpdateInPortLicencia;
 import com.control.asistencia.application.port.in.licencia.command.CommandSaveOrViewLicencia;
@@ -19,10 +20,11 @@ public class SaveOrUpdateInPortLicencia implements ISaveOrUpdateInPortLicencia {
     public ResponseEntity<?> saveOrUpdateLicencia(CommandSaveOrViewLicencia command) {
         return command.getId() > 0
                 ? ResponseBuilderApiRest.update(
-                        this.iSaveOrUpdateOutPortLicencia.saveOrUpdateLicencia(command)
-                )
+                this.iSaveOrUpdateOutPortLicencia.saveOrUpdateLicencia(command)
+        )
                 : ResponseBuilderApiRest.save(
-                        this.iSaveOrUpdateOutPortLicencia.saveOrUpdateLicencia(command)
-                 );
+                this.iSaveOrUpdateOutPortLicencia.saveOrUpdateLicencia(command)
+        );
     }
 }
+
