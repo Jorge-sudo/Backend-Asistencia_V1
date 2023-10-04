@@ -6,6 +6,7 @@ import com.control.asistencia.application.port.out.docenteLicencia.ISaveOrUpdate
 import com.control.asistencia.common.UseCase;
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class SaveOrUpdateInPortImplDocenteLicencia implements ISaveOrUpdateInPortDocenteLicencia {
@@ -15,6 +16,7 @@ public class SaveOrUpdateInPortImplDocenteLicencia implements ISaveOrUpdateInPor
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> saveOrUpdateDocenteLicencia(SaveCommandDocenteLicencia saveCommandDocenteLicencia) {
         return saveCommandDocenteLicencia.getIdDocenteLicencia() > 0
                 ? ResponseBuilderApiRest.update(

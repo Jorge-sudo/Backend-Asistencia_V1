@@ -21,14 +21,14 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 @PersistenceAdapter
-public class DocentePersistenceAdapterOrUpdate implements
+public class DocentePersistenceAdapter implements
             IViewOutPortDocente ,
             ISaveOrUpdateOutPortDocente ,
             IUpdateOutPortDocente {
     private final IRepositoryDocente iRepositoryDocente;
     private final IRepositoryRol iRepositoryRol;
     private final MapperDocente iMapperDocente;
-    public DocentePersistenceAdapterOrUpdate(
+    public DocentePersistenceAdapter(
             IRepositoryDocente iRepositoryDocente ,
             MapperDocente iMapperDocente ,
             IRepositoryRol iRepositoryRol) {

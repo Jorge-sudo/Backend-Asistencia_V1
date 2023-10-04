@@ -5,5 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IViewOutPortAsistencia {
-    Page<AsistenciaViewDTO> viewPageAsistencia(Pageable pageable) ;
+    Page<AsistenciaViewDTO> viewPageGlobalFilterAsistencia(Pageable pageable, String globalFilter) ;
+    Page<AsistenciaViewDTO> viewPageFindAllByFechaAsistencia(Pageable pageable, String fechaSearch);
 }

@@ -25,12 +25,5 @@ public class MateriaDocenteEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ci", nullable = false)
     private DocenteEntity docenteEntity;
-    /*
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiaDocente")
-    private List<AulaMateriaDocente> aulaMateriaDocentes;
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiaDocente")
-    private List<HorarioMateriaDocente> horarioMateriaDocentes; */
 
 }

@@ -16,11 +16,29 @@ public class ViewInPortImplAsistencia implements IViewInPortAsistencia {
         this.iViewOutPortAsistencia = iViewOutPortAsistencia;
     }
     @Override
-    public ResponseEntity<?> viewPageAsistencia(ViewPageCommand command) {
-        Sort sort = Sort.by(Sort.Direction.ASC, command.getSortField());
+    public ResponseEntity<?> viewPageGlobalFilterAsistencia(ViewPageCommand command) {
+        Sort sort = Sort.by(
+                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
+                command.getSortField());
+
         return ResponseBuilderApiRest.viewPage(
-                this.iViewOutPortAsistencia.viewPageAsistencia(
-                        PageRequest.of(command.getPage(), command.getSize(), sort)
+                this.iViewOutPortAsistencia.viewPageGlobalFilterAsistencia(
+                        PageRequest.of(command.getPage(), command.getSize(), sort),
+                        command.getGlobalFilter()
+                )
+        );
+    }
+
+    @Override
+    public ResponseEntity<?> viewPageFindAllByFechaAsistencia(ViewPageCommand command, String fechaSearch) {
+        Sort sort = Sort.by(
+                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
+                command.getSortField());
+
+        return ResponseBuilderApiRest.viewPage(
+                this.iViewOutPortAsistencia.viewPageFindAllByFechaAsistencia(
+                        PageRequest.of(command.getPage(), command.getSize(), sort),
+                        fechaSearch
                 )
         );
     }
