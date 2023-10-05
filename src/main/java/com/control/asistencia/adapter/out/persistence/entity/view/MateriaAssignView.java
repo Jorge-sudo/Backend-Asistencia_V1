@@ -1,12 +1,16 @@
 package com.control.asistencia.adapter.out.persistence.entity.view;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.Immutable;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Immutable
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class MateriaAssignView {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +28,5 @@ public class MateriaAssignView {
     private String semestre;
     private String nombreDocente;
     private String apellidoDocente;
-
 }
 

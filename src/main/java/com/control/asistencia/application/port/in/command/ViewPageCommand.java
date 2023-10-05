@@ -1,4 +1,4 @@
-package com.control.asistencia.application.port.in.commandPage;
+package com.control.asistencia.application.port.in.command;
 
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -25,6 +25,7 @@ public class ViewPageCommand {
         this.sortField = sortField;
         this.shortOrder = shortOrder;
     }
+
 
     public ViewPageCommand(int page, int size, String sortField) {
         this.page = page;

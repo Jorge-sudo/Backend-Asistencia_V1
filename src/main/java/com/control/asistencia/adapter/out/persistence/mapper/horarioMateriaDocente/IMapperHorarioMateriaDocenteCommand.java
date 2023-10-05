@@ -16,8 +16,8 @@ public interface IMapperHorarioMateriaDocenteCommand {
             @Mapping(source = "idHorarioMateriaDocente", target = "idHorarioMateriaDocente"),
             @Mapping(source = "laboratorio", target = "laboratorio"),
             @Mapping(source = "nroLaboratorio", target = "nroLaboratorio"),
-            @Mapping(source = "horarioEntity.idHorario", target = "idHorario"),
-            @Mapping(source = "materiaDocenteEntity.idMateriaDocente", target = "idMateriaDocente")
+            @Mapping(source = "horario.idHorario", target = "idHorario"),
+            @Mapping(source = "materiaDocente.idMateriaDocente", target = "idMateriaDocente")
     })
     CommandHorarioMateriaDocente entityToCommand(HorarioMateriaDocenteEntity entity);
 }

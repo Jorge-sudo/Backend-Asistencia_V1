@@ -1,6 +1,6 @@
 package com.control.asistencia.adapter.in.web.horario;
 
-import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
+import com.control.asistencia.application.port.in.command.ViewPageCommand;
 import com.control.asistencia.application.port.in.horario.IViewInPortHorario;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;

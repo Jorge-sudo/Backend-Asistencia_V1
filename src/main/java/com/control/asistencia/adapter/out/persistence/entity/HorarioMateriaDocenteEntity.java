@@ -26,10 +26,10 @@ public class HorarioMateriaDocenteEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_horario", nullable = false)
-    private HorarioEntity horarioEntity;
+    private HorarioEntity horario;
 
     //@JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_materia_docente", nullable = false)
-    private MateriaDocenteEntity materiaDocenteEntity;
+    private MateriaDocenteEntity materiaDocente;
 }

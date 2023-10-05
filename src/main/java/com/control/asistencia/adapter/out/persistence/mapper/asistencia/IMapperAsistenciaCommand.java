@@ -18,8 +18,8 @@ public interface IMapperAsistenciaCommand {
             @Mapping(source = "cantidadEstudiantes", target = "cantidadEstudiantes"),
             @Mapping(source = "fecha", target = "fecha"),
             @Mapping(source = "estado", target = "estado"),
-            @Mapping(source = "aulaEntity.idAula", target = "idAula"),
-            @Mapping(source = "horarioMateriaDocenteEntity.idHorarioMateriaDocente", target = "idHorarioMateriaDocente"),
+            @Mapping(source = "aula.idAula", target = "idAula"),
+            @Mapping(source = "horarioMateriaDocente.idHorarioMateriaDocente", target = "idHorarioMateriaDocente"),
 
     })
     CommandAsistencia entityToCommand(AsistenciaEntity asistenciaEntity);

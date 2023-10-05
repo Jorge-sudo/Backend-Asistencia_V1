@@ -53,10 +53,10 @@ public class HorarioMateriaDocentePersistenceAdapter implements
                             this.iRepositoryHorarioMateriaDocente.save(
                                     HorarioMateriaDocenteEntity.builder()
                                             .idHorarioMateriaDocente(command.getIdHorarioMateriaDocente())
-                                            .materiaDocenteEntity(this.iRepositoryMateriaDocente.findById(command.getIdMateriaDocente())
+                                            .materiaDocente(this.iRepositoryMateriaDocente.findById(command.getIdMateriaDocente())
                                                     .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaDocente con el ID: " + command.getIdMateriaDocente()))
                                             )
-                                            .horarioEntity(this.iRepositoryHorario.findById(command.getIdHorario())
+                                            .horario(this.iRepositoryHorario.findById(command.getIdHorario())
                                                     .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la horario con el ID: " + command.getIdHorario()))
                                             )
                                             .build()

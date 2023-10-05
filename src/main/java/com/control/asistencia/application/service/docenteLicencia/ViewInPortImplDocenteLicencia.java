@@ -1,6 +1,6 @@
 package com.control.asistencia.application.service.docenteLicencia;
 
-import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
+import com.control.asistencia.application.port.in.command.ViewPageCommand;
 import com.control.asistencia.application.port.in.docenteLicencia.IViewInPortDocenteLicencia;
 import com.control.asistencia.application.port.out.docenteLicencia.IViewOutPortDocenteLicencia;
 import com.control.asistencia.common.UseCase;
@@ -36,7 +36,7 @@ public class ViewInPortImplDocenteLicencia implements
     public ResponseEntity<?> viewPageInactiveDocenteLicenciaDTO(ViewPageCommand command) {
         Sort sort = Sort.by(
                 command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
-                command.getSortField());
+                this.getShortFieldDocenteLicencia(command.getSortField()));
         return ResponseBuilderApiRest.view(
                 Optional.of(
                         this.iViewOutPortDocenteLicencia.viewPageInactiveDocenteLicenciaDTO(
@@ -50,7 +50,8 @@ public class ViewInPortImplDocenteLicencia implements
     public ResponseEntity<?> viewPageFilterGlobalDocenteLicenciaDTO(ViewPageCommand command) {
         Sort sort = Sort.by(
                 command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
-                command.getSortField());
+                this.getShortFieldDocenteLicencia(command.getSortField()));
+
         return ResponseBuilderApiRest.view(
                 Optional.of(
                         this.iViewOutPortDocenteLicencia.viewPageFilterGlobalDocenteLicenciaDTO(
@@ -59,6 +60,19 @@ public class ViewInPortImplDocenteLicencia implements
                         )
                 )
         );
+    }
+
+    private String getShortFieldDocenteLicencia(String shortField){
+        return switch (shortField) {
+            case "fotografia" -> "docente.fotografia";
+            case "nombre"   -> "docente.nombre";
+            case "apellido"  -> "docente.apellido";
+            case "ci"  -> "docente.ci";
+            case "fechaInicio"  -> "licencia.fechaInicio";
+            case "fechaFinal"  -> "licencia.fechaFinal";
+            case "descripcion"  -> "licencia.descripcion";
+            default        -> shortField;
+        };
     }
 
 }

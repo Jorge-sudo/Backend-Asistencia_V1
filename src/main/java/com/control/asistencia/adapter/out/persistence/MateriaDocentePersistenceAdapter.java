@@ -41,10 +41,10 @@ public class MateriaDocentePersistenceAdapter implements
                         this.iRepositoryMateriaDocente.save(
                                 MateriaDocenteEntity.builder()
                                         .idMateriaDocente(command.getIdMateriaDocente())
-                                        .materiaEntity(this.iRepositoryMateria.findById(command.getSigla())
+                                        .materia(this.iRepositoryMateria.findById(command.getSigla())
                                                 .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materia con el ID: " + command.getSigla()))
                                         )
-                                        .docenteEntity(this.iRepositoryDocente.findById(command.getCi())
+                                        .docente(this.iRepositoryDocente.findById(command.getCi())
                                                 .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la docente con el ID: " + command.getCi()))
                                         )
                                         .build()

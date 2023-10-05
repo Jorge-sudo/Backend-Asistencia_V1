@@ -2,7 +2,7 @@ package com.control.asistencia.application.service.materiaCarreraSemestre;
 
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.IViewInPortMateriaCarreraSemestre;
-import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
+import com.control.asistencia.application.port.in.command.ViewPageCommand;
 import com.control.asistencia.application.port.out.materiaCarreraSemestre.IViewOutPortMateriaCarreraSemestre;
 import com.control.asistencia.common.UseCase;
 import org.springframework.data.domain.PageRequest;

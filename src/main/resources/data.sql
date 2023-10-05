@@ -39,10 +39,83 @@ INSERT IGNORE INTO docente(ci, cod_rfid) VALUES(2222230, '315BM00S');
 INSERT IGNORE INTO docente(ci, cod_rfid) VALUES(2222251, 'NN35NDDS');
 INSERT IGNORE INTO docente(ci, cod_rfid) VALUES(22215, 'F38CDB09');
 
-INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
-VALUES(1, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+--LICENCIAS
 
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(1, '2023-3-2', '2023-3-27', 'No podre asistir por motivos de salud');
 INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(1, 1, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(2, '2023-3-3', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(2, 2, 222223);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(3, '2023-3-4', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(3, 3, 2222234);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(4, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(4, 4, 22215);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(5, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(5, 5, 2222251);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(6, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(6, 6, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(7, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(7, 7, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(8, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(8, 8, 22227);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(9, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(9, 9, 2222251);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(10, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(10, 10, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(11, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(11, 11, 2222230);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(12, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(12, 12, 22219);
+---------------------------------------
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(13, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(13, 13, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(14, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(14, 14, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(15, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(15, 15, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(16, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(16, 16, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(17, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(17, 17, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(18, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(18, 18, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(19, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(19, 19, 22219);
 
 --DOCENTES
 INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(1, 'Primero');
@@ -245,3 +318,47 @@ INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_labo
 INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(24,  NULL, FALSE, 15, 10);
 
 INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(25,  NULL, FALSE, 16, 10);
+
+
+       ----------------- ASISTENCIAS -------------------------
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (1, '7:30', 20, '2021-3-22', 'Puntual', 1, 1);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (2, '7:30', 20, '2021-3-22', 'Puntual', 2, 2);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (3, '7:30', 20, '2021-3-22', 'Puntual', 1, 3);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (4, '7:30', 20, '2021-3-22', 'Puntual', 2, 4);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (5, '7:30', 20, '2021-3-22', 'Puntual', 1, 5);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (6, '7:30', 20, '2021-3-22', 'Puntual', 2, 6);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (7, '7:30', 20, '2021-3-22', 'Puntual', 1, 7);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (8, '7:30', 20, '2021-3-22', 'Puntual', 2, 8);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (9, '7:30', 20, '2021-3-22', 'Puntual', 1, 9);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (10, '7:30', 20, '2021-3-22', 'Puntual', 2, 10);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (11, '7:30', 20, '2021-3-22', 'Puntual', 1, 11);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (12, '7:30', 20, '2021-3-22', 'Puntual', 2, 12);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (13, '7:30', 20, '2023-10-4', 'Puntual', 1, 13);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (14, '7:30', 20, '2023-10-4', 'Puntual', 2, 14);

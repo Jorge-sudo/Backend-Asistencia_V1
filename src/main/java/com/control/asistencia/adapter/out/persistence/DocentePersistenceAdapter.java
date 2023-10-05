@@ -42,7 +42,7 @@ public class DocentePersistenceAdapter implements
     public Page<DocenteViewDTO> viewPageDocenteDTO(String globalFilter, Pageable pageable){
 
         return this.iMapperDocente.entitysToDtosPage(
-                globalFilter == null || globalFilter.isEmpty() || globalFilter.isBlank() || globalFilter.equals("undefined")
+                globalFilter == null
                         ? this.iRepositoryDocente.findAll(pageable)
                         : this.iRepositoryDocente.findAll(this.funFilterGlobal(globalFilter), pageable)
         );

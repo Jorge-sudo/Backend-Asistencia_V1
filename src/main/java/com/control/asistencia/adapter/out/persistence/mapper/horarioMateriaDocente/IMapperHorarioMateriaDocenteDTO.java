@@ -20,14 +20,14 @@ public interface IMapperHorarioMateriaDocenteDTO {
             @Mapping(source = "idHorarioMateriaDocente", target = "idHorarioMateriaDocente"),
             @Mapping(source = "laboratorio", target = "laboratorio"),
             @Mapping(source = "nroLaboratorio", target = "nroLaboratorio"),
-            @Mapping(source = "horarioEntity.horaInicio", target = "horaInicio"),
-            @Mapping(source = "horarioEntity.horaFin", target = "horaFin"),
-            @Mapping(source = "horarioEntity.diaSemanaEntity.nombre", target = "dia"),
-            @Mapping(source = "horarioEntity.turnoEntity.nombre", target = "turno"),
-            @Mapping(source = "materiaDocenteEntity.materiaEntity.sigla", target = "sigla"),
-            @Mapping(source = "materiaDocenteEntity.materiaEntity.nombre", target = "materia"),
-            @Mapping(source = "materiaDocenteEntity.docenteEntity.nombre", target = "nombreDocente"),
-            @Mapping(source = "materiaDocenteEntity.docenteEntity.apellido", target = "apellidoDocente"),
+            @Mapping(source = "horario.horaInicio", target = "horaInicio"),
+            @Mapping(source = "horario.horaFin", target = "horaFin"),
+            @Mapping(source = "horario.diaSemana.nombre", target = "dia"),
+            @Mapping(source = "horario.turno.nombre", target = "turno"),
+            @Mapping(source = "materiaDocente.materia.sigla", target = "sigla"),
+            @Mapping(source = "materiaDocente.materia.nombre", target = "materia"),
+            @Mapping(source = "materiaDocente.docente.nombre", target = "nombreDocente"),
+            @Mapping(source = "materiaDocente.docente.apellido", target = "apellidoDocente"),
     })
     HorarioMateriaDocenteDTO entityToDto(HorarioMateriaDocenteEntity entity);
     default Page<HorarioMateriaDocenteDTO> entitysToDtosPage(Page<HorarioMateriaDocenteEntity> page) {

@@ -15,8 +15,8 @@ public interface IMapperMateriaDocente {
 
     @Mappings({
             @Mapping(source = "idMateriaDocente", target = "idMateriaDocente"),
-            @Mapping(source = "materiaEntity.sigla", target = "sigla"),
-            @Mapping(source = "docenteEntity.ci", target = "ci")
+            @Mapping(source = "materia.sigla", target = "sigla"),
+            @Mapping(source = "docente.ci", target = "ci")
     })
     CommandMateriaDocente entityToCommand(MateriaDocenteEntity materiaDocenteEntity);
 }

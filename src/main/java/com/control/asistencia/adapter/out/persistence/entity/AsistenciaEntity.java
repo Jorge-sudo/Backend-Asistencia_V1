@@ -37,10 +37,10 @@ public class AsistenciaEntity {
 
     @ManyToOne
     @JoinColumn(name = "idAula",nullable = false)
-    private AulaEntity aulaEntity;
+    private AulaEntity aula;
 
     @ManyToOne
     @JoinColumn(name = "id_horario_materia_docente", nullable = false)
-    private HorarioMateriaDocenteEntity horarioMateriaDocenteEntity;
+    private HorarioMateriaDocenteEntity horarioMateriaDocente;
 
 }

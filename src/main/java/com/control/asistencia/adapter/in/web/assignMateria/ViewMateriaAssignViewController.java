@@ -1,13 +1,11 @@
 package com.control.asistencia.adapter.in.web.assignMateria;
 
-import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
+import com.control.asistencia.application.port.in.assignMateria.command.CommandPageAssignMateria;
 import com.control.asistencia.application.port.in.assignMateria.IViewInPortMateriaAssignView;
 import com.control.asistencia.common.WebAdapter;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @WebAdapter
 @RestController
@@ -17,16 +15,32 @@ public class ViewMateriaAssignViewController {
     public ViewMateriaAssignViewController(IViewInPortMateriaAssignView iViewInPortMateriaAssignView){
         this.iViewInPortMateriaAssignView = iViewInPortMateriaAssignView;
     }
-    @GetMapping(path = "/materiasAssignView/page/{page}/{size}/{sortBy}")
+    @GetMapping(path = "/materiasAssignView/page/{page}/{size}/{shortOrder}/{sortField}/{idCarrera}/{idDia}/{idSemestre}/{idTurno}")
     ResponseEntity<?> viewPageMateriaAssignView(
             @PathVariable("page") int page,
             @PathVariable("size") int size,
-            @PathVariable("sortBy") String sortBy ){
+            @PathVariable("shortOrder") int shortOrder,
+            @PathVariable("sortField") String sortField,
+            @PathVariable("idCarrera") int idCarrera,
+            @PathVariable("idDia") int idDia,
+            @PathVariable("idSemestre") int idSemestre,
+            @PathVariable("idTurno") int idTurno,
+            @RequestParam(value = "globalFilter", required = false) String globalFilter){
 
-        ViewPageCommand command = new ViewPageCommand(
+        if (globalFilter == null || globalFilter.isEmpty()) {
+            globalFilter = null;
+        }
+
+        @Valid  CommandPageAssignMateria command = new CommandPageAssignMateria(
                 page,
                 size,
-                sortBy);
+                sortField,
+                shortOrder,
+                globalFilter,
+                idCarrera,
+                idSemestre,
+                idDia,
+                idTurno);
 
         return this.iViewInPortMateriaAssignView.viewPageMateriaAssignView(command);
     }

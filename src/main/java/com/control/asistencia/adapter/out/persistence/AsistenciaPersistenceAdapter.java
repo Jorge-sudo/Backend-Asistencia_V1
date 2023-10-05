@@ -56,14 +56,14 @@ public class AsistenciaPersistenceAdapter implements
                                         .cantidadEstudiantes(commandAsistencia.getCantidadEstudiantes())
                                         .fecha(commandAsistencia.getFecha())
                                         .estado(commandAsistencia.getEstado())
-                                        .aulaEntity(
+                                        .aula(
                                                 this.iRepositoryAula.findById(commandAsistencia.getIdAula()).orElseThrow(
                                                         () -> new DataNotFoundExceptionMessage(
                                                                 "No existe la aula con el ID: " + commandAsistencia.getIdAula()
                                                         )
                                                 )
                                         )
-                                        .horarioMateriaDocenteEntity(
+                                        .horarioMateriaDocente(
                                                 this.iRepositoryHorarioMateriaDocente.findById(commandAsistencia.getIdHorarioMateriaDocente()).orElseThrow(
                                                         () -> new DataNotFoundExceptionMessage(
                                                                 "No existe el horarioMateriaDocente con el ID: " + commandAsistencia.getIdHorarioMateriaDocente()
@@ -107,38 +107,38 @@ public class AsistenciaPersistenceAdapter implements
     private Example<AsistenciaEntity> funFilterGlobal(String globalFilter) {
         return Example.of(
                 AsistenciaEntity.builder()
-                        .aulaEntity(
+                        .aula(
                                 AulaEntity.builder()
                                         .aula(globalFilter)
                                         .paralelo(globalFilter)
                                         .piso(globalFilter)
                                 .build()
                         )
-                        .horarioMateriaDocenteEntity(
+                        .horarioMateriaDocente(
                                 HorarioMateriaDocenteEntity.builder()
-                                        .horarioEntity(
+                                        .horario(
                                                 HorarioEntity.builder()
-                                                        .diaSemanaEntity(
+                                                        .diaSemana(
                                                                 DiaSemanaEntity.builder()
                                                                         .nombre(globalFilter)
                                                                 .build()
                                                         )
-                                                        .turnoEntity(
+                                                        .turno(
                                                                 TurnoEntity.builder()
                                                                         .nombre(globalFilter)
                                                                 .build()
                                                         )
                                                 .build()
                                         )
-                                        .materiaDocenteEntity(
+                                        .materiaDocente(
                                                 MateriaDocenteEntity.builder()
-                                                        .materiaEntity(
+                                                        .materia(
                                                                 MateriaEntity.builder()
                                                                         .nombre(globalFilter)
                                                                         .sigla(globalFilter)
                                                                 .build()
                                                         )
-                                                        .docenteEntity(
+                                                        .docente(
                                                                 DocenteEntity.builder()
                                                                         .nombre(globalFilter)
                                                                         .apellido(globalFilter)
@@ -164,7 +164,7 @@ public class AsistenciaPersistenceAdapter implements
                         .withMatcher("horarioMateriaDocente.materiaDocente.docente.email", match -> match.contains().ignoreCase())
                         .withIgnorePaths(
                                 "idAsistencia", "horaEntrada",
-                                "cantidadEstudiantes", "fecha", "estado", "aulaEntity.idAula","aulaEntity.bloque",
+                                "cantidadEstudiantes", "fecha", "estado", "aula.idAula","aula.bloque",
                                 "horarioMateriaDocente.idHorarioMateriaDocente", "horarioMateriaDocente.nroLaboratorio",
                                 "horarioMateriaDocente.laboratorio", "horarioMateriaDocente.horario.idHorario", "horarioMateriaDocente.horario.horaInicio",
                                 "horarioMateriaDocente.horario.horaFin", "horarioMateriaDocente.horario.diaSemana.idDiaSemana",

@@ -20,10 +20,10 @@ public class MateriaDocenteEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sigla", nullable = false)
-    private MateriaEntity materiaEntity;
+    private MateriaEntity materia;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ci", nullable = false)
-    private DocenteEntity docenteEntity;
+    private DocenteEntity docente;
 
 }

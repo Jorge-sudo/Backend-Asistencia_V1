@@ -1,7 +1,7 @@
 package com.control.asistencia.application.service.docente;
 
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
-import com.control.asistencia.application.port.in.commandPage.ViewPageCommand;
+import com.control.asistencia.application.port.in.command.ViewPageCommand;
 import com.control.asistencia.application.port.in.docente.IViewInPortDocente;
 import com.control.asistencia.application.port.out.docente.IViewOutPortDocente;
 import com.control.asistencia.common.UseCase;
