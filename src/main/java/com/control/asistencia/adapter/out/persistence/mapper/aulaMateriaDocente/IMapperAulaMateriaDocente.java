@@ -1,7 +1,7 @@
 package com.control.asistencia.adapter.out.persistence.mapper.aulaMateriaDocente;
 
 import com.control.asistencia.adapter.out.persistence.entity.AulaMateriaDocenteEntity;
-import com.control.asistencia.application.port.in.assignMateria.command.CommandAulaMateriaDocente;
+import com.control.asistencia.application.port.in.asignatura.command.CommandAulaMateriaDocente;
 import org.mapstruct.*;
 
 @Mapper(

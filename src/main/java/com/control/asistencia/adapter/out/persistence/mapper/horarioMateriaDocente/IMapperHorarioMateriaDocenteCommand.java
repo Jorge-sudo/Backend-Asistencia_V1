@@ -1,7 +1,7 @@
 package com.control.asistencia.adapter.out.persistence.mapper.horarioMateriaDocente;
 
 import com.control.asistencia.adapter.out.persistence.entity.HorarioMateriaDocenteEntity;
-import com.control.asistencia.application.port.in.assignMateria.command.CommandHorarioMateriaDocente;
+import com.control.asistencia.application.port.in.asignatura.command.CommandHorarioMateriaDocente;
 import org.mapstruct.*;
 
 @Mapper(

@@ -4,11 +4,11 @@ import com.control.asistencia.adapter.out.persistence.entity.CarreraEntity;
 import com.control.asistencia.adapter.out.persistence.entity.DiaSemanaEntity;
 import com.control.asistencia.adapter.out.persistence.entity.SemestreEntity;
 import com.control.asistencia.adapter.out.persistence.entity.TurnoEntity;
-import com.control.asistencia.adapter.out.persistence.entity.view.MateriaAssignView;
-import com.control.asistencia.adapter.out.persistence.mapper.MateriaAssign.MapperMateriaAssign;
+import com.control.asistencia.adapter.out.persistence.entity.view.AsignaturaView;
+import com.control.asistencia.adapter.out.persistence.mapper.AsignaturaView.MapperAsignaturaView;
 import com.control.asistencia.adapter.out.persistence.repository.*;
-import com.control.asistencia.application.port.in.assignMateria.command.CommandPageAssignMateria;
-import com.control.asistencia.application.port.out.assignMateria.IViewOutPortMateriaAssignView;
+import com.control.asistencia.application.port.in.asignatura.command.CommandPageAssignMateria;
+import com.control.asistencia.application.port.out.asignatura.IViewOutPortAsignaturaView;
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import org.springframework.data.domain.*;
@@ -16,43 +16,43 @@ import org.springframework.data.domain.*;
 import java.util.Optional;
 
 @PersistenceAdapter
-public class MateriaAssignViewPersistenceAdapter implements IViewOutPortMateriaAssignView {
-    private final IRepositoryMateriaAssignView iRepositoryMateriaAssignView;
+public class MateriaAsignaturaViewPersistenceAdapter implements IViewOutPortAsignaturaView {
+    private final IRepositoryAsignaturaView iRepositoryAsignaturaView;
     private final IRepositoryCarrera iRepositoryCarrera;
     private final IRepositoryTurno iRepositoryTurno;
     private final IRepositorySemestre iRepositorySemestre;
     private final IRepositoryDiaSemana iRepositoryDiaSemana;
-    private final MapperMateriaAssign mapperMateriaAssign;
-    public MateriaAssignViewPersistenceAdapter(
-            IRepositoryMateriaAssignView iRepositoryMateriaAssignView,
+    private final MapperAsignaturaView mapperAsignaturaView;
+    public MateriaAsignaturaViewPersistenceAdapter(
+            IRepositoryAsignaturaView iRepositoryAsignaturaView,
             IRepositoryCarrera iRepositoryCarrera,
             IRepositoryTurno iRepositoryTurno,
             IRepositorySemestre iRepositorySemestre,
             IRepositoryDiaSemana iRepositoryDiaSemana,
-            MapperMateriaAssign mapperMateriaAssign) {
+            MapperAsignaturaView mapperAsignaturaView) {
 
-        this.iRepositoryMateriaAssignView = iRepositoryMateriaAssignView;
+        this.iRepositoryAsignaturaView = iRepositoryAsignaturaView;
         this.iRepositoryCarrera = iRepositoryCarrera;
         this.iRepositoryTurno = iRepositoryTurno;
         this.iRepositorySemestre = iRepositorySemestre;
         this.iRepositoryDiaSemana = iRepositoryDiaSemana;
-        this.mapperMateriaAssign = mapperMateriaAssign;
+        this.mapperAsignaturaView = mapperAsignaturaView;
 
     }
 
     @Override
-    public Page<MateriaAssignView> viewPageMateriaAssignView(CommandPageAssignMateria command) {
+    public Page<AsignaturaView> viewPageMateriaAssignView(CommandPageAssignMateria command) {
         Sort sort = Sort.by(
                 command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
                 command.getSortField());
         Pageable page = PageRequest.of(command.getPage(), command.getSize(), sort );
 
-        return this.mapperMateriaAssign.fotografiaToBase64Images(this.iRepositoryMateriaAssignView.findAll(this.funFilter(command), page));
+        return this.mapperAsignaturaView.fotografiaToBase64Images(this.iRepositoryAsignaturaView.findAll(this.funFilter(command), page));
     }
 
 
-    private Example<MateriaAssignView> funFilter(CommandPageAssignMateria command){
-        Example<MateriaAssignView> example = null;
+    private Example<AsignaturaView> funFilter(CommandPageAssignMateria command){
+        Example<AsignaturaView> example = null;
         Optional<CarreraEntity> carrera = Optional.ofNullable(
                 this.iRepositoryCarrera.findById(command.getIdCarrera()).orElseThrow(
                         () -> new DataNotFoundExceptionMessage("No se encontró la carrera con el id: " + command.getIdCarrera()
@@ -91,10 +91,10 @@ public class MateriaAssignViewPersistenceAdapter implements IViewOutPortMateriaA
 
     }
 
-    private Example<MateriaAssignView> withSearch(String search, String carrera,
-                                                  String semestre, String turno, String dia){
+    private Example<AsignaturaView> withSearch(String search, String carrera,
+                                               String semestre, String turno, String dia){
         return Example.of(
-                MateriaAssignView.builder()
+                AsignaturaView.builder()
                         .carrera(carrera)
                         .semestre(semestre)
                         .turno(turno)
@@ -114,10 +114,10 @@ public class MateriaAssignViewPersistenceAdapter implements IViewOutPortMateriaA
         );
     }
 
-    private Example<MateriaAssignView> outOfSearch(String carrera, String semestre,
-                                                   String turno, String dia){
+    private Example<AsignaturaView> outOfSearch(String carrera, String semestre,
+                                                String turno, String dia){
         return Example.of(
-                MateriaAssignView.builder()
+                AsignaturaView.builder()
                         .carrera(carrera)
                         .semestre(semestre)
                         .turno(turno)

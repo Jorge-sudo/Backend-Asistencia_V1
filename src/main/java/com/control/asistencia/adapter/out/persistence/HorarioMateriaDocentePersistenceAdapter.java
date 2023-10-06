@@ -6,7 +6,7 @@ import com.control.asistencia.adapter.out.persistence.mapper.horarioMateriaDocen
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryHorario;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryHorarioMateriaDocente;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateriaDocente;
-import com.control.asistencia.application.port.in.assignMateria.command.CommandHorarioMateriaDocente;
+import com.control.asistencia.application.port.in.asignatura.command.CommandHorarioMateriaDocente;
 import com.control.asistencia.application.port.out.horarioMateriaDocente.ISaveOrUpdateOutPortHorarioMateriaDocente;
 import com.control.asistencia.application.port.out.horarioMateriaDocente.IViewOutPortHorarioMateriaDocente;
 import com.control.asistencia.common.PersistenceAdapter;

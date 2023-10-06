@@ -1,6 +1,6 @@
 package com.control.asistencia.application.port.out.materiaDocente;
 
-import com.control.asistencia.application.port.in.assignMateria.command.CommandMateriaDocente;
+import com.control.asistencia.application.port.in.asignatura.command.CommandMateriaDocente;
 
 import java.util.Optional;
 

@@ -5,7 +5,7 @@ import com.control.asistencia.adapter.out.persistence.mapper.materiaDocente.IMap
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryDocente;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateria;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateriaDocente;
-import com.control.asistencia.application.port.in.assignMateria.command.CommandMateriaDocente;
+import com.control.asistencia.application.port.in.asignatura.command.CommandMateriaDocente;
 import com.control.asistencia.application.port.out.materiaDocente.ISaveOrUpdateOutPortMateriaDocente;
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;

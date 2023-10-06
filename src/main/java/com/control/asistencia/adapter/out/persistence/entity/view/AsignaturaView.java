@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MateriaAssignView {
+public class AsignaturaView {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

@@ -1,9 +1,9 @@
-package com.control.asistencia.application.service.assignMateria;
+package com.control.asistencia.application.service.asignatura;
 
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
-import com.control.asistencia.application.port.in.assignMateria.IAssignMatterInPort;
-import com.control.asistencia.application.port.in.assignMateria.command.CommandAssignMatter;
-import com.control.asistencia.application.port.in.assignMateria.command.CommandMateriaDocente;
+import com.control.asistencia.application.port.in.asignatura.IAssignMatterInPort;
+import com.control.asistencia.application.port.in.asignatura.command.CommandAssignMatter;
+import com.control.asistencia.application.port.in.asignatura.command.CommandMateriaDocente;
 import com.control.asistencia.application.port.out.aulaMateriaDocente.ISaveOrUpdateOutPortAulaMateriaDocente;
 import com.control.asistencia.application.port.out.horarioMateriaDocente.ISaveOrUpdateOutPortHorarioMateriaDocente;
 import com.control.asistencia.application.port.out.materiaDocente.ISaveOrUpdateOutPortMateriaDocente;

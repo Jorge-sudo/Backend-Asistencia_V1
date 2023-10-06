@@ -1,4 +1,4 @@
-package com.control.asistencia.application.port.in.assignMateria.command;
+package com.control.asistencia.application.port.in.asignatura.command;
 
 import com.control.asistencia.application.port.in.command.ViewPageCommand;
 import jakarta.validation.constraints.Min;

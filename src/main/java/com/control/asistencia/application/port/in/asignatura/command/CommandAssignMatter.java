@@ -1,4 +1,4 @@
-package com.control.asistencia.application.port.in.assignMateria.command;
+package com.control.asistencia.application.port.in.asignatura.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
