@@ -153,7 +153,8 @@ SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         hmd.nro_laboratorio AS 'nro_laboratorio',
         s.nombre AS 'semestre',
         p.nombre AS 'nombre_docente',
-        p.apellido AS 'apellido_docente'
+        p.apellido AS 'apellido_docente',
+        p.fotografia AS 'fotografia_docente'
 FROM materia m
          JOIN materia_carrera_semestre mc ON m.sigla = mc.sigla
          JOIN carrera c ON mc.id_carrera = c.id_carrera

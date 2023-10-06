@@ -1,5 +1,6 @@
 package com.control.asistencia.adapter.out.persistence.entity.view;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +29,9 @@ public class MateriaAssignView {
     private String semestre;
     private String nombreDocente;
     private String apellidoDocente;
+    @JsonIgnore
+    private String fotografiaDocente;
+    @Transient
+    private String base64Image;
 }
 

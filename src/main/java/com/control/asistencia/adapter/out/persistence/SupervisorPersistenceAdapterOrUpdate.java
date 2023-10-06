@@ -1,7 +1,7 @@
 package com.control.asistencia.adapter.out.persistence;
 
 import com.control.asistencia.adapter.out.persistence.entity.SupervisorEntity;
-import com.control.asistencia.adapter.out.persistence.mapper.supervisor.IMapperSupervisor;
+import com.control.asistencia.adapter.out.persistence.mapper.supervisor.MapperSupervisor;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryRol;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositorySupervisor;
 import com.control.asistencia.application.port.in.supervisor.command.SaveCommandSupervisor;
@@ -23,21 +23,21 @@ public class SupervisorPersistenceAdapterOrUpdate implements
         IUpdateOutPortSupervisor {
 
     private final IRepositorySupervisor iRepositorySupervisor;
-    private final IMapperSupervisor iMapperSupervisor;
+    private final MapperSupervisor mapperSupervisor;
     private final IRepositoryRol iRepositoryRol;
     public SupervisorPersistenceAdapterOrUpdate(
             IRepositorySupervisor iRepositorySupervisor ,
-            IMapperSupervisor iMapperSupervisor ,
+            MapperSupervisor mapperSupervisor,
             IRepositoryRol iRepositoryRol) {
 
-        this.iMapperSupervisor = iMapperSupervisor;
+        this.mapperSupervisor = mapperSupervisor;
         this.iRepositorySupervisor = iRepositorySupervisor;
         this.iRepositoryRol = iRepositoryRol;
     }
 
     @Override
     public Set<SupervisorViewDTO> viewSetSupervisorDTO() {
-        return this.iMapperSupervisor.entitysToDtosSet(
+        return this.mapperSupervisor.entitysToDtosSet(
                 this.iRepositorySupervisor.findAll()
         );
     }
@@ -45,7 +45,7 @@ public class SupervisorPersistenceAdapterOrUpdate implements
     @Override
     public Optional<SupervisorViewDTO> viewByCiSupervisorDTO(Long ci) {
         return Optional.ofNullable(
-                this.iMapperSupervisor.entityToDto(
+                this.mapperSupervisor.entityToDto(
                         this.iRepositorySupervisor.findById(ci)
                                 .orElse(null)
                 )
@@ -55,7 +55,7 @@ public class SupervisorPersistenceAdapterOrUpdate implements
     @Override
     public Optional<SupervisorViewDTO> saveOrUpdateSupervisor(SaveCommandSupervisor command) {
         return Optional.of(
-                this.iMapperSupervisor.entityToDto(
+                this.mapperSupervisor.entityToDto(
                         this.iRepositorySupervisor.save(
                                 SupervisorEntity.builder()
                                         .ci(command.getCi())

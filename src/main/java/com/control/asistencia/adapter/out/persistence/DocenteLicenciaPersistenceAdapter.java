@@ -2,7 +2,7 @@ package com.control.asistencia.adapter.out.persistence;
 
 import com.control.asistencia.adapter.out.persistence.entity.DocenteEntity;
 import com.control.asistencia.adapter.out.persistence.entity.DocenteLicenciaEntity;
-import com.control.asistencia.adapter.out.persistence.mapper.docenteLicencia.IMapperDocenteLicencia;
+import com.control.asistencia.adapter.out.persistence.mapper.docenteLicencia.MapperDocenteLicencia;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryDocente;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryDocenteLicencia;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryLicencia;
@@ -27,22 +27,22 @@ public class DocenteLicenciaPersistenceAdapter implements
     private final IRepositoryDocenteLicencia iRepositoryDocenteLicencia;
     private final IRepositoryDocente iRepositoryDocente;
     private final IRepositoryLicencia iRepositoryLicencia;
-    private final IMapperDocenteLicencia iMapperDocenteLicencia;
+    private final MapperDocenteLicencia mapperDocenteLicencia;
     public DocenteLicenciaPersistenceAdapter(
             IRepositoryDocenteLicencia iRepositoryDocenteLicencia ,
-            IMapperDocenteLicencia iMapperDocenteLicencia ,
+            MapperDocenteLicencia mapperDocenteLicencia,
             IRepositoryDocente iRepositoryDocente ,
             IRepositoryLicencia iRepositoryLicencia) {
 
         this.iRepositoryDocenteLicencia = iRepositoryDocenteLicencia;
-        this.iMapperDocenteLicencia = iMapperDocenteLicencia;
+        this.mapperDocenteLicencia = mapperDocenteLicencia;
         this.iRepositoryDocente = iRepositoryDocente;
         this.iRepositoryLicencia = iRepositoryLicencia;
     }
     @Override
     public Optional<DocenteLicenciaDTO> saveOrUpdateDocenteLicencia(SaveCommandDocenteLicencia command) {
         return Optional.of(
-                this.iMapperDocenteLicencia.entityToDto(
+                this.mapperDocenteLicencia.entityToDto(
                         this.iRepositoryDocenteLicencia.save(
                                 DocenteLicenciaEntity.builder()
                                         .idDocenteLicencia(command.getIdDocenteLicencia())
@@ -62,7 +62,7 @@ public class DocenteLicenciaPersistenceAdapter implements
 
     @Override
     public Page<DocenteLicenciaDTO> viewPageActiveDocenteLicenciaDTO(Pageable pageable ) {
-        return this.iMapperDocenteLicencia.entitysToDtosPage(
+        return this.mapperDocenteLicencia.entitysToDtosPage(
                 this.iRepositoryDocenteLicencia.findAllAtTheMoment(
                         new Date(),
                         pageable
@@ -73,7 +73,7 @@ public class DocenteLicenciaPersistenceAdapter implements
 
     @Override
     public Page<DocenteLicenciaDTO> viewPageInactiveDocenteLicenciaDTO(Pageable pageable) {
-        return this.iMapperDocenteLicencia.entitysToDtosPage(
+        return this.mapperDocenteLicencia.entitysToDtosPage(
                 this.iRepositoryDocenteLicencia.findAllPrevious(
                         new Date(),
                         pageable
@@ -83,7 +83,7 @@ public class DocenteLicenciaPersistenceAdapter implements
 
     @Override
     public Page<DocenteLicenciaDTO> viewPageFilterGlobalDocenteLicenciaDTO(Pageable pageable, String globalFilter) {
-        return this.iMapperDocenteLicencia.entitysToDtosPage(
+        return this.mapperDocenteLicencia.entitysToDtosPage(
                 this.iRepositoryDocenteLicencia.findAll(
                         this.funFilterGlobal(globalFilter),
                         pageable

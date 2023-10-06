@@ -4,7 +4,6 @@ import com.control.asistencia.adapter.out.persistence.entity.RolEntity;
 import com.control.asistencia.adapter.out.persistence.entity.SupervisorEntity;
 import com.control.asistencia.application.port.in.imagePersona.IViewInPortImagePersona;
 import com.control.asistencia.domain.supervisor.SupervisorViewDTO;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,9 +11,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class IMapperSupervisor {
+public class MapperSupervisor {
     private final IViewInPortImagePersona iViewInPortImagePersona;
-    public IMapperSupervisor(IViewInPortImagePersona iViewInPortImagePersona) {
+    public MapperSupervisor(IViewInPortImagePersona iViewInPortImagePersona) {
         this.iViewInPortImagePersona = iViewInPortImagePersona;
     }
 

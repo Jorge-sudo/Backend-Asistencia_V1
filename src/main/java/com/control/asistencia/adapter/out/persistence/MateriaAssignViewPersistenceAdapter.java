@@ -5,6 +5,7 @@ import com.control.asistencia.adapter.out.persistence.entity.DiaSemanaEntity;
 import com.control.asistencia.adapter.out.persistence.entity.SemestreEntity;
 import com.control.asistencia.adapter.out.persistence.entity.TurnoEntity;
 import com.control.asistencia.adapter.out.persistence.entity.view.MateriaAssignView;
+import com.control.asistencia.adapter.out.persistence.mapper.MateriaAssign.MapperMateriaAssign;
 import com.control.asistencia.adapter.out.persistence.repository.*;
 import com.control.asistencia.application.port.in.assignMateria.command.CommandPageAssignMateria;
 import com.control.asistencia.application.port.out.assignMateria.IViewOutPortMateriaAssignView;
@@ -21,18 +22,21 @@ public class MateriaAssignViewPersistenceAdapter implements IViewOutPortMateriaA
     private final IRepositoryTurno iRepositoryTurno;
     private final IRepositorySemestre iRepositorySemestre;
     private final IRepositoryDiaSemana iRepositoryDiaSemana;
+    private final MapperMateriaAssign mapperMateriaAssign;
     public MateriaAssignViewPersistenceAdapter(
             IRepositoryMateriaAssignView iRepositoryMateriaAssignView,
             IRepositoryCarrera iRepositoryCarrera,
             IRepositoryTurno iRepositoryTurno,
             IRepositorySemestre iRepositorySemestre,
-            IRepositoryDiaSemana iRepositoryDiaSemana) {
+            IRepositoryDiaSemana iRepositoryDiaSemana,
+            MapperMateriaAssign mapperMateriaAssign) {
 
         this.iRepositoryMateriaAssignView = iRepositoryMateriaAssignView;
         this.iRepositoryCarrera = iRepositoryCarrera;
         this.iRepositoryTurno = iRepositoryTurno;
         this.iRepositorySemestre = iRepositorySemestre;
         this.iRepositoryDiaSemana = iRepositoryDiaSemana;
+        this.mapperMateriaAssign = mapperMateriaAssign;
 
     }
 
@@ -43,7 +47,7 @@ public class MateriaAssignViewPersistenceAdapter implements IViewOutPortMateriaA
                 command.getSortField());
         Pageable page = PageRequest.of(command.getPage(), command.getSize(), sort );
 
-        return this.iRepositoryMateriaAssignView.findAll(this.funFilter(command), page);
+        return this.mapperMateriaAssign.fotografiaToBase64Images(this.iRepositoryMateriaAssignView.findAll(this.funFilter(command), page));
     }
 
 

@@ -12,11 +12,11 @@ import java.net.MalformedURLException;
 import java.util.Date;
 
 @Component
-public class IMapperDocenteLicencia {
+public class MapperDocenteLicencia {
 
 
     private final IViewInPortImagePersona iViewInPortImagePersona;
-    public IMapperDocenteLicencia(IViewInPortImagePersona iViewInPortImagePersona) {
+    public MapperDocenteLicencia(IViewInPortImagePersona iViewInPortImagePersona) {
         this.iViewInPortImagePersona = iViewInPortImagePersona;
     }
 
