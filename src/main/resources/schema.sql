@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS asistencia (
 
 CREATE VIEW IF NOT EXISTS asignatura_view AS
 SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
-        m.nombre AS 'nombre',
+        m.nombre AS 'materia',
         mc.activo AS 'activo',
         m.sigla AS 'sigla',
         c.nombre AS 'carrera',

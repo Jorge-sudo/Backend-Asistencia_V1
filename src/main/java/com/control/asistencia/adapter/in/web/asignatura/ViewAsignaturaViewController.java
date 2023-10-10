@@ -15,7 +15,7 @@ public class ViewAsignaturaViewController {
     public ViewAsignaturaViewController(IViewInPortAsignaturaView iViewInPortAsignaturaView){
         this.iViewInPortAsignaturaView = iViewInPortAsignaturaView;
     }
-    @GetMapping(path = "/asignatura/page/{page}/{size}/{shortOrder}/{sortField}/{idCarrera}/{idDia}/{idSemestre}/{idTurno}")
+    @GetMapping(path = "/asignaturas/page/{page}/{size}/{shortOrder}/{sortField}/{idCarrera}/{idDia}/{idSemestre}/{idTurno}")
     ResponseEntity<?> viewPageMateriaAssignView(
             @PathVariable("page") int page,
             @PathVariable("size") int size,
@@ -32,15 +32,8 @@ public class ViewAsignaturaViewController {
         }
 
         @Valid  CommandPageAssignMateria command = new CommandPageAssignMateria(
-                page,
-                size,
-                sortField,
-                shortOrder,
-                globalFilter,
-                idCarrera,
-                idSemestre,
-                idDia,
-                idTurno);
+                page, size, sortField, shortOrder, globalFilter,
+                idCarrera, idSemestre, idDia, idTurno);
 
         return this.iViewInPortAsignaturaView.viewPageMateriaAssignView(command);
     }

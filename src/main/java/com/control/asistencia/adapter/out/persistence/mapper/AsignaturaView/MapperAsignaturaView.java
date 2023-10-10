@@ -16,7 +16,7 @@ public class MapperAsignaturaView {
 
     public AsignaturaView fotografiaToBase64Image(AsignaturaView asignaturaView) {
         try {
-            asignaturaView.setBase64Image(iViewInPortImagePersona.viewByNameImagePersona(asignaturaView.getFotografiaDocente()));
+            asignaturaView.setBase64Image(this.iViewInPortImagePersona.viewByNameImagePersona(asignaturaView.getFotografiaDocente()));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }

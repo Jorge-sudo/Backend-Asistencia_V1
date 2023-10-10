@@ -16,7 +16,7 @@ public class AsignaturaView {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nombre;
+    private String materia;
     private Boolean activo;
     private String sigla;
     private String carrera;
