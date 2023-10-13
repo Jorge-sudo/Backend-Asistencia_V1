@@ -18,7 +18,7 @@ public class ViewInPortImplAsistencia implements IViewInPortAsistencia {
     @Override
     public ResponseEntity<?> viewPageGlobalFilterAsistencia(ViewPageCommand command) {
         Sort sort = Sort.by(
-                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
+                command.getShortOrder() == 1 ? Sort.Direction.DESC : Sort.Direction.ASC ,
                 this.getShortFieldAsistencia(command.getSortField()));
 
         return ResponseBuilderApiRest.viewPage(
@@ -32,7 +32,7 @@ public class ViewInPortImplAsistencia implements IViewInPortAsistencia {
     @Override
     public ResponseEntity<?> viewPageFindAllByFechaAsistencia(ViewPageCommand command, String fechaSearch) {
         Sort sort = Sort.by(
-                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
+                command.getShortOrder() == 1 ? Sort.Direction.DESC : Sort.Direction.ASC ,
                 this.getShortFieldAsistencia(command.getSortField()));
 
         return ResponseBuilderApiRest.viewPage(

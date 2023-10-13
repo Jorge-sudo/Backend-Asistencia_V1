@@ -21,7 +21,7 @@ public class ViewInPortImplDocenteLicencia implements
     @Override
     public ResponseEntity<?> viewPageActiveDocenteLicenciaDTO(ViewPageCommand command) {
         Sort sort = Sort.by(
-                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
+                command.getShortOrder() == 1 ? Sort.Direction.DESC : Sort.Direction.ASC ,
                 command.getSortField());
         return ResponseBuilderApiRest.view(
                 Optional.of(

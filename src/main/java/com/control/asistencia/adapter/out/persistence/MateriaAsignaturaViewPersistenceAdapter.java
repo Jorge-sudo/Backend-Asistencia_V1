@@ -43,7 +43,7 @@ public class MateriaAsignaturaViewPersistenceAdapter implements IViewOutPortAsig
     @Override
     public Page<AsignaturaView> viewPageMateriaAssignView(CommandPageAssignMateria command) {
         Sort sort = Sort.by(
-                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
+                command.getShortOrder() == 1 ? Sort.Direction.DESC : Sort.Direction.ASC ,
                 command.getSortField());
         Pageable page = PageRequest.of(command.getPage(), command.getSize(), sort );
 

@@ -24,7 +24,7 @@ public class ViewInPortImplDocente implements  IViewInPortDocente {
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageDocenteDTO(ViewPageCommand command) {
         Sort sort = Sort.by(
-                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
+                command.getShortOrder() == 1 ? Sort.Direction.DESC : Sort.Direction.ASC ,
                 command.getSortField());
 
         return ResponseBuilderApiRest.viewPage(this.iViewOutPortDocente.viewPageDocenteDTO(

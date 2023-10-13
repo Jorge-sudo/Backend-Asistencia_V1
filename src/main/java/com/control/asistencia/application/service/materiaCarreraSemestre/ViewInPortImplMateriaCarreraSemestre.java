@@ -21,8 +21,8 @@ public class ViewInPortImplMateriaCarreraSemestre implements IViewInPortMateriaC
     @Transactional(readOnly = true)
     public ResponseEntity<?> viewPageMateriaCarreraSemestreDTO(ViewPageCommand command) {
         Sort sort = Sort.by(
-                command.getShortOrder() == 1 ? Sort.Direction.ASC : Sort.Direction.DESC ,
-                command.getSortField());
+                command.getShortOrder() == 1 ? Sort.Direction.DESC : Sort.Direction.ASC ,
+                this.getShortFieldMateriaCarreraSemestre(command.getSortField()));
 
         return ResponseBuilderApiRest.viewPage(
                 this.iViewOutPortMateriaCarreraSemestre.viewPageMateriaCarreraSemestreDTO(
@@ -45,5 +45,15 @@ public class ViewInPortImplMateriaCarreraSemestre implements IViewInPortMateriaC
         return ResponseBuilderApiRest.view(
                 this.iViewOutPortMateriaCarreraSemestre.viewByIdMateriaCarreraSemestreDTO(id)
         );
+    }
+
+    private String getShortFieldMateriaCarreraSemestre(String shortField){
+        return switch (shortField) {
+            case "sigla" -> "materia.sigla";
+            case "materia"   -> "materia.nombre";
+            case "carrera"  -> "carrera.nombre";
+            case "semestre"  -> "semestre.nombre";
+            default        -> shortField;
+        };
     }
 }
