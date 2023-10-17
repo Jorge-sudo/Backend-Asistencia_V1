@@ -1,10 +1,7 @@
 package com.control.asistencia.application.port.in.rol;
 
-import com.control.asistencia.application.port.in.commandGeneric.SaveOrViewCommandGeneric;
-
-import java.util.Optional;
-import java.util.Set;
+import org.springframework.http.ResponseEntity;
 
 public interface IViewInPortRol {
-    Optional<Set<SaveOrViewCommandGeneric>> viewAllRol();
+    ResponseEntity<?> viewAllRol();
 }
