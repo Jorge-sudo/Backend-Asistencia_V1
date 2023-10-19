@@ -3,6 +3,8 @@ package com.control.asistencia.config.exception;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.config.exception.exceptions.TokenExpiredExceptionMessage;
 import com.control.asistencia.config.exception.exceptions.TokenNotFoundExceptionMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex) {
+        ex.printStackTrace();
         List<String> errors = ex.getBindingResult().getFieldErrors()
                 .stream().map(FieldError::getDefaultMessage).collect(Collectors.toList());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
@@ -29,36 +32,42 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataNotFoundExceptionMessage.class)
     public ResponseEntity<Map<String, List<String>>> handleNotFoundException(DataNotFoundExceptionMessage ex) {
+        ex.printStackTrace();
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
+        ex.printStackTrace();
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, List<String>>> handleRuntimeExceptions(RuntimeException ex) {
+        ex.printStackTrace();
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<Map<String, List<String>>> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+        ex.printStackTrace();
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(TokenExpiredExceptionMessage.class)
     public ResponseEntity<Map<String, List<String>>> handleTokenExpiredException(TokenExpiredExceptionMessage ex) {
+        ex.printStackTrace();
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(TokenNotFoundExceptionMessage.class)
     public ResponseEntity<Map<String, List<String>>> handleTokenNotFoundException(TokenNotFoundExceptionMessage ex) {
+        ex.printStackTrace();
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }

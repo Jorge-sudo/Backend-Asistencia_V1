@@ -13,6 +13,7 @@ import com.control.asistencia.config.img.StoragePaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class SaveOrUpdateInPortImplImagePersona  implements ISaveOrUpdateInPortI
         this.storagePaths.createDirectoryIsNoTExists();
     }
     @Override
+    @Transactional
     public ResponseEntity<?> saveOrUpdateImagen(MultipartFile img, Long ci) throws IOException {
         boolean update = false;
         boolean save = false;

@@ -20,7 +20,6 @@ public class PersonaEntity {
 
     @Id
     @Digits(integer=12, fraction=0, message="CI no valido: No se permite decimales y maximo de digitos es 12.")
-    @NotNull(message = "CI no válido: el CI es NULL")
     @Column(unique = true)
     private Long ci ;
 

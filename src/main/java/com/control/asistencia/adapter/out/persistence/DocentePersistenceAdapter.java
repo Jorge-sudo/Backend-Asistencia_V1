@@ -17,6 +17,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -28,14 +29,17 @@ public class DocentePersistenceAdapter implements
     private final IRepositoryDocente iRepositoryDocente;
     private final IRepositoryRol iRepositoryRol;
     private final MapperDocente iMapperDocente;
+    private final PasswordEncoder passwordEncoder;
     public DocentePersistenceAdapter(
             IRepositoryDocente iRepositoryDocente ,
             MapperDocente iMapperDocente ,
-            IRepositoryRol iRepositoryRol) {
+            IRepositoryRol iRepositoryRol ,
+            PasswordEncoder passwordEncoder) {
 
         this.iRepositoryDocente = iRepositoryDocente;
         this.iMapperDocente = iMapperDocente;
         this.iRepositoryRol = iRepositoryRol;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -80,7 +84,7 @@ public class DocentePersistenceAdapter implements
                                         .email(command.getEmail())
                                         .genero(command.getGenero())
                                         .correoInstitucional(command.getCorreoInstitucional())
-                                        .contrasenia(command.getContrasenia())
+                                        .contrasenia(this.passwordEncoder.encode(command.getContrasenia()))
                                         .activo(command.isActivo())
                                         .rol(this.iRepositoryRol.findById(command.getRol())
                                                 .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el rol con el ID: " + command.getRol())))
