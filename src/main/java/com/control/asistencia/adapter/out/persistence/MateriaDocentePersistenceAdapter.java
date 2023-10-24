@@ -3,7 +3,7 @@ package com.control.asistencia.adapter.out.persistence;
 import com.control.asistencia.adapter.out.persistence.entity.MateriaDocenteEntity;
 import com.control.asistencia.adapter.out.persistence.mapper.materiaDocente.IMapperMateriaDocente;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryDocente;
-import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateria;
+import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateriaCarreraSemestre;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryMateriaDocente;
 import com.control.asistencia.application.port.in.asignatura.command.CommandMateriaDocente;
 import com.control.asistencia.application.port.out.materiaDocente.ISaveOrUpdateOutPortMateriaDocente;
@@ -17,19 +17,19 @@ public class MateriaDocentePersistenceAdapter implements
         ISaveOrUpdateOutPortMateriaDocente {
 
     private final IRepositoryMateriaDocente iRepositoryMateriaDocente;
-    private final IRepositoryMateria iRepositoryMateria;
+    private final IRepositoryMateriaCarreraSemestre materiaCarreraSemestre;
     private final IRepositoryDocente iRepositoryDocente;
     private final IMapperMateriaDocente iMapperMateriaDocente;
     public MateriaDocentePersistenceAdapter(
             IRepositoryMateriaDocente iRepositoryMateriaDocente ,
-            IRepositoryMateria iRepositoryMateria ,
             IRepositoryDocente iRepositoryDocente ,
-            IMapperMateriaDocente iMapperMateriaDocente) {
+            IMapperMateriaDocente iMapperMateriaDocente ,
+            IRepositoryMateriaCarreraSemestre materiaCarreraSemestre) {
 
         this.iRepositoryMateriaDocente = iRepositoryMateriaDocente;
-        this.iRepositoryMateria = iRepositoryMateria;
         this.iRepositoryDocente = iRepositoryDocente;
         this.iMapperMateriaDocente = iMapperMateriaDocente;
+        this.materiaCarreraSemestre = materiaCarreraSemestre;
     }
 
     @Override
@@ -41,8 +41,8 @@ public class MateriaDocentePersistenceAdapter implements
                         this.iRepositoryMateriaDocente.save(
                                 MateriaDocenteEntity.builder()
                                         .idMateriaDocente(command.getIdMateriaDocente())
-                                        .materia(this.iRepositoryMateria.findById(command.getSigla())
-                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materia con el ID: " + command.getSigla()))
+                                        .materiaCarreraSemestre(this.materiaCarreraSemestre.findById(command.getIdMateriaDocente())
+                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaCarreraSemestre con el ID: " + command.getIdMateriaCarreraSemestre()))
                                         )
                                         .docente(this.iRepositoryDocente.findById(command.getCi())
                                                 .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la docente con el ID: " + command.getCi()))

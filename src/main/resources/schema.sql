@@ -59,14 +59,6 @@ CREATE TABLE IF NOT EXISTS materia(
 );
 
 
-CREATE TABLE IF NOT EXISTS materia_docente(
-    id_materia_docente INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    sigla VARCHAR(10) NOT NULL,
-    ci BIGINT NOT NULL,
-    FOREIGN KEY (sigla) REFERENCES materia(sigla),
-    FOREIGN KEY (ci) REFERENCES docente(ci)
-);
-
 CREATE TABLE IF NOT EXISTS carrera(
     id_carrera INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL
@@ -81,6 +73,14 @@ CREATE TABLE IF NOT EXISTS materia_carrera_semestre(
     FOREIGN KEY (id_semestre) REFERENCES  semestre(id_semestre),
     FOREIGN KEY (id_carrera) REFERENCES carrera(id_carrera),
     FOREIGN KEY (sigla) REFERENCES materia(sigla)
+);
+
+CREATE TABLE IF NOT EXISTS materia_docente(
+    id_materia_docente INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    id_materia_carrera_semestre INTEGER NOT NULL,
+    ci BIGINT NOT NULL,
+    FOREIGN KEY (id_materia_carrera_semestre) REFERENCES materia_carrera_semestre(id_materia_carrera_semestre),
+    FOREIGN KEY (ci) REFERENCES docente(ci)
 );
 
 CREATE TABLE IF NOT EXISTS turno(
@@ -155,10 +155,10 @@ SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         p.nombre AS 'nombre_docente',
         p.apellido AS 'apellido_docente',
         p.fotografia AS 'fotografia_docente'
-FROM materia m
+FROM    materia m
          JOIN materia_carrera_semestre mc ON m.sigla = mc.sigla
          JOIN carrera c ON mc.id_carrera = c.id_carrera
-         JOIN materia_docente md ON m.sigla = md.sigla
+         JOIN materia_docente md ON mc.id_materia_carrera_semestre = md.id_materia_carrera_semestre
          JOIN aula_materia_docente amd ON amd.id_materia_docente = md.id_materia_docente
          JOIN aula a ON amd.id_aula = a.id_aula
          JOIN horario_materia_docente hmd ON hmd.id_materia_docente = md.id_materia_docente

@@ -132,10 +132,14 @@ public class AsistenciaPersistenceAdapter implements
                                         )
                                         .materiaDocente(
                                                 MateriaDocenteEntity.builder()
-                                                        .materia(
-                                                                MateriaEntity.builder()
-                                                                        .nombre(globalFilter)
-                                                                        .sigla(globalFilter)
+                                                        .materiaCarreraSemestre(
+                                                                MateriaCarreraSemestreEntity.builder()
+                                                                        .materia(
+                                                                                MateriaEntity.builder()
+                                                                                        .nombre(globalFilter)
+                                                                                        .sigla(globalFilter)
+                                                                                        .build()
+                                                                        )
                                                                 .build()
                                                         )
                                                         .docente(

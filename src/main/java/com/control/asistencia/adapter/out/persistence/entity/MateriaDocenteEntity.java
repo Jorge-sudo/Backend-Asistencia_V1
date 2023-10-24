@@ -19,8 +19,8 @@ public class MateriaDocenteEntity {
     private int idMateriaDocente;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sigla", nullable = false)
-    private MateriaEntity materia;
+    @JoinColumn(name = "id_materia_carrera_semestre", nullable = false)
+    private MateriaCarreraSemestreEntity materiaCarreraSemestre;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ci", nullable = false)

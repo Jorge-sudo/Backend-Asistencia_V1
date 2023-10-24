@@ -24,8 +24,8 @@ public interface IMapperHorarioMateriaDocenteDTO {
             @Mapping(source = "horario.horaFin", target = "horaFin"),
             @Mapping(source = "horario.diaSemana.nombre", target = "dia"),
             @Mapping(source = "horario.turno.nombre", target = "turno"),
-            @Mapping(source = "materiaDocente.materia.sigla", target = "sigla"),
-            @Mapping(source = "materiaDocente.materia.nombre", target = "materia"),
+            @Mapping(source = "materiaDocente.materiaCarreraSemestre.materia.sigla", target = "sigla"),
+            @Mapping(source = "materiaDocente.materiaCarreraSemestre.materia.nombre", target = "materia"),
             @Mapping(source = "materiaDocente.docente.nombre", target = "nombreDocente"),
             @Mapping(source = "materiaDocente.docente.apellido", target = "apellidoDocente"),
     })

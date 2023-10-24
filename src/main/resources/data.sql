@@ -200,19 +200,19 @@ INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SOC-123', 'Sociologia de la 
 
 --DOCENTES
 --111
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(1, 'ING-111', 2222224);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(2, 'LIN-114', 22225);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(3, 'MAT-113', 2222231);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(4, 'MAT-112', 222223);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(5, 'FHC-116', 22227);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(6, 'INV-115', 222221);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(1, 1, 2222224);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(2, 2, 22225);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(3, 3, 2222231);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(4, 4, 222223);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(5, 5, 22227);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(6, 6, 222221);
 --112
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(7, 'ING-111', 2222251);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(8, 'LIN-114', 22219);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(9, 'MAT-113', 2222234);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(10, 'MAT-112', 22215);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(11, 'FHC-116', 2222230);
-INSERT IGNORE INTO materia_docente(id_materia_docente, sigla, ci) VALUES(12, 'INV-115', 2222241);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(7, 7, 2222251);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(8, 1, 22219);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(9, 2, 2222234);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(10, 3, 22215);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(11, 4, 2222230);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(12, 5, 2222241);
 
 INSERT IGNORE INTO carrera(id_carrera, nombre) VALUES(1, 'Ingieneria de Sistemas');
 INSERT IGNORE INTO carrera(id_carrera, nombre) VALUES(2, 'Contaduria Publica');

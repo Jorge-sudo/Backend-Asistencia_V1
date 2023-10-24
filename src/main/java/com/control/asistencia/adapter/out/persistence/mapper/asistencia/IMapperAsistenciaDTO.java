@@ -206,7 +206,7 @@ public class IMapperAsistenciaDTO {
         if ( materiaDocente == null ) {
             return null;
         }
-        MateriaEntity materia = materiaDocente.getMateria();
+        MateriaEntity materia = materiaDocente.getMateriaCarreraSemestre().getMateria();
         if ( materia == null ) {
             return null;
         }
@@ -225,7 +225,7 @@ public class IMapperAsistenciaDTO {
         if ( materiaDocente == null ) {
             return null;
         }
-        MateriaEntity materia = materiaDocente.getMateria();
+        MateriaEntity materia = materiaDocente.getMateriaCarreraSemestre().getMateria();
         if ( materia == null ) {
             return null;
         }
@@ -376,7 +376,11 @@ public class IMapperAsistenciaDTO {
 
         MateriaDocenteEntity.MateriaDocenteEntityBuilder materiaDocente = MateriaDocenteEntity.builder();
 
-        materiaDocente.materia( asistenciaViewDTOToMateriaEntity( asistenciaViewDTO ) );
+        materiaDocente.materiaCarreraSemestre(
+                MateriaCarreraSemestreEntity.builder()
+                        .materia( asistenciaViewDTOToMateriaEntity( asistenciaViewDTO ) )
+                        .build()
+        );
         materiaDocente.docente( asistenciaViewDTOToDocenteEntity( asistenciaViewDTO ) );
 
         return materiaDocente.build();
