@@ -79,6 +79,15 @@ public class MateriaCarreraSemestrePersistenceAdapter implements
         );
     }
 
+    @Override
+    public Optional<Set<MateriaCarreraSemestreViewDTO>> viewBySiglaMateriaCarreraSemestreDTO(String sigla) {
+        return Optional.of(
+                this.iViewMapperMateriaCarreraSemestre.entitysToDtosSet(
+                        this.iRepositoryMateriaCarreraSemestre.findBySigla(sigla)
+                )
+        );
+    }
+
 
     @Override
     public Optional<MateriaCarreraSemestreViewDTO> saveOrUpdateMateriaCarreraSemestre(

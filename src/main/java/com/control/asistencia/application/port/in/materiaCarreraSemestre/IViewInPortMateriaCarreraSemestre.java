@@ -7,5 +7,6 @@ public interface IViewInPortMateriaCarreraSemestre {
     ResponseEntity<?> viewPageMateriaCarreraSemestreDTO(
             ViewPageCommand command);
     ResponseEntity<?>  viewAllMateriaCarreraSemestreDTO();
-    ResponseEntity<?>  viewByIdMateriaCarreraSemestreDTO(int id) ;
+    ResponseEntity<?>  viewByIdMateriaCarreraSemestreDTO(int id);
+    ResponseEntity<?>  viewBySiglaMateriaCarreraSemestreDTO(String sigla);
 }

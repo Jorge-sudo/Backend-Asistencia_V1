@@ -45,5 +45,8 @@ public class ViewControllerMateriaCarreraSemestre {
         return this.iViewInPortMateriaCarreraSemestre.viewByIdMateriaCarreraSemestreDTO(id);
     }
 
-
+    @GetMapping(path = "/materiaCarreraSemestres/sigla/{sigla}")
+    ResponseEntity<?> viewBySiglaMateriaCarreraSemestre(@PathVariable("sigla") String sigla) {
+        return this.iViewInPortMateriaCarreraSemestre.viewBySiglaMateriaCarreraSemestreDTO(sigla);
+    }
 }

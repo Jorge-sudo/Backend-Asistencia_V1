@@ -47,6 +47,13 @@ public class ViewInPortImplMateriaCarreraSemestre implements IViewInPortMateriaC
         );
     }
 
+    @Override
+    public ResponseEntity<?> viewBySiglaMateriaCarreraSemestreDTO(String sigla) {
+        return ResponseBuilderApiRest.view(
+                this.iViewOutPortMateriaCarreraSemestre.viewBySiglaMateriaCarreraSemestreDTO(sigla)
+        );
+    }
+
     private String getShortFieldMateriaCarreraSemestre(String shortField){
         return switch (shortField) {
             case "sigla" -> "materia.sigla";

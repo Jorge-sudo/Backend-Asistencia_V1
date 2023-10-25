@@ -12,4 +12,6 @@ public interface IViewOutPortMateriaCarreraSemestre {
             String globalFilter, Pageable pageable) ;
     Optional<Set<MateriaCarreraSemestreViewDTO>> viewAllMateriaCarreraSemestreDTO() ;
     Optional<MateriaCarreraSemestreViewDTO> viewByIdMateriaCarreraSemestreDTO(int id) ;
+
+    Optional<Set<MateriaCarreraSemestreViewDTO>> viewBySiglaMateriaCarreraSemestreDTO(String sigla) ;
 }
