@@ -5,6 +5,9 @@ import com.control.asistencia.domain.horario.HorarioViewDTO;
 import org.mapstruct.*;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+import java.util.Set;
+
 @Mapper(
         //indicamos que la implementacion sea generado como un componente de spring para poder inyectarl
         componentModel = MappingConstants.ComponentModel.SPRING,
@@ -23,5 +26,12 @@ public interface IMapperHorarioDTO {
     HorarioViewDTO entityToDto(HorarioEntity horarioEntity);
     default Page<HorarioViewDTO> entitysToDtosPage(Page<HorarioEntity> horarioEntityPage){
         return horarioEntityPage.map(this::entityToDto);
+    }
+
+    default Set<HorarioViewDTO> entitysToDtosSet(List<HorarioEntity> horarioEntitySet){
+        return horarioEntitySet
+                .stream()
+                .map(this::entityToDto)
+                .collect(java.util.stream.Collectors.toSet());
     }
 }

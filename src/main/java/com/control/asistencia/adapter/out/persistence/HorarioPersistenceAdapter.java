@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
+import java.util.Set;
 
 @PersistenceAdapter
 public class HorarioPersistenceAdapter implements
@@ -82,6 +83,15 @@ public class HorarioPersistenceAdapter implements
     public Page<HorarioViewDTO> viewPageHorario(Pageable pageable) {
         return this.iMapperHorarioDTO.entitysToDtosPage(
                 this.iRepositoryHorario.findAll(pageable)
+        );
+    }
+
+    @Override
+    public Optional<Set<HorarioViewDTO>> viewAllHorario() {
+        return Optional.of(
+                this.iMapperHorarioDTO.entitysToDtosSet(
+                        this.iRepositoryHorario.findAll()
+                )
         );
     }
 }

@@ -7,4 +7,5 @@ import org.springframework.http.ResponseEntity;
 public interface IViewInPortAula {
     ResponseEntity<?> viewPageAulaDTO(ViewPageCommand command);
     ResponseEntity<?> viewByIdAulaDTO(int idAula);
+    ResponseEntity<?> viewAllAulaDTO();
 }

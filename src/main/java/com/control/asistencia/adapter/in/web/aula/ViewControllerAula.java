@@ -36,4 +36,9 @@ public class ViewControllerAula {
             @PathVariable("id") int id){
         return this.iViewInPortAula.viewByIdAulaDTO(id);
     }
+
+    @GetMapping(path = "/aulas")
+    ResponseEntity<?> viewAllAula(){
+        return this.iViewInPortAula.viewAllAulaDTO();
+    }
 }

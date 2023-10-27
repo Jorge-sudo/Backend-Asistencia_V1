@@ -26,4 +26,11 @@ public class ViewInPortImplHorario implements IViewInPortHorario {
                 )
         ));
     }
+
+    @Override
+    public ResponseEntity<?> viewAllHorarioDTO() {
+        return ResponseBuilderApiRest.view(
+                this.iViewOutPortHorario.viewAllHorario()
+        );
+    }
 }

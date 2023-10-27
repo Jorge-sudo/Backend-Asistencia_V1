@@ -30,4 +30,9 @@ public class ViewControllerHorario {
 
         return this.iViewInPortHorario.viewPageHorarioDTO(command);
     }
+
+    @GetMapping(path = "/horarios")
+    ResponseEntity<?> viewAllHorario(){
+        return this.iViewInPortHorario.viewAllHorarioDTO();
+    }
 }

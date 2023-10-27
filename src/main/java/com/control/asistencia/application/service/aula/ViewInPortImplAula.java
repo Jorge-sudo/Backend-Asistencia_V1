@@ -34,4 +34,11 @@ public class ViewInPortImplAula implements
                 this.iViewOutPortAula.viewByIdAulaDTO(idAula)
         );
     }
+
+    @Override
+    public ResponseEntity<?> viewAllAulaDTO() {
+        return ResponseBuilderApiRest.view(
+                this.iViewOutPortAula.viewAllAulaDTO()
+        );
+    }
 }
