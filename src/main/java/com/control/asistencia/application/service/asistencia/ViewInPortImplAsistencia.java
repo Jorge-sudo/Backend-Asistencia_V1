@@ -1,5 +1,6 @@
 package com.control.asistencia.application.service.asistencia;
 
+import com.control.asistencia.application.port.in.asistencia.command.CommandPageAsistencia;
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.asistencia.IViewInPortAsistencia;
 import com.control.asistencia.application.port.in.command.ViewPageCommand;
@@ -15,30 +16,18 @@ public class ViewInPortImplAsistencia implements IViewInPortAsistencia {
     public ViewInPortImplAsistencia(IViewOutPortAsistencia iViewOutPortAsistencia) {
         this.iViewOutPortAsistencia = iViewOutPortAsistencia;
     }
+
+
     @Override
-    public ResponseEntity<?> viewPageGlobalFilterAsistencia(ViewPageCommand command) {
+    public ResponseEntity<?> viewPageByFechaAndGlobalFilterAsistencia(ViewPageCommand command, CommandPageAsistencia commandAsistencia) {
         Sort sort = Sort.by(
                 command.getShortOrder() == 1 ? Sort.Direction.DESC : Sort.Direction.ASC ,
                 this.getShortFieldAsistencia(command.getSortField()));
 
         return ResponseBuilderApiRest.viewPage(
-                this.iViewOutPortAsistencia.viewPageGlobalFilterAsistencia(
+                this.iViewOutPortAsistencia.viewPageByFechaAndGlobalFilterAsistencia(
                         PageRequest.of(command.getPage(), command.getSize(), sort),
-                        command.getGlobalFilter()
-                )
-        );
-    }
-
-    @Override
-    public ResponseEntity<?> viewPageFindAllByFechaAsistencia(ViewPageCommand command, String fechaSearch) {
-        Sort sort = Sort.by(
-                command.getShortOrder() == 1 ? Sort.Direction.DESC : Sort.Direction.ASC ,
-                this.getShortFieldAsistencia(command.getSortField()));
-
-        return ResponseBuilderApiRest.viewPage(
-                this.iViewOutPortAsistencia.viewPageFindAllByFechaAsistencia(
-                        PageRequest.of(command.getPage(), command.getSize(), sort),
-                        fechaSearch
+                        commandAsistencia
                 )
         );
     }

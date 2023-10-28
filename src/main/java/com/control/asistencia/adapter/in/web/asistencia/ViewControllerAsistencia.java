@@ -1,6 +1,7 @@
 package com.control.asistencia.adapter.in.web.asistencia;
 
 import com.control.asistencia.application.port.in.asistencia.IViewInPortAsistencia;
+import com.control.asistencia.application.port.in.asistencia.command.CommandPageAsistencia;
 import com.control.asistencia.application.port.in.command.ViewPageCommand;
 import com.control.asistencia.common.WebAdapter;
 import org.springframework.http.ResponseEntity;
@@ -14,36 +15,17 @@ public class ViewControllerAsistencia {
     public ViewControllerAsistencia(IViewInPortAsistencia iViewInPortAsistencia){
         this.iViewInPortAsistencia = iViewInPortAsistencia;
     }
-    @GetMapping(path = "/asistencias/page/search/{page}/{size}/{shortOrder}/{sortField}")
-    ResponseEntity<?> viewPageGlobalFilterAsistencia(
-            @PathVariable("page") int page,
-            @PathVariable("size") int size,
-            @PathVariable("shortOrder") int shortOrder,
-            @PathVariable("sortField") String sortField,
-            @RequestParam(value = "globalFilter", required = false) String globalFilter){
 
-        if (globalFilter == null || globalFilter.isEmpty()) {
-            globalFilter = null;
-        }
-
-        ViewPageCommand command = new ViewPageCommand(
-                page,
-                size,
-                sortField,
-                shortOrder,
-                globalFilter);
-
-
-        return this.iViewInPortAsistencia.viewPageGlobalFilterAsistencia(command);
-    }
-
-    @GetMapping(path = "/asistencias/page/date/{page}/{size}/{shortOrder}/{sortField}/{fechaSearch}")
+    @GetMapping(path = "/asistencias/page/date/{page}/{size}/{shortOrder}/{sortField}/{idCarrera}/{idSemestre}/{fechaSearch}")
     ResponseEntity<?> viewPageFindAllByFechaAsistencia(
             @PathVariable("page") int page,
             @PathVariable("size") int size,
             @PathVariable("shortOrder") int shortOrder,
             @PathVariable("sortField") String sortField,
-            @PathVariable("fechaSearch") String fechaSearch){
+            @PathVariable("idCarrera") int idCarrera,
+            @PathVariable("idSemestre") int idSemestre,
+            @PathVariable("fechaSearch") String fechaSearch,
+            @RequestParam(value = "globalFilter", required = false) String globalFilter){
 
         ViewPageCommand command = new ViewPageCommand(
                 page,
@@ -51,6 +33,13 @@ public class ViewControllerAsistencia {
                 sortField,
                 shortOrder);
 
-        return this.iViewInPortAsistencia.viewPageFindAllByFechaAsistencia(command, fechaSearch);
+        CommandPageAsistencia commandAsistencia = new CommandPageAsistencia(
+                idCarrera,
+                idSemestre,
+                globalFilter,
+                fechaSearch
+        );
+
+        return this.iViewInPortAsistencia.viewPageByFechaAndGlobalFilterAsistencia(command, commandAsistencia);
     }
 }

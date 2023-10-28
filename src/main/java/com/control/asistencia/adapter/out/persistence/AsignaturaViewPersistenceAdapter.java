@@ -74,16 +74,9 @@ public class AsignaturaViewPersistenceAdapter implements IViewOutPortAsignaturaV
                 )
         );
 
-        if(command.getGlobalFilter() == null){
-            if(carrera.isPresent() && turno.isPresent() && semestre.isPresent() && dia.isPresent()){
-                example =  this.outOfSearch(carrera.get().getNombre(),
-                        semestre.get().getNombre(), turno.get().getNombre(), dia.get().getNombre());
-            }
-        }else{
-            if(carrera.isPresent() && turno.isPresent() && semestre.isPresent() && dia.isPresent()){
-                example =  this.withSearch(command.getGlobalFilter(), carrera.get().getNombre(),
-                        semestre.get().getNombre(), turno.get().getNombre(), dia.get().getNombre());
-            }
+        if(carrera.isPresent() && turno.isPresent() && semestre.isPresent() && dia.isPresent()){
+            example =  this.withSearch(command.getGlobalFilter(), carrera.get().getNombre(),
+                    semestre.get().getNombre(), turno.get().getNombre(), dia.get().getNombre());
         }
         return example;
 
@@ -112,25 +105,4 @@ public class AsignaturaViewPersistenceAdapter implements IViewOutPortAsignaturaV
         );
     }
 
-    private Example<AsignaturaView> outOfSearch(String carrera, String semestre,
-                                                String turno, String dia){
-        return Example.of(
-                AsignaturaView.builder()
-                        .carrera(carrera)
-                        .semestre(semestre)
-                        .turno(turno)
-                        .dia(dia)
-                        .build(),
-                ExampleMatcher.matching() // Cambiar  por matching()
-                        .withMatcher("carrera", match -> match.exact().ignoreCase())
-                        .withMatcher("semestre", match -> match.exact().ignoreCase())
-                        .withMatcher("turno", match -> match.exact().ignoreCase())
-                        .withMatcher("dia", match -> match.exact().ignoreCase())
-                        .withIgnorePaths(
-                                "id", "laboratorio",
-                                "nroLaboratorio", "activo", "aula",
-                                "sigla", "nombre", "nombreDocente",
-                                "apellidoDocente", "horario")
-        );
-    }
 }

@@ -3,10 +3,9 @@ package com.control.asistencia.adapter.out.persistence;
 import com.control.asistencia.adapter.out.persistence.entity.*;
 import com.control.asistencia.adapter.out.persistence.mapper.asistencia.IMapperAsistenciaCommand;
 import com.control.asistencia.adapter.out.persistence.mapper.asistencia.IMapperAsistenciaDTO;
-import com.control.asistencia.adapter.out.persistence.repository.IRepositoryAsistencia;
-import com.control.asistencia.adapter.out.persistence.repository.IRepositoryAula;
-import com.control.asistencia.adapter.out.persistence.repository.IRepositoryHorarioMateriaDocente;
+import com.control.asistencia.adapter.out.persistence.repository.*;
 import com.control.asistencia.application.port.in.asistencia.command.CommandAsistencia;
+import com.control.asistencia.application.port.in.asistencia.command.CommandPageAsistencia;
 import com.control.asistencia.application.port.out.asistencia.ISaveOrUpdateOutPortAsistencia;
 import com.control.asistencia.application.port.out.asistencia.IViewOutPortAsistencia;
 import com.control.asistencia.common.PersistenceAdapter;
@@ -30,19 +29,25 @@ public class AsistenciaPersistenceAdapter implements
     private final IRepositoryAula  iRepositoryAula;
     private final IRepositoryHorarioMateriaDocente iRepositoryHorarioMateriaDocente;
     private final IMapperAsistenciaDTO iMapperAsistenciaDTO;
+    private final IRepositoryCarrera iRepositoryCarrera;
+    private final IRepositorySemestre iRepositorySemestre;
     private final IMapperAsistenciaCommand iMapperAsistenciaCommand;
     public AsistenciaPersistenceAdapter(
             IRepositoryAsistencia iRepositoryAsistencia ,
             IMapperAsistenciaDTO iMapperAsistenciaDTO ,
             IRepositoryAula iRepositoryAula ,
             IRepositoryHorarioMateriaDocente iRepositoryHorarioMateriaDocente ,
-            IMapperAsistenciaCommand iMapperAsistenciaCommand){
+            IMapperAsistenciaCommand iMapperAsistenciaCommand,
+            IRepositoryCarrera iRepositoryCarrera,
+            IRepositorySemestre iRepositorySemestre){
 
         this.iRepositoryAsistencia = iRepositoryAsistencia;
         this.iRepositoryAula = iRepositoryAula;
         this.iRepositoryHorarioMateriaDocente = iRepositoryHorarioMateriaDocente;
         this.iMapperAsistenciaDTO = iMapperAsistenciaDTO;
         this.iMapperAsistenciaCommand = iMapperAsistenciaCommand;
+        this.iRepositoryCarrera = iRepositoryCarrera;
+        this.iRepositorySemestre = iRepositorySemestre;
     }
 
     @Override
@@ -85,44 +90,49 @@ public class AsistenciaPersistenceAdapter implements
     }
 
     @Override
-    public Page<AsistenciaViewDTO> viewPageGlobalFilterAsistencia(Pageable pageable, String globalFilter) {
+    public Page<AsistenciaViewDTO> viewPageByFechaAndGlobalFilterAsistencia(Pageable pageable, CommandPageAsistencia command) {
         return this.iMapperAsistenciaDTO.entitysToDtosPage(
                 this.iRepositoryAsistencia.findAll(
-                        this.funFilterGlobal(globalFilter),
+                        this.funFilter(command),
                         pageable
                 )
         );
     }
 
-    @Override
-    public Page<AsistenciaViewDTO> viewPageFindAllByFechaAsistencia(Pageable pageable, String fechaSearch) {
-        return this.iMapperAsistenciaDTO.entitysToDtosPage(
-                this.iRepositoryAsistencia.findAllByFecha(
-                        pageable,
-                        Date.valueOf(fechaSearch)
+
+    private Example<AsistenciaEntity> funFilter(CommandPageAsistencia command) {
+        Example<AsistenciaEntity> example = null;
+        Optional<CarreraEntity> carrera = Optional.ofNullable(
+                this.iRepositoryCarrera.findById(command.getIdCarrera()).orElseThrow(
+                        () -> new DataNotFoundExceptionMessage("No se encontró la carrera con el id: " + command.getIdCarrera()
+                        )
+                ));
+        Optional<SemestreEntity> semestre = Optional.ofNullable(
+                this.iRepositorySemestre.findById(command.getIdSemestre()).orElseThrow(
+                        () -> new DataNotFoundExceptionMessage("No se encontró el semestre con el id: " + command.getIdSemestre())
                 )
         );
+
+        if (carrera.isPresent()  && semestre.isPresent() ) {
+            example = this.withFilter(carrera.get().getNombre(),
+                    semestre.get().getNombre(),
+                    command.getGlobalFilter(),
+                    command.getDateSearch());
+        }
+        return example;
     }
 
-    private Example<AsistenciaEntity> funFilterGlobal(String globalFilter) {
+    private Example<AsistenciaEntity> withFilter(String carrera,
+                                                 String semestre,
+                                                 String globalFilter,
+                                                 String fechaSearch) {
         return Example.of(
                 AsistenciaEntity.builder()
-                        .aula(
-                                AulaEntity.builder()
-                                        .aula(globalFilter)
-                                        .paralelo(globalFilter)
-                                        .piso(globalFilter)
-                                .build()
-                        )
+                        .fecha(Date.valueOf(fechaSearch))
                         .horarioMateriaDocente(
                                 HorarioMateriaDocenteEntity.builder()
                                         .horario(
                                                 HorarioEntity.builder()
-                                                        .diaSemana(
-                                                                DiaSemanaEntity.builder()
-                                                                        .nombre(globalFilter)
-                                                                .build()
-                                                        )
                                                         .turno(
                                                                 TurnoEntity.builder()
                                                                         .nombre(globalFilter)
@@ -140,6 +150,16 @@ public class AsistenciaPersistenceAdapter implements
                                                                                         .sigla(globalFilter)
                                                                                         .build()
                                                                         )
+                                                                        .carrera(
+                                                                                CarreraEntity.builder()
+                                                                                        .nombre(carrera)
+                                                                                .build()
+                                                                        )
+                                                                        .semestre(
+                                                                                SemestreEntity.builder()
+                                                                                        .nombre(semestre)
+                                                                                .build()
+                                                                        )
                                                                 .build()
                                                         )
                                                         .docente(
@@ -156,9 +176,10 @@ public class AsistenciaPersistenceAdapter implements
                 .build(),
 
                 ExampleMatcher.matchingAny() // Cambiar  por matching()
-                        .withMatcher("asistencia.aula.aula", match -> match.contains().ignoreCase())
-                        .withMatcher("asistencia.aula.paralelo", match -> match.contains().ignoreCase())
-                        .withMatcher("asistencia.aula.piso", match -> match.contains().ignoreCase())
+                        .withMatcher("aula.aula", match -> match.contains().ignoreCase())
+                        .withMatcher("aula.paralelo", match -> match.contains().ignoreCase())
+                        .withMatcher("aula.piso", match -> match.contains().ignoreCase())
+                        .withMatcher("fecha", match -> match.exact().ignoreCase())
                         .withMatcher("horarioMateriaDocente.horario.diaSemana.nombre", match -> match.contains().ignoreCase())
                         .withMatcher("horarioMateriaDocente.horario.turno.nombre", match -> match.contains().ignoreCase())
                         .withMatcher("horarioMateriaDocente.materiaDocente.materia.sigla", match -> match.contains().ignoreCase())
@@ -166,9 +187,11 @@ public class AsistenciaPersistenceAdapter implements
                         .withMatcher("horarioMateriaDocente.materiaDocente.docente.nombre", match -> match.contains().ignoreCase())
                         .withMatcher("horarioMateriaDocente.materiaDocente.docente.apellido", match -> match.contains().ignoreCase())
                         .withMatcher("horarioMateriaDocente.materiaDocente.docente.email", match -> match.contains().ignoreCase())
+                        .withMatcher("horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.carrera.nombre", match -> match.exact().ignoreCase())
+                        .withMatcher("horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.semestre.nombre", match -> match.exact().ignoreCase())
                         .withIgnorePaths(
                                 "idAsistencia", "horaEntrada",
-                                "cantidadEstudiantes", "fecha", "estado", "aula.idAula","aula.bloque",
+                                "cantidadEstudiantes", "estado", "aula.idAula","aula.bloque", "aula.aula",
                                 "horarioMateriaDocente.idHorarioMateriaDocente", "horarioMateriaDocente.nroLaboratorio",
                                 "horarioMateriaDocente.laboratorio", "horarioMateriaDocente.horario.idHorario", "horarioMateriaDocente.horario.horaInicio",
                                 "horarioMateriaDocente.horario.horaFin", "horarioMateriaDocente.horario.diaSemana.idDiaSemana",
@@ -176,7 +199,9 @@ public class AsistenciaPersistenceAdapter implements
                                 "horarioMateriaDocente.materiaDocente.docente.codRfid", "horarioMateriaDocente.materiaDocente.docente.ci",
                                 "horarioMateriaDocente.materiaDocente.docente.fotografia", "horarioMateriaDocente.materiaDocente.docente.genero",
                                 "horarioMateriaDocente.materiaDocente.docente.correoInstitucional", "horarioMateriaDocente.materiaDocente.docente.contrasenia",
-                                "horarioMateriaDocente.materiaDocente.docente.activo")
+                                "horarioMateriaDocente.materiaDocente.docente.activo", "horarioMateriaDocente.horario.diaSemana.nombre",
+                                "aula.paralelo", "aula.piso")
+
         );
     }
 }
