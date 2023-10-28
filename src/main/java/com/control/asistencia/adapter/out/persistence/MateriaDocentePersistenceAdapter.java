@@ -17,19 +17,19 @@ public class MateriaDocentePersistenceAdapter implements
         ISaveOrUpdateOutPortMateriaDocente {
 
     private final IRepositoryMateriaDocente iRepositoryMateriaDocente;
-    private final IRepositoryMateriaCarreraSemestre materiaCarreraSemestre;
+    private final IRepositoryMateriaCarreraSemestre iRepositoryMateriaCarreraSemestre;
     private final IRepositoryDocente iRepositoryDocente;
     private final IMapperMateriaDocente iMapperMateriaDocente;
     public MateriaDocentePersistenceAdapter(
             IRepositoryMateriaDocente iRepositoryMateriaDocente ,
             IRepositoryDocente iRepositoryDocente ,
             IMapperMateriaDocente iMapperMateriaDocente ,
-            IRepositoryMateriaCarreraSemestre materiaCarreraSemestre) {
+            IRepositoryMateriaCarreraSemestre iRepositoryMateriaCarreraSemestre) {
 
         this.iRepositoryMateriaDocente = iRepositoryMateriaDocente;
         this.iRepositoryDocente = iRepositoryDocente;
         this.iMapperMateriaDocente = iMapperMateriaDocente;
-        this.materiaCarreraSemestre = materiaCarreraSemestre;
+        this.iRepositoryMateriaCarreraSemestre = iRepositoryMateriaCarreraSemestre;
     }
 
     @Override
@@ -41,11 +41,13 @@ public class MateriaDocentePersistenceAdapter implements
                         this.iRepositoryMateriaDocente.save(
                                 MateriaDocenteEntity.builder()
                                         .idMateriaDocente(command.getIdMateriaDocente())
-                                        .materiaCarreraSemestre(this.materiaCarreraSemestre.findById(command.getIdMateriaDocente())
-                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la materiaCarreraSemestre con el ID: " + command.getIdMateriaCarreraSemestre()))
+                                        .materiaCarreraSemestre(
+                                                this.iRepositoryMateriaCarreraSemestre.findById(command.getIdMateriaCarreraSemestre())
+                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe materiaCarreraSemestre con el ID: " + command.getIdMateriaCarreraSemestre()))
                                         )
-                                        .docente(this.iRepositoryDocente.findById(command.getCi())
-                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la docente con el ID: " + command.getCi()))
+                                        .docente(
+                                                this.iRepositoryDocente.findById(command.getCi())
+                                                .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe la docente con el CI: " + command.getCi()))
                                         )
                                         .build()
                         )

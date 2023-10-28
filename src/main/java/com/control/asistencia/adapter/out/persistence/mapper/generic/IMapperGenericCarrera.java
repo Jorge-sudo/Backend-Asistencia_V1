@@ -4,7 +4,7 @@ import com.control.asistencia.adapter.out.persistence.entity.CarreraEntity;
 import com.control.asistencia.application.port.in.commandGeneric.SaveOrViewCommandGeneric;
 import org.mapstruct.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Mapper(
         //indicamos que la implementacion sea generado como un componente de spring para poder inyectarl
@@ -22,10 +22,10 @@ public interface IMapperGenericCarrera {
     SaveOrViewCommandGeneric entityToCommand(CarreraEntity carreraEntity);
     @InheritInverseConfiguration
     CarreraEntity commandToEntity(SaveOrViewCommandGeneric carreraDTO);
-    default Set<SaveOrViewCommandGeneric> entitysToCommandsSet(Set<CarreraEntity> carreraEntity) {
+    default List<SaveOrViewCommandGeneric> entitysToCommandsList(List<CarreraEntity> carreraEntity) {
         return carreraEntity
                 .stream()
                 .map(this::entityToCommand)
-                .collect(java.util.stream.Collectors.toSet());
+                .collect(java.util.stream.Collectors.toList());
     }
 }

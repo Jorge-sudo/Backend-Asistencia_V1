@@ -145,7 +145,7 @@ SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         mc.activo AS 'activo',
         m.sigla AS 'sigla',
         c.nombre AS 'carrera',
-        CONCAT(a.id_aula,'-', a.aula, '-', a.paralelo) AS 'aula' ,
+        CONCAT(a.paralelo,'-', a.aula, '-', a.piso, '-', a.bloque) AS 'aula' ,
         ds.nombre AS 'dia',
         CONCAT(SUBSTRING(h.hora_inicio, 1, 5), '-', SUBSTRING(h.hora_fin, 1, 5)) AS 'horario', -- Aquí se ajusta el formato
         t.nombre AS 'turno',

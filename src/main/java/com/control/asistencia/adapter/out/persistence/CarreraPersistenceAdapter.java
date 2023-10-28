@@ -9,9 +9,8 @@ import com.control.asistencia.application.port.out.carrera.IViewOutPortCarrera;
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @PersistenceAdapter
 public class CarreraPersistenceAdapter implements
@@ -32,10 +31,10 @@ public class CarreraPersistenceAdapter implements
 
 
     @Override
-    public Optional<Set<SaveOrViewCommandGeneric>> viewAllCarreraDTO() {
+    public Optional<List<SaveOrViewCommandGeneric>> viewAllCarreraDTO() {
         return Optional.of(
-                this.iMapperGenericCarrera.entitysToCommandsSet(
-                        new HashSet<>(this.iRepositoryCarrera.findAll())
+                this.iMapperGenericCarrera.entitysToCommandsList(
+                        this.iRepositoryCarrera.findAll()
                 )
         );
     }

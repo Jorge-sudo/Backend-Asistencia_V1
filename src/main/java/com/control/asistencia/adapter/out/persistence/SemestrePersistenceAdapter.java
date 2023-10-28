@@ -10,6 +10,7 @@ import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -30,10 +31,10 @@ public class SemestrePersistenceAdapter implements
     }
 
     @Override
-    public Optional<Set<SaveOrViewCommandGeneric>> viewAllSemestreDTO() {
+    public Optional<List<SaveOrViewCommandGeneric>> viewAllSemestreDTO() {
         return Optional.of(
-                this.iMapperGenericSemestre.entitysToCommandsSet(
-                        new HashSet<>(this.iRepositorySemestre.findAll())
+                this.iMapperGenericSemestre.entitysToCommandsList(
+                        this.iRepositorySemestre.findAll()
                 )
         );
     }

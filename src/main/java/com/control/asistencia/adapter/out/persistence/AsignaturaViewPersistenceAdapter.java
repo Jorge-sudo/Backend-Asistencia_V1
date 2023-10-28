@@ -16,14 +16,14 @@ import org.springframework.data.domain.*;
 import java.util.Optional;
 
 @PersistenceAdapter
-public class MateriaAsignaturaViewPersistenceAdapter implements IViewOutPortAsignaturaView {
+public class AsignaturaViewPersistenceAdapter implements IViewOutPortAsignaturaView {
     private final IRepositoryAsignaturaView iRepositoryAsignaturaView;
     private final IRepositoryCarrera iRepositoryCarrera;
     private final IRepositoryTurno iRepositoryTurno;
     private final IRepositorySemestre iRepositorySemestre;
     private final IRepositoryDiaSemana iRepositoryDiaSemana;
     private final MapperAsignaturaView mapperAsignaturaView;
-    public MateriaAsignaturaViewPersistenceAdapter(
+    public AsignaturaViewPersistenceAdapter(
             IRepositoryAsignaturaView iRepositoryAsignaturaView,
             IRepositoryCarrera iRepositoryCarrera,
             IRepositoryTurno iRepositoryTurno,
@@ -79,8 +79,6 @@ public class MateriaAsignaturaViewPersistenceAdapter implements IViewOutPortAsig
                 example =  this.outOfSearch(carrera.get().getNombre(),
                         semestre.get().getNombre(), turno.get().getNombre(), dia.get().getNombre());
             }
-
-
         }else{
             if(carrera.isPresent() && turno.isPresent() && semestre.isPresent() && dia.isPresent()){
                 example =  this.withSearch(command.getGlobalFilter(), carrera.get().getNombre(),

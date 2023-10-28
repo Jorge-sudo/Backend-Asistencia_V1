@@ -9,6 +9,6 @@ import java.util.Set;
 
 public interface IRepositoryMateriaCarreraSemestre
         extends JpaRepository<MateriaCarreraSemestreEntity, Integer> {
-    @Query("SELECT m FROM MateriaCarreraSemestreEntity m WHERE m.materia.sigla = :sigla")
+    @Query("SELECT m FROM MateriaCarreraSemestreEntity m WHERE m.materia.sigla = :sigla AND m.activo = true")
     Set<MateriaCarreraSemestreEntity> findBySigla(String sigla);
 }

@@ -4,6 +4,7 @@ import com.control.asistencia.adapter.out.persistence.entity.SemestreEntity;
 import com.control.asistencia.application.port.in.commandGeneric.SaveOrViewCommandGeneric;
 import org.mapstruct.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Mapper(
@@ -22,10 +23,10 @@ public interface IMapperGenericSemestre {
     SaveOrViewCommandGeneric entityToCommand(SemestreEntity semestreEntity);
     @InheritInverseConfiguration
     SemestreEntity commandToEntity(SaveOrViewCommandGeneric semestreDTO);
-    default Set<SaveOrViewCommandGeneric> entitysToCommandsSet(Set<SemestreEntity> semestreEntities) {
+    default List<SaveOrViewCommandGeneric> entitysToCommandsList(List<SemestreEntity> semestreEntities) {
         return semestreEntities
                 .stream()
                 .map(this::entityToCommand)
-                .collect(java.util.stream.Collectors.toSet());
+                .collect(java.util.stream.Collectors.toList());
     }
 }

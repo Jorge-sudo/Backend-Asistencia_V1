@@ -18,7 +18,7 @@ public class AssignMatterController {
     public AssignMatterController(IAssignMatterInPort iAssignMatterInPort) {
         this.iAssignMatterInPort = iAssignMatterInPort;
     }
-    @PostMapping("/asignarMateria")
+    @PostMapping("/asignaturas")
     ResponseEntity<?> saveOrUpdateAsignarMateria(@RequestBody @Valid CommandAssignMatter data){
         return this.iAssignMatterInPort.assignMatter(data);
     }
