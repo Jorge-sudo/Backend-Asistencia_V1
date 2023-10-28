@@ -16,7 +16,7 @@ public class ViewControllerAsistencia {
         this.iViewInPortAsistencia = iViewInPortAsistencia;
     }
 
-    @GetMapping(path = "/asistencias/page/date/{page}/{size}/{shortOrder}/{sortField}/{idCarrera}/{idSemestre}/{fechaSearch}")
+    @GetMapping(path = "/asistencias/page/{page}/{size}/{shortOrder}/{sortField}/{idCarrera}/{idSemestre}/{fechaSearch}")
     ResponseEntity<?> viewPageFindAllByFechaAsistencia(
             @PathVariable("page") int page,
             @PathVariable("size") int size,
@@ -26,6 +26,10 @@ public class ViewControllerAsistencia {
             @PathVariable("idSemestre") int idSemestre,
             @PathVariable("fechaSearch") String fechaSearch,
             @RequestParam(value = "globalFilter", required = false) String globalFilter){
+
+        if (globalFilter == null || globalFilter.isEmpty()) {
+            globalFilter = null;
+        }
 
         ViewPageCommand command = new ViewPageCommand(
                 page,

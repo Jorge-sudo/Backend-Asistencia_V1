@@ -90,18 +90,18 @@ public class AsignaturaViewPersistenceAdapter implements IViewOutPortAsignaturaV
                         .semestre(semestre)
                         .turno(turno)
                         .dia(dia)
-                        .horario(search)
+                        .apellidoDocente(search)
                         .build(),
                 ExampleMatcher.matching() // Cambiar  por matching()
                         .withMatcher("carrera", match -> match.exact().ignoreCase())
                         .withMatcher("semestre", match -> match.exact().ignoreCase())
                         .withMatcher("turno", match -> match.exact().ignoreCase())
                         .withMatcher("dia", match -> match.exact().ignoreCase())
-                        .withMatcher("horario", match -> match.startsWith().ignoreCase())
+                        .withMatcher("apellidoDocente", match -> match.startsWith().ignoreCase())
                         .withIgnorePaths(
                                 "id", "laboratorio",
                                 "nroLaboratorio", "activo", "aula", "sigla",
-                                "nombre", "nombreDocente", "apellidoDocente")
+                                "nombre", "nombreDocente", "horario")
         );
     }
 

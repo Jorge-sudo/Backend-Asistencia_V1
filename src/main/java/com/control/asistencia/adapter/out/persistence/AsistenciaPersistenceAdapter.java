@@ -115,9 +115,9 @@ public class AsistenciaPersistenceAdapter implements
 
         if (carrera.isPresent()  && semestre.isPresent() ) {
             example = this.withFilter(carrera.get().getNombre(),
-                    semestre.get().getNombre(),
-                    command.getGlobalFilter(),
-                    command.getDateSearch());
+                                      semestre.get().getNombre(),
+                                      command.getGlobalFilter(),
+                                      command.getDateSearch());
         }
         return example;
     }
@@ -131,25 +131,10 @@ public class AsistenciaPersistenceAdapter implements
                         .fecha(Date.valueOf(fechaSearch))
                         .horarioMateriaDocente(
                                 HorarioMateriaDocenteEntity.builder()
-                                        .horario(
-                                                HorarioEntity.builder()
-                                                        .turno(
-                                                                TurnoEntity.builder()
-                                                                        .nombre(globalFilter)
-                                                                .build()
-                                                        )
-                                                .build()
-                                        )
                                         .materiaDocente(
                                                 MateriaDocenteEntity.builder()
                                                         .materiaCarreraSemestre(
                                                                 MateriaCarreraSemestreEntity.builder()
-                                                                        .materia(
-                                                                                MateriaEntity.builder()
-                                                                                        .nombre(globalFilter)
-                                                                                        .sigla(globalFilter)
-                                                                                        .build()
-                                                                        )
                                                                         .carrera(
                                                                                 CarreraEntity.builder()
                                                                                         .nombre(carrera)
@@ -164,9 +149,7 @@ public class AsistenciaPersistenceAdapter implements
                                                         )
                                                         .docente(
                                                                 DocenteEntity.builder()
-                                                                        .nombre(globalFilter)
                                                                         .apellido(globalFilter)
-                                                                        .email(globalFilter)
                                                                 .build()
                                                         )
                                                 .build()
@@ -175,32 +158,28 @@ public class AsistenciaPersistenceAdapter implements
                         )
                 .build(),
 
-                ExampleMatcher.matchingAny() // Cambiar  por matching()
-                        .withMatcher("aula.aula", match -> match.contains().ignoreCase())
-                        .withMatcher("aula.paralelo", match -> match.contains().ignoreCase())
-                        .withMatcher("aula.piso", match -> match.contains().ignoreCase())
+                ExampleMatcher.matching() // Cambiar  por matching()
                         .withMatcher("fecha", match -> match.exact().ignoreCase())
-                        .withMatcher("horarioMateriaDocente.horario.diaSemana.nombre", match -> match.contains().ignoreCase())
-                        .withMatcher("horarioMateriaDocente.horario.turno.nombre", match -> match.contains().ignoreCase())
-                        .withMatcher("horarioMateriaDocente.materiaDocente.materia.sigla", match -> match.contains().ignoreCase())
-                        .withMatcher("horarioMateriaDocente.materiaDocente.materia.nombre", match -> match.contains().ignoreCase())
-                        .withMatcher("horarioMateriaDocente.materiaDocente.docente.nombre", match -> match.contains().ignoreCase())
-                        .withMatcher("horarioMateriaDocente.materiaDocente.docente.apellido", match -> match.contains().ignoreCase())
-                        .withMatcher("horarioMateriaDocente.materiaDocente.docente.email", match -> match.contains().ignoreCase())
+                        .withMatcher("horarioMateriaDocente.materiaDocente.docente.apellido", match -> match.startsWith().ignoreCase())
                         .withMatcher("horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.carrera.nombre", match -> match.exact().ignoreCase())
                         .withMatcher("horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.semestre.nombre", match -> match.exact().ignoreCase())
                         .withIgnorePaths(
-                                "idAsistencia", "horaEntrada",
+                                "idAsistencia", "horaEntrada", "horarioMateriaDocente.horario.turno.nombre",
                                 "cantidadEstudiantes", "estado", "aula.idAula","aula.bloque", "aula.aula",
                                 "horarioMateriaDocente.idHorarioMateriaDocente", "horarioMateriaDocente.nroLaboratorio",
                                 "horarioMateriaDocente.laboratorio", "horarioMateriaDocente.horario.idHorario", "horarioMateriaDocente.horario.horaInicio",
                                 "horarioMateriaDocente.horario.horaFin", "horarioMateriaDocente.horario.diaSemana.idDiaSemana",
+                                "horarioMateriaDocente.horario.diaSemana.nombre", "horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.idMateriaCarreraSemestre",
+                                "horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.materia.idMateria", "horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.carrera.idCarrera",
+                                "horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.semestre.idSemestre", "horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.activo",
                                 "horarioMateriaDocente.horario.turno.idTurno", "horarioMateriaDocente.materiaDocente.idMateriaDocente",
                                 "horarioMateriaDocente.materiaDocente.docente.codRfid", "horarioMateriaDocente.materiaDocente.docente.ci",
                                 "horarioMateriaDocente.materiaDocente.docente.fotografia", "horarioMateriaDocente.materiaDocente.docente.genero",
                                 "horarioMateriaDocente.materiaDocente.docente.correoInstitucional", "horarioMateriaDocente.materiaDocente.docente.contrasenia",
                                 "horarioMateriaDocente.materiaDocente.docente.activo", "horarioMateriaDocente.horario.diaSemana.nombre",
-                                "aula.paralelo", "aula.piso")
+                                "aula.paralelo", "aula.piso", "horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.materia.sigla",
+                                "horarioMateriaDocente.materiaDocente.materiaCarreraSemestre.materia.nombre",
+                                "horarioMateriaDocente.materiaDocente.docente.nombre", "horarioMateriaDocente.materiaDocente.docente.email")
 
         );
     }
