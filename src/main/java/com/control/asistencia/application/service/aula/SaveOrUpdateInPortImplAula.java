@@ -27,14 +27,12 @@ public class SaveOrUpdateInPortImplAula implements
     @Override
     @Transactional
     public ResponseEntity<?> saveOrUpdateAula(CommandAula commandAula) {
-        Optional<CommandAula> response = this.iViewOutPortAula
-                .viewByIdAulaDTO(commandAula.getId());
-        return response.isEmpty()
-                ? ResponseBuilderApiRest.save(
-                this.iSaveOrUpdateOutPortAula.saveOrUpdateAula(commandAula)
-        )
-                : ResponseBuilderApiRest.update(
-                this.iSaveOrUpdateOutPortAula.saveOrUpdateAula(commandAula)
-        );
+        return commandAula.getId() > 0
+                ? ResponseBuilderApiRest.update(
+                    this.iSaveOrUpdateOutPortAula.saveOrUpdateAula(commandAula)
+                )
+                : ResponseBuilderApiRest.save(
+                    this.iSaveOrUpdateOutPortAula.saveOrUpdateAula(commandAula)
+                );
     }
 }
