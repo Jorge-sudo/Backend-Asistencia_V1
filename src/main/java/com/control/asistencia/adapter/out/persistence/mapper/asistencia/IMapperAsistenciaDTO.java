@@ -12,6 +12,7 @@ import java.sql.Time;
 @Component
 public class IMapperAsistenciaDTO {
     private final IViewInPortImagePersona iViewInPortImagePersona;
+    HorarioMateriaDocenteEntity horarioMateriaDocenteEntity;
     public IMapperAsistenciaDTO(IViewInPortImagePersona iViewInPortImagePersona) {
         this.iViewInPortImagePersona = iViewInPortImagePersona;
     }
@@ -127,9 +128,6 @@ public class IMapperAsistenciaDTO {
     }
 
     private Time asistenciaEntityHorarioMateriaDocenteEntityHorarioEntityHoraInicio(AsistenciaEntity asistenciaEntity) {
-        if ( asistenciaEntity == null ) {
-            return null;
-        }
         HorarioMateriaDocenteEntity horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
         if ( horarioMateriaDocenteEntity == null ) {
             return null;
@@ -142,9 +140,6 @@ public class IMapperAsistenciaDTO {
     }
 
     private Time asistenciaEntityHorarioMateriaDocenteEntityHorarioEntityHoraFin(AsistenciaEntity asistenciaEntity) {
-        if ( asistenciaEntity == null ) {
-            return null;
-        }
         HorarioMateriaDocenteEntity horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
         if ( horarioMateriaDocenteEntity == null ) {
             return null;
@@ -157,9 +152,6 @@ public class IMapperAsistenciaDTO {
     }
 
     private String asistenciaEntityHorarioMateriaDocenteEntityHorarioEntityDiaSemanaEntityNombre(AsistenciaEntity asistenciaEntity) {
-        if ( asistenciaEntity == null ) {
-            return null;
-        }
         HorarioMateriaDocenteEntity horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
         if ( horarioMateriaDocenteEntity == null ) {
             return null;
@@ -195,13 +187,7 @@ public class IMapperAsistenciaDTO {
     }
 
     private String asistenciaEntityHorarioMateriaDocenteEntityMateriaDocenteEntityMateriaEntitySigla(AsistenciaEntity asistenciaEntity) {
-        if ( asistenciaEntity == null ) {
-            return null;
-        }
-        HorarioMateriaDocenteEntity horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
-        if ( horarioMateriaDocenteEntity == null ) {
-            return null;
-        }
+        this.horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
         MateriaDocenteEntity materiaDocente = horarioMateriaDocenteEntity.getMateriaDocente();
         if ( materiaDocente == null ) {
             return null;
@@ -214,9 +200,6 @@ public class IMapperAsistenciaDTO {
     }
 
     private String asistenciaEntityHorarioMateriaDocenteEntityMateriaDocenteEntityMateriaEntityNombre(AsistenciaEntity asistenciaEntity) {
-        if ( asistenciaEntity == null ) {
-            return null;
-        }
         HorarioMateriaDocenteEntity horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
         if ( horarioMateriaDocenteEntity == null ) {
             return null;
@@ -233,13 +216,7 @@ public class IMapperAsistenciaDTO {
     }
 
     private String asistenciaEntityHorarioMateriaDocenteEntityMateriaDocenteEntityDocenteEntityNombre(AsistenciaEntity asistenciaEntity) {
-        if ( asistenciaEntity == null ) {
-            return null;
-        }
-        HorarioMateriaDocenteEntity horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
-        if ( horarioMateriaDocenteEntity == null ) {
-            return null;
-        }
+        this.horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
         MateriaDocenteEntity materiaDocente = horarioMateriaDocenteEntity.getMateriaDocente();
         if ( materiaDocente == null ) {
             return null;
@@ -252,13 +229,7 @@ public class IMapperAsistenciaDTO {
     }
 
     private String asistenciaEntityHorarioMateriaDocenteEntityMateriaDocenteEntityDocenteEntityApellido(AsistenciaEntity asistenciaEntity) {
-        if ( asistenciaEntity == null ) {
-            return null;
-        }
         HorarioMateriaDocenteEntity horarioMateriaDocenteEntity = asistenciaEntity.getHorarioMateriaDocente();
-        if ( horarioMateriaDocenteEntity == null ) {
-            return null;
-        }
         MateriaDocenteEntity materiaDocente = horarioMateriaDocenteEntity.getMateriaDocente();
         if ( materiaDocente == null ) {
             return null;
@@ -287,117 +258,5 @@ public class IMapperAsistenciaDTO {
             return null;
         }
         return docenteEntity.getFotografia();
-    }
-
-    protected AulaEntity asistenciaViewDTOToAulaEntity(AsistenciaViewDTO asistenciaViewDTO) {
-        if ( asistenciaViewDTO == null ) {
-            return null;
-        }
-
-        AulaEntity.AulaEntityBuilder aulaEntity = AulaEntity.builder();
-
-        aulaEntity.aula( asistenciaViewDTO.getAula() );
-        aulaEntity.paralelo( asistenciaViewDTO.getParalelo() );
-        aulaEntity.piso( asistenciaViewDTO.getPiso() );
-        aulaEntity.bloque( asistenciaViewDTO.getBloque() );
-
-        return aulaEntity.build();
-    }
-
-    protected DiaSemanaEntity asistenciaViewDTOToDiaSemanaEntity(AsistenciaViewDTO asistenciaViewDTO) {
-        if ( asistenciaViewDTO == null ) {
-            return null;
-        }
-
-        DiaSemanaEntity.DiaSemanaEntityBuilder diaSemana = DiaSemanaEntity.builder();
-
-        diaSemana.nombre( asistenciaViewDTO.getDiaSemana() );
-
-        return diaSemana.build();
-    }
-
-    protected TurnoEntity asistenciaViewDTOToTurnoEntity(AsistenciaViewDTO asistenciaViewDTO) {
-        if ( asistenciaViewDTO == null ) {
-            return null;
-        }
-
-        TurnoEntity.TurnoEntityBuilder turnoEntity = TurnoEntity.builder();
-
-        turnoEntity.nombre( asistenciaViewDTO.getTurno() );
-
-        return turnoEntity.build();
-    }
-
-    protected HorarioEntity asistenciaViewDTOToHorarioEntity(AsistenciaViewDTO asistenciaViewDTO) {
-        if ( asistenciaViewDTO == null ) {
-            return null;
-        }
-
-        HorarioEntity.HorarioEntityBuilder horario = HorarioEntity.builder();
-
-        horario.diaSemana( asistenciaViewDTOToDiaSemanaEntity( asistenciaViewDTO ) );
-        horario.turno( asistenciaViewDTOToTurnoEntity( asistenciaViewDTO ) );
-        horario.horaInicio( asistenciaViewDTO.getHoraInicio() );
-        horario.horaFin( asistenciaViewDTO.getHoraFin() );
-
-        return horario.build();
-    }
-
-    protected MateriaEntity asistenciaViewDTOToMateriaEntity(AsistenciaViewDTO asistenciaViewDTO) {
-        if ( asistenciaViewDTO == null ) {
-            return null;
-        }
-
-        MateriaEntity.MateriaEntityBuilder materia = MateriaEntity.builder();
-
-        materia.sigla( asistenciaViewDTO.getSigla() );
-        materia.nombre( asistenciaViewDTO.getNombreMateria() );
-
-        return materia.build();
-    }
-
-    protected DocenteEntity asistenciaViewDTOToDocenteEntity(AsistenciaViewDTO asistenciaViewDTO) {
-        if ( asistenciaViewDTO == null ) {
-            return null;
-        }
-
-        DocenteEntity.DocenteEntityBuilder<?, ?> docenteEntity = DocenteEntity.builder();
-
-        docenteEntity.nombre( asistenciaViewDTO.getNombreDocente() );
-        docenteEntity.apellido( asistenciaViewDTO.getApellidoDocente() );
-
-        return docenteEntity.build();
-    }
-
-    protected MateriaDocenteEntity asistenciaViewDTOToMateriaDocenteEntity(AsistenciaViewDTO asistenciaViewDTO) {
-        if ( asistenciaViewDTO == null ) {
-            return null;
-        }
-
-        MateriaDocenteEntity.MateriaDocenteEntityBuilder materiaDocente = MateriaDocenteEntity.builder();
-
-        materiaDocente.materiaCarreraSemestre(
-                MateriaCarreraSemestreEntity.builder()
-                        .materia( asistenciaViewDTOToMateriaEntity( asistenciaViewDTO ) )
-                        .build()
-        );
-        materiaDocente.docente( asistenciaViewDTOToDocenteEntity( asistenciaViewDTO ) );
-
-        return materiaDocente.build();
-    }
-
-    protected HorarioMateriaDocenteEntity asistenciaViewDTOToHorarioMateriaDocenteEntity(AsistenciaViewDTO asistenciaViewDTO) {
-        if ( asistenciaViewDTO == null ) {
-            return null;
-        }
-
-        HorarioMateriaDocenteEntity.HorarioMateriaDocenteEntityBuilder horarioMateriaDocenteEntity = HorarioMateriaDocenteEntity.builder();
-
-        horarioMateriaDocenteEntity.horario( asistenciaViewDTOToHorarioEntity( asistenciaViewDTO ) );
-        horarioMateriaDocenteEntity.materiaDocente( asistenciaViewDTOToMateriaDocenteEntity( asistenciaViewDTO ) );
-        horarioMateriaDocenteEntity.nroLaboratorio( asistenciaViewDTO.getNroLaboratorio() );
-        horarioMateriaDocenteEntity.laboratorio( asistenciaViewDTO.isLaboratorio() );
-
-        return horarioMateriaDocenteEntity.build();
     }
 }

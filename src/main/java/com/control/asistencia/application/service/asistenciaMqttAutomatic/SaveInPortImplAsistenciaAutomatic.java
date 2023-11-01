@@ -12,8 +12,8 @@ import com.control.asistencia.domain.docente.DocenteViewDTO;
 import com.control.asistencia.domain.horarioMateriaDocente.HorarioMateriaDocenteDTO;
 import com.control.asistencia.domain.mqttAsistencia.MqttMessageAsistencia;
 import com.control.asistencia.domain.mqttAsistencia.MqttMessageResponseAsistencia;
+import com.control.asistencia.util.asistenciaMqtt.AsistenciaStatus;
 import com.control.asistencia.util.asistenciaMqtt.UtilDia;
-import com.control.asistencia.util.asistenciaMqtt.UtilMaxAndMinMinutes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +43,7 @@ public class SaveInPortImplAsistenciaAutomatic {
     private final IViewOutPortAula iViewOutPortAula;
     private final ISaveOrUpdateOutPortAsistencia iSaveOrUpdateOutPortAsistencia;
     private final IViewOutPortHorarioMateriaDocente iViewOutPortHorarioMateriaDocente;
+    private final AsistenciaStatus asistenciaStatus;
     private static final Logger logger = LoggerFactory.getLogger(SaveInPortImplAsistenciaAutomatic.class);
     // Obtener la zona horaria definida en la propiedad "spring.jackson.time-zone"
     private final ZoneId zonaHoraria = ZoneId.of("America/La_Paz");
@@ -52,13 +53,15 @@ public class SaveInPortImplAsistenciaAutomatic {
             IViewOutPortDocente iViewOutPortDocente,
             IViewOutPortAula iViewOutPortAula,
             ISaveOrUpdateOutPortAsistencia iSaveOrUpdateOutPortAsistencia,
-            IViewOutPortHorarioMateriaDocente iViewOutPortHorarioMateriaDocente) {
+            IViewOutPortHorarioMateriaDocente iViewOutPortHorarioMateriaDocente,
+            AsistenciaStatus asistenciaStatus) {
 
         this.iMqttPubTopicGateway = iMqttPubTopicGateway;
         this.iViewOutPortDocente = iViewOutPortDocente;
         this.iViewOutPortAula = iViewOutPortAula;
         this.iSaveOrUpdateOutPortAsistencia = iSaveOrUpdateOutPortAsistencia;
         this.iViewOutPortHorarioMateriaDocente = iViewOutPortHorarioMateriaDocente;
+        this.asistenciaStatus = asistenciaStatus;
     }
 
     @Transactional
@@ -102,13 +105,16 @@ public class SaveInPortImplAsistenciaAutomatic {
                                 .build()
                 );
 
-                asistencia.ifPresent(commandAsistencia -> this.iMqttPubTopicGateway.sendMessageMqtt(
-                        this.asistenciaResponse,
-                        MqttMessageResponseAsistencia.builder()
-                                .idAsistencia(commandAsistencia.getIdAsistencia())
-                                .estado("OK")
-                                .build().toString()
-                ));
+                asistencia.ifPresent(
+
+                        commandAsistencia -> this.iMqttPubTopicGateway.sendMessageMqtt(
+                                this.asistenciaResponse,
+                                MqttMessageResponseAsistencia.builder()
+                                    .idAsistencia(commandAsistencia.getIdAsistencia())
+                                    .estado("OK")
+                                    .build().toString()
+                        )
+                );
             }else{
                 this.iMqttPubTopicGateway.sendMessageMqtt(
                         this.asistenciaResponse,
@@ -136,22 +142,12 @@ public class SaveInPortImplAsistenciaAutomatic {
         Set<HorarioMateriaDocenteDTO> horarios =
                 this.iViewOutPortHorarioMateriaDocente.viewByDocenteAndDiaDTO(ci, dia);
 
-        Optional<HorarioMateriaDocenteDTO> docenteLate = horarios.stream()
-                .filter(horario -> UtilMaxAndMinMinutes.increaseMinutes(horario.getHoraInicio()).before(time)
-                        && horario.getHoraFin().after(time))
-                .findFirst();
-
-        Optional<HorarioMateriaDocenteDTO> docentePunctual = horarios.stream()
-                .filter(horario -> UtilMaxAndMinMinutes.delayMinutes(horario.getHoraInicio()).before(time)
-                        && UtilMaxAndMinMinutes.increaseMinutes(horario.getHoraInicio()).after(time))
-                .findFirst();
-
-        return docenteLate.map(horario -> {
+        return  this.asistenciaStatus.getDocenteLate(horarios, time).map(horario -> {
             logger.info("HorarioMateriaDocentesAtrasado =>" + horario);
             this.iMqttPubTopicGateway.sendMessageMqtt(materiaSendLcdTopic, horario.getMateria());
             this.idHorarioMateriaDocente = horario.getIdHorarioMateriaDocente();
             return "Impuntual";
-        }).orElseGet(() -> docentePunctual.map(horario -> {
+        }).orElseGet(() ->  this.asistenciaStatus.getDocentePunctual(horarios, time).map(horario -> {
             logger.info("HorarioMateriaDocentesPuntuales =>" + horario);
             this.iMqttPubTopicGateway.sendMessageMqtt(materiaSendLcdTopic, horario.getMateria());
             this.idHorarioMateriaDocente = horario.getIdHorarioMateriaDocente();

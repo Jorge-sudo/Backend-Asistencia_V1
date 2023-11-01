@@ -1,7 +1,7 @@
 package com.control.asistencia.adapter.in.web.asistencia;
 
 import com.control.asistencia.application.port.in.asistencia.ISaveOrUpdateInPortAsistencia;
-import com.control.asistencia.application.port.in.asistencia.command.CommandAsistencia;
+import com.control.asistencia.application.port.in.asistencia.command.CommandAsistenciaForm;
 import com.control.asistencia.common.WebAdapter;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class SaveOrUpdateControllerAsistencia {
     }
 
     @PostMapping("/asistencias")
-    ResponseEntity<?> saveOrUpdateAsistencia(@RequestBody @Valid CommandAsistencia data){
+    ResponseEntity<?> saveOrUpdateAsistencia(@RequestBody @Valid CommandAsistenciaForm data){
         return this.iSaveOrUpdateInPortAsistencia.saveOrUpdateAsistencia(data);
     }
 }
