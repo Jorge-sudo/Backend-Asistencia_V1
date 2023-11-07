@@ -3,9 +3,8 @@ package com.control.asistencia.adapter.in.web.auth;
 import com.control.asistencia.common.WebAdapter;
 import com.control.asistencia.config.jwt.JwtGenerador;
 import com.control.asistencia.domain.login.LoginRequest;
-import com.control.asistencia.domain.login.LoginResponse;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseCookie;
 
 @WebAdapter
 @RestController
@@ -39,9 +39,9 @@ public class AuthLoginController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>(
-                new LoginResponse(
-                        jwtGenerador.generarToken(authentication)
-                ), HttpStatus.OK);
+
+        ResponseCookie jwtCookie = this.jwtGenerador.generateJwtCookie(authentication);
+
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).build();
     }
 }

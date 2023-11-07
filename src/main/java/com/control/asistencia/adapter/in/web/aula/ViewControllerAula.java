@@ -17,19 +17,6 @@ public class ViewControllerAula {
     public ViewControllerAula(IViewInPortAula iViewInPortAula){
         this.iViewInPortAula = iViewInPortAula;
     }
-    @GetMapping(path = "/aulas/page/{page}/{size}/{sortBy}")
-    ResponseEntity<?> viewPageAula(
-            @PathVariable("page") int page,
-            @PathVariable("size") int size,
-            @PathVariable("sortBy") String sortBy ){
-
-        ViewPageCommand command = new ViewPageCommand(
-                page,
-                size,
-                sortBy);
-
-        return this.iViewInPortAula.viewPageAulaDTO(command);
-    }
 
     @GetMapping(path = "/aulas/{id}")
     ResponseEntity<?> viewByIdAula(

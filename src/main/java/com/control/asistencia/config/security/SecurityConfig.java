@@ -66,17 +66,182 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/swagger-ui/index.html#/").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/api/docentes/**").hasAnyAuthority( "ADMIN" ,"USER")
-                        .requestMatchers(HttpMethod.GET,"/api/docente/**").hasAnyAuthority("ADMIN" , "USER")
-                        .requestMatchers(HttpMethod.DELETE,"/api/docente/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/docente/actualizar").hasAnyAuthority("ADMIN", "USER")
+
+                        /* ---- PERSONA IMAGE ---- */
+
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/imagePersona/upload"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- DOCENTE ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/docentes",
+                                "/api/docentes/page/{page}/{size}/{shortOrder}/{sortField}",
+                                "/api/docentes/{ci}"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/docentes/activo",
+                                "/api/docentes"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- SUPERVISOR ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/supervisores",
+                                "/api/supervisores/{ci}"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/supervisores/activo",
+                                "/api/supervisores"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- MATERIA-CARRERA-SEMESTRE ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/materiaCarreraSemestres",
+                                "/api/materiaCarreraSemestres/page/{page}/{size}/{shortOrder}/{sortField}",
+                                "/api/materiaCarreraSemestres/{id}",
+                                "/api/materiaCarreraSemestres/sigla/{sigla}"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/materiaCarreraSemestres/activo",
+                                "/api/materiaCarreraSemestres"
+                        ).hasAnyAuthority( "ADMIN")
+                        .requestMatchers(
+                                HttpMethod.DELETE,
+                                "/api/materiaCarreraSemestres/{id}"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- SEMESTRES ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/semestres"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/semestres"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- MATERIA ---- */
+
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/materias"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- CARRERAS---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/carreras"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+
+                        /* ---- AULA ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/aulas",
+                                "/api/aulas/{id}"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/aulas"
+                        ).hasAnyAuthority( "ADMIN")
+                        .requestMatchers(
+                                HttpMethod.DELETE,
+                                "/api/aulas/{id}"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- TURNO ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/turnos"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+
+                        /* ---- ASIGNATURA ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/asignaturas/page/{page}/{size}/{shortOrder}/{sortField}/{idCarrera}/{idDia}/{idSemestre}/{idTurno}"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/asignaturas"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- HORARIO ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/horarios"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/horarios"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- DOCENTE LICENCIA ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/docenteLicencias",
+                                "/api/docenteLicencias/page/active/{page}/{size}/{shortOrder}/{sortField}",
+                                "/api/docenteLicencias/page/inactive/{page}/{size}/{shortOrder}/{sortField}",
+                                "/api/docenteLicencias/page/search/{page}/{size}/{shortOrder}/{sortField}"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/docenteLicencias"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- DIA SEMANA ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/diasSemana"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+
+                        /* ---- LICENCIA ---- */
+
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/licencias"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- ASISTENCIA ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/asistencias/page/{page}/{size}/{shortOrder}/{sortField}/{idCarrera}/{idSemestre}/{fechaSearch}"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/asistencias"
+                        ).hasAnyAuthority( "ADMIN")
+
+                        /* ---- ROL ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/roles"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
+
                         .anyRequest().authenticated()
                 )
                 .cors(withDefaults())
                 .addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exception) -> exception
                         .authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
-
                 )
                 .userDetailsService(this.customUsersDetailsService)
                 .sessionManagement((session) -> session

@@ -3,8 +3,6 @@ package com.control.asistencia.config.exception;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.config.exception.exceptions.TokenExpiredExceptionMessage;
 import com.control.asistencia.config.exception.exceptions.TokenNotFoundExceptionMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +20,7 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex) {
         ex.printStackTrace();

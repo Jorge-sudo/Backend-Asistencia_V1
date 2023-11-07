@@ -25,7 +25,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             HttpServletResponse response,
             AuthenticationException authException) throws IOException {
 
-        String token = request.getHeader(JwtSecurityConstants.HEADER_AUTHORIZATION_KEY);
+        String token =  this.jwtGenerador.getJwtFromCookies(request);
 
         if (token == null || token.isEmpty()) {
             response.sendError(

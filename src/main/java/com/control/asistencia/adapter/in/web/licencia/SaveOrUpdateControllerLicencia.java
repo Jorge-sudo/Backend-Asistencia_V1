@@ -18,7 +18,7 @@ public class SaveOrUpdateControllerLicencia {
     public SaveOrUpdateControllerLicencia(ISaveOrUpdateInPortLicencia iSaveOrUpdateInPortLicencia) {
         this.iSaveOrUpdateInPortLicencia = iSaveOrUpdateInPortLicencia;
     }
-    @PostMapping(path = "/licencia")
+    @PostMapping(path = "/licencias")
     ResponseEntity<?> saveOrUpdateLicencia(@RequestBody @Valid CommandSaveOrViewLicencia data){
         return this.iSaveOrUpdateInPortLicencia.saveOrUpdateLicencia(data);
     }
