@@ -5,7 +5,6 @@ import com.control.asistencia.application.port.in.commandGeneric.SaveOrViewComma
 import org.mapstruct.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Mapper(
         //indicamos que la implementacion sea generado como un componente de spring para poder inyectarl

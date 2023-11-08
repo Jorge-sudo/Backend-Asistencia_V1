@@ -32,7 +32,8 @@ public class CustomUsersDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(persona.getRol().getNombre()));
             // Crea y devuelve un objeto User de Spring Security con el correo institucional, la contraseña y las autoridades del usuario
             return new UserDetailsImpl(
-                    persona.getCi(),
+                    persona.getNombre() + " " + persona.getApellido(),
+                    persona.getRol().getNombre(),
                     persona.getEmail(),
                     persona.getContrasenia(),
                     authorities);

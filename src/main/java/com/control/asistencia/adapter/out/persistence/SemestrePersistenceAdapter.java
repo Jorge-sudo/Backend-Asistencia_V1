@@ -9,10 +9,8 @@ import com.control.asistencia.application.port.out.semestre.IViewOutPortSemestre
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @PersistenceAdapter
 public class SemestrePersistenceAdapter implements

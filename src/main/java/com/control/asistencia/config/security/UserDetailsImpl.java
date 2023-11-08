@@ -6,19 +6,22 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
-@Getter
 @Setter
+@Getter
 public class UserDetailsImpl extends User {
-    private long id;
+    private String name;
+    private String role;
 
     public UserDetailsImpl(
-            long id,
+            String name,
+            String role,
             String correoInstitucional,
             String contrasenia,
             Collection<? extends GrantedAuthority> authorities) {
 
         super(correoInstitucional, contrasenia, authorities);
-        this.id = id;
+        this.name = name;
+        this.role = role;
     }
 
 }

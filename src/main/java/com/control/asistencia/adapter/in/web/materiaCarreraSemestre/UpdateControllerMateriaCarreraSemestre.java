@@ -1,6 +1,5 @@
 package com.control.asistencia.adapter.in.web.materiaCarreraSemestre;
 
-import com.control.asistencia.application.port.in.docente.command.UpdateActivoCommandDocente;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.IUpdateInPortMateriaCarreraSemestre;
 import com.control.asistencia.application.port.in.materiaCarreraSemestre.command.UpdateActivoCommandMateriaCarreraSemestre;
 import com.control.asistencia.common.WebAdapter;

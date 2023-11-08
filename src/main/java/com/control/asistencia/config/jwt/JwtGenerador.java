@@ -17,19 +17,12 @@ public class JwtGenerador {
     public String generarToken(Authentication authentication) {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         String username = userDetails.getUsername();
-        long userId = userDetails.getId();
         Date tiempoActual = new Date();
         Date HourExpirationToken = new
                 Date(tiempoActual.getTime() + JwtSecurityConstants.JWT_EXPIRATION_TOKEN);
 
-        String role = authentication.getAuthorities().stream().findFirst().isPresent()
-                ? authentication.getAuthorities().stream().findFirst().get().getAuthority()
-                : "USER" ;
-
         return Jwts.builder()
                 .setSubject(username)
-                .claim("userId", userId)
-                .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(HourExpirationToken)
                 .signWith(JwtSecurityConstants.JWT_FIRMA, SignatureAlgorithm.HS512)
@@ -48,13 +41,12 @@ public class JwtGenerador {
     public ResponseCookie generateJwtCookie(Authentication authentication) {
         String jwt = generarToken(authentication);
         return ResponseCookie.from(JwtSecurityConstants.JWT_COOKIE_NAME, jwt)
-                                        .path("/api")
-                                        .maxAge(24 * 60 * 60)
-                                        .httpOnly(true).build();
-    }
-
-    public ResponseCookie getCleanJwtCookie() {
-        return ResponseCookie.from(JwtSecurityConstants.JWT_COOKIE_NAME, null).path("/api").build();
+                .path("/api")
+                .maxAge(24 * 60 * 60)
+                .httpOnly(true)
+                .sameSite("Strict")
+                .secure(false)
+                .build();
     }
 
     public String obtenerUsernameDeJwt(String token) {

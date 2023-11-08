@@ -4,24 +4,19 @@ import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.aula.ISaveOrUpdateInPortAula;
 import com.control.asistencia.application.port.in.aula.command.CommandAula;
 import com.control.asistencia.application.port.out.aula.ISaveOrUpdateOutPortAula;
-import com.control.asistencia.application.port.out.aula.IViewOutPortAula;
 import com.control.asistencia.common.UseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @UseCase
 public class SaveOrUpdateInPortImplAula implements
         ISaveOrUpdateInPortAula {
     private final ISaveOrUpdateOutPortAula iSaveOrUpdateOutPortAula;
-    private final IViewOutPortAula iViewOutPortAula;
     public SaveOrUpdateInPortImplAula(
-            ISaveOrUpdateOutPortAula iSaveOrUpdateOutPortAula ,
-            IViewOutPortAula iViewOutPortAula){
+            ISaveOrUpdateOutPortAula iSaveOrUpdateOutPortAula ){
 
         this.iSaveOrUpdateOutPortAula = iSaveOrUpdateOutPortAula;
-        this.iViewOutPortAula = iViewOutPortAula;
     }
 
     @Override

@@ -2,7 +2,9 @@ package com.control.asistencia.adapter.in.web.auth;
 
 import com.control.asistencia.common.WebAdapter;
 import com.control.asistencia.config.jwt.JwtGenerador;
+import com.control.asistencia.config.security.UserDetailsImpl;
 import com.control.asistencia.domain.login.LoginRequest;
+import com.control.asistencia.domain.login.LoginResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,7 @@ public class AuthLoginController {
     }
     @PostMapping("/login")
     ResponseEntity<?> login(@RequestBody @Valid LoginRequest loginRequest) {
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -40,8 +43,18 @@ public class AuthLoginController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
         ResponseCookie jwtCookie = this.jwtGenerador.generateJwtCookie(authentication);
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                .body(
+                        LoginResponse.builder()
+                                .name(userDetails.getName())
+                                .role(userDetails.getRole())
+                                .build()
+                );
     }
 }
