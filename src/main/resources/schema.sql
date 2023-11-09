@@ -169,33 +169,32 @@ FROM    materia m
          JOIN docente d ON md.ci = d.ci
          JOIN persona p ON d.ci = p.ci;
 
-CREATE VIEW IF NOT EXISTS vista_docente_dashboard AS
+CREATE VIEW IF NOT EXISTS dashboard_view AS
 SELECT
     1 AS id,
-    COUNT(*)  AS total_docentes,
-    CAST(SUM(IF(p.activo = FALSE, 1, 0)) AS INTEGER) AS total_inactivos
-FROM docente d
-         JOIN persona p ON d.ci = p.ci;
+    (SELECT COUNT(*)
+     FROM materia_carrera_semestre) AS 'materias',
+    (SELECT COUNT(*)
+     FROM materia_carrera_semestre mcs
+     WHERE mcs.activo = TRUE ) AS 'materias_activas',
+    (SELECT COUNT(*)
+     FROM docente)  AS 'docentes',
+    (SELECT COUNT(*)
+     FROM docente d
+     JOIN persona p ON d.ci =  p.ci
+     WHERE p.activo = TRUE) AS 'docentes_activos',
+    (SELECT COUNT(*)
+     FROM asistencia a
+     WHERE a.fecha = CURDATE()) AS 'asistencias_hoy',
+    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS INTEGER)
+     FROM asistencia a
+     WHERE a.fecha = CURDATE())
+        AS 'asistencias_puntuales_hoy',
+    (SELECT COUNT(*)
+     FROM asistencia a
+     WHERE MONTH(a.fecha) = MONTH(CURDATE())) AS 'asistencias_mes',
+    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS INTEGER)
+     FROM asistencia a
+     WHERE MONTH(a.fecha) = MONTH(CURDATE()))
+        AS 'asistencias_puntuales_mes';
 
-#CREATE VIEW IF NOT EXISTS vista_docente_asistencia_dashboard AS
-#SELECT
-#    1 AS id,
-#   COUNT(*) AS docente_asistencia_total,
-#   CAST(SUM(IF(a.estado = 'Impuntual', 1, 0)) AS INTEGER ) AS total_inpuntuales
-#FROM persona p JOIN  docente d  ON p.ci = d.ci JOIN docente_asistencia da
-#ON da.ci = d.ci JOIN asistencia a ON da.id_asistencia= a.id_asistencia  WHERE a.fecha = CURDATE();
-
-#CREATE VIEW IF NOT EXISTS vista_docente_asistencia_dashboard_mes AS
-#SELECT
-#   1 AS id,
-#   COUNT(*)  AS docente_asistencia_total,
-#   CAST(SUM(IF(a.estado = 'Impuntual', 1, 0)) AS INTEGER) AS total_inpuntuales
-#FROM persona p JOIN  docente d  ON p.ci = d.ci JOIN docente_asistencia da
-#ON da.ci = d.ci JOIN asistencia a ON da.id_asistencia= a.id_asistencia WHERE MONTH(a.fecha) = MONTH(CURDATE());
-
-CREATE VIEW IF NOT EXISTS vista_materia_carrera_dashboard AS
-SELECT
-    1 AS id,
-    COUNT(*) AS total_materia_carreras,
-    CAST(SUM(IF(mcs.activo = FALSE, 1, 0)) AS INTEGER) AS total_inactivos
-FROM carrera c JOIN  materia_carrera_semestre mcs  ON c.id_carrera = mcs.id_carrera JOIN materia m  ON m.sigla = mcs.sigla;
