@@ -5,6 +5,7 @@ import com.control.asistencia.config.exception.exceptions.TokenExpiredExceptionM
 import com.control.asistencia.config.exception.exceptions.TokenNotFoundExceptionMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -31,7 +32,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             response.sendError(
                     HttpServletResponse.SC_UNAUTHORIZED,
                     "No se proporcionó un token de autenticación");
-            throw new TokenNotFoundExceptionMessage("No se proporcionó un token de autenticación");
+            ResponseCookie cleanJwtCookie = this.jwtGenerador.getCleanJwtCookie();
+            response.addHeader("Set-Cookie", cleanJwtCookie.toString());
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+            throw new TokenNotFoundExceptionMessage("El token de autenticación es inválido o ha expirado");
         }
 
         boolean tokenValido = jwtGenerador.validarToken(token);
@@ -40,9 +44,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             response.sendError(
                     HttpServletResponse.SC_UNAUTHORIZED,
                     "El token de autenticación es inválido o ha expirado");
+            ResponseCookie cleanJwtCookie = this.jwtGenerador.getCleanJwtCookie();
+            response.addHeader("Set-Cookie", cleanJwtCookie.toString());
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
             throw new TokenExpiredExceptionMessage("El token de autenticación es inválido o ha expirado");
         }
-
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
     }
 }

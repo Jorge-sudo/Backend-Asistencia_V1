@@ -41,7 +41,7 @@ public class SecurityConfig {
     }
 
 
-    //Este bean va a encargarse de verificar la información de los usuarios que se loguearán en nuestra api
+    //Este bean va a encargarse de verificar la información de los usuarios que iniciaran sesión en nuestra aplicación
     @Bean
     AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -65,7 +65,15 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/logout").permitAll()
                         .requestMatchers("/swagger-ui/index.html#/").permitAll()
+
+                        /* ---- DASHBOARD ---- */
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/dashboard"
+                        ).hasAnyAuthority( "ADMIN" ,"USER")
 
                         /* ---- PERSONA IMAGE ---- */
 

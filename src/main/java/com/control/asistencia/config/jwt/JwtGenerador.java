@@ -42,11 +42,16 @@ public class JwtGenerador {
         String jwt = generarToken(authentication);
         return ResponseCookie.from(JwtSecurityConstants.JWT_COOKIE_NAME, jwt)
                 .path("/api")
-                .maxAge(24 * 60 * 60)
+                .maxAge( 60 * 60)
                 .httpOnly(true)
                 .sameSite("Strict")
                 .secure(false)
                 .build();
+    }
+
+    public ResponseCookie getCleanJwtCookie() {
+        return ResponseCookie.from(JwtSecurityConstants.JWT_COOKIE_NAME, null)
+                .path("/api").build();
     }
 
     public String obtenerUsernameDeJwt(String token) {
@@ -68,11 +73,17 @@ public class JwtGenerador {
     }
 
     public Boolean validarToken(String token) {
-        Jwts.parserBuilder()
-                .setSigningKey(JwtSecurityConstants.JWT_FIRMA)
-                .build()
-                .parseClaimsJws(token);
-        return true;
+        try{
+            Jwts.parserBuilder()
+                    .setSigningKey(JwtSecurityConstants.JWT_FIRMA)
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
 }
