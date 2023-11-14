@@ -52,6 +52,7 @@ public class AuthLoginController {
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .body(
                         LoginResponse.builder()
+                                .ci(userDetails.getCi())
                                 .name(userDetails.getName())
                                 .role(userDetails.getRole())
                                 .build()

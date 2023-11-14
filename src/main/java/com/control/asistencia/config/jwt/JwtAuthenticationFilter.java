@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Validamos la información del token
         if (StringUtils.hasText(token) && jwtGenerador.validarToken(token)) {
             String username = jwtGenerador.obtenerUsernameDeJwt(token);
-            UserDetails userDetails = customUsersDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = this.customUsersDetailsService.loadUserByUsername(username);
             //Cargamos una lista de String con los roles alojados en BD
             String role = userDetails.getAuthorities().stream().findFirst().isPresent()
                     ? userDetails.getAuthorities().stream().findFirst().get().getAuthority()
