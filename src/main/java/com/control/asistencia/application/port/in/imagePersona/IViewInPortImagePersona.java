@@ -6,4 +6,5 @@ import java.net.MalformedURLException;
 public interface IViewInPortImagePersona {
     String viewByNameImagePersona(String nombreFoto) throws MalformedURLException;
     boolean thisImagePersonaExists(String nameImg) throws IOException;
+
 }

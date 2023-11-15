@@ -5,6 +5,7 @@ import com.control.asistencia.config.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -24,6 +25,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 //Indicamos que se activa la seguridad web en nuestra aplicación y además esta será una clase la cual contendrá toda la configuración referente a la seguridad
 public class SecurityConfig {
+
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final CustomUsersDetailsService customUsersDetailsService;
@@ -79,8 +81,9 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 HttpMethod.POST,
-                                "/api/imagePersona/upload"
-                        ).hasAnyAuthority( "ADMIN")
+                                "/api/image_persona/upload",
+                                "/api/persona/update_password"
+                        ).hasAnyAuthority( "ADMIN", "USER")
 
                         /* ---- DOCENTE ---- */
 
@@ -90,6 +93,12 @@ public class SecurityConfig {
                                 "/api/docentes/page/{page}/{size}/{shortOrder}/{sortField}",
                                 "/api/docentes/{ci}"
                         ).hasAnyAuthority( "ADMIN" ,"USER")
+
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/docentes/perfil"
+                        ).hasAnyAuthority( "ADMIN", "USER")
+
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/docentes/activo",
@@ -103,6 +112,12 @@ public class SecurityConfig {
                                 "/api/supervisores",
                                 "/api/supervisores/{ci}"
                         ).hasAnyAuthority( "ADMIN" ,"USER")
+
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/supervisores/perfil"
+                        ).hasAnyAuthority( "ADMIN", "USER")
+
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/supervisores/activo",

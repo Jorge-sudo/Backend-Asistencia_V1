@@ -1,6 +1,5 @@
 package com.control.asistencia.config.jwt;
 
-import com.control.asistencia.config.security.CustomUsersDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -17,14 +17,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final CustomUsersDetailsService customUsersDetailsService;
+    private final UserDetailsService userDetailsService;
     private final JwtGenerador jwtGenerador;
-    @Autowired
+
     public JwtAuthenticationFilter(
-            CustomUsersDetailsService customUsersDetailsService,
+            UserDetailsService userDetailsService,
             JwtGenerador jwtGenerador) {
 
-        this.customUsersDetailsService = customUsersDetailsService;
+        this.userDetailsService = userDetailsService;
         this.jwtGenerador = jwtGenerador;
     }
 
@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Validamos la información del token
         if (StringUtils.hasText(token) && jwtGenerador.validarToken(token)) {
             String username = jwtGenerador.obtenerUsernameDeJwt(token);
-            UserDetails userDetails = this.customUsersDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             //Cargamos una lista de String con los roles alojados en BD
             String role = userDetails.getAuthorities().stream().findFirst().isPresent()
                     ? userDetails.getAuthorities().stream().findFirst().get().getAuthority()

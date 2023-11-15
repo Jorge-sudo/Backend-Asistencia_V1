@@ -27,9 +27,10 @@ public class ViewInPortImplImagePersona implements IViewInPortImagePersona {
         this.storagePaths.createDirectoryIsNoTExists();
     }
 
+
+
     @Override
     public String viewByNameImagePersona(String nameImg) {
-
         String base64;
         // Se obtiene la ruta completa del archivo a cargar
         Path rutaArchivo = this.storagePaths.imgDirectory().resolve(nameImg).toAbsolutePath();
@@ -58,7 +59,6 @@ public class ViewInPortImplImagePersona implements IViewInPortImagePersona {
     public boolean thisImagePersonaExists(String nameImg) {
         // Se obtiene la ruta completa del archivo a cargar
         Path rutaArchivo = this.storagePaths.imgDirectory().resolve(nameImg).toAbsolutePath();
-
 
         // Se crea un recurso de Spring Resource a partir de la ruta del archivo
         Resource recurso = null;

@@ -68,7 +68,7 @@ public class ResponseBuilderApiRest {
 
     public static ResponseEntity<?> updateActivo(boolean result) {
         return buildResponse(
-                "Tus datos se actualizaron con éxito.",
+                result ? "Tus datos se actualizaron con éxito." : "Tus datos no se actualizaron, revisa el id enviado.",
                 HttpStatus.OK,
                 false,
                 false,
@@ -76,6 +76,29 @@ public class ResponseBuilderApiRest {
                 false,
                 Optional.empty());
     }
+
+    public static ResponseEntity<?> updatePerfil(boolean result) {
+        return buildResponse(
+                result ? "Tus datos se actualizaron con éxito." : "Tus datos no se actualizaron, revisa el id enviado.",
+                HttpStatus.OK,
+                false,
+                false,
+                result,
+                false,
+                Optional.empty());
+    }
+
+    public static ResponseEntity<?> updatePassword(boolean result) {
+        return buildResponse(
+                result ? "Su contraseña se actualizaron con éxito." : "Su contraseña no se actualizo, contraseña incorrecta.",
+                HttpStatus.OK,
+                false,
+                false,
+                result,
+                false,
+                Optional.empty());
+    }
+
     public static ResponseEntity<?> delete(boolean result) {
         return buildResponse(
                 result ? "Tus datos fueron eliminados con éxito.": "Tus datos no fueron eliminados, revisa el id enviado.",

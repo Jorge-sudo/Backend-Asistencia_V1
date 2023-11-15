@@ -6,12 +6,14 @@ import com.control.asistencia.adapter.out.persistence.repository.IRepositoryRol;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositorySupervisor;
 import com.control.asistencia.application.port.in.supervisor.command.SaveCommandSupervisor;
 import com.control.asistencia.application.port.in.supervisor.command.UpdateActivoCommandSupervisor;
+import com.control.asistencia.application.port.in.supervisor.command.UpdatePerfilCommandSupervisor;
 import com.control.asistencia.application.port.out.supervisor.ISaveOrUpdateOutPortSupervisor;
 import com.control.asistencia.application.port.out.supervisor.IUpdateOutPortSupervisor;
 import com.control.asistencia.application.port.out.supervisor.IViewOutPortSupervisor;
 import com.control.asistencia.common.PersistenceAdapter;
 import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.domain.supervisor.SupervisorViewDTO;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 import java.util.Set;
@@ -25,14 +27,17 @@ public class SupervisorPersistenceAdapterOrUpdate implements
     private final IRepositorySupervisor iRepositorySupervisor;
     private final MapperSupervisor mapperSupervisor;
     private final IRepositoryRol iRepositoryRol;
+    private final PasswordEncoder passwordEncoder;
     public SupervisorPersistenceAdapterOrUpdate(
             IRepositorySupervisor iRepositorySupervisor ,
             MapperSupervisor mapperSupervisor,
-            IRepositoryRol iRepositoryRol) {
+            IRepositoryRol iRepositoryRol,
+            PasswordEncoder passwordEncoder) {
 
         this.mapperSupervisor = mapperSupervisor;
         this.iRepositorySupervisor = iRepositorySupervisor;
         this.iRepositoryRol = iRepositoryRol;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -65,7 +70,7 @@ public class SupervisorPersistenceAdapterOrUpdate implements
                                         .email(command.getEmail())
                                         .genero(command.getGenero())
                                         .correoInstitucional(command.getCorreoInstitucional())
-                                        .contrasenia(command.getContrasenia())
+                                        .contrasenia(this.passwordEncoder.encode(command.getContrasenia()))
                                         .activo(command.isActivo())
                                         .rol(this.iRepositoryRol.findById(command.getRol())
                                                 .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el rol con el ID: " + command.getRol())))
@@ -84,5 +89,19 @@ public class SupervisorPersistenceAdapterOrUpdate implements
         supervisorEntity.setActivo(command.isActivo());
         supervisorEntity = this.iRepositorySupervisor.save(supervisorEntity);
         return supervisorEntity.isActivo() == command.isActivo();
+    }
+
+    @Override
+    public boolean updateSupervisorPerfil(UpdatePerfilCommandSupervisor command) {
+        return  this.iRepositorySupervisor.findById(command.getCi())
+                .map(supervisorEntity -> {
+                            supervisorEntity.setEmail(command.getEmail());
+                            supervisorEntity.setActivo(command.isActivo());
+                            supervisorEntity.setReporteEmail(command.isReporteEmail());
+                            supervisorEntity.setReporteInstitucional(command.isReporteInstitucional());
+                            this.iRepositorySupervisor.save(supervisorEntity);
+                            return true;
+                        }
+                ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el supervisor con el CI: " + command.getCi()));
     }
 }

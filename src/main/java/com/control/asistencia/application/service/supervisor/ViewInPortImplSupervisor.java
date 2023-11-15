@@ -1,5 +1,6 @@
 package com.control.asistencia.application.service.supervisor;
 
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.supervisor.IViewInPortSupervisor;
 import com.control.asistencia.application.port.out.supervisor.IViewOutPortSupervisor;
@@ -30,7 +31,7 @@ public class ViewInPortImplSupervisor implements IViewInPortSupervisor {
         return ResponseBuilderApiRest.view(
                 Optional.of(
                         this.iViewOutPortSupervisor.viewByCiSupervisorDTO(ci)
-                            .orElseThrow(() -> new RuntimeException("No existe el supervisor con el ci: " + ci))
+                            .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el supervisor con el ci: " + ci))
                 )
         );
     }

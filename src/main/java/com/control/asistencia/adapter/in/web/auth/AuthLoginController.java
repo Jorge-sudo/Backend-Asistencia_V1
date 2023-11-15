@@ -55,6 +55,7 @@ public class AuthLoginController {
                                 .ci(userDetails.getCi())
                                 .name(userDetails.getName())
                                 .role(userDetails.getRole())
+                                .base64Image(userDetails.getBase64Image())
                                 .build()
                 );
     }

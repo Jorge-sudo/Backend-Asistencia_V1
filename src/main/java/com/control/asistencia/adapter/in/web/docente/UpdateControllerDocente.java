@@ -2,6 +2,7 @@ package com.control.asistencia.adapter.in.web.docente;
 
 import com.control.asistencia.application.port.in.docente.IUpdateInPortDocente;
 import com.control.asistencia.application.port.in.docente.command.UpdateActivoCommandDocente;
+import com.control.asistencia.application.port.in.docente.command.UpdatePerfilCommandDocente;
 import com.control.asistencia.common.WebAdapter;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +24,11 @@ public class UpdateControllerDocente {
     ResponseEntity<?> updateDocenteActivo(
             @RequestBody @Valid UpdateActivoCommandDocente command){
         return this.iUpdateInPortDocente.updateDocenteActivo(command);
+    }
+
+    @PostMapping("/docentes/perfil")
+    ResponseEntity<?> updateDocentePerfil(
+            @RequestBody @Valid UpdatePerfilCommandDocente command){
+        return this.iUpdateInPortDocente.updatePerfilDocente(command);
     }
 }

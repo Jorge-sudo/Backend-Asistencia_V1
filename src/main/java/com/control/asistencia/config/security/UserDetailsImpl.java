@@ -12,19 +12,22 @@ public class UserDetailsImpl extends User {
     private long ci;
     private String name;
     private String role;
+    private String base64Image;
 
     public UserDetailsImpl(
             long ci,
             String name,
             String role,
-            String correoInstitucional,
+            String base64Image,
+            String email,
             String contrasenia,
             Collection<? extends GrantedAuthority> authorities) {
 
-        super(correoInstitucional, contrasenia, authorities);
+        super(email, contrasenia, authorities);
         this.ci = ci;
         this.name = name;
         this.role = role;
+        this.base64Image = base64Image;
     }
 
 }

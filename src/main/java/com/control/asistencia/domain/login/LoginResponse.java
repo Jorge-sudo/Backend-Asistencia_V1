@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LoginResponse {
     private long ci;
+    private String base64Image;
     private String name;
     private String role;
 }

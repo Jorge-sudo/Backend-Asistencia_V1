@@ -21,7 +21,7 @@ public class SaveOrUpdateControllerImagePersona {
         this.iSaveOrUpdateInPortImagePersona = iSaveOrUpdateInPortImagePersona;
     }
 
-    @PostMapping("/imagePersona/upload")
+    @PostMapping("/image_persona/upload")
     ResponseEntity<?> saveOrUpdateImagePersona(
             @RequestParam("file") MultipartFile file,
             @RequestParam("ci") Long ci) throws IOException {

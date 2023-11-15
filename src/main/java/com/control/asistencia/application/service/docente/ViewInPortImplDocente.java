@@ -1,5 +1,6 @@
 package com.control.asistencia.application.service.docente;
 
+import com.control.asistencia.config.exception.exceptions.DataNotFoundExceptionMessage;
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import com.control.asistencia.application.port.in.command.ViewPageCommand;
 import com.control.asistencia.application.port.in.docente.IViewInPortDocente;
@@ -39,7 +40,7 @@ public class ViewInPortImplDocente implements  IViewInPortDocente {
         return ResponseBuilderApiRest.view(
                 Optional.of(
                         this.iViewOutPortDocente.viewByCiDocenteDTO(ci)
-                        .orElseThrow(() -> new RuntimeException("No existe el docente con el ci: " + ci))
+                        .orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el docente con el ci: " + ci))
                 )
         );
     }

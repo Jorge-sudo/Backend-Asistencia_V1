@@ -7,6 +7,7 @@ import com.control.asistencia.adapter.out.persistence.repository.IRepositoryDoce
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryRol;
 import com.control.asistencia.application.port.in.docente.command.SaveCommandDocente;
 import com.control.asistencia.application.port.in.docente.command.UpdateActivoCommandDocente;
+import com.control.asistencia.application.port.in.docente.command.UpdatePerfilCommandDocente;
 import com.control.asistencia.application.port.out.docente.ISaveOrUpdateOutPortDocente;
 import com.control.asistencia.application.port.out.docente.IUpdateOutPortDocente;
 import com.control.asistencia.application.port.out.docente.IViewOutPortDocente;
@@ -101,6 +102,19 @@ public class DocentePersistenceAdapter implements
         return  this.iRepositoryDocente.findById(command.getCi())
                 .map(docenteEntity -> {
                     docenteEntity.setActivo(command.isActivo());
+                    this.iRepositoryDocente.save(docenteEntity);
+                    return true;
+                }
+        ).orElseThrow(() -> new DataNotFoundExceptionMessage("No existe el docente con el CI: " + command.getCi()));
+    }
+
+    @Override
+    public boolean updateDocentePerfil(UpdatePerfilCommandDocente command) {
+        return  this.iRepositoryDocente.findById(command.getCi())
+                .map(docenteEntity -> {
+                    docenteEntity.setEmail(command.getEmail());
+                    docenteEntity.setActivo(command.isActivo());
+                    docenteEntity.setCodRfid(command.getCodRfid());
                     this.iRepositoryDocente.save(docenteEntity);
                     return true;
                 }

@@ -2,6 +2,7 @@ package com.control.asistencia.application.service.docente;
 
 import com.control.asistencia.application.port.in.docente.IUpdateInPortDocente;
 import com.control.asistencia.application.port.in.docente.command.UpdateActivoCommandDocente;
+import com.control.asistencia.application.port.in.docente.command.UpdatePerfilCommandDocente;
 import com.control.asistencia.application.port.out.docente.IUpdateOutPortDocente;
 import com.control.asistencia.common.UseCase;
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
@@ -21,5 +22,12 @@ public class UpdateInPortImplDocente implements IUpdateInPortDocente {
     public ResponseEntity<?> updateDocenteActivo(UpdateActivoCommandDocente command) {
         return ResponseBuilderApiRest.updateActivo(
                 iUpdateOutPortDocente.updateDocenteActivo(command));
+    }
+
+    @Override
+    public ResponseEntity<?> updatePerfilDocente(UpdatePerfilCommandDocente command) {
+        return ResponseBuilderApiRest.updatePerfil(
+                iUpdateOutPortDocente.updateDocentePerfil(command)
+        );
     }
 }

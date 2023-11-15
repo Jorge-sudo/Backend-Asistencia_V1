@@ -2,6 +2,7 @@ package com.control.asistencia.adapter.in.web.supervisor;
 
 import com.control.asistencia.application.port.in.supervisor.IUpdateInPortSupervisor;
 import com.control.asistencia.application.port.in.supervisor.command.UpdateActivoCommandSupervisor;
+import com.control.asistencia.application.port.in.supervisor.command.UpdatePerfilCommandSupervisor;
 import com.control.asistencia.common.WebAdapter;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,4 +24,11 @@ public class UpdateControllerSupervisor {
             @RequestBody @Valid UpdateActivoCommandSupervisor command){
         return this.iUpdateInPortSupervisor.updateSupervisorActivo(command);
     }
+
+    @PostMapping("/supervisores/perfil")
+    ResponseEntity<?> updateSupervisorPerfil(
+            @RequestBody @Valid UpdatePerfilCommandSupervisor command){
+        return this.iUpdateInPortSupervisor.updatePerfilSupervisor(command);
+    }
+
 }
