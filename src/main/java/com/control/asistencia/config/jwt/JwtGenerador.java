@@ -44,8 +44,8 @@ public class JwtGenerador {
                 .path("/api")
                 .maxAge( 60 * 60)
                 .httpOnly(true)
-                .sameSite("Strict")
-                .secure(false)
+                .sameSite("None")
+                .secure(true)
                 .build();
     }
 

@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS asistencia (
 );
 
 
-CREATE VIEW IF NOT EXISTS asignatura_view AS
+CREATE OR REPLACE VIEW  asignatura_view AS
 SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         m.nombre AS 'materia',
         mc.activo AS 'activo',
@@ -156,45 +156,46 @@ SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         p.apellido AS 'apellido_docente',
         p.fotografia AS 'fotografia_docente'
 FROM    materia m
-         JOIN materia_carrera_semestre mc ON m.sigla = mc.sigla
-         JOIN carrera c ON mc.id_carrera = c.id_carrera
-         JOIN materia_docente md ON mc.id_materia_carrera_semestre = md.id_materia_carrera_semestre
-         JOIN aula_materia_docente amd ON amd.id_materia_docente = md.id_materia_docente
-         JOIN aula a ON amd.id_aula = a.id_aula
-         JOIN horario_materia_docente hmd ON hmd.id_materia_docente = md.id_materia_docente
-         JOIN horario h ON hmd.id_horario = h.id_horario
-         JOIN dia_semana ds ON h.id_dia = ds.id_dia
-         JOIN turno t ON h.id_turno = t.id_turno
-         JOIN semestre s ON mc.id_semestre = s.id_semestre
-         JOIN docente d ON md.ci = d.ci
-         JOIN persona p ON d.ci = p.ci;
+            JOIN materia_carrera_semestre mc ON m.sigla = mc.sigla
+            JOIN carrera c ON mc.id_carrera = c.id_carrera
+            JOIN materia_docente md ON mc.id_materia_carrera_semestre = md.id_materia_carrera_semestre
+            JOIN aula_materia_docente amd ON amd.id_materia_docente = md.id_materia_docente
+            JOIN aula a ON amd.id_aula = a.id_aula
+            JOIN horario_materia_docente hmd ON hmd.id_materia_docente = md.id_materia_docente
+            JOIN horario h ON hmd.id_horario = h.id_horario
+            JOIN dia_semana ds ON h.id_dia = ds.id_dia
+            JOIN turno t ON h.id_turno = t.id_turno
+            JOIN semestre s ON mc.id_semestre = s.id_semestre
+            JOIN docente d ON md.ci = d.ci
+            JOIN persona p ON d.ci = p.ci;
 
-CREATE VIEW IF NOT EXISTS dashboard_view AS
+CREATE OR REPLACE VIEW dashboard_view AS
 SELECT
     1 AS id,
     (SELECT COUNT(*)
-     FROM materia_carrera_semestre) AS 'materias',
+     FROM materia_carrera_semestre) AS materias,
     (SELECT COUNT(*)
      FROM materia_carrera_semestre mcs
-     WHERE mcs.activo = TRUE ) AS 'materias_activas',
+     WHERE mcs.activo = TRUE ) AS materias_activas,
     (SELECT COUNT(*)
-     FROM docente)  AS 'docentes',
+     FROM docente)  AS docentes,
     (SELECT COUNT(*)
      FROM docente d
-     JOIN persona p ON d.ci =  p.ci
-     WHERE p.activo = TRUE) AS 'docentes_activos',
+              JOIN persona p ON d.ci =  p.ci
+     WHERE p.activo = TRUE) AS docentes_activos,
     (SELECT COUNT(*)
      FROM asistencia a
-     WHERE a.fecha = CURDATE()) AS 'asistencias_hoy',
-    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS INTEGER)
+     WHERE a.fecha = CURDATE()) AS asistencias_hoy,
+    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS SIGNED)
      FROM asistencia a
      WHERE a.fecha = CURDATE())
-        AS 'asistencias_puntuales_hoy',
+        AS asistencias_puntuales_hoy,
     (SELECT COUNT(*)
      FROM asistencia a
-     WHERE MONTH(a.fecha) = MONTH(CURDATE())) AS 'asistencias_mes',
-    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS INTEGER)
+     WHERE MONTH(a.fecha) = MONTH(CURDATE())) AS asistencias_mes,
+    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS SIGNED)
      FROM asistencia a
      WHERE MONTH(a.fecha) = MONTH(CURDATE()))
-        AS 'asistencias_puntuales_mes';
+        AS asistencias_puntuales_mes;
+
 

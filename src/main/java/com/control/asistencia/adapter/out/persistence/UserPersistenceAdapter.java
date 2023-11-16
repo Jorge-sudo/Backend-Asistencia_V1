@@ -4,6 +4,7 @@ import com.control.asistencia.adapter.out.persistence.entity.PersonaEntity;
 import com.control.asistencia.adapter.out.persistence.repository.IRepositoryPersona;
 import com.control.asistencia.application.port.out.user.IViewOutPortUser;
 import com.control.asistencia.common.PersistenceAdapter;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -15,9 +16,10 @@ public class UserPersistenceAdapter  implements IViewOutPortUser {
     }
 
     @Override
+    @Transactional
     public Optional<PersonaEntity> viewByEmail(String email) {
         return Optional.ofNullable(
-                this.iRepositoryPersona.findByNombre(email)
+                this.iRepositoryPersona.findByEmail(email.trim())
         );
     }
 }

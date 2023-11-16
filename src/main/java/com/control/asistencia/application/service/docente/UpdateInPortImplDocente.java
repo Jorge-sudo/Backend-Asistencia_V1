@@ -25,6 +25,7 @@ public class UpdateInPortImplDocente implements IUpdateInPortDocente {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> updatePerfilDocente(UpdatePerfilCommandDocente command) {
         return ResponseBuilderApiRest.updatePerfil(
                 iUpdateOutPortDocente.updateDocentePerfil(command)

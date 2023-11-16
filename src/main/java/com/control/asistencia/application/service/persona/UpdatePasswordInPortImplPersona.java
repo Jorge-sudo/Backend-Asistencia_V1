@@ -6,6 +6,7 @@ import com.control.asistencia.application.port.out.persona.IUpdatePasswordOutPor
 import com.control.asistencia.common.UseCase;
 import com.control.asistencia.util.controller.ResponseBuilderApiRest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 public class UpdatePasswordInPortImplPersona implements IUpdatePasswordInPortPersona {
@@ -17,6 +18,7 @@ public class UpdatePasswordInPortImplPersona implements IUpdatePasswordInPortPer
 
 
     @Override
+    @Transactional
     public ResponseEntity<?> updatePassword(UpdatePasswordPersona command) {
         return ResponseBuilderApiRest.updatePassword(
                 iUpdatePasswordOutPortPersona.updatePassword(command)

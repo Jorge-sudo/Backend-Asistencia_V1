@@ -2,10 +2,8 @@ package com.control.asistencia.config.security;
 
 import com.control.asistencia.adapter.out.persistence.entity.PersonaEntity;
 import com.control.asistencia.application.port.in.imagePersona.IViewInPortImagePersona;
-import com.control.asistencia.application.port.out.persona.IViewOutPortPersona;
 import com.control.asistencia.application.port.out.user.IViewOutPortUser;
 import jakarta.transaction.Transactional;
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +17,6 @@ import java.util.List;
 
 @Service
 public class CustomUsersDetailsService implements UserDetailsService {
-
 
     private final IViewOutPortUser iViewOutPortUser;
     private final IViewInPortImagePersona iViewInPortImagePersona;

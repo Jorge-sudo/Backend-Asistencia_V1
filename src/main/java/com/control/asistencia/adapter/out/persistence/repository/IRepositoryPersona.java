@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface IRepositoryPersona
         extends JpaRepository<PersonaEntity, Long> {
     @Query("SELECT p FROM PersonaEntity p WHERE p.email = :email")
-    PersonaEntity findByNombre(String email);
+    PersonaEntity findByEmail(String email);
 }

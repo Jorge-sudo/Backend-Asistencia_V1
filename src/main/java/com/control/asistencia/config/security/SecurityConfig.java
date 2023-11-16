@@ -82,7 +82,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/image_persona/upload",
-                                "/api/persona/update_password"
+                                "/api/personas/update_password"
                         ).hasAnyAuthority( "ADMIN", "USER")
 
                         /* ---- DOCENTE ---- */
@@ -160,6 +160,11 @@ public class SecurityConfig {
                                 HttpMethod.POST,
                                 "/api/materias"
                         ).hasAnyAuthority( "ADMIN")
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/materias/{sigla}"
+                        ).hasAnyAuthority( "ADMIN", "USER")
 
                         /* ---- CARRERAS---- */
 
