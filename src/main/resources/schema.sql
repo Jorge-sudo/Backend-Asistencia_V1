@@ -1,8 +1,7 @@
-
 -- CONTROL DE ASISTENCIA MODELO RELACIONAL NORMALIZADO
 CREATE TABLE IF NOT EXISTS rol (
-   id_rol INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-   nombre VARCHAR(15) NOT NULL
+    id_rol INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    nombre VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS persona (
@@ -139,7 +138,7 @@ CREATE TABLE IF NOT EXISTS asistencia (
 );
 
 
-CREATE OR REPLACE VIEW  asignatura_view AS
+CREATE VIEW IF NOT EXISTS asignatura_view AS
 SELECT  ROW_NUMBER() OVER (ORDER BY m.nombre) AS 'id',
         m.nombre AS 'materia',
         mc.activo AS 'activo',
@@ -169,33 +168,31 @@ FROM    materia m
             JOIN docente d ON md.ci = d.ci
             JOIN persona p ON d.ci = p.ci;
 
-CREATE OR REPLACE VIEW dashboard_view AS
+CREATE VIEW IF NOT EXISTS dashboard_view AS
 SELECT
     1 AS id,
     (SELECT COUNT(*)
-     FROM materia_carrera_semestre) AS materias,
+     FROM materia_carrera_semestre) AS 'materias',
     (SELECT COUNT(*)
      FROM materia_carrera_semestre mcs
-     WHERE mcs.activo = TRUE ) AS materias_activas,
+     WHERE mcs.activo = TRUE ) AS 'materias_activas',
     (SELECT COUNT(*)
-     FROM docente)  AS docentes,
+     FROM docente)  AS 'docentes',
     (SELECT COUNT(*)
      FROM docente d
               JOIN persona p ON d.ci =  p.ci
-     WHERE p.activo = TRUE) AS docentes_activos,
+     WHERE p.activo = TRUE) AS 'docentes_activos',
     (SELECT COUNT(*)
      FROM asistencia a
-     WHERE a.fecha = CURDATE()) AS asistencias_hoy,
-    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS SIGNED)
+     WHERE a.fecha = CURDATE()) AS 'asistencias_hoy',
+    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS INTEGER)
      FROM asistencia a
      WHERE a.fecha = CURDATE())
-        AS asistencias_puntuales_hoy,
+        AS 'asistencias_puntuales_hoy',
     (SELECT COUNT(*)
      FROM asistencia a
-     WHERE MONTH(a.fecha) = MONTH(CURDATE())) AS asistencias_mes,
-    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS SIGNED)
+     WHERE MONTH(a.fecha) = MONTH(CURDATE())) AS 'asistencias_mes',
+    (SELECT CAST(SUM(IF(a.estado = 'Puntual', 1, 0)) AS INTEGER)
      FROM asistencia a
      WHERE MONTH(a.fecha) = MONTH(CURDATE()))
-        AS asistencias_puntuales_mes;
-
-
+        AS 'asistencias_puntuales_mes';

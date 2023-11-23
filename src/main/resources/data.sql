@@ -3,6 +3,17 @@ INSERT IGNORE INTO turno(id_turno, nombre) VALUES(1, 'Mañana');
 INSERT IGNORE INTO turno(id_turno, nombre) VALUES(2, 'Tarde');
 INSERT IGNORE INTO turno(id_turno, nombre) VALUES(3, 'Noche');
 
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(1, 'Primero');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(2, 'Segundo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(3, 'Tercero');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(4, 'Cuarto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(5, 'Quinto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(6, 'Sexto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(7, 'Séptimo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(8, 'Octavo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(9, 'Noveno');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(10, 'Décimo');
+
 INSERT IGNORE INTO dia_semana(id_dia, nombre) VALUES(1, 'Lunes');
 INSERT IGNORE INTO dia_semana(id_dia, nombre) VALUES(2, 'Martes');
 INSERT IGNORE INTO dia_semana(id_dia, nombre) VALUES(3, 'Miércoles');
@@ -360,3 +371,313 @@ INSERT IGNORE INTO docente(ci, cod_rfid) VALUES(44484, 'JDNFD6661CCC');
 INSERT IGNORE INTO docente(ci, cod_rfid) VALUES(44485, 'CVJGMVB8881QQ');
 INSERT IGNORE INTO docente(ci, cod_rfid) VALUES(44486, 'VVVIDNC6111');
 INSERT IGNORE INTO docente(ci, cod_rfid) VALUES(44487, 'SERT999VJZAMO0');
+
+
+       --LICENCIAS
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(1, '2023-3-2', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(1, 1, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(2, '2023-3-3', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(2, 2, 222223);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(3, '2023-3-4', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(3, 3, 2222234);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(4, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(4, 4, 22215);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(5, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(5, 5, 2222251);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(6, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(6, 6, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(7, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(7, 7, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(8, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(8, 8, 22227);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(9, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(9, 9, 2222251);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(10, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(10, 10, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(11, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(11, 11, 2222230);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(12, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(12, 12, 22219);
+---------------------------------------
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(13, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(13, 13, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(14, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(14, 14, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(15, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(15, 15, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(16, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(16, 16, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(17, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(17, 17, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(18, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(18, 18, 22219);
+
+INSERT IGNORE INTO licencia(id_licencia, fecha_inicio, fecha_final, descripcion)
+VALUES(19, '2023-3-22', '2023-3-27', 'No podre asistir por motivos de salud');
+INSERT IGNORE INTO docente_licencia(id_docente_licencia, id_licencia, ci) VALUES(19, 19, 22219);
+
+--DOCENTES
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(1, 'Primero');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(2, 'Segundo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(3, 'Tercero');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(4, 'Cuarto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(5, 'Quinto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(6, 'Sexto');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(7, 'Septimo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(8, 'Octavo');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(9, 'Noveno');
+INSERT IGNORE INTO semestre(id_semestre, nombre) VALUES(10, 'Decimo');
+
+--MATERIAS
+INSERT IGNORE INTO materia(sigla, nombre) VALUES('ING-111', 'Introduccion a la Informatica');
+INSERT IGNORE INTO materia(sigla, nombre) VALUES('LIN-114', 'Expresion Oral y Escrita');
+INSERT IGNORE INTO materia(sigla, nombre) VALUES('MAT-113', 'Calculo 1');
+INSERT IGNORE INTO materia(sigla, nombre) VALUES('MAT-112', 'Algebra');
+INSERT IGNORE INTO materia(sigla, nombre) VALUES('FHC-116', 'Revelacion y Fe');
+INSERT IGNORE INTO materia(sigla, nombre) VALUES('INV-115', 'Tecnicas de Estudio');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ADM-212', 'Administración y Gestión Educativa I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('BIO-113', 'Fundamentos Biológicos de la Educación');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('FHC-126', 'Moral Cristiana, Iglesia y Sociedad');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('FHC-216', 'Biblia y Vida Cristiana');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('FHC-226', 'Sacramentos y Espiritualidad');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('INF-122', 'Ofimática I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-121', 'Introducción a la Programación');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-211', 'Programación I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-221', 'Programación II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-311', 'Programación III');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-321', 'Programación Avanzada');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-411', 'Proyectos de Software');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-421', 'Ingeniería de Software I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-511', 'Ingeniería de Software II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('ING-512', 'Lenguajes Formales y Compiladores');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('INV-125', 'Introducción al Pensamiento Científico');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('INV-416', 'Metodología de la Investigación I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('INV-426', 'Metodología de la Investigación II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('INV-516', 'Taller de Grado I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('INV-525', 'Taller de Grado II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('LEN-114', 'Expresión Oral y Escrita I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('LEN-124', 'Expresión Oral y Escrita II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('LIN-415', 'Optativa I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('LIN-425', 'Optativa II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('LIN-515', 'Optativa III');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('LIN-524', 'Optativa IV');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('MAT-124', 'Cálculo II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('MAT-212', 'Estadística I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('MAT-213', 'Álgebra Lineal');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('MAT-214', 'Cálculo III');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('MAT-224', 'Estadistica II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('MAT-314', 'Análisis Numérico');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('MAT-324', 'Investigación Operativa I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('MAT-413', 'Investigación Operativa II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('PED-111', 'Introducción a las Ciencias de la Educación');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('PED-121', 'Pedagogía General');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('PED-211', 'Corrientes Pedagógicas Contemporáneas');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('RED-125', 'Electrónica I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('RED-215', 'Electrónica II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('RED-225', 'Sistemas Digitales');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('RED-315', 'Hardware y Arquitectura de Computadoras');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('RED-325', 'Redes de Computadoras');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('RED-414', 'Redes y Comunicaciones');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('RED-422', 'Ingeniería de Redes');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIM-423', 'Inteligencia Artificial I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIM-424', 'Ingeniería de Sistemas I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIM-513', 'Inteligencia Artificial II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIM-514', 'Ingenieria de Sistemas II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIM-522', 'Simulación y Modelación');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIM-523', 'Sistemas de Control Digital');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-122', 'Introducción a los Sistemas Administrativos');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-123', 'Sistemas de Información Contable');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-222', 'Base de Datos I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-223', 'Análisis y Diseño de Sistemas I');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-312', 'Base de Datos II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-313', 'Análisis y Diseño de Sistemas II');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-322', 'Teoría de los Sistemas de Información');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-323', 'Sistemas Operativos');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SIS-412', 'Programación en Internet');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SOC-112', 'Sociedad y Estado');
+INSERT IGNORE INTO materia (sigla, nombre) VALUES ('SOC-123', 'Sociologia de la Educación');
+
+       --DOCENTES
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(1, 1, 'ING-111', 1, TRUE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(2, 1, 'LIN-114', 1, TRUE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(3, 1, 'MAT-113', 1, TRUE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(4, 1, 'MAT-112', 1, TRUE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(5, 1, 'FHC-116', 1, FALSE);
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(6, 1, 'INV-115', 1, FALSE);
+    --eliminar mas adelante
+INSERT IGNORE INTO materia_carrera_semestre(id_materia_carrera_semestre, id_carrera, sigla, id_semestre, activo) VALUES(7, 2, 'INV-115', 6, TRUE);
+
+
+--Lunes-Mañana
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(1, '7:30', '9:00', 1, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(2, '9:15', '10:45', 1, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(3, '11:00', '12:30', 1, 1);
+--Martes-Mañana
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(4, '7:30', '9:00', 2, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(5, '9:15', '10:45', 2, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(6, '11:00', '12:30', 2, 1);
+--Miercoles-Mañana
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(7, '7:30', '9:00', 3, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(8, '9:15', '10:45', 3, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(9, '11:00', '12:30', 3, 1);
+--Jueves-Mañana
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(10, '7:30', '9:00', 4, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(11, '9:15', '10:45', 4, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(12, '11:00', '12:30', 4, 1);
+--Viernes-Mañana
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(13, '7:30', '9:00', 5, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(14, '9:15', '10:45', 5, 1);
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(15, '11:00', '12:30', 5, 1);
+
+--Miercoles-Noche
+INSERT IGNORE INTO horario(id_horario, hora_inicio, hora_fin, id_dia, id_turno) VALUES(16, '20:30', '21:45', 3, 3);
+
+--Aula
+INSERT IGNORE INTO aula(id_aula, aula, paralelo, piso, bloque) VALUES(1, 'A2', '111', 'P2', 'B');
+INSERT IGNORE INTO aula(id_aula, aula, paralelo, piso, bloque) VALUES(2, 'A3', '112', 'P2', 'B');
+
+
+
+--DOCENTES
+--111
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(1, 1, 2222224);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(2, 2, 22225);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(3, 3, 2222231);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(4, 4, 222223);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(5, 5, 22227);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(6, 6, 222221);
+--112
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(7, 7, 2222251);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(8, 1, 22219);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(9, 2, 2222234);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(10, 3, 22215);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(11, 4, 2222230);
+INSERT IGNORE INTO materia_docente(id_materia_docente, id_materia_carrera_semestre, ci) VALUES(12, 5, 2222241);
+
+
+--DOCENTES
+--111
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(1, 1, 1);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(2, 2, 1);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(3, 3, 1);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(4, 4, 1);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(5, 5, 1);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(6, 6, 1);
+--112
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(7, 7, 2);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(8, 8, 2);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(9, 9, 2);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(10, 10, 2);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(11, 11, 2);
+INSERT IGNORE INTO aula_materia_docente(id_aula_materia_docente, id_materia_docente, id_aula) VALUES(12, 12, 2);
+
+-- 111
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente, nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(1,  4, TRUE, 1, 1);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(2,  NULL, FALSE, 2, 2);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(3,  NULL, FALSE, 3, 3);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(4,  NULL, FALSE, 4, 4);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(5,  NULL, FALSE, 5, 5);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(6,  NULL, FALSE, 6, 1);
+
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(7,  NULL, FALSE, 10, 4);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(8,  NULL, FALSE, 11, 2);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(9,  NULL, FALSE, 12, 6);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(10,  NULL, FALSE, 13, 6);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(11,  NULL, FALSE, 14, 3);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(12,  NULL, FALSE, 15, 5);
+
+--112
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(13,  NULL, FALSE, 1, 12);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(14,  4, TRUE, 2, 9);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(15,  NULL, FALSE, 3, 8);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(16,  NULL, FALSE, 4, 11);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(17,  4, TRUE, 5, 7);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(18,  NULL, FALSE, 6, 10);
+
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(19,  NULL, FALSE, 10, 12);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(20,  NULL, FALSE, 11, 9);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(21,  NULL, FALSE, 12, 8);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(22,  NULL, FALSE, 13, 11);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(23,  NULL, FALSE, 14, 7);
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(24,  NULL, FALSE, 15, 10);
+
+INSERT IGNORE INTO horario_materia_docente(id_horario_materia_docente,  nro_laboratorio, laboratorio, id_horario, id_materia_docente) VALUES(25,  NULL, FALSE, 16, 10);
+
+
+       ----------------- ASISTENCIAS -------------------------
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (1, '7:30', 20, '2021-3-22', 'Puntual', 1, 1);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (2, '7:30', 20, '2021-3-22', 'Puntual', 2, 2);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (3, '7:30', 20, '2021-3-22', 'Puntual', 1, 3);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (4, '7:30', 20, '2021-3-22', 'Puntual', 2, 4);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (5, '7:30', 20, '2021-3-22', 'Puntual', 1, 5);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (6, '7:30', 20, '2021-3-22', 'Puntual', 2, 6);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (7, '7:30', 20, '2021-3-22', 'Puntual', 1, 7);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (8, '7:30', 20, '2021-3-22', 'Puntual', 2, 8);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (9, '7:30', 20, '2021-3-22', 'Puntual', 1, 9);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (10, '7:30', 20, '2021-3-22', 'Puntual', 2, 10);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (11, '7:30', 20, '2021-3-22', 'Puntual', 1, 11);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (12, '7:30', 20, '2021-3-22', 'Puntual', 2, 12);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (13, '7:30', 20, '2023-10-4', 'Puntual', 1, 13);
+
+INSERT IGNORE INTO asistencia (id_asistencia, hora_entrada, cantidad_estudiantes, fecha, estado, id_aula, id_horario_materia_docente)
+VALUES (14, '7:30', 20, '2023-10-4', 'Puntual', 2, 14);
